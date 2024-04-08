@@ -1,0 +1,108 @@
+module DS77
+{
+    imports
+    {
+        Base
+    }
+
+    recipe Forge Diablo Sandwich
+    {
+        DiabloFixins,
+        AAApoc.AAABurgerBun/BreadSlices,
+        SmokeyBBQSauce,
+
+        Category:Cooking,
+        Sound:SliceBread,
+        Time:120.0,
+		NeedToBeLearn:true,
+        OnGiveXP:Recipe.OnGiveXP.Cooking3,
+        OnTest:Recipe.OnTest.MakeDiabloSandwich,
+        OnCreate:Recipe.OnCreate.ReturnPanAfterUse,
+        Result:DiabloSandwich,
+    }
+
+    recipe Prepare Diablo Fixins
+    {
+        Pan,
+        keep Fork/Spoon/Spatula,
+        MincedMeat,        
+        Salt,
+        Pepper,
+        Hotsauce,
+        SmokeyBBQSauce,
+
+        Sound:SliceMeat,
+        SkillRequired:Cooking=5,
+        Time:240.0,
+		NeedToBeLearn:true,
+        OnGiveXP:Recipe.OnGiveXP.Cooking10,
+
+        Category:Cooking,
+        Result:DiabloFixins,
+    }
+
+    recipe Make Smokey's BBQ Sauce
+    {
+        Saucepan,
+        Salt,
+        Pepper,
+        SugarBrown,
+        Honey,
+        Ketchup,
+        Mustard,
+        Vinegar,
+        Hotsauce,
+        PepperHabanero/PepperJalapeno,
+        WildGarlic/WildGarlic2,
+        Onion,
+
+
+        Sound:SliceMeat,
+        SkillRequired:Cooking=5,
+        Time:240.0,
+		NeedToBeLearn:true,
+        OnGiveXP:Recipe.OnGiveXP.Cooking10,
+
+        Category:Cooking,
+        Result:SmokeyBBQSauceBase,
+
+    }
+
+    recipe Bottle Smokey's BBQ Sauce
+    {
+        SmokeyBBQSauceBase,
+
+        Time:160,
+		NeedToBeLearn:true,
+        OnTest:Recipe.OnTest.BottleSmokeyBBQSauce,
+        OnCreate:Recipe.OnCreate.ReturnSaucePanAfterUse,
+        Result:SmokeyBBQSauce,
+
+    }
+
+    recipe Discard Diablo Fixins
+    {
+        destroy DiabloFixins,
+
+        Time:120.0,
+        OnGiveXP:Recipe.OnGiveXP.None,
+        Sound:EmptyPan,
+        Category:Cooking,
+        AllowRottenItem:true,
+
+        Result:Pan,
+    }
+
+    recipe Discard Smokey's BBQ Sauce Base
+    {
+        destroy SmokeyBBQSauceBase,
+
+        Time:120.0,
+        OnGiveXP:Recipe.OnGiveXP.None,
+        Sound:EmptyPan,
+        Category:Cooking,
+        AllowRottenItem:true,
+
+        Result:Saucepan,
+    }
+}

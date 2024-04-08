@@ -1,0 +1,13 @@
+Recipes_EN = 
+{
+
+	Recipe_Make_100_Stack_of_Cash = "Make $100 Stack of Cash",
+	Recipe_Make_1000_Stack_of_Cash = "Make $1000 Stack of Cash",
+	Recipe_Make_10000_Stack_of_Cash = "Make $10000 Stack of Cash",
+	
+
+	Recipe_Break_Stack_of_Cash_into_1s = "Break Stack of Cash into $1's",
+	Recipe_Break_Stack_of_Cash_into_100s = "Break Stack of Cash into $100's",
+	Recipe_Break_Stack_of_Cash_into_1000s = "Break Stack of Cash into $1000's",
+
+}

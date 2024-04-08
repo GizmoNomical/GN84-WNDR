@@ -1,0 +1,229 @@
+module GN84-ECO-TEST
+{
+    imports
+    {
+        Base
+    }
+
+		
+	recipe Search Wallet for Money
+	{
+		Wallet,
+		
+		InSameInventory:true,
+		Result:EmptyWallet1,
+		Time:80,			
+		AnimNode:Craft,
+		OnCreate:CollectMoneyFromWallet,
+	}
+	
+	recipe Search Wallet for Money
+	{
+		Wallet2,
+		
+		InSameInventory:true,
+		Result:EmptyWallet2,
+		AnimNode:Craft,
+		Time:80,	
+		OnCreate:CollectMoneyFromWallet,		
+	}
+	
+	recipe Search Wallet for Money
+	{
+		Wallet3,
+		
+		InSameInventory:true,
+		Result:EmptyWallet3,
+		AnimNode:Craft,
+		Time:80,
+		OnCreate:CollectMoneyFromWallet,
+	}
+	
+	recipe Search Wallet for Money
+	{
+		Wallet4,
+		
+		InSameInventory:true,
+		Result:EmptyWallet4,
+		AnimNode:Craft,
+		Time:80,
+		OnCreate:CollectMoneyFromWallet,
+	}
+		
+		
+
+		
+		
+	recipe Make 100 Stack of Cash
+	{
+		Money=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack100,
+		AnimNode:Craft,
+		Time:50,
+	}
+	
+	recipe Make 1000 Stack of Cash
+	{
+		Money=1000,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000,
+		AnimNode:Craft,
+		Time:100,
+	}
+	
+	recipe Make 1000 Stack of Cash
+	{
+		MoneyStack100=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000,
+		AnimNode:Craft,
+		Time:60,
+	}
+	
+	recipe Make 10000 Stack of Cash
+	{
+		MoneyStack100=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000,
+		AnimNode:Craft,
+		Time:100,
+	}
+
+	recipe Make 10000 Stack of Cash
+	{
+		MoneyStack1000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000,
+		AnimNode:Craft,
+		Time:60,
+	}
+	
+	
+	
+	
+	recipe Break Stack of Cash into 1s
+	{
+		MoneyStack100,
+		
+		InSameInventory:true,
+		Result:Base.Money=100,
+		AnimNode:Craft,
+		Time:900,
+	}	
+
+	
+	recipe Break Stack of Cash into 100s
+	{
+		MoneyStack1000,
+		
+		InSameInventory:true,
+		Result:MoneyStack100=10,
+		AnimNode:Craft,
+		Time:60,
+	}	
+		
+	recipe Break Stack of Cash into 1000s
+	{
+		MoneyStack10000,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000=10,
+		AnimNode:Craft,
+		Time:60,
+	}		
+		
+
+	
+	
+	
+		
+	recipe Convert to 100 Smokey Points
+	{
+		MoneyStack100,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints100,	
+	}
+	
+	recipe Convert to 1000 Smokey Points
+	{
+		MoneyStack100=10,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints1000,	
+	}
+	
+	recipe Convert to 1000 Smokey Points
+	{
+		MoneyStack1000,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints1000,	
+	}
+	
+	recipe Convert to 10000 Smokey Points
+	{
+		MoneyStack100=100,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 10000 Smokey Points
+	{
+		MoneyStack1000=10,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 10000 Smokey Points
+	{
+		MoneyStack10000,
+		
+		Result:SheetPaper2,
+		Time:60.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+	
+	
+	recipe Cut Leather Wallet
+   	{
+   		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
+   		keep Scissors,
+   		Result:LeatherStrips=1,
+   		Time:120.0,
+		AnimNode:Craft,
+		OnCreate:CutLeatherWallet,
+   	}
+	
+}

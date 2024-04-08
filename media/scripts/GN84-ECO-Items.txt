@@ -1,0 +1,99 @@
+module GN84-ECO-TEST
+{
+    imports
+    {
+        Base
+    }
+
+    item MoneyStack100
+    {
+        DisplayName          =  Stack of Cash - $100 - ,
+		DisplayCategory		 =  Junk,
+        Type                 =  Normal,
+        Weight               =  0.01,
+        Icon                 =  MoneyStack100,
+		WorldStaticModel	 =  MoneyStack100,
+		
+    }
+	
+	item MoneyStack1000
+    {
+        DisplayName          =  Stack of Cash - $1000 - ,
+		DisplayCategory		 =  Junk,
+        Type                 =  Normal,
+        Weight               =  .1,
+        Icon                 =  MoneyStack1000,
+		WorldStaticModel	 =  MoneyStack1000,
+		
+    }
+	
+	item MoneyStack10000
+    {
+        DisplayName          =  Stack of Cash - $10000 - ,
+		DisplayCategory		 =  Junk,
+        Type                 =  Normal,
+        Weight               =  1.0,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+	
+	item EmptyWallet1
+	{
+		DisplayName = Empty Wallet,
+		DisplayCategory = Junk,
+		Weight = 0.01,
+		Type = Normal,
+		Icon = Wallet_01,
+		WorldStaticModel = Wallet,
+	}
+	item EmptyWallet2
+	{
+		DisplayName = Empty Wallet,
+		DisplayCategory = Junk,
+		Weight = 0.01,
+		Type = Normal,
+		Icon = Wallet_02,
+		WorldStaticModel = Wallet2,
+	}
+	item EmptyWallet3
+	{
+		DisplayName = Empty Wallet,
+		DisplayCategory = Junk,
+		Weight = 0.01,
+		Type = Normal,
+		Icon = Wallet_03,
+		WorldStaticModel = Wallet3,
+	}
+	item EmptyWallet4
+	{
+		DisplayName = Empty Wallet,
+		DisplayCategory = Junk,
+		Weight = 0.01,
+		Type = Normal,
+		Icon = Wallet_04,
+		WorldStaticModel = Wallet4,
+	}	
+
+	model MoneyStack100
+	{
+		mesh = worlditems/MoneyStack100,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}
+
+	model MoneyStack1000
+	{
+		mesh = worlditems/MoneyStack1000,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}
+
+	model MoneyStack10000
+	{
+		mesh = worlditems/MoneyStack10000,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}    
+	
+}

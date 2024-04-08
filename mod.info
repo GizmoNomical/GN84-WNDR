@@ -1,0 +1,5 @@
+name=The Wanderers Economy - TESTING
+poster=poster.png
+id=GN84-ECO-TEST
+description=The Wanderers Economy
+require=ServerPoints

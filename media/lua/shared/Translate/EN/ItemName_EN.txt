@@ -1,0 +1,7 @@
+ItemName_EN = {
+
+ItemName_GN84-ECO-TEST.MoneyStack100 = "Stack of Cash - $100 - ",
+ItemName_GN84-ECO-TEST.MoneyStack1000 = "Stack of Cash - $1000 - ",
+ItemName_GN84-ECO-TEST.MoneyStack10000 = "Stack of Cash - $10000 - ",
+
+}
