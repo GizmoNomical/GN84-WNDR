@@ -2,7 +2,6 @@ require "recipecode"
 
 -- Adding Smokey Points
 
-
 function GivePlayerSmokeyPoints100()
 	sendClientCommand("ServerPoints", "add", {getPlayer():getUsername(), 100})
 end
@@ -18,73 +17,90 @@ end
 
 -- Searching Wallets for Money
 
-
 function CollectMoneyFromWallet(items, result, player)
 	
 	local wealth = ZombRand(10)+1;
+	local eFunds = ZombRand(10)+1;
 	local i = 0;
+	local e = 0;
+	local ei = 0;
 	local billChosen = 0;
 	
-	print ("Wealth Roll: ", wealth)
-	-- High Roll - Very Wealthy Zombie
-	if (wealth >= 9)
+	print ("-------------------------")
+	print ("Wealth Roll         : ", wealth)
+	print ("Emergency Funds Roll: ", eFunds)
+	print ("-------------------------")
+
+	-- High Roll - Emergency Funds
+	if (eFunds >= 9)
 	then
 		billChosen = ZombRand(10)+1;
-		print ("Class: Very Wealthy")
-		print ("Bill Roll: ", billChosen)
+		print ("Zombie Had Emergency Funds")
+		-- print ("Bill Roll: ", billChosen)
 		
-		if (billChosen > 9)
+		if (billChosen == 10)
 			then
-				i = 100
-				print ("Amount: ",i)
+				e = 200
+				print ("Amount: ",e)
+		end				
+		if (billChosen == 9)
+			then
+				e = 100
+				print ("Amount: ",e)
 		end
-		if (billChosen < 2)
+		if (billChosen <= 2)
 			then
-				i = 50
-				print ("Amount: ",i)
+				e = 50
+				print ("Amount: ",e)
 		end
-		if (billChosen >2 and billChosen <8)
+		if (billChosen >2 and billChosen <9)
 			then
-				i = 20
-				print ("Amount: ",i)
+				e = 20
+				print ("Amount: ",e)
 		end
 	end
+	print ("-------------------------")
 	
 	-- Normal Roll - 	
-	if (wealth < 9)
+	-- if (wealth < 9)
 	
-	then
+	-- then
 	-- Roll for Wealth Class of Zombie
 				
 		if (wealth >=7)
 			then
 				print ("Class: Wealthy")
-				i = ZombRand(20)+1
+				i = ZombRand(50)+1
 				print ("Amount: ", i)
 		end
 		if (wealth < 2)
 			then
 				print ("Class: Poor")
-				i = ZombRand(5)+1
+				i = ZombRand(10)+1
 				print ("Amount: ", i)
 		end
 		if (wealth >=2 and wealth <=6)
 			then
 				print ("Class: Average")
-				i = ZombRand(10)+1
+				i = ZombRand(20)+1
 				print ("Amount: ", i)
 		end
+		print ("-------------------------")
 		
-	end
+	-- end
 	
 	local t = 0;
+	ei = e + i;
+	print ("Total: ", ei)
 
-	print ("--------------------")
+	print ("-------------------------")
+	print ("-------------------------")
 	
-	while(t ~= i) do
+	while(t ~= ei) do
 		player:getInventory():AddItem("Money");
 		t = t+1
 	end
+
 end
 
 
