@@ -22,23 +22,14 @@ require "Vehicles/VehicleDistributions"
 
 Distributions = Distributions or {};
 
-local distributionTable = {
-    all = {
+local distributionTableCash = {
+    all = {        
         inventoryfemale = {
-            rolls = 1,
-            items = {
-                "Wallet2", 300,
-                "Wallet4", 300,
-            }
-        },
-        inventoryfemale = {
-            rolls = 5,
-            items = { 
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
+            rolls = 7,
+            items = {    
+                "Money", 20,                                 
+                "Money", 13,
+                "Money", 11,           
                 "Money", 5,
                 "Money", 5,
                 "Money", 5,
@@ -46,21 +37,11 @@ local distributionTable = {
             }
         },
         inventorymale = {
-            rolls = 1,
-            items = {
-                "Wallet", 300,
-                "Wallet3", 300,
-                "Wallet4", 300,
-            }
-        },
-        inventorymale = {
-            rolls = 5,
-            items = { 
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
+            rolls = 7,
+            items = {     
+                "Money", 20,
+                "Money", 13,
+                "Money", 11,            
                 "Money", 5,
                 "Money", 5,
                 "Money", 5,
@@ -68,11 +49,33 @@ local distributionTable = {
             }
         },
     },
-
-
 }
 
-table.insert(Distributions, 1, distributionTable);
+local distributionTableWallets = {
+    all = {
+        inventoryfemale = {
+            rolls = 1,
+            items = {
+                "Wallet2", 7,
+                "Wallet4", 7,
+            }
+        },
+        inventorymale = {
+            rolls = 1,
+            items = {
+                "Wallet", 7,
+                "Wallet3", 7,
+                "Wallet4", 7,
+            }
+        },
+    },
+}
+
+
+
+
+table.insert(Distributions, 1, distributionTableCash);
+table.insert(Distributions, 1, distributionTableWallets);
 
 
 ItemPickerJava.Parse()
