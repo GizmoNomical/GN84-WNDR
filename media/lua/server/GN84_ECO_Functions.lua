@@ -27,39 +27,40 @@ function CollectMoneyFromWallet(items, result, player)
 	local billChosen = 0;
 	
 	print ("-------------------------")
-	print ("Wealth Roll         : ", wealth)
-	print ("Emergency Funds Roll: ", eFunds)
-	print ("-------------------------")
+	-- print ("Wealth Roll         : ", wealth)
+	-- print ("Emergency Funds Roll: ", eFunds)
+	-- print ("-------------------------")
 
 	-- High Roll - Emergency Funds
 	if (eFunds >= 90)
 	then
 		billChosen = ZombRand(100)+1;
-		print ("Zombie Had Emergency Funds")
+		-- print ("***Zombie Had Emergency Funds***")
 		-- print ("Bill Roll: ", billChosen)
 		
-		if (billChosen == 100)
+		if (billChosen >= 99)
 			then
 				e = 200
-				print ("Amount: ",e)
+				--print ("Amount: ***",e)
 		end				
-		if (billChosen >= 95 and billChosen <100)
+		if (billChosen >= 93 and billChosen <97)
 			then
 				e = 100
-				print ("Amount: ",e)
+				-- print ("Amount: ***",e)
 		end
-		if (billChosen <= 20)
+		if (billChosen <= 22)
 			then
 				e = 50
-				print ("Amount: ",e)
+				-- print ("Amount: ***",e)
 		end
-		if (billChosen >25 and billChosen <85)
+		if (billChosen >28 and billChosen <83)
 			then
 				e = 20
-				print ("Amount: ",e)
-		end
+				-- print ("Amount: ***",e)
+		end		
+		print ("***Zombie Had Emergency Funds -", e, "***")
 	end
-	print ("-------------------------")
+	-- print ("-------------------------")
 	
 	-- Normal Roll - 	
 	-- if (wealth < 9)
@@ -67,26 +68,26 @@ function CollectMoneyFromWallet(items, result, player)
 	-- then
 	-- Roll for Wealth Class of Zombie
 				
-		if (wealth >=95)
+		if (wealth >=94)
 			then
-				print ("Class: Wealthy")
+				-- print ("Class: Wealthy")
 				i = ZombRand(20)+1
-				print ("Amount: ", i)
+				-- print ("Amount: ", i)
 		end
 		if (wealth < 50)
 			then
-				print ("Class: Poor")
+				-- print ("Class: Poor")
 				i = ZombRand(5)+1
-				print ("Amount: ", i)
+				-- print ("Amount: ", i)
 		end
-		if (wealth >=55 and wealth <=85)
+		if (wealth >=52 and wealth <=86)
 			then
-				print ("Class: Average")
+				-- print ("Class: Average")
 				i = ZombRand(10)+1
-				print ("Amount: ", i)
+				-- print ("Amount: ", i)
 		end
-		print ("-------------------------")
-		
+		-- print ("-------------------------")
+		print ("Wallet Cash: ", i)
 	-- end
 	
 	local t = 0;

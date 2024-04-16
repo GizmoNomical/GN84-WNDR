@@ -12,7 +12,7 @@ module GN84-ECO-TEST
 		
 		InSameInventory:true,
 		Result:EmptyWallet1,
-		Time:80,			
+		Time:60,			
 		AnimNode:Craft,
 		OnCreate:CollectMoneyFromWallet,
 	}
@@ -24,7 +24,7 @@ module GN84-ECO-TEST
 		InSameInventory:true,
 		Result:EmptyWallet2,
 		AnimNode:Craft,
-		Time:80,	
+		Time:60,	
 		OnCreate:CollectMoneyFromWallet,		
 	}
 	
@@ -35,7 +35,7 @@ module GN84-ECO-TEST
 		InSameInventory:true,
 		Result:EmptyWallet3,
 		AnimNode:Craft,
-		Time:80,
+		Time:60,
 		OnCreate:CollectMoneyFromWallet,
 	}
 	
@@ -46,12 +46,10 @@ module GN84-ECO-TEST
 		InSameInventory:true,
 		Result:EmptyWallet4,
 		AnimNode:Craft,
-		Time:80,
+		Time:60,
 		OnCreate:CollectMoneyFromWallet,
 	}
 		
-		
-
 		
 		
 	recipe Make 100 Stack of Cash
@@ -104,20 +102,6 @@ module GN84-ECO-TEST
 		Time:60,
 	}
 	
-	
-	
-	
-	recipe Break Stack of Cash into 1s
-	{
-		MoneyStack100,
-		
-		InSameInventory:true,
-		Result:Base.Money=100,
-		AnimNode:Craft,
-		Time:900,
-	}	
-
-	
 	recipe Break Stack of Cash into 100s
 	{
 		MoneyStack1000,
@@ -138,9 +122,6 @@ module GN84-ECO-TEST
 		Time:60,
 	}		
 		
-
-	
-	
 	
 		
 	recipe Convert to 100 Smokey Points
@@ -214,6 +195,7 @@ module GN84-ECO-TEST
 		AnimNode:Craft,
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
+	
 	
 	
 	recipe Cut Leather Wallet
