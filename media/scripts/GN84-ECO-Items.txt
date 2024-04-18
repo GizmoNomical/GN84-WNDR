@@ -47,6 +47,7 @@ module GN84-ECO-TEST
 		Icon = Wallet_01,
 		WorldStaticModel = Wallet,
 	}
+
 	item EmptyWallet2
 	{
 		DisplayName = Empty Wallet,
@@ -56,6 +57,7 @@ module GN84-ECO-TEST
 		Icon = Wallet_02,
 		WorldStaticModel = Wallet2,
 	}
+
 	item EmptyWallet3
 	{
 		DisplayName = Empty Wallet,
@@ -65,6 +67,7 @@ module GN84-ECO-TEST
 		Icon = Wallet_03,
 		WorldStaticModel = Wallet3,
 	}
+
 	item EmptyWallet4
 	{
 		DisplayName = Empty Wallet,
@@ -74,6 +77,43 @@ module GN84-ECO-TEST
 		Icon = Wallet_04,
 		WorldStaticModel = Wallet4,
 	}	
+
+	item SafehouseExpansionPermit100
+	{
+		DisplayName			=  Safehouse Expansion Permit - 100,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit100,
+		WorldStaticModel	=  SafehouseExpansionPermit100,
+	
+	}
+
+	item SafehouseExpansionPermit1000
+	{
+		DisplayName			=  Safehouse Expansion Permit - 1000,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit1000,
+		WorldStaticModel	=  SafehouseExpansionPermit1000,
+	
+	}
+
+
+	model SafehouseExpansionPermit100
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/SafehouseExpansionPermit100,
+		scale = 0.6,
+	}
+
+	model SafehouseExpansionPermit1000
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/SafehouseExpansionPermit1000,
+		scale = 0.6,
+	}
 
 	model MoneyStack100
 	{
