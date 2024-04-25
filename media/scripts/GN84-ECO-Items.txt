@@ -78,9 +78,20 @@ module GN84-ECO-TEST
 		WorldStaticModel = Wallet4,
 	}	
 
+	item SafehouseExpansionPermit10
+	{
+		DisplayName			=  Safehouse Expansion Permit - 10 Tiles,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit10,
+		WorldStaticModel	=  SafehouseExpansionPermit10,
+	
+	}
+
 	item SafehouseExpansionPermit100
 	{
-		DisplayName			=  Safehouse Expansion Permit - 100,
+		DisplayName			=  Safehouse Expansion Permit - 100 Tiles,
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -91,7 +102,7 @@ module GN84-ECO-TEST
 
 	item SafehouseExpansionPermit1000
 	{
-		DisplayName			=  Safehouse Expansion Permit - 1000,
+		DisplayName			=  Safehouse Expansion Permit - 1000 Tiles,
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -99,41 +110,5 @@ module GN84-ECO-TEST
 		WorldStaticModel	=  SafehouseExpansionPermit1000,
 	
 	}
-
-
-	model SafehouseExpansionPermit100
-	{
-		mesh = worlditems/GN84Permit,
-		texture = worlditems/SafehouseExpansionPermit100,
-		scale = 0.6,
-	}
-
-	model SafehouseExpansionPermit1000
-	{
-		mesh = worlditems/GN84Permit,
-		texture = worlditems/SafehouseExpansionPermit1000,
-		scale = 0.6,
-	}
-
-	model MoneyStack100
-	{
-		mesh = worlditems/MoneyStack100,
-		texture = worlditems/MoneyStack,
-		scale = 0.6,
-	}
-
-	model MoneyStack1000
-	{
-		mesh = worlditems/MoneyStack1000,
-		texture = worlditems/MoneyStack,
-		scale = 0.6,
-	}
-
-	model MoneyStack10000
-	{
-		mesh = worlditems/MoneyStack10000,
-		texture = worlditems/MoneyStack,
-		scale = 0.6,
-	}    
 	
 }

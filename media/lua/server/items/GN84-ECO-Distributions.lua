@@ -2,18 +2,6 @@ require "Items/SuburbsDistributions"
 require "Items/ProceduralDistributions"
 require "Vehicles/VehicleDistributions"
 
--- table.insert(SuburbsDistributions["all"]["inventorymale"].items, "Base.Wallet")
--- table.insert(SuburbsDistributions["all"]["inventorymale"].items, 10)
-
--- table.insert(SuburbsDistributions["all"]["inventoryfemale"].items, "Base.Wallet2")
--- table.insert(SuburbsDistributions["all"]["inventoryfemale"].items, 10)
-
--- table.insert(SuburbsDistributions["all"]["inventorymale"].items, "GN84-ECO-TEST.MoneyStack100")
--- table.insert(SuburbsDistributions["all"]["inventorymale"].items, 10)
-
--- table.insert(SuburbsDistributions["all"]["inventoryfemale"].items, "GN84-ECO-TEST.MoneyStack100")
--- table.insert(SuburbsDistributions["all"]["inventoryfemale"].items, 10)
-
 -- table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet")
 -- table.insert(VehicleDistributions["GloveBox"].items, 0.1)
 

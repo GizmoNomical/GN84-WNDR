@@ -1,0 +1,53 @@
+module GN84-ECO-TEST
+{
+    imports
+    {
+        Base
+    }
+
+
+	model SafehouseExpansionPermit10
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/SafehouseExpansionPermit10,
+		scale = 0.6,
+	}
+
+	model SafehouseExpansionPermit100
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/SafehouseExpansionPermit100,
+		scale = 0.6,
+	}
+
+	model SafehouseExpansionPermit1000
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/SafehouseExpansionPermit1000,
+		scale = 0.6,
+	}
+
+	model MoneyStack100
+	{
+		mesh = worlditems/MoneyStack100,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}
+
+	model MoneyStack1000
+	{
+		mesh = worlditems/MoneyStack1000,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}
+
+	model MoneyStack10000
+	{
+		mesh = worlditems/MoneyStack10000,
+		texture = worlditems/MoneyStack,
+		scale = 0.6,
+	}    
+
+
+}
+

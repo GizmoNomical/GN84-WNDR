@@ -5,7 +5,12 @@ module GN84-ECO-TEST
         Base
     }
 
-		
+
+
+/* SEARCH WALLETS FOR MONEY */
+/* ------------------------ */
+
+
 	recipe Search Wallet for Money
 	{
 		Wallet,
@@ -51,7 +56,11 @@ module GN84-ECO-TEST
 	}
 		
 		
-		
+/* CONVERT STACKS OF CASH */
+/* ---------------------- */
+
+
+
 	recipe Make 100 Stack of Cash
 	{
 		Money=100,
@@ -122,8 +131,11 @@ module GN84-ECO-TEST
 		Time:60,
 	}		
 		
-	
-		
+/* CONVERT CASH TO SMOKEY POINTS */
+/* ----------------------------- */	
+
+
+
 	recipe Convert to 100 Smokey Points
 	{
 		MoneyStack100,
@@ -196,7 +208,11 @@ module GN84-ECO-TEST
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 	
-	
+
+
+/* CUT LEATHER STRIPS FROM WALLET */
+/* ------------------------------ */
+
 	
 	recipe Cut Leather Wallet
    	{
@@ -207,5 +223,8 @@ module GN84-ECO-TEST
 		AnimNode:Craft,
 		OnCreate:CutLeatherWallet,
    	}
+
+
+	
 	
 }
