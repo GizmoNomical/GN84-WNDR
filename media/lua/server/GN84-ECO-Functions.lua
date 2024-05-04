@@ -8,8 +8,9 @@ local wealthyCash = SandboxVars.GN84ECO.WealthyCash						-- 20 - Max cash found 
 local averageCash = SandboxVars.GN84ECO.AverageCash						-- 10 - Max cash found in Average Zombie Wallet
 local poorCash = SandboxVars.GN84ECO.PoorCash								-- 5  - Max cash found in Poor Zombie Wallet
 
-
+--------------------------
 -- Adding Smokey Points
+--------------------------
 
 function GivePlayerSmokeyPoints100()
 	sendClientCommand("GN84-ECO-TEST", "add", {getPlayer():getUsername(), 100})
@@ -37,11 +38,12 @@ function SmokeyPointsOnZombieKill(zombie)
 end
 
 Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
-
-
 	
 
+------------------------------
 -- Searching Wallets for Money
+------------------------------
+
 --  VARIABLES
 
 	local wealth;  		-- Zombie Wealth - Upper Class, Middle Class, Lower Class
@@ -50,7 +52,6 @@ Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
 	local eFundCash;	-- Total Money found from hidden Emergency Funds
 	local combinedCash; -- Total of Wallet / EFunds
 	local eFundBill;	-- Efund Roll
-
 
 	
 function searchEFunds()
@@ -140,8 +141,10 @@ function CollectMoneyFromWallet(items, result, player)
 	end
 end
 
-
+----------------------------------------
 -- Cutting up Wallets for Leather Strips
+----------------------------------------
+
 --  VARIABLES
 
 local leatherRoll;
@@ -168,7 +171,10 @@ function CutLeatherWallet(items, result, player)
 		end
 end
 
+---------------------------
 -- Shredding and  Recycling
+---------------------------
+
 -- VARIABLES
 
 local watchesMinValue = SandboxVars.GN84ECO.WatchesMinValue		
@@ -183,11 +189,14 @@ local jewelryDiamondMinValue = SandboxVars.GN84ECO.JewelryDiamondMinValue
 local jewelryDiamondMaxValue= SandboxVars.GN84ECO.JewelryDiamondMaxValue
 
 
+
+-- NEEDS IMPLEMENTED
 function PlayGrinderSound()
 end
 
 function PlayCashoutSound()
 end
+-----------------------
 
 
 function ShredderRecycleWatches(items, result, player)
@@ -261,58 +270,67 @@ function ShredderRecycleJewelryDiamond(items, result, player)
 end
 
 
+----------------------------------
+-- Safehouse Validation & Claiming
+----------------------------------
 
-
-
-
--- Safehouse Claiming
+-- VARIABLES
 
 buildingSqFootage = nil;
 
-function debuggingKey(_keyPressed)
-	local key = _keyPressed
-	if getAccessLevel() == "admin" then
-		-- print (tostring(key))
-		if key == 71
-			then		
-				--ClaimResidentialSafehouse()
-				CheckSafehouseSize()
-			end	
-	end
-end
+local residentialPermitSize = SandboxVars.GN84ECO.ResidentialPermitSize
+local factionBunkerPermitSize = SandboxVars.GN84ECO.FactionBunkerPermitSize
 
-function ClaimResidentialSafehouse(worldobjects, square, player)
+
+
+
+
+
+function ValidateSafehouseClaim(worldobjects, square, player)
 	
 	CheckSafehouseSize()
 	if not buildingSqFootage
 	then
 		print ("Error in Returning Safehouse Size")
 		return
-	elseif buildingSqFootage >= 2000 and buildingSqFootage < 10000
+	elseif buildingSqFootage >= residentialPermitSize and buildingSqFootage < factionBunkerPermitSize  -- Large Residential Claim
 			then
+				-- Check for Permit
+				-- 
+
 				print ("You must purchase a Residential Permit to Claim this Building!")
+
+				-- Remove Permit from Inventory
+				-- player:getInventory():RemoveOneOf("ResidentialClaimPermit")
+
 				return
 
-	elseif buildingSqFootage >= 10000
+	elseif buildingSqFootage >= factionBunkerPermitSize   -- Faction Bunker Claim
 			then
+				-- Check for Permit
+				-- 
+
 				print ("You must purchase a Faction Bunker Permit to Claim this Building!")
+
+				-- Remove Permit from Inventory
+				-- player:getInventory():RemoveOneOf("FactionBunkerClaimPermit")
+
 				return
 
-	elseif buildingSqFootage == 0
+	elseif buildingSqFootage == 0 -- Invalid Safehouse
 			then
 				print ("Invalid Safehouse")
 				return
 
-	else
-								-- Claim as Normal
+	else  -- Standard Claim
+							
 				print ("You can claim this building")
 				playerSafehouseClaim()
-				-- Remove Permit from Inventory
-				-- player:getInventory():RemoveOneOf("ResidentialClaimPermit")
+				
 	end
 end
 
--- Check Safehouse Sq Footage and Amount of Floors
+
 function CheckSafehouseSize(worldobjects, square, player)	
 		
 		buildingSqFootage = nil
@@ -322,30 +340,31 @@ function CheckSafehouseSize(worldobjects, square, player)
 				return
 			end
 
-		-- Get building definition
-
+		
+			-- Get building definition
 		local buildingDef = getPlayer():getSquare():getBuilding():getDef();
 		
 		if buildingDef == nil -- Error Handling
 			then 
-				print ("Error: No Building Def")
+				print ("Error: No Building Def") -- Check if player is still in a building
 				return
 		elseif buildingDef
 			then
 				
-				-- Check if player is still in a building
+				-- Get Building Center Coordinates
 				local buildingCenterX = ((buildingDef:getX() + buildingDef:getX2()) / 2) 
 				local buildingCenterY = ((buildingDef:getY() + buildingDef:getY2()) / 2)
 
-				local x, y, z = buildingCenterX, buildingCenterY, getPlayer():getZ();
-				-- local x, y, z = getPlayer():getX(), getPlayer():getY(), getPlayer():getZ();
+				-- Set Building Check location to Center Coordinates
+				local x, y, z = buildingCenterX, buildingCenterY, getPlayer():getZ();				
 				local currentTile = getCell():getGridSquare(x, y, z)
 				local buildingStories = z
 
-				if currentTile
-				then					
-					-- Check how many Floors Building Has
-					
+				if currentTile -- Check if Player is Standing on Valid Tile
+				then
+
+					-- Check how many Floors Building Has					
+
 					while currentTile:isSolidFloor()
 					do				
 						--print ("Is Solid Floor : ", z)
@@ -362,14 +381,13 @@ function CheckSafehouseSize(worldobjects, square, player)
 						buildingStories = z
 						--print("Building Stories: ",buildingStories)
 					end	
-					--print ("Warning: Exited Loop")
+						--print ("Warning: Exited Loop")
 				end
-
 				
+				-- Get Width and Height of Building Bounds
 				local buildingHeight = buildingDef:getH();
 				local buildingWidth = buildingDef:getW();		
-				
-				
+								
 
 				print ("#############################")
 				print ("Coords: X: ", buildingDef:getX(), " X2: ", buildingDef:getX2(), " Y: ", buildingDef:getY(), " Y2: ", buildingDef:getY2())
@@ -377,35 +395,33 @@ function CheckSafehouseSize(worldobjects, square, player)
 				print ("Running Safehouse Size Check...")
 				print ("Safehouse Size is: ", buildingWidth, " Wide -- ", buildingHeight, " Tall")	
 				print ("#############################")
-				-- Check Safehouse Sq Footage and Stories
-
 				
-				if buildingStories == nil
+				if buildingStories == nil -- Error Handling
 				then
 					return
 				end
-
 				
-					if (buildingStories == 0)
+					if (buildingStories == 0) -- Single Story Building
 					then
 						print ("Building is ", (buildingStories + 1)," Story Tall")
 						buildingSqFootage = buildingHeight * buildingWidth * 9
 						print ("Safehouse Sq Footage: ", (buildingSqFootage))
 						return
-					elseif (buildingStories >= 1)
+					elseif (buildingStories >= 1) -- Multi-Story Building
 						then
 							print ("Building is ", (buildingStories)," Story Tall")
 							buildingSqFootage = (buildingHeight * buildingWidth * 9 * buildingStories)
 							print ("Safehouse Sq Footage: ", (buildingSqFootage))	
 							return
-					else
+					else -- Invalid Building
 						return
 					end			
 			end
 end
 
-
--- Claiming Functions
+-----------------------------
+-- Vanilla Claiming Functions
+-----------------------------
 
 function playerSafehouseClaim(worldobjects, square, player)
 	local builddef = getPlayer():getSquare():getBuilding():getDef()
@@ -416,12 +432,30 @@ end
 local function Context_safezone(player, context, worldobjects, test)	
 	for _, opt in pairs(context.options) do
         if opt.name == getText("ContextMenu_SafehouseClaim") then
-					opt.onSelect = ClaimResidentialSafehouse
+					opt.onSelect = ValidateSafehouseClaim
 				end			
             break
         end
     end
 		
+
+----------------------------
+-- ADMIN DEBUGGING FUNCTIONS
+----------------------------
+
+function debuggingKey(_keyPressed)
+	local key = _keyPressed
+	if getAccessLevel() == "admin" then
+		-- print (tostring(key))
+		if key == 71
+			then		
+				--ValidateSafehouseClaim()
+				CheckSafehouseSize()
+			end	
+	end
+end
+
+
 
 Events.OnFillWorldObjectContextMenu.Add(Context_safezone)
 Events.OnKeyPressed.Add(debuggingKey);

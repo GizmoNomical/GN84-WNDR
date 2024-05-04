@@ -21,6 +21,8 @@ Sandbox_EN = {
     Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Diamond) - Min Value",
     Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Diamond) - Max Value",
 
+    Sandbox_GN84ECO_ResidentialPermitSize = "Residential Permit Needed (Sq Footage)",
+    Sandbox_GN84ECO_FactionBunkerPermitSize = "Faction Bunker Permit Needed (Sq Footage)",
 
 
 

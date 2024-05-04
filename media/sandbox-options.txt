@@ -226,3 +226,25 @@ option GN84ECO.JewelryDiamondMaxValue
     page = GN84ECO,
     translation = GN84ECO_JewelryDiamondMaxValue,
 }
+
+option GN84ECO.ResidentialPermitSize
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 2000,
+
+    page = GN84ECO,
+    translation = GN84ECO_ResidentialPermitSize
+}
+
+option GN84ECO.FactionBunkerPermitSize
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 10000,
+
+    page = GN84ECO,
+    translation = GN84ECO_FactionBunkerPermitSize
+}
