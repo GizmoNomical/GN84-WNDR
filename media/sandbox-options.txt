@@ -1,0 +1,228 @@
+VERSION = 1,
+
+option ServerPoints.PointsName
+{
+    type = string,
+    default = Smokey Points,
+
+    page = GN84ECO,
+    translation = GN84ECO_PointsName,
+}
+
+option ServerPoints.PointsFrequency
+{
+    type = enum,
+    numValues = 4,
+    default = 3,
+
+    page = GN84ECO,
+    translation = GN84ECO_PointsFrequency,
+}
+
+option ServerPoints.PointsPerTick
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_PointsPerTick,
+}
+
+option ServerPoints.ServerMessage
+{
+    type = string,
+    default = Thanks for playing on The Wanderers.  Spend your Smokey Points Wisely!,
+
+    page = GN84ECO,
+    translation = GN84ECO_ServerMessage,
+}
+
+option GN84ECO.PointsPerZombieKill
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 6,
+
+    page = GN84ECO,
+    translation = GN84ECO_PointsPerZombieKill,
+}
+
+option GN84ECO.EFundOdds
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_EFundOdds,
+}
+
+option GN84ECO.WalletCashMultiplier
+{
+    type = double,
+    min = 0.001,
+    max = 1000.0,
+    default = 1.0,
+
+    page = GN84ECO,
+    translation = GN84ECO_WalletCashMultiplier,
+}
+
+option GN84ECO.EFundCashMultiplier
+{
+    type = double,
+    min = 0.001,
+    max = 1000.0,
+    default = 1.0,
+
+    page = GN84ECO,
+    translation = GN84ECO_EFundCashMultiplier,
+}
+
+option GN84ECO.WealthyCash
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+
+    page = GN84ECO,
+    translation = GN84ECO_WealthyCash,
+}
+
+option GN84ECO.AverageCash
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_AverageCash,
+}
+
+option GN84ECO.PoorCash
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_PoorCash,
+}
+
+option GN84ECO.WatchesMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 3,
+
+    page = GN84ECO,
+    translation = GN84ECO_WatchesMinValue,
+}
+
+option GN84ECO.WatchesMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_WatchesMaxValue,
+}
+
+option GN84ECO.JewelrySimpleMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 1,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelrySimpleMinValue,
+}
+
+option GN84ECO.JewelrySimpleMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelrySimpleMaxValue,
+}
+
+
+option GN84ECO.JewelryPreciousMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryPreciousMinValue,
+}
+
+option GN84ECO.JewelryPreciousMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 50,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryPreciousMaxValue,
+}
+
+option GN84ECO.JewelryGemsMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 25,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryGemsMinValue,
+}
+
+option GN84ECO.JewelryGemsMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 100,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryGemsMaxValue,
+}
+
+option GN84ECO.JewelryDiamondMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 100,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryDiamondMinValue,
+}
+
+option GN84ECO.JewelryDiamondMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 200,
+
+    page = GN84ECO,
+    translation = GN84ECO_JewelryDiamondMaxValue,
+}

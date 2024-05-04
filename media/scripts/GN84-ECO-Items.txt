@@ -5,6 +5,15 @@ module GN84-ECO-TEST
         Base
     }
 
+	item MoneyClip
+	{
+		DisplayName			 = Money Clip,
+		DisplayCategory		 = Tool,
+		Type 				 = Normal,
+		Weight				 = 0.1,
+		Icon				 = MoneyClip		
+	}
+
     item MoneyStack100
     {
         DisplayName          =  Stack of Cash - $100 - ,
@@ -110,5 +119,59 @@ module GN84-ECO-TEST
 		WorldStaticModel	=  SafehouseExpansionPermit1000,
 	
 	}
+
+	item AdditionalSafehousePermit
+	{
+		DisplayName			=  Additional Safehouse Permit,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  AdditionalSafehousePermit,
+		WorldStaticModel	=  AdditionalSafehousePermit,
 	
+	}
+
+	item ResidentialClaimPermit
+	{
+		DisplayName			=  Residential Claim Permit,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+	
+	}
+
+	item CommercialClaimPermit
+	{
+		DisplayName			=  Commercial Claim Permit,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  CommercialClaimPermit,
+		WorldStaticModel	=  CommercialClaimPermit,
+	
+	}
+
+	item FactionBunkerClaimPermit
+	{
+		DisplayName			=  Faction Bunker Claim Permit,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  FactionBunkerClaimPermit,
+		WorldStaticModel	=  FactionBunkerClaimPermit,
+	
+	}
+
+	item SmokeyShredderRecycler
+	{
+		DisplayName			=  Smokey's All-In-One Shredder Recycler,
+		DisplayCategory		=  Tool,
+		Weight				=  200.0,
+		Type				=  Normal,
+		Icon				=  SmokeyShredderRecycler,
+		WorldStaticModel	=  SmokeyShredderRecycler,
+
+	}
 }

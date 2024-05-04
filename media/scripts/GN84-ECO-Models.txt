@@ -6,6 +6,13 @@ module GN84-ECO-TEST
     }
 
 
+	model SmokeyShredderRecycler
+	{
+		mesh = worlditems/SmokeyShredderRecycler,
+		texture = worlditems/SmokeyShredderRecycler,
+		scale = 0.6,
+	}
+
 	model SafehouseExpansionPermit10
 	{
 		mesh = worlditems/GN84Permit,
@@ -24,6 +31,34 @@ module GN84-ECO-TEST
 	{
 		mesh = worlditems/GN84Permit,
 		texture = worlditems/SafehouseExpansionPermit1000,
+		scale = 0.6,
+	}
+
+	model AdditionalSafehousePermit
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/AdditionalSafehousePermit,
+		scale = 0.6,
+	}
+
+	model ResidentialClaimPermit
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/ResidentialClaimPermit,
+		scale = 0.6,
+	}
+
+	model CommercialClaimPermit
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/CommercialClaimPermit,
+		scale = 0.6,
+	}
+
+	model FactionBunkerClaimPermit
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/FactionBunkerClaimPermit,
 		scale = 0.6,
 	}
 

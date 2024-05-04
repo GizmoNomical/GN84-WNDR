@@ -1,0 +1,39 @@
+Sandbox_EN = {
+        
+    Sandbox_GN84ECO = "The Wanderers Economy",
+    
+    Sandbox_GN84ECO_PointsPerZombieKill = "Points per Zombie Kill",
+    Sandbox_GN84ECO_EFundOdds = "Emergency Fund Odds",
+    Sandbox_GN84ECO_EFundOdds_tooltip = "0 to 100 - Higher = Better Odds",
+    Sandbox_GN84ECO_WalletCashMultiplier = "Wallet Cash Multiplier",
+    Sandbox_GN84ECO_EFundCashMultiplier = "Emergency Fund Cash Multiplier",
+    Sandbox_GN84ECO_WealthyCash = "Wealthy Zombie Cash Limit",
+    Sandbox_GN84ECO_AverageCash = "Average Zombie Cash Limit",
+    Sandbox_GN84ECO_PoorCash = "Poor Zombie Cash Limit",
+    Sandbox_GN84ECO_WatchesMinValue = "Recycling: Watches - Min Value",
+    Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Watches - Max Value",
+    Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Simple) - Min Value",
+    Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Simple) - Max Value",
+    Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Precious) - Min Value",
+    Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Precious) - Max Value",
+    Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Gemstones) - Min Value",
+    Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Gemstones) - Max Value",
+    Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Diamond) - Min Value",
+    Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Diamond) - Max Value",
+
+
+
+
+    Sandbox_GN84ECO_PointsName = "Points Name",
+    Sandbox_GN84ECO_PointsFrequency = "Award Frequency",
+    Sandbox_GN84ECO_PointsFrequency_tooltip = "Requires Server Restart To Apply",
+    Sandbox_GN84ECO_PointsFrequency_option1 = "Disabled",
+    Sandbox_GN84ECO_PointsFrequency_option2 = "Every Ten Minutes",
+    Sandbox_GN84ECO_PointsFrequency_option3 = "Every Hour",
+    Sandbox_GN84ECO_PointsFrequency_option4 = "Every Day",
+
+    Sandbox_GN84ECO_PointsPerTick = "Points Per Tick",
+
+    Sandbox_GN84ECO_ServerMessage = "Server Message",
+
+}
