@@ -1,4 +1,4 @@
-module GN84-ECO-TEST
+module GN84-ECO
 {
     imports
     {

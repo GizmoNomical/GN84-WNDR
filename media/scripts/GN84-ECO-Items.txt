@@ -1,4 +1,4 @@
-module GN84-ECO-TEST
+module GN84-ECO
 {
     imports
     {
@@ -131,9 +131,31 @@ module GN84-ECO-TEST
 	
 	}
 
-	item ResidentialClaimPermit
+	item ResidentialClaimPermitSmall
 	{
-		DisplayName			=  Residential Claim Permit,
+		DisplayName			=  Residential Claim Permit (Small),
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+	
+	}
+
+	item ResidentialClaimPermitMedium
+	{
+		DisplayName			=  Residential Claim Permit (Medium),
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+	
+	}
+
+	item ResidentialClaimPermitLarge
+	{
+		DisplayName			=  Residential Claim Permit (Large),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -153,9 +175,31 @@ module GN84-ECO-TEST
 	
 	}
 
-	item FactionBunkerClaimPermit
+	item FactionBunkerClaimPermitSmall
 	{
-		DisplayName			=  Faction Bunker Claim Permit,
+		DisplayName			=  Faction Bunker Claim Permit (Small),
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  FactionBunkerClaimPermit,
+		WorldStaticModel	=  FactionBunkerClaimPermit,
+	
+	}
+
+	item FactionBunkerClaimPermitMedium
+	{
+		DisplayName			=  Faction Bunker Claim Permit (Medium),
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  FactionBunkerClaimPermit,
+		WorldStaticModel	=  FactionBunkerClaimPermit,
+	
+	}
+
+	item FactionBunkerClaimPermitLarge
+	{
+		DisplayName			=  Faction Bunker Claim Permit (Large),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,

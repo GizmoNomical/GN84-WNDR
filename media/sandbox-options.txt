@@ -227,18 +227,40 @@ option GN84ECO.JewelryDiamondMaxValue
     translation = GN84ECO_JewelryDiamondMaxValue,
 }
 
-option GN84ECO.ResidentialPermitSize
+option GN84ECO.ResidentialPermitSizeSmall
 {
     type = integer,
     min = 1,
     max = 100000,
-    default = 2000,
+    default = 1500,
 
     page = GN84ECO,
-    translation = GN84ECO_ResidentialPermitSize
+    translation = GN84ECO_ResidentialPermitSizeSmall
 }
 
-option GN84ECO.FactionBunkerPermitSize
+option GN84ECO.ResidentialPermitSizeMedium
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 3500,
+
+    page = GN84ECO,
+    translation = GN84ECO_ResidentialPermitSizeMedium
+}
+
+option GN84ECO.ResidentialPermitSizeLarge
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 7500,
+
+    page = GN84ECO,
+    translation = GN84ECO_ResidentialPermitSizeLarge
+}
+
+option GN84ECO.FactionBunkerPermitSizeSmall
 {
     type = integer,
     min = 1,
@@ -246,5 +268,27 @@ option GN84ECO.FactionBunkerPermitSize
     default = 10000,
 
     page = GN84ECO,
-    translation = GN84ECO_FactionBunkerPermitSize
+    translation = GN84ECO_FactionBunkerPermitSizeSmall
+}
+
+option GN84ECO.FactionBunkerPermitSizeMedium
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 25000,
+
+    page = GN84ECO,
+    translation = GN84ECO_FactionBunkerPermitSizeMedium
+}
+
+option GN84ECO.FactionBunkerPermitSizeLarge
+{
+    type = integer,
+    min = 1,
+    max = 100000,
+    default = 50000,
+
+    page = GN84ECO,
+    translation = GN84ECO_FactionBunkerPermitSizeLarge
 }

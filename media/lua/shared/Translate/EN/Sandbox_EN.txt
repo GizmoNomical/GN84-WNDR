@@ -20,12 +20,12 @@ Sandbox_EN = {
     Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Gemstones) - Max Value",
     Sandbox_GN84ECO_WatchesMinValue = "Recycling: Jewelry (Diamond) - Min Value",
     Sandbox_GN84ECO_WatchesMaxValue = "Recycling: Jewelry (Diamond) - Max Value",
-
-    Sandbox_GN84ECO_ResidentialPermitSize = "Residential Permit Needed (Sq Footage)",
-    Sandbox_GN84ECO_FactionBunkerPermitSize = "Faction Bunker Permit Needed (Sq Footage)",
-
-
-
+    Sandbox_GN84ECO_ResidentialPermitSizeSmall = "Residential Permit (Small) - Square Footage",
+    Sandbox_GN84ECO_ResidentialPermitSizeLarge = "Residential Permit (Medium) - Square Footage",
+    Sandbox_GN84ECO_ResidentialPermitSizeLarge = "Residential Permit (Large) - Square Footage",
+    Sandbox_GN84ECO_FactionBunkerPermitSizeSmall = "Faction Bunker Permit (Small) Square Footage",
+    Sandbox_GN84ECO_FactionBunkerPermitSizeSmall = "Faction Bunker Permit (Medium) Square Footage",
+    Sandbox_GN84ECO_FactionBunkerPermitSizeLarge = "Faction Bunker Permit (Large) Square Footage",    
     Sandbox_GN84ECO_PointsName = "Points Name",
     Sandbox_GN84ECO_PointsFrequency = "Award Frequency",
     Sandbox_GN84ECO_PointsFrequency_tooltip = "Requires Server Restart To Apply",
