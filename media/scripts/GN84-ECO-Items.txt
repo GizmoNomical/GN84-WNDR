@@ -8,10 +8,13 @@ module GN84-ECO
 	item MoneyClip
 	{
 		DisplayName			 = Money Clip,
-		DisplayCategory		 = Tool,
-		Type 				 = Normal,
+		DisplayCategory		 = Container,
+		WeightReduction		 = 99,
 		Weight				 = 0.1,
-		Icon				 = MoneyClip		
+		Type 				 = Container,
+		Capacity			 = 5,
+		Icon				 = MoneyClip,
+		PutInSound			 = PutItemInBag,		
 	}
 
     item MoneyStack100
