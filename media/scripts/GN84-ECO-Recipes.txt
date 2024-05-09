@@ -17,8 +17,9 @@ module GN84-ECO
 		
 		InSameInventory:true,
 		Result:EmptyWallet1,
-		Time:60,			
+		Time:110,			
 		AnimNode:Craft,
+		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
 	
@@ -29,7 +30,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet2,
 		AnimNode:Craft,
-		Time:60,	
+		Time:110,
+		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,		
 	}
 	
@@ -40,7 +42,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet3,
 		AnimNode:Craft,
-		Time:60,
+		Time:110,
+		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
 	
@@ -51,7 +54,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet4,
 		AnimNode:Craft,
-		Time:60,
+		Time:110,
+		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
 		
@@ -68,6 +72,7 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack100,
 		AnimNode:Craft,
+		Sound:CountingMoney,
 		Time:50,
 	}
 	
@@ -78,7 +83,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack1000,
 		AnimNode:Craft,
-		Time:100,
+		Sound:CountingMoney,
+		Time:70,
 	}
 	
 	recipe Make 1000 Stack of Cash
@@ -88,7 +94,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack1000,
 		AnimNode:Craft,
-		Time:60,
+		Sound:CountingMoney,
+		Time:70,
 	}
 	
 	recipe Make 10000 Stack of Cash
@@ -98,7 +105,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack10000,
 		AnimNode:Craft,
-		Time:100,
+		Sound:CountingMoney,
+		Time:70,
 	}
 
 	recipe Make 10000 Stack of Cash
@@ -108,7 +116,19 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack10000,
 		AnimNode:Craft,
-		Time:60,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 100000 Stack of Cash
+	{
+		MoneyStack10000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
 	}
 	
 	recipe Break Stack of Cash into 100s
@@ -118,7 +138,8 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack100=10,
 		AnimNode:Craft,
-		Time:60,
+		Sound:CountingMoney,
+		Time:50,
 	}	
 		
 	recipe Break Stack of Cash into 1000s
@@ -128,7 +149,19 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:MoneyStack1000=10,
 		AnimNode:Craft,
-		Time:60,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 10000s
+	{
+		MoneyStack100000,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000=10,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
 	}		
 		
 /* CONVERT CASH TO SMOKEY POINTS */
@@ -141,10 +174,11 @@ module GN84-ECO
 		MoneyStack100,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints100,	
 	}
 	
@@ -153,10 +187,11 @@ module GN84-ECO
 		MoneyStack100=10,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 	
@@ -165,10 +200,11 @@ module GN84-ECO
 		MoneyStack1000,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 	
@@ -177,10 +213,11 @@ module GN84-ECO
 		MoneyStack100=100,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
@@ -189,10 +226,11 @@ module GN84-ECO
 		MoneyStack1000=10,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
@@ -201,11 +239,64 @@ module GN84-ECO
 		MoneyStack10000,
 		
 		Result:SheetPaper2,
-		Time:60.0,
+		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
+		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 100000 Smokey Points
+	{
+		MoneyStack10000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints100000,	
+	}
+
+	recipe Convert to 100000 Smokey Points
+	{
+		MoneyStack100000,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints100000,	
+	}
+
+	recipe Convert to 1000000 Smokey Points
+	{
+		MoneyStack100000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints1000000,	
+	}
+
+	recipe Convert to 1000000 Smokey Points
+	{
+		MoneyStack10000=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
 	
 

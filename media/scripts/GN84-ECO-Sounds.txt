@@ -1,0 +1,71 @@
+module GN84-ECO
+{
+    imports
+    {
+        Base
+    }
+
+
+    sound SearchWallet
+    {
+        category = Item,
+        loop = false,
+        clip
+            {
+                file = media/sound/SearchWallet.wav,
+                distanceMax = 10,
+                volume = 1.0,
+                
+            }
+    }
+
+    sound MoneyClipShuffle
+    {
+        category = Item,
+        loop = false,        
+        clip
+            {
+                file = media/sound/MoneyClipShuffle.wav,
+                distanceMax = 10,
+                volume = 1.0,
+                
+            }
+    }
+
+    sound CountingMoney
+    {
+        category = Item,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/CountingMoney.wav,
+            distanceMax = 10,
+            volume = 0.45,
+        }
+    }
+
+    sound CashRegisterSound
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/CashRegisterSound.wav,
+            distanceMax = 10,
+            volume = 0.75,
+        }
+    }
+
+    sound ReceiptSound
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/ReceiptSound.wav,
+            distanceMax = 10,
+            volume = 0.7,
+        }
+    }
+}

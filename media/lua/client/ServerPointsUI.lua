@@ -12,7 +12,7 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 
 local function OnServerCommand(module, command, arguments)
-    if module == "GN84-ECO-TEST" and command == "get" then
+    if module == "GN84-ECO" and command == "get" then
         ServerPointsUI.instance.points = arguments[1]
         Events.OnServerCommand.Remove(OnServerCommand)
     end
@@ -28,7 +28,7 @@ function ServerPointsUI:setVisible(visible)
     end
     if visible then
         Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("GN84-ECO-TEST", "get", nil)
+        sendClientCommand("GN84-ECO", "get", nil)
     end
 end
 
@@ -66,7 +66,7 @@ end
 --end
 
 function ServerPointsUI.LoadListings(module, command, arguments)
-    if module == "GN84-ECO-TEST" and command == "load" then
+    if module == "GN84-ECO" and command == "load" then
         Events.OnServerCommand.Remove(ServerPointsUI.LoadListings)
         for k, v in pairs(arguments) do
             local scrollingList = ISScrollingListBox:new(1, 0, ServerPointsUI.instance.tabPanel.width - 2, ServerPointsUI.instance.tabPanel.height - ServerPointsUI.instance.tabPanel.tabHeight)
@@ -95,7 +95,7 @@ end
 local function OnTick()
     Events.OnTick.Remove(OnTick)
     Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
-    sendClientCommand("GN84-ECO-TEST", "load", nil)
+    sendClientCommand("GN84-ECO", "load", nil)
 end
 
 function ServerPointsUI:createChildren()
@@ -151,21 +151,22 @@ function ServerPointsUI:onReload()
         self.tabPanel:removeView(v.view)
     end
     Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
-    sendClientCommand("GN84-ECO-TEST", "load", nil)
+    sendClientCommand("GN84-ECO", "load", nil)
 end
 
 function ServerPointsUI.BuyType.ITEM(row)
-    sendClientCommand("GN84-ECO-TEST", "buy", { row.price, row.target })
+    sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
     getPlayer():getInventory():AddItems(row.target, row.quantity)
+    getSoundManager():PlaySound("CashRegisterSound", false, 1)
 end
 
 function ServerPointsUI.BuyType.VEHICLE(row)
-    sendClientCommand("GN84-ECO-TEST", "buy", { row.price, row.target })
-    sendClientCommand("GN84-ECO-TEST", "vehicle", { row.target })
+    sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
+    sendClientCommand("GN84-ECO", "vehicle", { row.target })
 end
 
 function ServerPointsUI.BuyType.XP(row)
-    sendClientCommand("GN84-ECO-TEST", "buy", { row.price, row.target })
+    sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
     getPlayer():getXp():AddXP(Perks[row.target], row.quantity, true, false, false)
 end
 
@@ -176,7 +177,7 @@ function ServerPointsUI:onBuy()
         ServerPointsUI.BuyType[row.type](row)
     end
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-ECO-TEST", "get", nil)
+    sendClientCommand("GN84-ECO", "get", nil)
 end
 
 function ServerPointsUI.PreviewType.VEHICLE(self)

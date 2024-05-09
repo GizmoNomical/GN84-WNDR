@@ -24,7 +24,7 @@ option ServerPoints.PointsPerTick
     type = integer,
     min = 0,
     max = 2147483647,
-    default = 10,
+    default = 250,
 
     page = GN84ECO,
     translation = GN84ECO_PointsPerTick,
@@ -88,7 +88,7 @@ option GN84ECO.WealthyCash
     type = integer,
     min = 0,
     max = 100,
-    default = 20,
+    default = 50,
 
     page = GN84ECO,
     translation = GN84ECO_WealthyCash,
@@ -99,7 +99,7 @@ option GN84ECO.AverageCash
     type = integer,
     min = 0,
     max = 100,
-    default = 10,
+    default = 15,
 
     page = GN84ECO,
     translation = GN84ECO_AverageCash,
@@ -114,6 +114,32 @@ option GN84ECO.PoorCash
 
     page = GN84ECO,
     translation = GN84ECO_PoorCash,
+}
+
+option GN84ECO.PlayerLuckBonus
+{
+    type = double,
+    min = 1,
+    max = 10,
+    default = 1.2,
+
+    page = GN84ECO,
+    translation = GN84ECO_PlayerLuckBonus,
+
+
+}
+
+option GN84ECO.PlayerUnluckyPenalty
+{
+    type = double,
+    min = 0.01,
+    max = 1,
+    default = 0.95,
+
+    page = GN84ECO,
+    translation = GN84ECO_PlayerUnluckyPenalty,
+
+
 }
 
 option GN84ECO.WatchesMinValue
@@ -227,7 +253,7 @@ option GN84ECO.JewelryDiamondMaxValue
     translation = GN84ECO_JewelryDiamondMaxValue,
 }
 
-option GN84ECO.ResidentialPermitSizeSmall
+option GN84ECO.ResidentialPermitSmall
 {
     type = integer,
     min = 1,
@@ -235,10 +261,10 @@ option GN84ECO.ResidentialPermitSizeSmall
     default = 1500,
 
     page = GN84ECO,
-    translation = GN84ECO_ResidentialPermitSizeSmall
+    translation = GN84ECO_ResidentialPermitSmall,
 }
 
-option GN84ECO.ResidentialPermitSizeMedium
+option GN84ECO.ResidentialPermitLarge
 {
     type = integer,
     min = 1,
@@ -246,10 +272,10 @@ option GN84ECO.ResidentialPermitSizeMedium
     default = 3500,
 
     page = GN84ECO,
-    translation = GN84ECO_ResidentialPermitSizeMedium
+    translation = GN84ECO_ResidentialPermitLarge,
 }
 
-option GN84ECO.ResidentialPermitSizeLarge
+option GN84ECO.ResidentialPermitMansion
 {
     type = integer,
     min = 1,
@@ -257,10 +283,10 @@ option GN84ECO.ResidentialPermitSizeLarge
     default = 7500,
 
     page = GN84ECO,
-    translation = GN84ECO_ResidentialPermitSizeLarge
+    translation = GN84ECO_ResidentialPermitMansion,
 }
 
-option GN84ECO.FactionBunkerPermitSizeSmall
+option GN84ECO.FactionPermitSmall
 {
     type = integer,
     min = 1,
@@ -268,10 +294,10 @@ option GN84ECO.FactionBunkerPermitSizeSmall
     default = 10000,
 
     page = GN84ECO,
-    translation = GN84ECO_FactionBunkerPermitSizeSmall
+    translation = GN84ECO_FactionPermitSmall,
 }
 
-option GN84ECO.FactionBunkerPermitSizeMedium
+option GN84ECO.FactionPermitLarge
 {
     type = integer,
     min = 1,
@@ -279,10 +305,10 @@ option GN84ECO.FactionBunkerPermitSizeMedium
     default = 25000,
 
     page = GN84ECO,
-    translation = GN84ECO_FactionBunkerPermitSizeMedium
+    translation = GN84ECO_FactionPermitLarge,
 }
 
-option GN84ECO.FactionBunkerPermitSizeLarge
+option GN84ECO.FactionPermitMassive
 {
     type = integer,
     min = 1,
@@ -290,5 +316,5 @@ option GN84ECO.FactionBunkerPermitSizeLarge
     default = 50000,
 
     page = GN84ECO,
-    translation = GN84ECO_FactionBunkerPermitSizeLarge
+    translation = GN84ECO_FactionPermitMassive,
 }

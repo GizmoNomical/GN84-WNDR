@@ -8,9 +8,33 @@ Distributions = Distributions or {};
 local distributionTableCash = {
     all = {        
         inventoryfemale = {
-            rolls = 7,
+            rolls = 100,
             items = {    
-                "Money", 20,                                 
+                "Money", 80,
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80,
+                "Money", 80,
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 50,
+                "Money", 50,
+                "Money", 50, 
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,  
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20,                                  
                 "Money", 13,
                 "Money", 11,           
                 "Money", 5,
@@ -20,9 +44,33 @@ local distributionTableCash = {
             }
         },
         inventorymale = {
-            rolls = 7,
+            rolls = 100,
             items = {     
-                "Money", 20,
+                "Money", 80,
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80,
+                "Money", 80,
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 80, 
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,
+                "Money", 50,  
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
                 "Money", 13,
                 "Money", 11,            
                 "Money", 5,
@@ -32,29 +80,87 @@ local distributionTableCash = {
             }
         },
         cashregister = {
-            rolls = 20,
+            rolls = 100,
             items = {     
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 100,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
                 "Money", 20,
                 "Money", 20,
                 "Money", 20,
                 "Money", 20,
-                "Money", 20,
-                "Money", 20,
-                "Money", 13,
-                "Money", 11,            
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
-                "Money", 5,
+                "Money", 20,                
             }
         },
         vendingsnack = {
-            rolls = 5,
-            items = {                    
+            rolls = 15,
+            items = { 
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,
+                "Money", 80,    
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20,                
                 "Money", 13,
                 "Money", 11,            
                 "Money", 5,
@@ -65,8 +171,16 @@ local distributionTableCash = {
                 }
             },
             vendingpop = {
-                rolls = 3,
-                items = {                    
+                rolls = 10,
+                items = {  
+                    "Money", 80,
+                    "Money", 80,
+                    "Money", 80,  
+                    "Money", 20, 
+                    "Money", 20, 
+                    "Money", 20, 
+                    "Money", 20, 
+                    "Money", 20,                 
                     "Money", 13,
                     "Money", 11,            
                     "Money", 5,
@@ -78,7 +192,17 @@ local distributionTableCash = {
         },
         Briefcase = {
             rolls = 7,
-            items = {           
+            items = {    
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20, 
+                "Money", 20,        
                 "Money", 13,
                 "Money", 11,            
                 "Money", 5,
@@ -96,16 +220,16 @@ local distributionTableWallets = {
         inventoryfemale = {
             rolls = 1,
             items = {
-                "Wallet2", 7,
-                "Wallet4", 7,
+                "Wallet2", 100,
+                "Wallet4", 100,
             }
         },
         inventorymale = {
             rolls = 1,
             items = {
-                "Wallet", 7,
-                "Wallet3", 7,
-                "Wallet4", 7,
+                "Wallet", 100,
+                "Wallet3", 100,
+                "Wallet4", 100,
             }
         },
     },
@@ -115,112 +239,112 @@ table.insert(Distributions, 1, distributionTableCash);
 table.insert(Distributions, 1, distributionTableWallets);
 
 table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, "Base.Money");
-table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, 100);
+table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, 150);
 
 table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, 10);
+table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, 20);
 
 table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, "Base.Money");
-table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, 1000);
+table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, 10000);
 
 table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, 100);
+table.insert(ProceduralDistributions["list"]["PoliceEvidence"].items, 50);
 
 table.insert(ProceduralDistributions["list"]["SchoolLockers"].items, "Base.Money");
-table.insert(ProceduralDistributions["list"]["SchoolLockers"].items, 25);
+table.insert(ProceduralDistributions["list"]["SchoolLockers"].items, 50);
 
 table.insert(ProceduralDistributions["list"]["Locker"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["Locker"].items, 5);
+table.insert(ProceduralDistributions["list"]["Locker"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["Locker"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["Locker"].items, 5);
+table.insert(ProceduralDistributions["list"]["Locker"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["Locker"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["Locker"].items, 5);
+table.insert(ProceduralDistributions["list"]["Locker"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["Locker"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["Locker"].items, 5);
+table.insert(ProceduralDistributions["list"]["Locker"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["PoliceLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 5);
+table.insert(ProceduralDistributions["list"]["FireDeptLockers"].items, 10);
 
 
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 5);
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Money");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 100);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 2800);
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Wallet");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 5);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Wallet2");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 5);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Wallet3");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 5);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Wallet4");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 5);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet");
-table.insert(VehicleDistributions["GloveBox"].items, 6);
+table.insert(VehicleDistributions["GloveBox"].items, 3);
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet2");
-table.insert(VehicleDistributions["GloveBox"].items, 6);
+table.insert(VehicleDistributions["GloveBox"].items, 3);
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet3");
-table.insert(VehicleDistributions["GloveBox"].items, 6);
+table.insert(VehicleDistributions["GloveBox"].items, 3);
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet4");
-table.insert(VehicleDistributions["GloveBox"].items, 6);
+table.insert(VehicleDistributions["GloveBox"].items, 3);
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Money");
-table.insert(VehicleDistributions["GloveBox"].items, 250);
+table.insert(VehicleDistributions["GloveBox"].items, 150);
 
 
 ItemPickerJava.Parse()

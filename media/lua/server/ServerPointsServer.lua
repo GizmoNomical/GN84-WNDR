@@ -1,7 +1,7 @@
 
 function Recipe.OnCreate.RedeemPoints(items, result, player)
     local points = items:get(0):getModData().serverPoints or 0
-    sendClientCommand("GN84-ECO-TEST", "add", { player:getUsername(), points })
+    sendClientCommand("GN84-ECO", "add", { player:getUsername(), points })
     player:Say("Redeemed " .. points .. " " .. SandboxVars.ServerPoints.PointsName)
 end
 
@@ -84,7 +84,7 @@ function ServerPointsCommands.reload(module, command, player, args)
 end
 
 Events.OnClientCommand.Add(function(module, command, player, args)
-    if module == "GN84-ECO-TEST" and ServerPointsCommands[command] then
+    if module == "GN84-ECO" and ServerPointsCommands[command] then
         ServerPointsCommands[command](module, command, player, args)
     end
 end)

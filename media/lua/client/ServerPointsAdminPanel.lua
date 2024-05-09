@@ -7,7 +7,7 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 
 local function OnServerCommand(module, command, arguments)
-    if module == "GN84-ECO-TEST" and command == "get" then
+    if module == "GN84-ECO" and command == "get" then
         ServerPointsAdminPanel.instance.balance = "Balance: " .. tostring(arguments[1])
         Events.OnServerCommand.Remove(OnServerCommand)
     end
@@ -21,7 +21,7 @@ function ServerPointsAdminPanel:createChildren()
     local x = padBottom + getTextManager():MeasureStringX(UIFont.Medium, "Player:") + padBottom
     self.playerSelect = ISComboBox:new(x, padBottom * 2 + FONT_HGT_MEDIUM, self.width - x - padBottom, btnHgt, nil, function(_, combo)
         Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("GN84-ECO-TEST", "get", { combo.options[combo.selected] })
+        sendClientCommand("GN84-ECO", "get", { combo.options[combo.selected] })
     end)
     self.playerSelect:initialise()
     local players = getOnlinePlayers()
@@ -31,7 +31,7 @@ function ServerPointsAdminPanel:createChildren()
     table.sort(self.playerSelect.options)
     self.playerSelect.selected = 1
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-ECO-TEST", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-ECO", "get", { self.playerSelect.options[self.playerSelect.selected] })
     self:addChild(self.playerSelect)
 
     local z = self.playerSelect.y + self.playerSelect.height + padBottom + FONT_HGT_MEDIUM + padBottom * 2
@@ -79,12 +79,12 @@ end
 
 function ServerPointsAdminPanel:onOptionMouseDown(button)
     if button.internal == "GIVE" then
-        sendClientCommand("GN84-ECO-TEST", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-ECO", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
     elseif button.internal == "TAKE" then
-        sendClientCommand("GN84-ECO-TEST", "add", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-ECO", "add", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
     end
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-ECO-TEST", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-ECO", "get", { self.playerSelect.options[self.playerSelect.selected] })
 end
 
 function ServerPointsAdminPanel:onSpawn()
@@ -95,7 +95,7 @@ function ServerPointsAdminPanel:onSpawn()
 end
 
 function ServerPointsAdminPanel.onReload()
-    sendClientCommand("GN84-ECO-TEST", "reload", nil)
+    sendClientCommand("GN84-ECO", "reload", nil)
 end
 
 function ServerPointsAdminPanel:close()

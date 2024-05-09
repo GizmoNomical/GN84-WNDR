@@ -9,12 +9,13 @@ module GN84-ECO
 	{
 		DisplayName			 = Money Clip,
 		DisplayCategory		 = Container,
-		WeightReduction		 = 99,
+		WeightReduction		 = 100,
 		Weight				 = 0.1,
 		Type 				 = Container,
-		Capacity			 = 5,
+		Capacity			 = 25,
 		Icon				 = MoneyClip,
-		PutInSound			 = PutItemInBag,		
+		OpenSound			 = MoneyClipShuffle,
+		AcceptItemFunction	 = GN84_AcceptItemCash,		
 	}
 
     item MoneyStack100
@@ -22,7 +23,7 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $100 - ,
 		DisplayCategory		 =  Junk,
         Type                 =  Normal,
-        Weight               =  0.01,
+        Weight               =  0.001,
         Icon                 =  MoneyStack100,
 		WorldStaticModel	 =  MoneyStack100,
 		
@@ -33,7 +34,7 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $1000 - ,
 		DisplayCategory		 =  Junk,
         Type                 =  Normal,
-        Weight               =  .1,
+        Weight               =  0.01,
         Icon                 =  MoneyStack1000,
 		WorldStaticModel	 =  MoneyStack1000,
 		
@@ -44,7 +45,18 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $10000 - ,
 		DisplayCategory		 =  Junk,
         Type                 =  Normal,
-        Weight               =  1.0,
+        Weight               =  0.1,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
+	item MoneyStack100000
+    {
+        DisplayName          =  Stack of Cash - $100000 - ,
+		DisplayCategory		 =  Junk,
+        Type                 =  Normal,
+        Weight               =  0.1,
         Icon                 =  MoneyStack10000,
 		WorldStaticModel	 =  MoneyStack10000,
 		
@@ -134,9 +146,9 @@ module GN84-ECO
 	
 	}
 
-	item ResidentialClaimPermitSmall
+	item ResidentialPermitSmall
 	{
-		DisplayName			=  Residential Claim Permit (Small),
+		DisplayName			=  Residential Claim Permit (Small House),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -145,9 +157,9 @@ module GN84-ECO
 	
 	}
 
-	item ResidentialClaimPermitMedium
+	item ResidentialPermitLarge
 	{
-		DisplayName			=  Residential Claim Permit (Medium),
+		DisplayName			=  Residential Claim Permit (Large House),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -156,9 +168,9 @@ module GN84-ECO
 	
 	}
 
-	item ResidentialClaimPermitLarge
+	item ResidentialPermitMansion
 	{
-		DisplayName			=  Residential Claim Permit (Large),
+		DisplayName			=  Residential Claim Permit (Mansion),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -178,9 +190,9 @@ module GN84-ECO
 	
 	}
 
-	item FactionBunkerClaimPermitSmall
+	item FactionPermitSmall
 	{
-		DisplayName			=  Faction Bunker Claim Permit (Small),
+		DisplayName			=  Faction Claim Permit (Small Bunker),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -189,9 +201,9 @@ module GN84-ECO
 	
 	}
 
-	item FactionBunkerClaimPermitMedium
+	item FactionPermitLarge
 	{
-		DisplayName			=  Faction Bunker Claim Permit (Medium),
+		DisplayName			=  Faction Claim Permit (Large Bunker),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -200,9 +212,9 @@ module GN84-ECO
 	
 	}
 
-	item FactionBunkerClaimPermitLarge
+	item FactionPermitMassive
 	{
-		DisplayName			=  Faction Bunker Claim Permit (Large),
+		DisplayName			=  Faction Claim Permit (Massive Bunker),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
