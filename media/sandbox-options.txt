@@ -13,7 +13,7 @@ option ServerPoints.PointsFrequency
 {
     type = enum,
     numValues = 4,
-    default = 3,
+    default = 2,
 
     page = GN84ECO,
     translation = GN84ECO_PointsFrequency,
@@ -24,7 +24,7 @@ option ServerPoints.PointsPerTick
     type = integer,
     min = 0,
     max = 2147483647,
-    default = 250,
+    default = 80,
 
     page = GN84ECO,
     translation = GN84ECO_PointsPerTick,
@@ -44,7 +44,7 @@ option GN84ECO.PointsPerZombieKill
     type = integer,
     min = 0,
     max = 2147483647,
-    default = 6,
+    default = 18,
 
     page = GN84ECO,
     translation = GN84ECO_PointsPerZombieKill,
@@ -251,6 +251,72 @@ option GN84ECO.JewelryDiamondMaxValue
 
     page = GN84ECO,
     translation = GN84ECO_JewelryDiamondMaxValue,
+}
+
+option GN84ECO.SimpleToolMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 1,
+
+    page = GN84ECO,
+    translation = GN84ECO_SimpleToolMinValue,
+}
+
+option GN84ECO.SimpleToolMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_SimpleToolMaxValue,
+}
+
+option GN84ECO.LargeToolMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_LargeToolMinValue,
+}
+
+option GN84ECO.LargeToolMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 40,
+
+    page = GN84ECO,
+    translation = GN84ECO_LargeToolMaxValue,
+}
+
+option GN84ECO.ComplexToolMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 40,
+
+    page = GN84ECO,
+    translation = GN84ECO_ComplexToolMinValue,
+}
+
+option GN84ECO.ComplexToolMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 100,
+
+    page = GN84ECO,
+    translation = GN84ECO_ComplexToolMaxValue,
 }
 
 option GN84ECO.ResidentialPermitSmall

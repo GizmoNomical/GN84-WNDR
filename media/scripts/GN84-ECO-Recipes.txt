@@ -320,6 +320,8 @@ module GN84-ECO
 /* ------------------------------ */
 
 
+	/*JEWELRY*/
+
 	recipe Shred and Recycle Watch for Money
 	{
 		keep SmokeyShredderRecycler,
@@ -385,5 +387,50 @@ module GN84-ECO
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
+	/*TOOLS*/
+
+	recipe Shred and Recycle Tool for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer/Base.BallPeenHammer,
+        
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:2.0,
+        OnCreate:ShredderRecycleSimpleTool,
+	}
+
+	recipe Shred and Recycle Tool for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		ToolsOfTheTrade.FellingAxe/ToolsOfTheTrade.Hatchet/AuthenticZLite.AuthenticIceAxe/ToolsOfTheTrade.IndustrialPipeWrench/ToolsOfTheTrade.IndustrialWrenchToolsOfTheTrade.PostMaul/ToolsOfTheTrade.PulaskiAxeToolsOfTheTrade.SplittingMaul/ToolsOfTheTrade.UtilityBar,/Base.Shovel/Base.Shovel2/Base.LugWrench/Base.Jack/Base.TirePump/Base.WoodAxe/Base.GardenFork/Base.GardenHoe/Base.PickAxe/Base.SnowShovel,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:2.0,
+        OnCreate:ShredderRecycleLargeTool,
+	}
+
+	recipe Shred and Recycle Tool for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		ToolsOfTheTrade.Multitool/ToolsOfTheTrade.SpiffArmyKnife/Base.Sledgehammer/Base.Sledgehammer2/Base.CarBatteryCharger,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:2.0,
+        OnCreate:ShredderRecycleComplexTool,
+	}
+
+	
+
+
+
 	
 }

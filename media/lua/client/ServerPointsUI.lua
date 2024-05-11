@@ -325,7 +325,9 @@ function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
         z = y + (item.height - FONT_HGT_LARGE) / 2
     end
     self:drawText(item.text, x, z, 0.7, 0.7, 0.7, 1.0, self.font)
-    x = self.width - 75
+
+    -- POSSIBLE PRICE TAB WIDTH??
+    x = self.width - 240
     z = y + (item.height - FONT_HGT_LARGE) / 2
     self:drawText(tostring(item.price), x, z, 0.7, 0.7, 0.7, 1.0, self.font)
 end

@@ -40,27 +40,27 @@ Events.OnCreatePlayer.Add(OnCreatePlayer) ]]
 --------------------------
 
 function GivePlayerSmokeyPoints100()
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), 100})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 100})
 end
 
 function GivePlayerSmokeyPoints1000()
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), 1000})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 1000})
 end
 
 function GivePlayerSmokeyPoints10000()
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), 10000})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 10000})
 end
 
 function GivePlayerSmokeyPoints100000()
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), 100000})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 100000})
 end
 
 function GivePlayerSmokeyPoints1000000()
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), 1000000})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 1000000})
 end
 
 function GivePlayerSmokeyPointsVariable(amount)
-	sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), amount})
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), amount})
 end
 
 
@@ -72,7 +72,7 @@ function SmokeyPointsOnZombieKill(zombie)
 	local isoPlayer = getPlayer()
 
 	if isoPlayer == lastAttacker then
-		sendClientCommand("GN84-ECO", "add", {getPlayer():getUsername(), pointsPerZombieKill})		
+		sendClientCommand("GN84-ECO", "zombieKillPts", {getPlayer():getUsername(), pointsPerZombieKill})		
 	end	
 
 end
@@ -268,13 +268,21 @@ end
 local watchesMinValue = SandboxVars.GN84ECO.WatchesMinValue		
 local watchesMaxValue = SandboxVars.GN84ECO.WatchesMaxValue		
 local jewelrySimpleMinValue = SandboxVars.GN84ECO.JewelrySimpleMinValue
-local jewelrySimpleMaxValue= SandboxVars.GN84ECO.JewelrySimpleMaxValue
+local jewelrySimpleMaxValue = SandboxVars.GN84ECO.JewelrySimpleMaxValue
 local jewelryPreciousMinValue = SandboxVars.GN84ECO.JewelryPreciousMinValue
-local jewelryPreciousMaxValue= SandboxVars.GN84ECO.JewelryPreciousMaxValue
+local jewelryPreciousMaxValue = SandboxVars.GN84ECO.JewelryPreciousMaxValue
 local jewelryGemsMinValue = SandboxVars.GN84ECO.JewelryGemsMinValue
-local jewelryGemsMaxValue= SandboxVars.GN84ECO.JewelryGemsMaxValue
+local jewelryGemsMaxValue = SandboxVars.GN84ECO.JewelryGemsMaxValue
 local jewelryDiamondMinValue = SandboxVars.GN84ECO.JewelryDiamondMinValue
-local jewelryDiamondMaxValue= SandboxVars.GN84ECO.JewelryDiamondMaxValue
+local jewelryDiamondMaxValue = SandboxVars.GN84ECO.JewelryDiamondMaxValue
+
+local simpleToolMinValue = SandboxVars.GN84ECO.SimpleToolMinValue
+local simpleToolMaxValue = SandboxVars.GN84ECO.simpleToolMaxValue
+local largeToolMinValue = SandboxVars.GN84ECO.LargeToolMinValue
+local largeToolMaxValue = SandboxVars.GN84ECO.LargeToolMaxValue
+local complexToolMinValue = SandboxVars.GN84ECO.ComplexToolMinValue
+local complexToolMaxValue = SandboxVars.GN84ECO.ComplexToolMaxValue
+
 
 
 
@@ -286,6 +294,8 @@ function PlayCashoutSound()
 end
 -----------------------
 
+
+-- JEWELRY
 
 function ShredderRecycleWatches(items, result, player)
 	local watchesValueRoll = ZombRand(watchesMinValue, watchesMaxValue)+1
@@ -356,6 +366,52 @@ function ShredderRecycleJewelryDiamond(items, result, player)
 			t = t+1
 		end
 end
+
+
+--TOOLS
+
+function ShredderRecycleSimpleTool(items, result, player)
+	local toolValueRoll = ZombRand(simpleToolMinValue, simpleToolMaxValue)+1
+	
+	local t = 0;
+
+	print("Tool Value: ", toolValueRoll)
+
+	while(t ~= toolValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleLargeTool(items, result, player)
+	local toolValueRoll = ZombRand(largeToolMinValue, largeToolMaxValue)+1
+	
+	local t = 0;
+
+	print("Tool Value: ", toolValueRoll)
+
+	while(t ~= toolValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleComplexTool(items, result, player)
+	local toolValueRoll = ZombRand(complexToolMinValue, complexToolMaxValue)+1
+	
+	local t = 0;
+
+	print("Tool Value: ", toolValueRoll)
+
+	while(t ~= toolValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
 
 
 ----------------------------------

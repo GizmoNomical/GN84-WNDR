@@ -25,6 +25,14 @@ Sandbox_EN = {
     Sandbox_GN84ECO_JewelryDiamondMinValue = "Recycling: Jewelry (Diamond) - Min Value",
     Sandbox_GN84ECO_JewelryDiamondMaxValue = "Recycling: Jewelry (Diamond) - Max Value",
 
+    Sandbox_GN84ECO_SimpleToolMinValue = "Recycling: Simple Tools - Min Value",
+    Sandbox_GN84ECO_SimpleToolMaxValue = "Recycling: Simple Tools - Max Value",
+    Sandbox_GN84ECO_LargeToolMinValue = "Recycling: Large Tools - Min Value",
+    Sandbox_GN84ECO_LargeToolMaxValue = "Recycling: Large Tools - Max Value",
+    Sandbox_GN84ECO_ComplexToolMinValue = "Recycling: Complex Tools - Min Value",
+    Sandbox_GN84ECO_ComplexToolMaxValue = "Recycling: Complex Tools - Max Value",
+
+
     Sandbox_GN84ECO_ResidentialPermitSmall = "Residential Permit (Small House) - Square Footage",
     Sandbox_GN84ECO_ResidentialPermitLarge = "Residential Permit (Large House) - Square Footage",
     Sandbox_GN84ECO_ResidentialPermitMansion = "Residential Permit (Mansion) - Square Footage",
