@@ -90,7 +90,7 @@ end ]]
 --PER ZOMBIE KILL POINTS
 function ServerPointsCommands.zombieKillPts(module, command, player, args)
    --print ("Entering ServerPointsCommands.zombieKillPts")
-   print("[SMOKEY POINTS] ", args[1], " killed a zombie for ", args[2], " Smokey Points!")
+   --print("[SMOKEY POINTS] ", args[1], " killed a zombie for ", args[2], " Smokey Points!")
    --print(string.format("[SMOKEY POINTS] %s killed a zombie for %d Smokey Points", player:getUsername(), args[1], args[2]))
    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]

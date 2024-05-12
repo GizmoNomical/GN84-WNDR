@@ -331,7 +331,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleWatches,
 	}
 
@@ -344,7 +344,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleJewelrySimple,
 	}
 
@@ -357,7 +357,7 @@ module GN84-ECO
 
         Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleJewelryPrecious,
 	}
 
@@ -370,7 +370,7 @@ module GN84-ECO
 
         Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleJewelryGemstones,
 	}
 
@@ -383,7 +383,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
@@ -398,7 +398,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleSimpleTool,
 	}
 
@@ -411,7 +411,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleLargeTool,
 	}
 
@@ -424,12 +424,105 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:2.0,
+        Time:40.0,
         OnCreate:ShredderRecycleComplexTool,
 	}
 
+	recipe Shred and Recycle Leather for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.Belt2/Base.HolsterSimple/Base.HolsterDouble/Base.Sling/Base.Gloves_LeatherGloves/Base.Gloves_LeatherGlovesBlack/Base.Hat_Cowboy/Base.Shoes_ArmyBoots/Base.Shoes_ArmyBootsDesert/Base.TrousersMesh_Leather/Base.Trousers_LeatherBlack/Base.Jacket_Black/Base.Jacket_LeatherIronRodent/Base.Jacket_LeatherWildRacoons/Base.Jacket_LeatherBarrelDogs,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleLeather,
+	}
+
+	recipe Shred and Recycle Clothing for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.Shirt_Lumberjack/Base.Shirt_HawaiianTINT/Base.Shirt_HawaiianRed,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleClothing,
+	}
+
+	recipe Shred and Recycle Bulletproof Vest for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.Vest_BulletPolice/Base.Vest_BulletArmy/Base.Vest_BulletCivilian,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleBulletVest,
+	}
+
+	recipe Shred and Recycle Glasses for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleGlasses,
+	}
+
+	recipe Shred and Recycle Paper Products for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Base.Book/Base.ComicBook/Base.MagazineCrossword1/Base.MagazineCrossword2/Base.MagazineCrossword3/Base.Hottiez/Base.Magazine/Base.Newspaper/Base.TVMagazine/Base.MagazineWordsearch1/Base.MagazineWordsearch2/Base.MagazineWordsearch3/Base.Notebook/Base.Journal,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecyclePaperProduct,
+	}
+
+	recipe Shred and Recycle Electronics for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.Torch/Base.HandTorch/Base.NoiseTrap,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleLowElectronics,
+	}
+
+	recipe Shred and Recycle Electronics for Money
+	{
+		keep SmokeyShredderRecycler,
+
+		destroy
+		Radio.WalkieTalkie4/Radio.WalkieTalkie5/Radio.HamRadio1/Radio.HamRadio2/Radio.HamRadioMakeShift/Radio.RadioRed,
+		
+		Result:Money,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+        OnCreate:ShredderRecycleHighElectronics,
+	}
+
+
 	
 
+	
 
 
 	

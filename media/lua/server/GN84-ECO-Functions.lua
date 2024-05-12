@@ -283,6 +283,28 @@ local largeToolMaxValue = SandboxVars.GN84ECO.LargeToolMaxValue
 local complexToolMinValue = SandboxVars.GN84ECO.ComplexToolMinValue
 local complexToolMaxValue = SandboxVars.GN84ECO.ComplexToolMaxValue
 
+local leatherMinValue = SandboxVars.GN84ECO.LeatherMinValue
+local leatherMaxValue = SandboxVars.GN84ECO.LeatherMaxValue
+
+local clothingMinValue = SandboxVars.GN84ECO.ClothingMinValue
+local clothingMaxValue = SandboxVars.GN84ECO.ClothingMaxValue
+
+local bulletVestMinValue = SandboxVars.GN84ECO.BulletVestMinValue
+local bulletVestMaxValue = SandboxVars.GN84ECO.BulletVestMaxValue
+
+local glassesMinValue = SandboxVars.GN84ECO.GlassesMinValue
+local glassesMaxValue = SandboxVars.GN84ECO.GlassesMaxValue
+
+local paperProductMinValue = SandboxVars.GN84ECO.PaperProductMinValue
+local paperProductMaxValue = SandboxVars.GN84ECO.PaperProductMaxValue
+
+local lowElectronicsMinValue = SandboxVars.GN84ECO.LowElectronicsMinValue
+local lowElectronicsMaxValue = SandboxVars.GN84ECO.LowElectronicsMaxValue
+
+local highElectronicsMinValue = SandboxVars.GN84ECO.HighElectronicsMinValue
+local highElectronicsMaxValue = SandboxVars.GN84ECO.HighElectronicsMaxValue
+
+
 
 
 
@@ -411,6 +433,108 @@ function ShredderRecycleComplexTool(items, result, player)
 			t = t+1
 		end
 end
+
+function ShredderRecycleLeather(items, result, player)
+	local leatherValueRoll = ZombRand(leatherMinValue, leatherMaxValue)+1
+	
+	local t = 0;
+
+	print("Leather Value: ", leatherValueRoll)
+
+	while(t ~= leatherValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleClothing(items, result, player)
+	local clothingValueRoll = ZombRand(clothingMinValue, clothingMaxValue)+1
+	
+	local t = 0;
+
+	print("Clothing Value: ", clothingValueRoll)
+
+	while(t ~= clothingValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleBulletVest(items, result, player)
+	local vestValueRoll = ZombRand(bulletVestMinValue, bulletVestMaxValue)+1
+	
+	local t = 0;
+
+	print("Vest Value: ", vestValueRoll)
+
+	while(t ~= vestValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleGlasses(items, result, player)
+	local glassesValueRoll = ZombRand(glassesMinValue, glassesMaxValue)+1
+	
+	local t = 0;
+
+	print("Glasses Value: ", glassesValueRoll)
+
+	while(t ~= glassesValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecyclePaperProduct(items, result, player)
+	local paperValueRoll = ZombRand(paperProductMinValue, paperProductMaxValue)+1
+	
+	local t = 0;
+
+	print("Paper Value: ", paperValueRoll)
+
+	while(t ~= paperValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleLowElectronics(items, result, player)
+	local electronicsValueRoll = ZombRand(lowElectronicsMinValue, lowElectronicsMaxValue)+1
+	
+	local t = 0;
+
+	print("Electronic Value: ", electronicsValueRoll)
+
+	while(t ~= electronicsValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+function ShredderRecycleHighElectronics(items, result, player)
+	local electronicsValueRoll = ZombRand(highElectronicsMinValue, highElectronicsMaxValue)+1
+	
+	local t = 0;
+
+	print("Electronic Value: ", electronicsValueRoll)
+
+	while(t ~= electronicsValueRoll)
+		do
+			player:getInventory():AddItem("Money");
+			t = t+1
+		end
+end
+
+
+
+
 
 
 

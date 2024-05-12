@@ -121,7 +121,7 @@ function ServerPointsUI:createChildren()
     self.previewButton.font = UIFont.Medium
     self:addChild(self.previewButton)
 
-    self.buyButton = ISButton:new(self.width - 100 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "BUY", self, ServerPointsUI.onBuy)
+    self.buyButton = ISButton:new(self.width - 120 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "BUY", self, ServerPointsUI.onBuy)
     self.buyButton:initialise()
     self.buyButton:instantiate()
     self.buyButton.borderColor = self.buttonBorderColor
@@ -327,7 +327,7 @@ function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
     self:drawText(item.text, x, z, 0.7, 0.7, 0.7, 1.0, self.font)
 
     -- POSSIBLE PRICE TAB WIDTH??
-    x = self.width - 240
+    x = self.width - 215
     z = y + (item.height - FONT_HGT_LARGE) / 2
     self:drawText(tostring(item.price), x, z, 0.7, 0.7, 0.7, 1.0, self.font)
 end

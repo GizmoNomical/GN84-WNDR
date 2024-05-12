@@ -319,6 +319,160 @@ option GN84ECO.ComplexToolMaxValue
     translation = GN84ECO_ComplexToolMaxValue,
 }
 
+option GN84ECO.LeatherMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+
+    page = GN84ECO,
+    translation = GN84ECO_LeatherMinValue,
+}
+
+option GN84ECO.LeatherMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 50,
+
+    page = GN84ECO,
+    translation = GN84ECO_LeatherMaxValue,
+}
+
+option GN84ECO.GlassesMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_GlassesMinValue,
+}
+
+option GN84ECO.GlassesMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+
+    page = GN84ECO,
+    translation = GN84ECO_GlassesMaxValue,
+}
+
+option GN84ECO.BulletVestMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 100,
+
+    page = GN84ECO,
+    translation = GN84ECO_BulletVestMinValue,
+}
+
+option GN84ECO.BulletVestMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 250,
+
+    page = GN84ECO,
+    translation = GN84ECO_BulletVestMaxValue,
+}
+
+option GN84ECO.ClothingMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_ClothingMinValue,
+}
+
+option GN84ECO.ClothingMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+
+    page = GN84ECO,
+    translation = GN84ECO_ClothingMaxValue,
+}
+
+option GN84ECO.PaperProductMinValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_PaperProductMinValue,
+}
+
+option GN84ECO.PaperProductMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 10,
+
+    page = GN84ECO,
+    translation = GN84ECO_PaperProductMaxValue,
+}
+
+option GN84ECO.LowElectronicsMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 15,
+
+    page = GN84ECO,
+    translation = GN84ECO_LowElectronicsMinValue,
+}
+
+option GN84ECO.LowElectronicsMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 35,
+
+    page = GN84ECO,
+    translation = GN84ECO_LowElectronicsMaxValue,
+}
+
+option GN84ECO.HighElectronicsMinValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 50,
+
+    page = GN84ECO,
+    translation = GN84ECO_HighElectronicsMinValue,
+}
+
+option GN84ECO.HighElectronicsMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 100,
+
+    page = GN84ECO,
+    translation = GN84ECO_HighElectronicsMaxValue,
+}
+
 option GN84ECO.ResidentialPermitSmall
 {
     type = integer,

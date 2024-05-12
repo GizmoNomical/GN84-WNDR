@@ -32,6 +32,27 @@ Sandbox_EN = {
     Sandbox_GN84ECO_ComplexToolMinValue = "Recycling: Complex Tools - Min Value",
     Sandbox_GN84ECO_ComplexToolMaxValue = "Recycling: Complex Tools - Max Value",
 
+    Sandbox_GN84ECO_LeatherMinValue = "Recycling: Leather Items - Min Value",
+    Sandbox_GN84ECO_LeatherMaxValue = "Recycling: Leather Items - Max Value",    
+
+    Sandbox_GN84ECO_ClothingMinValue = "Recycling: Clothing Items - Min Value",
+    Sandbox_GN84ECO_ClothingMaxValue = "Recycling: Clothing Items - Max Value",
+
+    Sandbox_GN84ECO_BulletVestMinValue = "Recycling: Bulletproof Vests - Min Value",
+    Sandbox_GN84ECO_BulletVestMaxValue = "Recycling: Bulletproof Vests - Max Value",
+
+    Sandbox_GN84ECO_GlassesMinValue = "Recycling: Glasses - Min Value",
+    Sandbox_GN84ECO_GlassesMaxValue = "Recycling: Glasses - Max Value",
+
+    Sandbox_GN84ECO_PaperProductMinValue = "Recycling: Paper Products - Min Value",
+    Sandbox_GN84ECO_PaperProductMaxValue = "Recycling: Paper Products - Max Value",
+
+    Sandbox_GN84ECO_LowElectronicsMinValue = "Recycling: Electronics (Low End) - Min Value",
+    Sandbox_GN84ECO_LowElectronicsMaxValue = "Recycling: Electronics (Low End) - Max Value",
+
+    Sandbox_GN84ECO_HighElectronicsMinValue = "Recycling: Electronics (High End) - Min Value",
+    Sandbox_GN84ECO_HighElectronicsMaxValue = "Recycling: Electronics (High End) - Max Value",
+
 
     Sandbox_GN84ECO_ResidentialPermitSmall = "Residential Permit (Small House) - Square Footage",
     Sandbox_GN84ECO_ResidentialPermitLarge = "Residential Permit (Large House) - Square Footage",
