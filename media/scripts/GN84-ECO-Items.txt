@@ -227,7 +227,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Smokey's All-In-One Shredder Recycler,
 		DisplayCategory		=  Tool,
-		Weight				=  200.0,
+		Weight				=  50.0,
 		Type				=  Normal,
 		Icon				=  SmokeyShredderRecycler,
 		WorldStaticModel	=  SmokeyShredderRecycler,

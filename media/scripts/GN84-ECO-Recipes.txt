@@ -331,7 +331,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:50.0,
         OnCreate:ShredderRecycleWatches,
 	}
 
@@ -344,7 +344,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:50.0,
         OnCreate:ShredderRecycleJewelrySimple,
 	}
 
@@ -357,7 +357,7 @@ module GN84-ECO
 
         Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:50.0,
         OnCreate:ShredderRecycleJewelryPrecious,
 	}
 
@@ -370,7 +370,7 @@ module GN84-ECO
 
         Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:50.0,
         OnCreate:ShredderRecycleJewelryGemstones,
 	}
 
@@ -383,7 +383,7 @@ module GN84-ECO
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:50.0,
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
@@ -394,11 +394,11 @@ module GN84-ECO
 		keep SmokeyShredderRecycler,
 
 		destroy
-		Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer/Base.BallPeenHammer,
+		Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer,
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:100.0,
         OnCreate:ShredderRecycleSimpleTool,
 	}
 
@@ -411,7 +411,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:100.0,
         OnCreate:ShredderRecycleLargeTool,
 	}
 
@@ -424,7 +424,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:100.0,
         OnCreate:ShredderRecycleComplexTool,
 	}
 
@@ -437,7 +437,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:60.0,
         OnCreate:ShredderRecycleLeather,
 	}
 
@@ -450,7 +450,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:60.0,
         OnCreate:ShredderRecycleClothing,
 	}
 
@@ -463,7 +463,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:100.0,
         OnCreate:ShredderRecycleBulletVest,
 	}
 
@@ -489,7 +489,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:35.0,
         OnCreate:ShredderRecyclePaperProduct,
 	}
 
@@ -502,7 +502,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:60.0,
         OnCreate:ShredderRecycleLowElectronics,
 	}
 
@@ -515,7 +515,7 @@ module GN84-ECO
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
-        Time:40.0,
+        Time:60.0,
         OnCreate:ShredderRecycleHighElectronics,
 	}
 

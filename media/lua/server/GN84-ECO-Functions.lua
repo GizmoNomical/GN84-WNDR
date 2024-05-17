@@ -71,6 +71,10 @@ function SmokeyPointsOnZombieKill(zombie)
 	local lastAttacker = zombie:getAttackedBy()
 	local isoPlayer = getPlayer()
 
+	if isoPlayer == nil then
+		return
+	end
+
 	if isoPlayer == lastAttacker then
 		sendClientCommand("GN84-ECO", "zombieKillPts", {getPlayer():getUsername(), pointsPerZombieKill})		
 	end	
