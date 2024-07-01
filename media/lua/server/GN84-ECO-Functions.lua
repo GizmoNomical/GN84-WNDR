@@ -64,6 +64,9 @@ function GivePlayerSmokeyPointsVariable(amount)
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), amount})
 end
 
+function GivePlayerSmokeyPointsLottoTicket(amount)
+	sendClientCommand("GN84-ECO", "redeemLottoTicket", {getPlayer():getUsername(), amount})
+end
 
 -- Add Smokey Points on Zombie Kill
 -- ------------------------------- --
@@ -298,8 +301,8 @@ function CalcLottoWinnings()
 		end
 
 		-- DEBUGGING
-		print ("***Lottery Ticket Winnings -", lottoTicketWinnings, "***")
-		GivePlayerSmokeyPointsVariable(lottoTicketWinnings)
+		--print ("***Lottery Ticket Winnings -", lottoTicketWinnings, "***")
+		GivePlayerSmokeyPointsLottoTicket(lottoTicketWinnings)
 		winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
 		getPlayer():Say(winningText)
 	

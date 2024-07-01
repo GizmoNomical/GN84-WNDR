@@ -53,7 +53,9 @@ function ServerPointsCommands.get(module, command, player, args)
 end
 
 function ServerPointsCommands.buy(module, command, player, args)
-    print(string.format("[SMOKEY POINTS] %s bought %s for %d Smokey Points", player:getUsername(), args[2], args[1]))
+    print("###############")
+    print(string.format("[SMOKEY SHOP] %s bought %s for %d Smokey Points", player:getUsername(), args[2], args[1]))
+    print("###############")
     if not serverPointsData[player:getUsername()] then serverPointsData[player:getUsername()] = 0 end
     serverPointsData[player:getUsername()] = serverPointsData[player:getUsername()] - math.abs(args[1])
 end
@@ -71,7 +73,9 @@ function ServerPointsCommands.vehicle(module, command, player, args)
 end
 
 function ServerPointsCommands.add(module, command, player, args)
+    print("###############")
     print(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
+    print("###############")
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
 end
@@ -100,11 +104,23 @@ end
 
 --REDEEM CASH FOR POINTS
 function ServerPointsCommands.redeemCash(module, command, player, args)
+   print("###############")
    print("[SMOKEY POINTS] ", args[1], " redeemed $", args[2], " dollars for Smokey Points!")
+   print("###############")
     --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
 end
+
+--REDEEM LOTTO TICKET FOR POINTS
+function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
+    print("###############")
+    print("[WANDERERS LOTTO] ", args[1], " redeemed Winning Lotto Ticket for $", args[2], " Smokey Points!")
+    print("###############")
+     --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
+    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
+    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+ end
 
 
 function ServerPointsCommands.load(module, command, player, args)
