@@ -68,4 +68,16 @@ module GN84-ECO
             volume = 0.7,
         }
     }
+
+    sound ScratchLottoTicket
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/ScratchLottoTicket.wav,
+            distanceMax = 10,
+            volume = 0.7,
+        }
+    }
 }

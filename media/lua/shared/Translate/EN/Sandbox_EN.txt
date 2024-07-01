@@ -10,6 +10,7 @@ Sandbox_EN = {
     Sandbox_GN84ECO_WealthyCash = "Wealthy Zombie Cash Limit",
     Sandbox_GN84ECO_AverageCash = "Average Zombie Cash Limit",
     Sandbox_GN84ECO_PoorCash = "Poor Zombie Cash Limit",
+    Sandbox_GN84ECO_LotteryTicketOdds = "Lottery Ticket Odds of Winning (Default 1 in 3.5)",
 
     Sandbox_GN84ECO_PlayerLuckBonus = "Player Luck Bonus Modifier",    
     Sandbox_GN84ECO_PlayerUnluckyPenalty = "Player Unlucky Penalty Modifier",

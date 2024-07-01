@@ -340,7 +340,7 @@ module GN84-ECO
 		keep SmokeyShredderRecycler,
 
 		destroy
-		Base.Necklace_Crucifix/Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT,
+		Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT,
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
@@ -519,11 +519,17 @@ module GN84-ECO
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
+	recipe Scratch to Win Lotto Ticket
+	{
+		LottoTicketStandard,
 
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ScratchLottoTicket,
+		Result:Money,
+		Time:100.0,
+		OnCreate:ScratchLottoTicketStandard,
+	}
 	
-
-	
-
-
 	
 }

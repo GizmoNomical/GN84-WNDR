@@ -116,6 +116,17 @@ option GN84ECO.PoorCash
     translation = GN84ECO_PoorCash,
 }
 
+option GN84ECO.LotteryTicketOdds
+{
+    type = double,
+    min = 0,
+    max = 10,
+    default = 3.5,
+
+    page = GN84ECO,
+    translation = GN84ECO_LotteryTicketOdds,
+}
+
 option GN84ECO.PlayerLuckBonus
 {
     type = double,

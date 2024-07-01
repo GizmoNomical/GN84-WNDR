@@ -233,4 +233,31 @@ module GN84-ECO
 		WorldStaticModel	=  SmokeyShredderRecycler,
 
 	}
+
+	item LottoTicketStandard
+	{
+		DisplayName			=  Wanderers Lotto Ticket - Scratch to Win,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  LottoStandard,
+	}
+
+	item LottoTicketRare
+	{
+		DisplayName			=  Wanderers Lotto Ticket - Rare Prize,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  LottoRare,
+	}
+	item LottoTicketGolden
+	{
+		DisplayName			=  Wanderers Lotto Ticket - Golden Jackpot,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  LottoGolden,
+	}
+	
 }
