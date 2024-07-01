@@ -80,4 +80,29 @@ module GN84-ECO
             volume = 0.7,
         }
     }
+
+    sound ShredLottoTicket
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/ShredLottoTicket.wav,
+            distanceMax = 10,
+            volume = 0.7,
+        }
+    }
+
+    sound WinningTicketChime
+    {
+        category = Item,
+        loop = false,
+        clip
+        {
+            file = media/sound/WinningTicketChime.wav,
+            distanceMax = 10,
+            volume = 0.7,
+        }
+    }
+
 }

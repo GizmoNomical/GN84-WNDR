@@ -83,6 +83,27 @@ module GN84-ECO
 		scale = 0.6,
 	}    
 
+	model LottoTicketStandard
+	{
+		mesh = worlditems/LottoTicket,
+		texture = worlditems/LottoTicketStandardModel,
+		scale = 0.9,
+	}
+
+	model LottoTicketRare
+	{
+		mesh = worlditems/LottoTicket,
+		texture = worlditems/LottoTicketRareModel,
+		scale = 0.9,
+	}
+
+	model LottoTicketGolden
+	{
+		mesh = worlditems/LottoTicket,
+		texture = worlditems/LottoTicketGoldenModel,
+		scale = 0.9,
+	}
+
 
 }
 

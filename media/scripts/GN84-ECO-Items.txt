@@ -240,7 +240,8 @@ module GN84-ECO
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  LottoStandard,
+		Icon				=  LottoStandard,		
+		WorldStaticModel	=  LottoTicketStandard,
 	}
 
 	item LottoTicketRare
@@ -249,7 +250,8 @@ module GN84-ECO
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  LottoRare,
+		Icon				=  LottoRare,				
+		WorldStaticModel	=  LottoTicketRare,
 	}
 	item LottoTicketGolden
 	{
@@ -257,7 +259,8 @@ module GN84-ECO
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  LottoGolden,
+		Icon				=  LottoGolden,				
+		WorldStaticModel	=  LottoTicketGolden,
 	}
 	
 }

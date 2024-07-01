@@ -233,25 +233,26 @@ function CheckForWinner()
 
 	if getPlayer():HasTrait("Lucky") 
 	then
-		print ("Player is Lucky!")
-		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds - 0.5
+		--print ("Player is Lucky!")
+		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds - 0.15
 
 	elseif getPlayer():HasTrait("Unlucky")
 	then
-		print ("Player is Un-Lucky!")
-		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds + 0.5
+		--print ("Player is Un-Lucky!")
+		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds + 0.15
 
 	else
-		print("Player is neither Lucky or Unlucky...")
+		--print("Player is neither Lucky or Unlucky...")
 		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds
 
 	end
 
-	print ("Lottery Odds: 1 in ", lotteryTicketOdds)
+	--print ("Lottery Odds: 1 in ", lotteryTicketOdds)
 
 
 	isWinner = ZombRand(100)+1;
 	if isWinner <= ((1 / lotteryTicketOdds) * 100)
+	then
 		return true
 	else		
 		return false
@@ -262,43 +263,45 @@ end
 function CalcLottoWinnings()
 
 	lottoTicketRoll = ZombRand(10000)+1;
-		print ("Lotto Ticket Roll: ", lottoTicketRoll)
+		--print ("Lotto Ticket Roll: ", lottoTicketRoll)
 		
 		if (lottoTicketRoll >= 9994)
 			then
-				lottoTicketWinnings = 50000
+				lottoTicketWinnings = 100000
 
 		elseif (lottoTicketRoll >= 9893 and lottoTicketRoll <9994)
 			then
-				lottoTicketWinnings = 25000
+				lottoTicketWinnings = 75000
 
-		elseif (lottoTicketRoll >= 9761 and lottoTicketRoll <9893)
+		elseif (lottoTicketRoll >= 9791 and lottoTicketRoll <9893)
 		then
-			lottoTicketWinnings = 10000		
+			lottoTicketWinnings = 50000		
 
-		elseif (lottoTicketRoll >= 9549 and lottoTicketRoll <9761)
+		elseif (lottoTicketRoll >= 9649 and lottoTicketRoll <9791)
+		then
+			lottoTicketWinnings = 25000
+
+		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9649)
+		then
+			lottoTicketWinnings = 10000
+
+		elseif (lottoTicketRoll >= 5534 and lottoTicketRoll <8290)
 		then
 			lottoTicketWinnings = 5000
-
-		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9549)
+		
+		elseif (lottoTicketRoll >= 3200 and lottoTicketRoll <5534)
 		then
 			lottoTicketWinnings = 2500
 
-		elseif (lottoTicketRoll >= 7534 and lottoTicketRoll <8290)
-		then
-			lottoTicketWinnings = 1000
-		
-		elseif (lottoTicketRoll >= 801 and lottoTicketRoll <7534)
-		then
-			lottoTicketWinnings = 500
-
 		else
-			lottoTicketWinnings = 200				
+			lottoTicketWinnings = 1000				
 		end
 
 		-- DEBUGGING
 		print ("***Lottery Ticket Winnings -", lottoTicketWinnings, "***")
 		GivePlayerSmokeyPointsVariable(lottoTicketWinnings)
+		winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
+		getPlayer():Say(winningText)
 	
 end
 
@@ -309,11 +312,21 @@ function ScratchLottoTicketStandard()
 			then
 				print("Ticket is a Winner!")
 				CalcLottoWinnings()
+				PlayLottoWinnerSound()
 			else
-				print("Sorry, Ticket is not a winner..  Try again!")
+				print("Sorry, Ticket is Not a Winner..  Play again!")
+				getPlayer():Say("Sorry, Ticket is Not a Winner..  Play Again!")
+				PlayLottoLoserSound()
 		end		
 end
 
+function PlayLottoWinnerSound()
+	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1);
+end
+
+function PlayLottoLoserSound()
+	getSoundManager():PlaySound("ShredLottoTicket", false, 1):setVolume(1);
+end
 
 
 ----------------------------------------
@@ -1164,13 +1177,13 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 				if (buildingStories == 0) -- Single Story Building
 				then
 					print ("Building is ", (buildingStories + 1)," Story Tall")
-					getPlayer():Say("Building is ", (buildingStories + 1)," Story Tall")
+					getPlayer():Say("Building is " .. (buildingStories + 1) .. " Story Tall")
 					buildingSqFootage = buildingHeight * buildingWidth * 9					
 					
 				elseif (buildingStories >= 1) -- Multi-Story Building
 					then
 						print ("Building is ", (buildingStories)," Story Tall")
-						getPlayer():Say("Building is ", (buildingStories + 1)," Story Tall")
+						getPlayer():Say("Building is " .. (buildingStories + 1) .. " Story Tall")
 						buildingSqFootage = (buildingHeight * buildingWidth * 9 * buildingStories)						
 					
 				else -- Invalid Building
@@ -1179,8 +1192,8 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						print ("Safehouse Single Floor Square Footage: ", (buildingHeight * buildingWidth * 9))	
 						print ("Safehouse Total Square Footage: ", (buildingSqFootage))	
 						print ("#############################")
-						getPlayer():Say("Safehouse Single Floor Square Footage: ", (buildingHeight * buildingWidth * 9))
-						getPlayer():Say("Safehouse Total Square Footage: ", (buildingSqFootage))
+						getPlayer():Say("Safehouse Single Floor Square Footage: " .. (buildingHeight * buildingWidth * 9))
+						getPlayer():Say("Safehouse Total Square Footage: " .. (buildingSqFootage))
 		end
 end
 

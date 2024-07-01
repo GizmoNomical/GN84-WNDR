@@ -527,7 +527,7 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:ScratchLottoTicket,
 		Result:Money,
-		Time:100.0,
+		Time:150.0,
 		OnCreate:ScratchLottoTicketStandard,
 	}
 	

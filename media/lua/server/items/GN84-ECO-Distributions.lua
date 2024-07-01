@@ -235,23 +235,50 @@ local distributionTableWallets = {
         inventoryfemale = {
             rolls = 1,
             items = {
-                "Wallet2", 100,
-                "Wallet4", 100,
+                "Wallet2", 80,
+                "Wallet4", 80,
             }
         },
         inventorymale = {
             rolls = 1,
             items = {
-                "Wallet", 100,
-                "Wallet3", 100,
-                "Wallet4", 100,
+                "Wallet", 80,
+                "Wallet3", 80,
+                "Wallet4", 80,
             }
         },
     },
 }
 
+local distributionTableLottoTickets = {
+    all = {
+        inventoryfemale = {
+            rolls = 1,
+            items = {
+                "GN84-ECO.LottoTicketStandard", 5,
+                "GN84-ECO.LottoTicketRare", 0.001,
+            }
+        },
+        inventorymale = {
+            rolls = 2,
+            items = {
+                "GN84-ECO.LottoTicketStandard", 5,
+                "GN84-ECO.LottoTicketRare", 0.001,
+            }
+        },        
+        cashregister = {
+            rolls = 50,
+            items = {                     
+                "GN84-ECO.LottoTicketStandard", 40,            
+            }
+        },
+    },
+}
+
+
 table.insert(Distributions, 1, distributionTableCash);
 table.insert(Distributions, 1, distributionTableWallets);
+table.insert(Distributions, 1, distributionTableLottoTickets);
 
 table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, "Base.Money");
 table.insert(ProceduralDistributions["list"]["PoliceDesk"].items, 150);
@@ -317,6 +344,13 @@ table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "Base.Wallet4");
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 7);
 
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "GN84-ECO.LottoTicketStandard");
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 10);
+
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "GN84-ECO.LottoTicketRare");
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 0.001);
+
+
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet");
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
@@ -328,6 +362,12 @@ table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet4");
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 7);
+
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "GN84-ECO.LottoTicketStandard");
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 10);
+
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "GN84-ECO.LottoTicketRare");
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 0.001);
 
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Money");
@@ -345,6 +385,12 @@ table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Wallet4");
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 20);
 
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "GN84-ECO.LottoTicketStandard");
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 25);
+
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "GN84-ECO.LottoTicketRare");
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 0.001);
+
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet");
 table.insert(VehicleDistributions["GloveBox"].items, 3);
@@ -360,6 +406,62 @@ table.insert(VehicleDistributions["GloveBox"].items, 3);
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Money");
 table.insert(VehicleDistributions["GloveBox"].items, 150);
+
+table.insert(VehicleDistributions["GloveBox"].items, "GN84-ECO.LottoTicketStandard");
+table.insert(VehicleDistributions["GloveBox"].items, 0.5);
+
+
+table.insert(ProceduralDistributions.list["BinBar"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["BinBar"].items, 5)
+
+
+table.insert(ProceduralDistributions.list["BinDumpster"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["BinDumpster"].items, 5)
+
+
+table.insert(ProceduralDistributions.list["BinGeneric"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["BinGeneric"].items, 5)
+
+
+table.insert(ProceduralDistributions.list["GunStoreCounter"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["GunStoreCounter"].items, 25)
+
+
+table.insert(ProceduralDistributions.list["JanitorCleaning"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["JanitorCleaning"].items, 5)
+
+
+table.insert(ProceduralDistributions.list["JunkBin"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["JunkBin"].items, 5)
+
+
+table.insert(ProceduralDistributions.list["LivingRoomShelf"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["LivingRoomShelf"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["LivingRoomSideTable"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["LivingRoomSideTable"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["OfficeDeskHome"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["OfficeDeskHome"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["OtherGeneric"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["OtherGeneric"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["RandomFiller"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["RandomFiller"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["ShelfGeneric"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["ShelfGeneric"].items, 10)
+
+
+table.insert(ProceduralDistributions.list["CrateCigarettes"].items, "GN84-ECO.LottoTicketStandard")
+table.insert(ProceduralDistributions.list["CrateCigarettes"].items, 1)
+
 
 
 ItemPickerJava.Parse()

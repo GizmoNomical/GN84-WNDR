@@ -121,7 +121,7 @@ option GN84ECO.LotteryTicketOdds
     type = double,
     min = 0,
     max = 10,
-    default = 3.5,
+    default = 3.25,
 
     page = GN84ECO,
     translation = GN84ECO_LotteryTicketOdds,
