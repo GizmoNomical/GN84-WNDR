@@ -256,14 +256,14 @@ local distributionTableLottoTickets = {
             rolls = 1,
             items = {
                 "GN84-ECO.LottoTicketStandard", 5,
-                "GN84-ECO.LottoTicketRare", 0.00001,
+                "GN84-ECO.LottoTicketRare", 0.0000005,
             }
         },
         inventorymale = {
             rolls = 2,
             items = {
                 "GN84-ECO.LottoTicketStandard", 5,                
-                "GN84-ECO.LottoTicketRare", 0.00001,
+                "GN84-ECO.LottoTicketRare", 0.0000005,
             }
         },        
         cashregister = {
@@ -348,7 +348,7 @@ table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "GN84-EC
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, "GN84-ECO.LottoTicketRare");
-table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 0.0001);
+table.insert(ProceduralDistributions["list"]["BedroomSideTable"].items, 0.000001);
 
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "Base.Wallet");
@@ -367,7 +367,7 @@ table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "GN84-ECO.
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 10);
 
 table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, "GN84-ECO.LottoTicketRare");
-table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 0.0001);
+table.insert(ProceduralDistributions["list"]["BedroomDresser"].items, 0.000001);
 
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "Base.Money");
@@ -389,7 +389,7 @@ table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "GN84-ECO.
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 25);
 
 table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, "GN84-ECO.LottoTicketRare");
-table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 0.0001);
+table.insert(ProceduralDistributions["list"]["BarCounterMisc"].items, 0.000001);
 
 
 table.insert(VehicleDistributions["GloveBox"].items, "Base.Wallet");

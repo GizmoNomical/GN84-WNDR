@@ -270,34 +270,34 @@ function CalcLottoWinnings()
 		
 		if (lottoTicketRoll >= 9994)
 			then
-				lottoTicketWinnings = 100000
+				lottoTicketWinnings = 50000
 
-		elseif (lottoTicketRoll >= 9893 and lottoTicketRoll <9994)
+		elseif (lottoTicketRoll >= 9953 and lottoTicketRoll <9994)
 			then
-				lottoTicketWinnings = 75000
+				lottoTicketWinnings = 25000
 
-		elseif (lottoTicketRoll >= 9791 and lottoTicketRoll <9893)
+		elseif (lottoTicketRoll >= 9881 and lottoTicketRoll <9953)
 		then
-			lottoTicketWinnings = 50000		
+			lottoTicketWinnings = 10000		
 
-		elseif (lottoTicketRoll >= 9649 and lottoTicketRoll <9791)
-		then
-			lottoTicketWinnings = 25000
-
-		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9649)
-		then
-			lottoTicketWinnings = 10000
-
-		elseif (lottoTicketRoll >= 5534 and lottoTicketRoll <8290)
+		elseif (lottoTicketRoll >= 9749 and lottoTicketRoll <9881)
 		then
 			lottoTicketWinnings = 5000
-		
-		elseif (lottoTicketRoll >= 3200 and lottoTicketRoll <5534)
+
+		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9749)
 		then
 			lottoTicketWinnings = 2500
 
+		elseif (lottoTicketRoll >= 6034 and lottoTicketRoll <8290)
+		then
+			lottoTicketWinnings = 1000
+		
+		elseif (lottoTicketRoll >= 3200 and lottoTicketRoll <6034)
+		then
+			lottoTicketWinnings = 500
+
 		else
-			lottoTicketWinnings = 1000				
+			lottoTicketWinnings = 100				
 		end
 
 		-- DEBUGGING
@@ -321,6 +321,16 @@ function ScratchLottoTicketStandard()
 				getPlayer():Say("Sorry, Ticket is Not a Winner..  Play Again!")
 				PlayLottoLoserSound()
 		end		
+end
+
+function TradeRareForStandardTickets(items, result, player)
+	local t = 0;
+
+	while(t ~= 5)
+		do
+			player:getInventory():AddItem("GN84-ECO.LottoTicketStandard");
+			t = t+1
+		end
 end
 
 function PlayLottoWinnerSound()

@@ -519,7 +519,7 @@ module GN84-ECO
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
-	recipe Scratch to Win Lotto Ticket
+	recipe Scratch Lotto Ticket to Win
 	{
 		LottoTicketStandard,
 
@@ -529,6 +529,29 @@ module GN84-ECO
 		Result:Money,
 		Time:150.0,
 		OnCreate:ScratchLottoTicketStandard,
+	}
+
+	recipe Trade In for Five Standard Lotto Tickets
+	{
+		LottoTicketRare,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ScratchLottoTicket,
+		Result:Money,
+		Time:100.0,
+		OnCreate:TradeRareForStandardTickets,
+	}
+
+	recipe Trade In for Wanderers Lotto Wheel Spin Token
+	{
+		LottoTicketRare=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.WheelSpinToken,
+		Time:60.0,
 	}
 	
 	
