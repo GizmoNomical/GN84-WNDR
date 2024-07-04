@@ -16,7 +16,7 @@ local poorCash = SandboxVars.GN84ECO.PoorCash								-- 5  - Max cash found in P
 local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus
 local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty
 local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds
-
+local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue           -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
 
 --------------------------
 -- New Player Add Items
@@ -323,7 +323,7 @@ function ScratchLottoTicketStandard()
 		end		
 end
 
-function TradeRareForStandardTickets(items, result, player)
+function TradeRareTicketForStandardTickets(items, result, player)
 	local t = 0;
 
 	while(t ~= 5)
@@ -332,6 +332,17 @@ function TradeRareForStandardTickets(items, result, player)
 			t = t+1
 		end
 end
+
+function TradeRareTicketForCashStack(items, result, player)
+	local t = 0;
+
+	while(t ~= rareTicketCashValue)
+		do
+			player:getInventory():AddItem("GN84-ECO.MoneyStack1000");
+			t = t+1
+		end
+end
+
 
 function PlayLottoWinnerSound()
 	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1);

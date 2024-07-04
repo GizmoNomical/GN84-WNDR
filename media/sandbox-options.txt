@@ -127,6 +127,17 @@ option GN84ECO.LotteryTicketOdds
     translation = GN84ECO_LotteryTicketOdds,
 }
 
+option GN84ECO.RareTicketCashValue
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 5,
+
+    page = GN84ECO,
+    translation = GN84ECO_RareTicketCashValue,
+}
+
 option GN84ECO.PlayerLuckBonus
 {
     type = double,

@@ -531,7 +531,7 @@ module GN84-ECO
 		OnCreate:ScratchLottoTicketStandard,
 	}
 
-	recipe Trade In for Five Standard Lotto Tickets
+	recipe Redeem Rare Ticket for Five Standard Lotto Tickets
 	{
 		LottoTicketRare,
 
@@ -540,10 +540,23 @@ module GN84-ECO
 		Sound:ScratchLottoTicket,
 		Result:Money,
 		Time:100.0,
-		OnCreate:TradeRareForStandardTickets,
+		OnCreate:TradeRareTicketForStandardTickets,
 	}
 
-	recipe Trade In for Wanderers Lotto Wheel Spin Token
+	recipe Redeem Rare Ticket for Stack of Cash
+	{
+		LottoTicketRare,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ScratchLottoTicket,
+		Result:Money,
+		Time:100.0,
+		OnCreate:TradeRareTicketForCashStack,
+
+	}
+
+	recipe Redeem Rare Tickets for Wheel Spin Token
 	{
 		LottoTicketRare=10,
 
