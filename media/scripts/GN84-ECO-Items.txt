@@ -253,7 +253,7 @@ module GN84-ECO
 		Type				=  Normal,
 		Icon				=  LottoRare,				
 		WorldStaticModel	=  LottoTicketRare,
-		Tooltip 			=  Collect 10 Rare Tickets for a Chance to Win Big!,
+		Tooltip 			=  Collect Rare Tickets for a Chance to Win Big!,
 	}
 
 	item LottoTicketGolden
@@ -276,6 +276,17 @@ module GN84-ECO
 		Icon				=  WheelSpinToken,				
 		WorldStaticModel	=  LottoWheelSpinToken,
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Wheel and Claim your Prize!,
+	}
+
+	item SuperWheelSpinToken
+	{
+		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  WheelSpinToken,				
+		WorldStaticModel	=  LottoSuperWheelSpinToken,
+		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Super Wheel and Claim your Prize!,
 	}
 	
 }

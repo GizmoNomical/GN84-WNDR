@@ -17,7 +17,7 @@ module GN84-ECO
 		
 		InSameInventory:true,
 		Result:EmptyWallet1,
-		Time:110,			
+		Time:40,			
 		AnimNode:Craft,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
@@ -30,7 +30,7 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet2,
 		AnimNode:Craft,
-		Time:110,
+		Time:40,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,		
 	}
@@ -42,7 +42,7 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet3,
 		AnimNode:Craft,
-		Time:110,
+		Time:40,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
@@ -54,7 +54,7 @@ module GN84-ECO
 		InSameInventory:true,
 		Result:EmptyWallet4,
 		AnimNode:Craft,
-		Time:110,
+		Time:40,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
@@ -558,13 +558,24 @@ module GN84-ECO
 
 	recipe Redeem Rare Tickets for Wheel Spin Token
 	{
-		LottoTicketRare=10,
+		LottoTicketRare=25,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
 		Result:GN84-ECO.WheelSpinToken,
-		Time:60.0,
+		Time:70.0,
+	}
+
+	recipe Redeem Rare Tickets for Super Wheel Spin Token
+	{
+		LottoTicketRare=100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.SuperWheelSpinToken,
+		Time:70.0,
 	}
 	
 	

@@ -111,6 +111,12 @@ module GN84-ECO
 		scale = 0.9,
 	}
 
+	model LottoSuperWheelSpinToken
+	{
+		mesh = worlditems/LottoWheelSpinToken,
+		texture = worlditems/LottoWheelSpinTokenModel,
+		scale = 1.35,
+	}
 
 }
 
