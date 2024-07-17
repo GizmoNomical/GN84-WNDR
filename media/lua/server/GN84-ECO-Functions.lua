@@ -297,7 +297,7 @@ function CalcLottoWinnings()
 			lottoTicketWinnings = 500
 
 		else
-			lottoTicketWinnings = 100				
+			lottoTicketWinnings = 250				
 		end
 
 		-- DEBUGGING
