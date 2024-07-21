@@ -446,7 +446,7 @@ module GN84-ECO
 		keep SmokeyShredderRecycler,
 
 		destroy
-		GN84-ECO.EmptyWallet1/GN84-ECO.EmptyWallet2/GN84-ECO.EmptyWallet3/GN84-ECO.EmptyWallet4,
+		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
@@ -458,7 +458,7 @@ module GN84-ECO
 		keep SmokeyShredderRecycler,
 
 		destroy
-		Base.LeatherStrips/Base.LeatherStripsDirty,
+		LeatherStrips/LeatherStripsDirty,
 
 		Result:Money,
 		CanBeDoneFromFloor:true,
