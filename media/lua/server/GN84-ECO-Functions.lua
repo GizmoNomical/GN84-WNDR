@@ -1218,7 +1218,66 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						print ("#############################")
 						getPlayer():Say("Safehouse Single Floor Square Footage: " .. (buildingHeight * buildingWidth * 9))
 						getPlayer():Say("Safehouse Total Square Footage: " .. (buildingSqFootage))
+
+			
+						-- PRINT PERMIT REQUIRED
+			if not buildingSqFootage
+			then
+				-- print ("Error in Returning Safehouse Size")
+			return
+
+			-- SMALL RESIDENTIAL CLAIM
+			elseif buildingSqFootage >= residentialPermitSmall and buildingSqFootage < residentialPermitLarge
+			then
+					getPlayer():Say("Residential Permit (Small House) Required to Claim!")
+					return
+
+			-- MEDIUM RESIDENTIAL CLAIM
+			elseif buildingSqFootage >= residentialPermitLarge and buildingSqFootage < residentialPermitMansion
+			then
+				
+					getPlayer():Say("Residential Permit (Large House) Required to Claim!")
+					return
+
+			-- LARGE RESIDENTIAL CLAIM
+			elseif buildingSqFootage >= residentialPermitMansion and buildingSqFootage < factionPermitSmall
+			then
+				
+					getPlayer():Say("Residential Permit (Mansion) Required to Claim!")
+					return
+
+					--SMALL FACTION BUNKER CLAIM
+			elseif buildingSqFootage >= factionPermitSmall and buildingSqFootage < factionPermitLarge
+			then		
+					getPlayer():Say("Faction Permit (Small Bunker) Required to Claim!")
+					return
+
+						--LARGE FACTION BUNKER CLAIM
+			elseif buildingSqFootage >= factionPermitLarge and buildingSqFootage < factionPermitMassive
+			then
+					getPlayer():Say("Faction Permit (Large Bunker) Required to Claim!")
+					return
+
+			-- MASSIVE FACTION BUNKER CLAIM
+			elseif buildingSqFootage >= factionPermitMassive   
+			then
+				
+					getPlayer():Say("Faction Permit (Massive Bunker) Required to Claim!")
+					return
+
+			elseif buildingSqFootage == 0 -- Invalid Safehouse
+			then
+					print ("Invalid Safehouse")
+					return
+
+			else  -- Standard Claim									
+						
+					getPlayer():Say("No Permit Required to Claim!")
+						
+			end
 		end
+		
+
 end
 
 function CheckSafehouseSize(worldobjects, square, player)	
