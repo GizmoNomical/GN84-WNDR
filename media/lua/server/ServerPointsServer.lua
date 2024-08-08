@@ -122,6 +122,16 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
  end
 
+ --REDEEM VIP TOKEN FOR POINTS
+function ServerPointsCommands.redeemVIPToken(module, command, player, args)
+    print("###############")
+    print("[WANDERERS VIP] ", args[1], " redeemed VIP Token for $", args[2], " Smokey Points!")
+    print("###############")
+     --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
+    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
+    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+ end
+
 
 function ServerPointsCommands.load(module, command, player, args)
     sendServerCommand(player, module, command, listings)

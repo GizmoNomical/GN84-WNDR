@@ -584,6 +584,52 @@ module GN84-ECO
 		Result:GN84-ECO.SuperWheelSpinToken,
 		Time:70.0,
 	}
+
+	recipe Trade Wheel Spin Tokens for Super Wheel Spin Token
+	{
+		WheelSpinToken=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.SuperWheelSpinToken,
+		Time:70.0,
+	}
+
+	recipe Redeem VIP Token for Smokey Points
+	{
+		VIPToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Money,
+		Time:120.0,		
+		OnCreate:GivePlayerSmokeyPointsVIPToken,
+	}
+
+	recipe Redeem VIP Token for Wheel Spin Token
+	{
+		VIPToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.WheelSpinToken,
+		Time:120.0,
+	}
+
+	recipe Redeem VIP Tokens for Super Wheel Spin Token
+	{
+		VIPToken=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.SuperWheelSpinToken,
+		Time:120.0,
+	}
+	
 	
 	
 }

@@ -17,7 +17,7 @@ local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus
 local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty
 local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds
 local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue           -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-
+local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue           -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
 --------------------------
 -- New Player Add Items
 --------------------------
@@ -66,6 +66,10 @@ end
 
 function GivePlayerSmokeyPointsLottoTicket(amount)
 	sendClientCommand("GN84-ECO", "redeemLottoTicket", {getPlayer():getUsername(), amount})
+end
+
+function GivePlayerSmokeyPointsVIPToken()
+	sendClientCommand("GN84-ECO", "redeemVIPToken", {getPlayer():getUsername(), VIPTokenCashValue})
 end
 
 -- Add Smokey Points on Zombie Kill
@@ -276,15 +280,15 @@ function CalcLottoWinnings()
 			then
 				lottoTicketWinnings = 25000
 
-		elseif (lottoTicketRoll >= 9881 and lottoTicketRoll <9953)
+		elseif (lottoTicketRoll >= 9851 and lottoTicketRoll <9953)
 		then
 			lottoTicketWinnings = 10000		
 
-		elseif (lottoTicketRoll >= 9749 and lottoTicketRoll <9881)
+		elseif (lottoTicketRoll >= 9700 and lottoTicketRoll <9851)
 		then
 			lottoTicketWinnings = 5000
 
-		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9749)
+		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9700)
 		then
 			lottoTicketWinnings = 2500
 
@@ -388,7 +392,7 @@ end
 ----------------------------------------
 
 function GN84_AcceptItemCash(container, item)
-	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000"
+	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken"
 	then
 		return true
 	end

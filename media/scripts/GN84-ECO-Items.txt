@@ -288,5 +288,16 @@ module GN84-ECO
 		WorldStaticModel	=  LottoSuperWheelSpinToken,
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Super Wheel and Claim your Prize!,
 	}
+
+	item VIPToken
+	{
+		DisplayName			=  Wanderers VIP Token,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  VIPToken,				
+		WorldStaticModel	=  VIPToken,
+		Tooltip 			=  Thank you for Supporting The Wanderers!,
+	}
 	
 }

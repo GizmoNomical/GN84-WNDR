@@ -132,10 +132,21 @@ option GN84ECO.RareTicketCashValue
     type = integer,
     min = 0,
     max = 100,
-    default = 2,
+    default = 1,
 
     page = GN84ECO,
     translation = GN84ECO_RareTicketCashValue,
+}
+
+option GN84ECO.VIPTokenCashValue
+{
+    type = integer,
+    min = 0,
+    max = 1000000,
+    default = 100000,
+
+    page = GN84ECO,
+    translation = GN84ECO_VIPTokenCashValue,
 }
 
 option GN84ECO.PlayerLuckBonus
