@@ -12,7 +12,7 @@ module GN84-ECO
 		WeightReduction		 = 100,
 		Weight				 = 0.1,
 		Type 				 = Container,
-		Capacity			 = 25,
+		Capacity			 = 100,
 		Icon				 = MoneyClip,
 		OpenSound			 = MoneyClipShuffle,
 		AcceptItemFunction	 = GN84_AcceptItemCash,		
@@ -57,6 +57,17 @@ module GN84-ECO
 		DisplayCategory		 =  Junk,
         Type                 =  Normal,
         Weight               =  0.1,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
+	item MoneyStack1000000
+    {
+        DisplayName          =  Stack of Cash - $1000000 - ,
+		DisplayCategory		 =  Junk,
+        Type                 =  Normal,
+        Weight               =  1.0,
         Icon                 =  MoneyStack10000,
 		WorldStaticModel	 =  MoneyStack10000,
 		
