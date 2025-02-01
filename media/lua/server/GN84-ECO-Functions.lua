@@ -6,18 +6,18 @@ require "ISUI/ISContextMenu"
 -- Sandbox Variables
 --------------------------
 
-local pointsPerZombieKill = SandboxVars.GN84ECO.PointsPerZombieKill  		-- 6   - Smokey Points per Zombie Kill
-local eFundOdds = SandboxVars.GN84ECO.EFundOdds	          				-- 10  - Must roll <= to this number to get eFunds
-local walletCashMultiplier = SandboxVars.GN84ECO.WalletCashMultiplier		-- 1.0 -   Adjust total Wallet Cash
-local eFundCashMultiplier = SandboxVars.GN84ECO.EFundCashMultiplier		-- 1.0 - Adjust total eFund Cash
-local wealthyCash = SandboxVars.GN84ECO.WealthyCash						-- 20 - Max cash found in Wealthy Zombie Wallet
-local averageCash = SandboxVars.GN84ECO.AverageCash						-- 10 - Max cash found in Average Zombie Wallet
-local poorCash = SandboxVars.GN84ECO.PoorCash								-- 5  - Max cash found in Poor Zombie Wallet
-local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus
-local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty
-local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds
-local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue           -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue           -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
+local pointsPerZombieKill = SandboxVars.GN84ECO.PointsPerZombieKill or 18 		-- 6   - Smokey Points per Zombie Kill
+local eFundOdds = SandboxVars.GN84ECO.EFundOdds	or 10          				-- 10  - Must roll <= to this number to get eFunds
+local walletCashMultiplier = SandboxVars.GN84ECO.WalletCashMultiplier or 1.0		-- 1.0 -   Adjust total Wallet Cash
+local eFundCashMultiplier = SandboxVars.GN84ECO.EFundCashMultiplier	or 1.0	-- 1.0 - Adjust total eFund Cash
+local wealthyCash = SandboxVars.GN84ECO.WealthyCash	or 50					-- 20 - Max cash found in Wealthy Zombie Wallet
+local averageCash = SandboxVars.GN84ECO.AverageCash	or 15					-- 10 - Max cash found in Average Zombie Wallet
+local poorCash = SandboxVars.GN84ECO.PoorCash or 5								-- 5  - Max cash found in Poor Zombie Wallet
+local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus or 1.2
+local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty or 0.95
+local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds or 3.25
+local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue or 1          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
+local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue or 100000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
 --------------------------
 -- New Player Add Items
 --------------------------
@@ -365,7 +365,7 @@ end
 
 local leatherRoll;
 local extraLeatherOdds = 90
-local maxExtraLeather = 3
+local maxExtraLeather = 1
 local extraLeatherStrips;
 
 function CutLeatherWallet(items, result, player)
@@ -406,50 +406,50 @@ end
 
 -- VARIABLES
 
-local watchesMinValue = SandboxVars.GN84ECO.WatchesMinValue		
-local watchesMaxValue = SandboxVars.GN84ECO.WatchesMaxValue		
-local jewelrySimpleMinValue = SandboxVars.GN84ECO.JewelrySimpleMinValue
-local jewelrySimpleMaxValue = SandboxVars.GN84ECO.JewelrySimpleMaxValue
-local jewelryPreciousMinValue = SandboxVars.GN84ECO.JewelryPreciousMinValue
-local jewelryPreciousMaxValue = SandboxVars.GN84ECO.JewelryPreciousMaxValue
-local jewelryGemsMinValue = SandboxVars.GN84ECO.JewelryGemsMinValue
-local jewelryGemsMaxValue = SandboxVars.GN84ECO.JewelryGemsMaxValue
-local jewelryDiamondMinValue = SandboxVars.GN84ECO.JewelryDiamondMinValue
-local jewelryDiamondMaxValue = SandboxVars.GN84ECO.JewelryDiamondMaxValue
+local watchesMinValue = SandboxVars.GN84ECO.WatchesMinValue	or 3	
+local watchesMaxValue = SandboxVars.GN84ECO.WatchesMaxValue	or 10	
+local jewelrySimpleMinValue = SandboxVars.GN84ECO.JewelrySimpleMinValue or 1
+local jewelrySimpleMaxValue = SandboxVars.GN84ECO.JewelrySimpleMaxValue or 5
+local jewelryPreciousMinValue = SandboxVars.GN84ECO.JewelryPreciousMinValue or 10
+local jewelryPreciousMaxValue = SandboxVars.GN84ECO.JewelryPreciousMaxValue or 50
+local jewelryGemsMinValue = SandboxVars.GN84ECO.JewelryGemsMinValue or 25
+local jewelryGemsMaxValue = SandboxVars.GN84ECO.JewelryGemsMaxValue or 100
+local jewelryDiamondMinValue = SandboxVars.GN84ECO.JewelryDiamondMinValue or 100
+local jewelryDiamondMaxValue = SandboxVars.GN84ECO.JewelryDiamondMaxValue or 200
 
-local simpleToolMinValue = SandboxVars.GN84ECO.SimpleToolMinValue
-local simpleToolMaxValue = SandboxVars.GN84ECO.simpleToolMaxValue
-local largeToolMinValue = SandboxVars.GN84ECO.LargeToolMinValue
-local largeToolMaxValue = SandboxVars.GN84ECO.LargeToolMaxValue
-local complexToolMinValue = SandboxVars.GN84ECO.ComplexToolMinValue
-local complexToolMaxValue = SandboxVars.GN84ECO.ComplexToolMaxValue
+local simpleToolMinValue = SandboxVars.GN84ECO.SimpleToolMinValue or 1
+local simpleToolMaxValue = SandboxVars.GN84ECO.simpleToolMaxValue or 10
+local largeToolMinValue = SandboxVars.GN84ECO.LargeToolMinValue or 10
+local largeToolMaxValue = SandboxVars.GN84ECO.LargeToolMaxValue or 40
+local complexToolMinValue = SandboxVars.GN84ECO.ComplexToolMinValue or 40
+local complexToolMaxValue = SandboxVars.GN84ECO.ComplexToolMaxValue or 100
 
-local leatherMinValue = SandboxVars.GN84ECO.LeatherMinValue
-local leatherMaxValue = SandboxVars.GN84ECO.LeatherMaxValue
+local leatherMinValue = SandboxVars.GN84ECO.LeatherMinValue or 20
+local leatherMaxValue = SandboxVars.GN84ECO.LeatherMaxValue or 50
 
-local clothingMinValue = SandboxVars.GN84ECO.ClothingMinValue
-local clothingMaxValue = SandboxVars.GN84ECO.ClothingMaxValue
+local clothingMinValue = SandboxVars.GN84ECO.ClothingMinValue or 5
+local clothingMaxValue = SandboxVars.GN84ECO.ClothingMaxValue or 25
 
-local bulletVestMinValue = SandboxVars.GN84ECO.BulletVestMinValue
-local bulletVestMaxValue = SandboxVars.GN84ECO.BulletVestMaxValue
+local bulletVestMinValue = SandboxVars.GN84ECO.BulletVestMinValue or 100
+local bulletVestMaxValue = SandboxVars.GN84ECO.BulletVestMaxValue or 250
 
-local glassesMinValue = SandboxVars.GN84ECO.GlassesMinValue
-local glassesMaxValue = SandboxVars.GN84ECO.GlassesMaxValue
+local glassesMinValue = SandboxVars.GN84ECO.GlassesMinValue or 5
+local glassesMaxValue = SandboxVars.GN84ECO.GlassesMaxValue or 20
 
-local paperProductMinValue = SandboxVars.GN84ECO.PaperProductMinValue
-local paperProductMaxValue = SandboxVars.GN84ECO.PaperProductMaxValue
+local paperProductMinValue = SandboxVars.GN84ECO.PaperProductMinValue or 5
+local paperProductMaxValue = SandboxVars.GN84ECO.PaperProductMaxValue or 10
 
-local lowElectronicsMinValue = SandboxVars.GN84ECO.LowElectronicsMinValue
-local lowElectronicsMaxValue = SandboxVars.GN84ECO.LowElectronicsMaxValue
+local lowElectronicsMinValue = SandboxVars.GN84ECO.LowElectronicsMinValue or 15
+local lowElectronicsMaxValue = SandboxVars.GN84ECO.LowElectronicsMaxValue or 35
 
-local highElectronicsMinValue = SandboxVars.GN84ECO.HighElectronicsMinValue
-local highElectronicsMaxValue = SandboxVars.GN84ECO.HighElectronicsMaxValue
-
-
+local highElectronicsMinValue = SandboxVars.GN84ECO.HighElectronicsMinValue or 50
+local highElectronicsMaxValue = SandboxVars.GN84ECO.HighElectronicsMaxValue or 100
 
 
 
--- NEEDS IMPLEMENTED
+
+
+-- TODO - NEEDS IMPLEMENTED
 function PlayGrinderSound()
 end
 
@@ -575,6 +575,8 @@ function ShredderRecycleComplexTool(items, result, player)
 		end
 end
 
+-- LEATHER / CLOTHING ITEMS
+
 function ShredderRecycleLeather(items, result, player)
 	local leatherValueRoll = ZombRand(leatherMinValue, leatherMaxValue)+1
 	
@@ -631,6 +633,8 @@ function ShredderRecycleGlasses(items, result, player)
 		end
 end
 
+-- PAPER PRODUCTS
+
 function ShredderRecyclePaperProduct(items, result, player)
 	local paperValueRoll = ZombRand(paperProductMinValue, paperProductMaxValue)+1
 	
@@ -644,6 +648,8 @@ function ShredderRecyclePaperProduct(items, result, player)
 			t = t+1
 		end
 end
+
+-- ELECTRONICS
 
 function ShredderRecycleLowElectronics(items, result, player)
 	local electronicsValueRoll = ZombRand(lowElectronicsMinValue, lowElectronicsMaxValue)+1
@@ -687,12 +693,12 @@ end
 
 buildingSqFootage = nil;
 
-local residentialPermitSmall = SandboxVars.GN84ECO.ResidentialPermitSmall
-local residentialPermitLarge = SandboxVars.GN84ECO.ResidentialPermitLarge
-local residentialPermitMansion = SandboxVars.GN84ECO.ResidentialPermitMansion
-local factionPermitSmall = SandboxVars.GN84ECO.FactionPermitSmall
-local factionPermitLarge = SandboxVars.GN84ECO.FactionPermitLarge
-local factionPermitMassive = SandboxVars.GN84ECO.FactionPermitMassive
+local residentialPermitSmall = SandboxVars.GN84ECO.ResidentialPermitSmall or 1500
+local residentialPermitLarge = SandboxVars.GN84ECO.ResidentialPermitLarge or 3500
+local residentialPermitMansion = SandboxVars.GN84ECO.ResidentialPermitMansion or 7500
+local factionPermitSmall = SandboxVars.GN84ECO.FactionPermitSmall or 10000
+local factionPermitLarge = SandboxVars.GN84ECO.FactionPermitLarge or 25000
+local factionPermitMassive = SandboxVars.GN84ECO.FactionPermitMassive or 50000
 
 
 
@@ -860,9 +866,9 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 			local storyCount = 0
 
 
-			---------------------------
-			-- BEGIN FLOOR CHECKS
-			---------------------------
+			-------------------------
+			-- BEGIN FLOOR CHECKS  --
+			-------------------------
 
 
 			print ("#############################")
@@ -870,23 +876,27 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 			-- Set Building Check location to Center Coordinates
 			local x, y, z = buildingCenterX, buildingCenterY, getPlayer():getZ();				
 			local currentTile = getCell():getGridSquare(x, y, z)
+			local cachedTile
 			local buildingStories = z
+
+
+			--------------------
+			--  CENTER CHECK  --
+			--------------------
+			
 
 			if currentTile -- Check if Player is Standing on Valid Tile
 			then
-
-				-- Check how many Floors Building Has from Center	
-
+				cachedTile = currentTile
+				
 				while currentTile:isSolidFloor()
 				do				
-					--print ("Is Solid Floor : ", z)
-					
+										
 					z = z + 1
 					currentTile = getCell():getGridSquare(x, y, z)
 					
 					if not currentTile -- Error Handling
-					then
-						--print ("Warning: Finished Iteration over Floors from Center")
+					then						
 						break
 					end
 
@@ -895,8 +905,29 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
-				end	
+				end
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+				
+				while currentTile:isSolidFloor()
+				do		
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(x, y, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end
 
 				print ("Center Height: ", buildingStories)
 				
@@ -905,24 +936,29 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 			end
 
 
-			-- Set CurrentTile to X / Y
+			---------------------
+			--  CORNER CHECKS  --
+			---------------------
+			
+
+			-------------
+			--  X / Y  --
+			-------------
+			
 			currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
 
 			if currentTile
 			then
-			
-				-- Check floors from X / Y Location
+				cachedTile = currentTile
 
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
-					
+				do	
+
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X / Y")
 						break
 					end
 
@@ -931,7 +967,27 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do						
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				print ("X / Y Corner Height: ", buildingStories)
@@ -939,24 +995,26 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 				z = 0
 
 			end
+			
 
-			-- Set CurrentTile to X2 / Y2
+			---------------
+			--  X2 / Y2  --
+			---------------
+			
 
 			currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
 
 			if currentTile
 			then
-				
+				cachedTile = currentTile
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X2 / Y2")
 						break
 					end
 
@@ -965,35 +1023,56 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				print ("X2 / Y2 Corner Height: ", buildingStories)
 
 				z = 0
 
-
 			end
 
 
-			-- Set CurrentTile to X / Y2
+			--------------
+			--  X / Y2  --
+			--------------
+
 
 			currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
 
 			if currentTile
 			then
-					
+				cachedTile = currentTile
 
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X / Y2")
 						break
 					end
 
@@ -1002,7 +1081,28 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				print ("X / Y2 Corner Height: ", buildingStories)
@@ -1011,24 +1111,26 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 
 			end
 
-			--Set CurrentTile to X2 / Y
+
+			--------------
+			--  X2 / Y  --
+			--------------
+			
 
 			currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
 
 			if currentTile
 			then
-			
+				cachedTile = currentTile
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X2 / Y")
 						break
 					end
 
@@ -1037,32 +1139,423 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				print ("X2 / Y Corner Height: ", buildingStories)
 
+			end
+
+			---------------------------
+			--  CORNER INSET CHECKS  --
+			---------------------------
+			
+			---------------------
+			--  X + 5 / Y + 5  --
+			---------------------
+			
+			currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end					
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then						
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end					
+				end	
+
+				print ("X + 5 / Y + 5 Inset Corner Height: ", buildingStories)
+
+				z = 0
 
 			end
 
-			--Set CurrentTile to Offset Center:  X + 5  /  Y + 5
+			-----------------------
+			--  X2 - 5 / Y2 - 5  --
+			-----------------------
+			
 
-			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
+			currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
 
 			if currentTile
+			then
+				cachedTile = currentTile
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("X2 -5 / Y2 -5 Inset Corner Height: ", buildingStories)
+
+				z = 0
+
+			end
+
+			----------------------
+			--  X + 5 / Y2 - 5  --
+			----------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("X + 5 / Y2 - 5 Inset Corner Height: ", buildingStories)
+
+				z = 0
+
+			end
+
+			---------------------
+			--  X2 - 5 / Y + 5  --
+			---------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("X2 - 5 / Y + 5 Inset Corner Height: ", buildingStories)
+
+			end
+
+			--------------------------
+			-- CENTER OFFSET CHECKS --
+			--------------------------
+
+			------------------
+			--  +- 3 TILES  --
+			------------------
+
+			-----------------------
+			--  X + 3  /  Y + 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY + 3, z)
+
+			if currentTile and (buildingCenterX + 3 < buildingCornerX2) and (buildingCenterY + 3 < buildingCornerY2) 
+			then			
+				
+				while currentTile:isSolidFloor()
+				do		
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY + 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 3 / Y + 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X + 3  /  Y - 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY - 3, z)
+
+			if currentTile and (buildingCenterX + 3 < buildingCornerX2) and (buildingCenterY - 3 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY - 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 3 / Y - 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 3  /  Y + 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY + 3, z)
+
+			if currentTile and (buildingCenterX - 3 > buildingCornerX) and (buildingCenterY + 3 > buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY + 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 3 / Y + 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 3  /  Y - 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY - 3, z)
+
+			if currentTile and (buildingCenterX - 3 > buildingCornerX) and (buildingCenterY - 3 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY - 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 3 / Y - 3 Height: ", buildingStories)
+
+			end
+
+
+			------------------
+			--  +- 5 TILES  --
+			------------------
+			
+			-----------------------
+			--  X + 5  /  Y + 5  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
+
+			if currentTile and (buildingCenterX + 5 < buildingCornerX2) and (buildingCenterY + 5 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X + 5 / Y + 5")
 						break
 					end
 
@@ -1071,31 +1564,31 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				print ("Center X + 5 / Y + 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X + 5  /  Y - 5
+
+			-----------------------
+			--  X + 5  /  Y - 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY - 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX + 5 < buildingCornerX2) and (buildingCenterY - 5 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY - 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X + 5 / Y - 5")
 						break
 					end
 
@@ -1104,31 +1597,31 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				print ("Center X + 5 / Y - 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X - 5  /  Y + 5
+
+			-----------------------
+			--  X - 5  /  Y + 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY + 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX - 5 > buildingCornerX) and (buildingCenterY + 5 < buildingCornerY2) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY + 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X - 5 / Y + 5")
 						break
 					end
 
@@ -1137,31 +1630,31 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				print ("Center X - 5 / Y + 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X - 5  /  Y - 5
+
+			-----------------------
+			--  X - 5  /  Y - 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY - 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX - 5 > buildingCornerX) and (buildingCenterY - 5 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
-					
+				do	
+
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY - 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X - 5 / Y - 5")
 						break
 					end
 
@@ -1170,17 +1663,1103 @@ function CheckSafehouseSizeDebug(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				print ("Center X - 5 / Y - 5 Height: ", buildingStories)
 
 			end
 
+
+			------------------
+			--  +- 7 TILES  --
+			------------------
+			
+			-----------------------
+			--  X + 7  /  Y + 7  --
+			-----------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY + 7, z)
+
+			if currentTile and (buildingCenterX + 7 < buildingCornerX2) and (buildingCenterY + 7 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY + 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 7 / Y + 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X + 7  /  Y - 7  --
+			-----------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY - 7, z)
+
+			if currentTile and (buildingCenterX + 7 < buildingCornerX2) and (buildingCenterY - 7 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY - 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 7 / Y - 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 7  /  Y + 7  --
+			-----------------------
+			
+			currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY + 7, z)
+
+			if currentTile and (buildingCenterX - 7 > buildingCornerX) and (buildingCenterY + 7 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY + 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 7 / Y + 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 7  /  Y - 7  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY - 7, z)
+
+			if currentTile and (buildingCenterX - 7 > buildingCornerX) and (buildingCenterY - 7 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY - 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 7 / Y - 7 Height: ", buildingStories)
+
+			end
+
+
+
+			-------------------
+			--  +- 10 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 10  /  Y + 10  --
+			-------------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY + 10, z)
+
+			if currentTile and (buildingCenterX + 10 < buildingCornerX2) and (buildingCenterY + 10 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY + 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 10 / Y + 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X + 10  /  Y - 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY - 10, z)
+
+			if currentTile and (buildingCenterX + 10 < buildingCornerX2) and (buildingCenterY - 10 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY - 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 10 / Y - 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 10  /  Y + 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY + 10, z)
+			
+			if currentTile and (buildingCenterX - 10 > buildingCornerX) and (buildingCenterY + 10 < buildingCornerY2)  
+			then
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY + 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 10 / Y + 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 10  /  Y - 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY - 10, z)
+
+			if currentTile and (buildingCenterX - 10 > buildingCornerX) and (buildingCenterY - 10 > buildingCornerY) 
+			then
+				
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY - 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 10 / Y - 10 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 20 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 20  /  Y + 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY + 20, z)
+
+			if currentTile and (buildingCenterX + 20 < buildingCornerX2) and (buildingCenterY + 20 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY + 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 20 / Y + 20 Height: ", buildingStories)
+
+			end
+
+					
+			-------------------------
+			--  X + 20  /  Y - 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY - 20, z)
+
+			if currentTile and (buildingCenterX + 20 < buildingCornerX2) and (buildingCenterY - 20 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY - 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 20 / Y - 20 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 20  /  Y + 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY + 20, z)
+
+			if currentTile and (buildingCenterX - 20 > buildingCornerX)	and (buildingCenterY + 20 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY + 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 20 / Y + 20 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 20  /  Y - 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY - 20, z)
+
+			if currentTile and (buildingCenterX - 20 > buildingCornerX)	and (buildingCenterY - 20 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY - 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 20 / Y - 20 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 30 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 30  /  Y + 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY + 30, z)
+
+			if currentTile and (buildingCenterX + 30 < buildingCornerX2) and (buildingCenterY + 30 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY + 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 30 / Y + 30 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 30  /  Y - 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY - 30, z)
+
+			if currentTile and (buildingCenterX + 30 < buildingCornerX2) and (buildingCenterY - 30 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY - 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 30 / Y - 30 Height: ", buildingStories)
+
+			end
+
+
+
+			-------------------------
+			--  X - 30  /  Y + 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY + 30, z)
+
+			if currentTile and (buildingCenterX - 30 > buildingCornerX)	and (buildingCenterY + 30 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY + 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 30 / Y + 30 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 30  /  Y - 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY - 30, z)
+						
+			if currentTile and (buildingCenterX - 30 > buildingCornerX)	and (buildingCenterY - 30 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY - 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 30 / Y - 30 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 40 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 40  /  Y + 40  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY + 40, z)
+
+			if currentTile and (buildingCenterX + 40 < buildingCornerX2) and (buildingCenterY + 40 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY + 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 40 / Y + 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 40  /  Y - 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY - 40, z)
+
+			if currentTile and (buildingCenterX + 40 < buildingCornerX2) and (buildingCenterY - 40 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY - 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 40 / Y - 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 40  /  Y + 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY + 40, z)
+
+			if currentTile and (buildingCenterX - 40 > buildingCornerX)	and (buildingCenterY + 40 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY + 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 40 / Y + 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 40  /  Y - 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY - 40, z)
+			
+			if currentTile and (buildingCenterX - 40 > buildingCornerX)	and (buildingCenterY - 40 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY - 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 40 / Y - 40 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 50 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 50  /  Y + 50  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY + 50, z)
+
+			if currentTile and (buildingCenterX + 50 < buildingCornerX2) and (buildingCenterY + 50 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY + 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 50 / Y + 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 50  /  Y - 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY - 50, z)
+
+			if currentTile and (buildingCenterX + 50 < buildingCornerX2) and (buildingCenterY - 50 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY - 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 50 / Y - 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 50  /  Y + 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY + 50, z)
+
+			if currentTile and (buildingCenterX - 50 > buildingCornerX)	and (buildingCenterY + 50 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY + 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 50 / Y + 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 50  /  Y - 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY - 50, z)
+						
+			if currentTile and (buildingCenterX - 50 > buildingCornerX)	and (buildingCenterY - 50 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY - 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 50 / Y - 50 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 60 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 60  /  Y + 60  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY + 60, z)
+
+			if currentTile and (buildingCenterX + 60 < buildingCornerX2) and (buildingCenterY + 60 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY + 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 60 / Y + 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 60  /  Y - 60  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY - 60, z)
+
+			if currentTile and (buildingCenterX + 60 < buildingCornerX2) and (buildingCenterY - 60 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY - 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 60 / Y - 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 60  /  Y + 60  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY + 60, z)
+
+			if currentTile and (buildingCenterX - 60 > buildingCornerX)	and (buildingCenterY + 60 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY + 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 60 / Y + 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 60  /  Y - 60  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY - 60, z)
+						
+			if currentTile and (buildingCenterX - 60 > buildingCornerX)	and (buildingCenterY - 60 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY - 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 60 / Y - 60 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 70 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 70  /  Y + 70  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY + 70, z)
+
+			if currentTile and (buildingCenterX + 70 < buildingCornerX2) and (buildingCenterY + 70 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY + 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 70 / Y + 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 70  /  Y - 70  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY - 70, z)
+
+			if currentTile and (buildingCenterX + 70 < buildingCornerX2) and (buildingCenterY - 70 > buildingCornerY)
+			then
+							
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY - 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X + 70 / Y - 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 70  /  Y + 70  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY + 70, z)
+
+			if currentTile and (buildingCenterX - 70 > buildingCornerX)	and (buildingCenterY + 70 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY + 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 70 / Y + 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 70  /  Y - 70  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY - 70, z)
+						
+			if currentTile and (buildingCenterX - 70 > buildingCornerX)	and (buildingCenterY - 70 > buildingCornerY)
+			then	
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY - 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				print ("Center X - 70 / Y - 70 Height: ", buildingStories)
+
+			end
 			
 			-----------------------
 			-- END FLOOR CHECKS
 			-----------------------
+			
 
 			print ("Story Count: ", storyCount)
 			buildingStories = storyCount
@@ -1286,7 +2865,7 @@ end
 
 function CheckSafehouseSize(worldobjects, square, player)	
 		
-	print ("Entering CheckSafehouseSize")
+	
 	buildingSqFootage = nil
 	if not getPlayer():getSquare():getBuilding() -- Error Handling
 		then
@@ -1318,32 +2897,37 @@ function CheckSafehouseSize(worldobjects, square, player)
 			local storyCount = 0
 
 
-			---------------------------
-			-- BEGIN FLOOR CHECKS
-			---------------------------
+			-------------------------
+			-- BEGIN FLOOR CHECKS  --
+			-------------------------
 
-			--print ("#############################")
+
+			print ("#############################")
 
 			-- Set Building Check location to Center Coordinates
 			local x, y, z = buildingCenterX, buildingCenterY, getPlayer():getZ();				
 			local currentTile = getCell():getGridSquare(x, y, z)
+			local cachedTile
 			local buildingStories = z
+
+
+			--------------------
+			--  CENTER CHECK  --
+			--------------------
+			
 
 			if currentTile -- Check if Player is Standing on Valid Tile
 			then
-
-				-- Check how many Floors Building Has from Center	
-
+				cachedTile = currentTile
+				
 				while currentTile:isSolidFloor()
 				do				
-					--print ("Is Solid Floor : ", z)
-					
+										
 					z = z + 1
 					currentTile = getCell():getGridSquare(x, y, z)
 					
 					if not currentTile -- Error Handling
-					then
-						--print ("Warning: Finished Iteration over Floors from Center")
+					then						
 						break
 					end
 
@@ -1352,8 +2936,29 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
-				end	
+				end
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+				
+				while currentTile:isSolidFloor()
+				do		
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(x, y, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end
 
 				--print ("Center Height: ", buildingStories)
 				
@@ -1362,24 +2967,29 @@ function CheckSafehouseSize(worldobjects, square, player)
 			end
 
 
-			-- Set CurrentTile to X / Y
+			---------------------
+			--  CORNER CHECKS  --
+			---------------------
+			
+
+			-------------
+			--  X / Y  --
+			-------------
+			
 			currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
 
 			if currentTile
 			then
-			
-				-- Check floors from X / Y Location
+				cachedTile = currentTile
 
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
-					
+				do	
+
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X / Y")
 						break
 					end
 
@@ -1388,7 +2998,27 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do						
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				--print ("X / Y Corner Height: ", buildingStories)
@@ -1396,24 +3026,26 @@ function CheckSafehouseSize(worldobjects, square, player)
 				z = 0
 
 			end
+			
 
-			-- Set CurrentTile to X2 / Y2
+			---------------
+			--  X2 / Y2  --
+			---------------
+			
 
 			currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
 
 			if currentTile
 			then
-				
+				cachedTile = currentTile
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X2 / Y2")
 						break
 					end
 
@@ -1422,35 +3054,56 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY2, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				--print ("X2 / Y2 Corner Height: ", buildingStories)
 
 				z = 0
 
-
 			end
 
 
-			-- Set CurrentTile to X / Y2
+			--------------
+			--  X / Y2  --
+			--------------
+
 
 			currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
 
 			if currentTile
 			then
-					
+				cachedTile = currentTile
 
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X / Y2")
 						break
 					end
 
@@ -1459,7 +3112,28 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX, buildingCornerY2, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				--print ("X / Y2 Corner Height: ", buildingStories)
@@ -1468,24 +3142,26 @@ function CheckSafehouseSize(worldobjects, square, player)
 
 			end
 
-			--Set CurrentTile to X2 / Y
+
+			--------------
+			--  X2 / Y  --
+			--------------
+			
 
 			currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
 
 			if currentTile
 			then
-			
+				cachedTile = currentTile
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Corner X2 / Y")
 						break
 					end
 
@@ -1494,31 +3170,423 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2, buildingCornerY, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
 				end	
 
 				--print ("X2 / Y Corner Height: ", buildingStories)
-				
+
 			end
 
-			--Set CurrentTile to Offset Center:  X + 5  /  Y + 5
-
-			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
+			---------------------------
+			--  CORNER INSET CHECKS  --
+			---------------------------
+			
+			---------------------
+			--  X + 5 / Y + 5  --
+			---------------------
+			
+			currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
 
 			if currentTile
+			then
+				cachedTile = currentTile
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end					
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then						
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end					
+				end	
+
+				--print ("X + 5 / Y + 5 Inset Corner Height: ", buildingStories)
+
+				z = 0
+
+			end
+
+			-----------------------
+			--  X2 - 5 / Y2 - 5  --
+			-----------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("X2 -5 / Y2 -5 Inset Corner Height: ", buildingStories)
+
+				z = 0
+
+			end
+
+			----------------------
+			--  X + 5 / Y2 - 5  --
+			----------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX + 5, buildingCornerY2 - 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("X + 5 / Y2 - 5 Inset Corner Height: ", buildingStories)
+
+				z = 0
+
+			end
+
+			---------------------
+			--  X2 - 5 / Y + 5  --
+			---------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+
+			if currentTile
+			then
+				cachedTile = currentTile
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--CHECK FOR HIGHER CEILING
+				z = 0
+				currentTile = cachedTile
+
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 2
+					currentTile = getCell():getGridSquare(buildingCornerX2 - 5, buildingCornerY + 5, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("X2 - 5 / Y + 5 Inset Corner Height: ", buildingStories)
+
+			end
+
+			--------------------------
+			-- CENTER OFFSET CHECKS --
+			--------------------------
+
+			------------------
+			--  +- 3 TILES  --
+			------------------
+
+			-----------------------
+			--  X + 3  /  Y + 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY + 3, z)
+
+			if currentTile and (buildingCenterX + 3 < buildingCornerX2) and (buildingCenterY + 3 < buildingCornerY2) 
+			then			
+				
+				while currentTile:isSolidFloor()
+				do		
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY + 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 3 / Y + 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X + 3  /  Y - 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY - 3, z)
+
+			if currentTile and (buildingCenterX + 3 < buildingCornerX2) and (buildingCenterY - 3 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 3, buildingCenterY - 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 3 / Y - 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 3  /  Y + 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY + 3, z)
+
+			if currentTile and (buildingCenterX - 3 > buildingCornerX) and (buildingCenterY + 3 > buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY + 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 3 / Y + 3 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 3  /  Y - 3  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY - 3, z)
+
+			if currentTile and (buildingCenterX - 3 > buildingCornerX) and (buildingCenterY - 3 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 3, buildingCenterY - 3, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 3 / Y - 3 Height: ", buildingStories)
+
+			end
+
+
+			------------------
+			--  +- 5 TILES  --
+			------------------
+			
+			-----------------------
+			--  X + 5  /  Y + 5  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
+
+			if currentTile and (buildingCenterX + 5 < buildingCornerX2) and (buildingCenterY + 5 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY + 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X + 5 / Y + 5")
 						break
 					end
 
@@ -1527,31 +3595,31 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				--print ("Center X + 5 / Y + 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X + 5  /  Y - 5
+
+			-----------------------
+			--  X + 5  /  Y - 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY - 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX + 5 < buildingCornerX2) and (buildingCenterY - 5 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX + 5, buildingCenterY - 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X + 5 / Y - 5")
 						break
 					end
 
@@ -1560,31 +3628,31 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				--print ("Center X + 5 / Y - 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X - 5  /  Y + 5
+
+			-----------------------
+			--  X - 5  /  Y + 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY + 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX - 5 > buildingCornerX) and (buildingCenterY + 5 < buildingCornerY2) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
+				do	
 					
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY + 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X - 5 / Y + 5")
 						break
 					end
 
@@ -1593,31 +3661,31 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				--print ("Center X - 5 / Y + 5 Height: ", buildingStories)
 
 			end
 
-			--Set CurrentTile to Offset Center:  X - 5  /  Y - 5
+
+			-----------------------
+			--  X - 5  /  Y - 5  --
+			-----------------------
 
 			currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY - 5, z)
 
-			if currentTile
+			if currentTile and (buildingCenterX - 5 > buildingCornerX) and (buildingCenterY - 5 > buildingCornerY) 
 			then
 			
 				
 				while currentTile:isSolidFloor()
-				do				
-					--print ("Is Solid Floor : ", z)
-					
+				do	
+
 					z = z + 1
 					currentTile = getCell():getGridSquare(buildingCenterX - 5, buildingCenterY - 5, z)
 					
 					if not currentTile -- Error Handling
 					then
-						--print ("Warning: Finished Iteration over Floors from Center Offset: X - 5 / Y - 5")
 						break
 					end
 
@@ -1626,18 +3694,1103 @@ function CheckSafehouseSize(worldobjects, square, player)
 						then
 							storyCount = buildingStories
 						end
-					--print("Building Stories: ",buildingStories)
 				end	
 
 				--print ("Center X - 5 / Y - 5 Height: ", buildingStories)
+
+			end
+
+
+			------------------
+			--  +- 7 TILES  --
+			------------------
+			
+			-----------------------
+			--  X + 7  /  Y + 7  --
+			-----------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY + 7, z)
+
+			if currentTile and (buildingCenterX + 7 < buildingCornerX2) and (buildingCenterY + 7 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY + 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 7 / Y + 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X + 7  /  Y - 7  --
+			-----------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY - 7, z)
+
+			if currentTile and (buildingCenterX + 7 < buildingCornerX2) and (buildingCenterY - 7 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 7, buildingCenterY - 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 7 / Y - 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 7  /  Y + 7  --
+			-----------------------
+			
+			currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY + 7, z)
+
+			if currentTile and (buildingCenterX - 7 > buildingCornerX) and (buildingCenterY + 7 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY + 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 7 / Y + 7 Height: ", buildingStories)
+
+			end
+
+
+			-----------------------
+			--  X - 7  /  Y - 7  --
+			-----------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY - 7, z)
+
+			if currentTile and (buildingCenterX - 7 > buildingCornerX) and (buildingCenterY - 7 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 7, buildingCenterY - 7, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 7 / Y - 7 Height: ", buildingStories)
+
+			end
+
+
+
+			-------------------
+			--  +- 10 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 10  /  Y + 10  --
+			-------------------------
+			
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY + 10, z)
+
+			if currentTile and (buildingCenterX + 10 < buildingCornerX2) and (buildingCenterY + 10 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY + 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 10 / Y + 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X + 10  /  Y - 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY - 10, z)
+
+			if currentTile and (buildingCenterX + 10 < buildingCornerX2) and (buildingCenterY - 10 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 10, buildingCenterY - 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 10 / Y - 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 10  /  Y + 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY + 10, z)
+			
+			if currentTile and (buildingCenterX - 10 > buildingCornerX) and (buildingCenterY + 10 < buildingCornerY2)  
+			then
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY + 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 10 / Y + 10 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 10  /  Y - 10  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY - 10, z)
+
+			if currentTile and (buildingCenterX - 10 > buildingCornerX) and (buildingCenterY - 10 > buildingCornerY) 
+			then
+				
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 10, buildingCenterY - 10, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 10 / Y - 10 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 20 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 20  /  Y + 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY + 20, z)
+
+			if currentTile and (buildingCenterX + 20 < buildingCornerX2) and (buildingCenterY + 20 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY + 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 20 / Y + 20 Height: ", buildingStories)
+
+			end
+
+					
+			-------------------------
+			--  X + 20  /  Y - 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY - 20, z)
+
+			if currentTile and (buildingCenterX + 20 < buildingCornerX2) and (buildingCenterY - 20 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 20, buildingCenterY - 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 20 / Y - 20 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 20  /  Y + 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY + 20, z)
+
+			if currentTile and (buildingCenterX - 20 > buildingCornerX)	and (buildingCenterY + 20 < buildingCornerY2) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY + 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 20 / Y + 20 Height: ", buildingStories)
+
+			end
+
+
+			-------------------------
+			--  X - 20  /  Y - 20  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY - 20, z)
+
+			if currentTile and (buildingCenterX - 20 > buildingCornerX)	and (buildingCenterY - 20 > buildingCornerY) 
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 20, buildingCenterY - 20, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 20 / Y - 20 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 30 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 30  /  Y + 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY + 30, z)
+
+			if currentTile and (buildingCenterX + 30 < buildingCornerX2) and (buildingCenterY + 30 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY + 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 30 / Y + 30 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 30  /  Y - 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY - 30, z)
+
+			if currentTile and (buildingCenterX + 30 < buildingCornerX2) and (buildingCenterY - 30 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 30, buildingCenterY - 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 30 / Y - 30 Height: ", buildingStories)
+
+			end
+
+
+
+			-------------------------
+			--  X - 30  /  Y + 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY + 30, z)
+
+			if currentTile and (buildingCenterX - 30 > buildingCornerX)	and (buildingCenterY + 30 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY + 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 30 / Y + 30 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 30  /  Y - 30  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY - 30, z)
+						
+			if currentTile and (buildingCenterX - 30 > buildingCornerX)	and (buildingCenterY - 30 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 30, buildingCenterY - 30, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 30 / Y - 30 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 40 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 40  /  Y + 40  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY + 40, z)
+
+			if currentTile and (buildingCenterX + 40 < buildingCornerX2) and (buildingCenterY + 40 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY + 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 40 / Y + 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 40  /  Y - 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY - 40, z)
+
+			if currentTile and (buildingCenterX + 40 < buildingCornerX2) and (buildingCenterY - 40 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 40, buildingCenterY - 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 40 / Y - 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 40  /  Y + 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY + 40, z)
+
+			if currentTile and (buildingCenterX - 40 > buildingCornerX)	and (buildingCenterY + 40 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY + 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 40 / Y + 40 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 40  /  Y - 40  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY - 40, z)
+			
+			if currentTile and (buildingCenterX - 40 > buildingCornerX)	and (buildingCenterY - 40 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 40, buildingCenterY - 40, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 40 / Y - 40 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 50 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 50  /  Y + 50  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY + 50, z)
+
+			if currentTile and (buildingCenterX + 50 < buildingCornerX2) and (buildingCenterY + 50 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY + 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 50 / Y + 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 50  /  Y - 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY - 50, z)
+
+			if currentTile and (buildingCenterX + 50 < buildingCornerX2) and (buildingCenterY - 50 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 50, buildingCenterY - 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 50 / Y - 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 50  /  Y + 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY + 50, z)
+
+			if currentTile and (buildingCenterX - 50 > buildingCornerX)	and (buildingCenterY + 50 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY + 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 50 / Y + 50 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 50  /  Y - 50  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY - 50, z)
+						
+			if currentTile and (buildingCenterX - 50 > buildingCornerX)	and (buildingCenterY - 50 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 50, buildingCenterY - 50, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 50 / Y - 50 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 60 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 60  /  Y + 60  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY + 60, z)
+
+			if currentTile and (buildingCenterX + 60 < buildingCornerX2) and (buildingCenterY + 60 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY + 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 60 / Y + 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 60  /  Y - 60  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY - 60, z)
+
+			if currentTile and (buildingCenterX + 60 < buildingCornerX2) and (buildingCenterY - 60 > buildingCornerY)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 60, buildingCenterY - 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 60 / Y - 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 60  /  Y + 60  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY + 60, z)
+
+			if currentTile and (buildingCenterX - 60 > buildingCornerX)	and (buildingCenterY + 60 < buildingCornerY2)
+			then
+			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY + 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 60 / Y + 60 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 60  /  Y - 60  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY - 60, z)
+						
+			if currentTile and (buildingCenterX - 60 > buildingCornerX)	and (buildingCenterY - 60 > buildingCornerY)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 60, buildingCenterY - 60, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 60 / Y - 60 Height: ", buildingStories)
+
+			end
+
+			-------------------
+			--  +- 70 TILES  --
+			-------------------
+			
+			-------------------------
+			--  X + 70  /  Y + 70  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY + 70, z)
+
+			if currentTile and (buildingCenterX + 70 < buildingCornerX2) and (buildingCenterY + 70 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY + 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 70 / Y + 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X + 70  /  Y - 70  --
+			-------------------------
+
+			currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY - 70, z)
+
+			if currentTile and (buildingCenterX + 70 < buildingCornerX2) and (buildingCenterY - 70 > buildingCornerY)
+			then
+							
+				while currentTile:isSolidFloor()
+				do	
+					
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX + 70, buildingCenterY - 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X + 70 / Y - 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 70  /  Y + 70  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY + 70, z)
+
+			if currentTile and (buildingCenterX - 70 > buildingCornerX)	and (buildingCenterY + 70 < buildingCornerY2)
+			then			
+				
+				while currentTile:isSolidFloor()
+				do				
+										
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY + 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 70 / Y + 70 Height: ", buildingStories)
+
+			end
+
+			
+			-------------------------
+			--  X - 70  /  Y - 70  --
+			-------------------------
+
+
+			currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY - 70, z)
+						
+			if currentTile and (buildingCenterX - 70 > buildingCornerX)	and (buildingCenterY - 70 > buildingCornerY)
+			then	
+
+				while currentTile:isSolidFloor()
+				do	
+
+					z = z + 1
+					currentTile = getCell():getGridSquare(buildingCenterX - 70, buildingCenterY - 70, z)
+					
+					if not currentTile -- Error Handling
+					then
+						break
+					end
+
+					buildingStories = z					
+					if buildingStories > storyCount
+						then
+							storyCount = buildingStories
+						end
+				end	
+
+				--print ("Center X - 70 / Y - 70 Height: ", buildingStories)
 
 			end
 			
 			-----------------------
 			-- END FLOOR CHECKS
 			-----------------------
-
-			--print ("Story Count: ", storyCount)
+			
 			buildingStories = storyCount
 
 			-- Get Width and Height of Building Bounds
@@ -1646,11 +4799,6 @@ function CheckSafehouseSize(worldobjects, square, player)
 							
 
 			print ("#############################")
-			--print ("Coords: X: ", buildingDef:getX(), " X2: ", buildingDef:getX2(), " Y: ", buildingDef:getY(), " Y2: ", buildingDef:getY2())
-			--print ("Safehouse Center: ", buildingCenterX, " x ", buildingCenterY)
-			--print ("Running Safehouse Size Check...")
-			--print ("Safehouse Size is: ", buildingWidth, " Wide -- ", buildingHeight, " Tall")	
-			--print ("#############################")
 			
 			if buildingStories == nil -- Error Handling
 			then
@@ -1718,8 +4866,16 @@ end
 Events.OnFillWorldObjectContextMenu.Add(Context_safezone)
 
 ----------------------------
--- ADMIN DEBUGGING FUNCTIONSa
+-- ADMIN DEBUGGING FUNCTIONS
 ----------------------------
+
+--  CHECK FOR FAVORITED OR EQUIPPED ITEM
+
+function Recipe.OnTest.IsNotFavorited(item, result)
+    return not item:isFavorite() and not item:isEquipped()
+end
+
+--  HOTKEY FOR SAFEHOUSE SIZE CHECK
 
 function debuggingKey(_keyPressed)
 	local key = _keyPressed

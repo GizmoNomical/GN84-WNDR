@@ -366,6 +366,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleWatches,
 	}
 
@@ -378,6 +379,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleJewelrySimple,
 	}
 
@@ -390,6 +392,7 @@ module GN84-ECO
         Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleJewelryPrecious,
 	}
 
@@ -402,6 +405,7 @@ module GN84-ECO
         Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleJewelryGemstones,
 	}
 
@@ -414,6 +418,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
@@ -428,6 +433,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleSimpleTool,
 	}
 
@@ -440,6 +446,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleLargeTool,
 	}
 
@@ -452,6 +459,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleComplexTool,
 	}
 
@@ -464,6 +472,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleLeather,
 	}
 
@@ -476,6 +485,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
 	}
 
 	recipe Shred and Recycle Leather Strips for Money
@@ -487,6 +497,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
 	}
 
 	recipe Shred and Recycle Clothing for Money
@@ -498,6 +509,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:10.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleClothing,
 	}
 
@@ -510,6 +522,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:10.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleBulletVest,
 	}
 
@@ -522,6 +535,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleGlasses,
 	}
 
@@ -534,6 +548,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecyclePaperProduct,
 	}
 
@@ -541,11 +556,12 @@ module GN84-ECO
 	{
 		keep SmokeyShredderRecycler,
 
-		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.Torch/Base.HandTorch/Base.NoiseTrap,
+		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap,
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleLowElectronics,
 	}
 
@@ -558,6 +574,7 @@ module GN84-ECO
 		Result:Money,
 		CanBeDoneFromFloor:true,
         Time:5.0,
+		OnTest:Recipe.OnTest.IsNotFavorited,
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
@@ -573,7 +590,7 @@ module GN84-ECO
 		OnCreate:ScratchLottoTicketStandard,
 	}
 
-	recipe Redeem Rare Ticket for Five Standard Lotto Tickets
+	recipe Redeem Rare Ticket for Standard Lotto Tickets
 	{
 		LottoTicketRare,
 
@@ -585,9 +602,9 @@ module GN84-ECO
 		OnCreate:TradeRareTicketForStandardTickets,
 	}
 
-	recipe Redeem Rare Ticket for Stack of Cash
+	recipe Redeem Rare Tickets for Stack of Cash
 	{
-		LottoTicketRare,
+		LottoTicketRare=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
