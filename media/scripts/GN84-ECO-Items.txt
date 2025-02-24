@@ -310,5 +310,16 @@ module GN84-ECO
 		WorldStaticModel	=  VIPToken,
 		Tooltip 			=  Thank you for Supporting The Wanderers!,
 	}
+
+	item EventToken
+	{
+		DisplayName			=  Wanderers Event Token,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  EventToken,				
+		WorldStaticModel	=  EventToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
 	
 }

@@ -32,11 +32,14 @@ function ServerPointsUI:setVisible(visible)
     end
 end
 
-function ServerPointsUI.LoadType.ITEM(row, entry)
-    row.quantity = entry.quantity or 1
+function ServerPointsUI.LoadType.ITEM(row, entry)    
     local item = getScriptManager():getItem(entry.target)
-    row.text = item:getDisplayName()
-    row.texture = item:getNormalTexture()
+    if item then
+        --print (item)
+        row.quantity = entry.quantity or 1
+        row.text = item:getDisplayName()
+        row.texture = item:getNormalTexture()
+    end
 end
 
 function ServerPointsUI.LoadType.VEHICLE(row, entry)
@@ -77,15 +80,20 @@ function ServerPointsUI.LoadListings(module, command, arguments)
             scrollingList:initialise()
             scrollingList.doDrawItem = ServerPointsUI.doDrawItem
             ServerPointsUI.instance.tabPanel:addView(k, scrollingList)
+
             for _, entry in ipairs(v) do
-                local row = scrollingList:addItem(entry.type, nil)
-                row.type = entry.type
-                row.target = entry.target
-                row.price = entry.price or 0
-                if ServerPointsUI.LoadType[entry.type] then
-                    ServerPointsUI.LoadType[entry.type](row, entry)
-                else
-                    row.text = entry.type .. ":" .. tostring(entry.target)
+                local listItem = getScriptManager():getItem(tostring(entry.target))  -- Check if Item is Valid and Continue to next if not
+                if listItem or entry.type == "DIV" then
+
+                    local row = scrollingList:addItem(entry.type, nil)
+                    row.type = entry.type
+                    row.target = entry.target
+                    row.price = entry.price or 0
+                    if ServerPointsUI.LoadType[entry.type] then                        
+                            ServerPointsUI.LoadType[entry.type](row, entry)                        
+                    else
+                        row.text = entry.type .. ":" .. tostring(entry.target)
+                    end 
                 end
             end
         end
@@ -134,25 +142,45 @@ function ServerPointsUI:createChildren()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
-    if getDebug() then
-        self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "RELOAD", self, ServerPointsUI.onReload)
-        self.reloadButton:initialise()
-        self.reloadButton:instantiate()
-        self:addChild(self.reloadButton)
-    end
+    
+    self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "REFRESH LISTINGS", self, ServerPointsUI.onReload)
+    self.reloadButton:initialise()
+    self.reloadButton:instantiate()
+    self:addChild(self.reloadButton)
+
+    -- if getDebug() then
+    --    self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "RELOAD", self, ServerPointsUI.onReload)
+    --    self.reloadButton:initialise()
+    --    self.reloadButton:instantiate()
+    --    self:addChild(self.reloadButton)
+   -- end
 end
 
 function ServerPointsUI:close()
     self:setVisible(false)
 end
 
-function ServerPointsUI:onReload()
+--  AUTO REFRESH FUNCTION - BROKEN
+--function ServerPointsUI:autoRefreshClientListings()
+--    --ServerPointsUI.onReload()
+--    if MainScreen.instance.serverPoints:getIsVisible() then        
+--        print ("Debug - Refresh Client Listings")
+--    end
+--end
+
+
+function ServerPointsUI:onReload()    
+
     for i, v in ipairs(self.tabPanel.viewList) do
         self.tabPanel:removeView(v.view)
     end
     Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
     sendClientCommand("GN84-ECO", "load", nil)
+    print("Refreshing Client Listings")    
+
 end
+
+--Events.EveryOneMinute.Add(ServerPointsUI.autoRefreshClientListings)
 
 function ServerPointsUI.BuyType.ITEM(row)
     sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
@@ -329,7 +357,13 @@ function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
     -- POSSIBLE PRICE TAB WIDTH??
     x = self.width - 215
     z = y + (item.height - FONT_HGT_LARGE) / 2
-    self:drawText(tostring(item.price), x, z, 0.7, 0.7, 0.7, 1.0, self.font)
+    -- Check for 'Out of Stock' Items
+    if item.price == 999999999
+    then
+        self:drawText("OUT OF STOCK", x, z, 0.7, 0.7, 0.7, 1.0, self.font)
+    else
+        self:drawText(tostring(item.price), x, z, 0.7, 0.7, 0.7, 1.0, self.font)
+    end
 end
 
 function ServerPointsUI:doDrawItem(y, item, alt)
@@ -370,7 +404,10 @@ function ServerPointsUI:render()
         if ServerPointsUI.BuyType[row.type] then
             self.buyButton:setY(z)
             self.buyButton:setVisible(true)
-            if self.points < row.price then
+            if row.price == 999999999 then
+                self.buyButton:setEnable(false)
+                self.buyButton:setVisible(false)
+            elseif self.points < row.price then
                 self.buyButton:setEnable(false)
             else
                 self.buyButton:setEnable(true)

@@ -9,6 +9,8 @@ if not isServer() then return end
 
 local serverPointsData
 local listings
+local oldListings
+
 
 local function PointsTick()
     local players = getOnlinePlayers()
@@ -30,7 +32,31 @@ local function LoadListings()
     end
     fileReader:close()
     listings = loadstring(table.concat(lines, "\n"))() or { ["Missing Configuration"] = {} }
+
+    
+    local sameContents = true        
+    for i, value in ipairs(lines) do
+        -- print (lines[i])
+        if oldListings ~= nil then
+            if  value ~= oldListings[i] then
+                sameContents = false
+                break
+            end
+        end        
+    end
+
+    if sameContents then
+        --print ("listings are the same")
+    else
+        print ("Smokey Shop Listings Updated")
+    end
+
+    oldListings = lines    
+    
 end
+
+-- Force Server Reload of Listings on a Timer
+Events.EveryTenMinutes.Add(LoadListings)
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
     serverPointsData = ModData.getOrCreate("serverPointsData")
@@ -127,6 +153,16 @@ function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
     print("[WANDERERS VIP] ", args[1], " redeemed VIP Token for $", args[2], " Smokey Points!")
     print("###############")
+     --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
+    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
+    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+ end
+
+ --REDEEM EVENT TOKEN FOR POINTS
+function ServerPointsCommands.redeemEventToken(module, command, player, args)
+    print("#################")
+    print("[WANDERERS EVENT] ", args[1], " redeemed EVENT Token for $", args[2], " Smokey Points!")
+    print("#################")
      --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]

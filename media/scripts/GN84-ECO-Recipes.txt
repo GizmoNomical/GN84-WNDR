@@ -578,6 +578,8 @@ module GN84-ECO
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
+	/*LOTTO AND TOKENS*/
+
 	recipe Scratch Lotto Ticket to Win
 	{
 		LottoTicketStandard,
@@ -682,6 +684,38 @@ module GN84-ECO
 		Time:120.0,
 	}
 	
+	recipe Redeem Event Token for Smokey Points
+	{
+		EventToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Money,
+		Time:120.0,		
+		OnCreate:GivePlayerSmokeyPointsEventToken,
+	}
 	
-	
+	recipe Redeem Event Tokens for Wheel Spin Token
+	{
+		EventToken=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.WheelSpinToken,
+		Time:120.0,
+	}
+
+	recipe Redeem Event Tokens for Super Wheel Spin Token
+	{
+		EventToken=25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.SuperWheelSpinToken,
+		Time:120.0,
+	}
+
 }

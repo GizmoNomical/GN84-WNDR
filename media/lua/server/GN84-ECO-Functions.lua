@@ -17,7 +17,8 @@ local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus or 1.2
 local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty or 0.95
 local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds or 3.25
 local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue or 1          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue or 100000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
+local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue or 25000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
+local EventTokenCashValue = SandboxVars.GN84ECO.EventTokenCashValue or 10000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
 --------------------------
 -- New Player Add Items
 --------------------------
@@ -70,6 +71,10 @@ end
 
 function GivePlayerSmokeyPointsVIPToken()
 	sendClientCommand("GN84-ECO", "redeemVIPToken", {getPlayer():getUsername(), VIPTokenCashValue})
+end
+
+function GivePlayerSmokeyPointsEventToken()
+	sendClientCommand("GN84-ECO", "redeemEventToken", {getPlayer():getUsername(), EventTokenCashValue})
 end
 
 -- Add Smokey Points on Zombie Kill
@@ -392,7 +397,7 @@ end
 ----------------------------------------
 
 function GN84_AcceptItemCash(container, item)
-	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.MoneyStack1000000" or item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit10" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit100" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit1000" or item:getFullType() == "GN84-ECO.AdditionalSafehousePermit" or item:getFullType() == "GN84-ECO.ResidentialPermitSmall" or item:getFullType() == "GN84-ECO.ResidentialPermitLarge" or item:getFullType() == "GN84-ECO.ResidentialPermitMansion" or item:getFullType() == "GN84-ECO.CommercialClaimPermit" or item:getFullType() == "GN84-ECO.FactionPermitSmall" or item:getFullType() == "GN84-ECO.FactionPermitLarge" or item:getFullType() == "GN84-ECO.FactionPermitMassive"
+	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.MoneyStack1000000" or item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken" or item:getFullType() == "GN84-ECO.EventToken"or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit10" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit100" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit1000" or item:getFullType() == "GN84-ECO.AdditionalSafehousePermit" or item:getFullType() == "GN84-ECO.ResidentialPermitSmall" or item:getFullType() == "GN84-ECO.ResidentialPermitLarge" or item:getFullType() == "GN84-ECO.ResidentialPermitMansion" or item:getFullType() == "GN84-ECO.CommercialClaimPermit" or item:getFullType() == "GN84-ECO.FactionPermitSmall" or item:getFullType() == "GN84-ECO.FactionPermitLarge" or item:getFullType() == "GN84-ECO.FactionPermitMassive"
 	then
 		return true
 	end

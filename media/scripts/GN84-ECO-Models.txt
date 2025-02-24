@@ -108,20 +108,27 @@ module GN84-ECO
 	{
 		mesh = worlditems/LottoWheelSpinToken,
 		texture = worlditems/LottoWheelSpinTokenModel,
-		scale = 0.9,
+		scale = 1.35,
 	}
 
 	model LottoSuperWheelSpinToken
 	{
 		mesh = worlditems/LottoWheelSpinToken,
 		texture = worlditems/LottoWheelSpinTokenModel,
-		scale = 1.35,
+		scale = 1.5,
 	}
 
 	model VIPToken
 	{
 		mesh = worlditems/VIPToken,
 		texture = worlditems/VIPTokenModel,
+		scale = 1.35,
+	}
+
+	model EventToken
+	{
+		mesh = worlditems/EventToken,
+		texture = worlditems/EventTokenModel,
 		scale = 1.35,
 	}
 
