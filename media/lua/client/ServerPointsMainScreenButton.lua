@@ -27,7 +27,7 @@ function MainScreen:instantiate()
         self:addChild(self.serverPoints)
 
         local labelHgt = getTextManager():getFontHeight(UIFont.Large) + 8 * 2
-        self.pointsOption = ISLabel:new(self.quitToDesktop.x, self.quitToDesktop.y + labelHgt + 16, labelHgt, string.upper(SandboxVars.ServerPoints.PointsName) .. " SHOP", 1, 1, 1, 1, UIFont.Large, true)
+        self.pointsOption = ISLabel:new(self.quitToDesktop.x, self.quitToDesktop.y + labelHgt + 16, labelHgt, "THE SMOKEY SHOP", 1, 1, 1, 1, UIFont.Large, true)
         self.pointsOption.internal = "POINTS"
         self.pointsOption:initialise()
         self.bottomPanel:addChild(self.pointsOption)

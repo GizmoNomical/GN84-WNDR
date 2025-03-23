@@ -1,3 +1,4 @@
+require "ISUI/ISPanel"
 
 local ServerPointsUI = ISPanel:derive("ServerPointsUI")
 ServerPointsUI.BuyType = {}
@@ -29,6 +30,7 @@ function ServerPointsUI:setVisible(visible)
     if visible then
         Events.OnServerCommand.Add(OnServerCommand)
         sendClientCommand("GN84-ECO", "get", nil)
+        ServerPointsUI.automaticRefresh()
     end
 end
 
@@ -120,7 +122,7 @@ function ServerPointsUI:createChildren()
     self.tabPanel.addView = self.addView
     self:addChild(self.tabPanel)
     Events.OnTick.Add(OnTick)
-
+    
     self.previewButton = ISButton:new(self.width - 200 * FONT_SCALE - padBottom * 2, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "PREVIEW", self, ServerPointsUI.onPreview)
     self.previewButton:initialise()
     self.previewButton:instantiate()
@@ -147,40 +149,55 @@ function ServerPointsUI:createChildren()
     self.reloadButton:initialise()
     self.reloadButton:instantiate()
     self:addChild(self.reloadButton)
+   
+end
 
-    -- if getDebug() then
-    --    self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "RELOAD", self, ServerPointsUI.onReload)
-    --    self.reloadButton:initialise()
-    --    self.reloadButton:instantiate()
-    --    self:addChild(self.reloadButton)
-   -- end
+function ServerPointsUI:autoCloseWindow()
+    if not MainScreen.instance:isVisible() then
+        if MainScreen.instance.serverPoints:isVisible() then            
+            MainScreen.instance.serverPoints:setVisible(false)
+        end  
+    end
 end
 
 function ServerPointsUI:close()
-    self:setVisible(false)
+    self:setVisible(false) 
+    ServerPointsUI:removeFromUIManager()
 end
 
---  AUTO REFRESH FUNCTION - BROKEN
---function ServerPointsUI:autoRefreshClientListings()
---    --ServerPointsUI.onReload()
---    if MainScreen.instance.serverPoints:getIsVisible() then        
---        print ("Debug - Refresh Client Listings")
---    end
---end
+function serverForceRefresh(module, command, player, args)
+    if module == "GN84-ECO" and command == "ServerForceRefresh" then
+        ServerPointsUI.automaticRefresh()
+        --print ("Server Updated Shop Listings")
+    end
+end
 
+Events.OnServerCommand.Add(serverForceRefresh)
+
+function ServerPointsUI:automaticRefresh()  
+    if ServerPointsUI.instance ~= nil then
+        if ServerPointsUI.instance.tabPanel.viewList ~= nil then
+            for i, v in ipairs(ServerPointsUI.instance.tabPanel.viewList) do
+                ServerPointsUI.instance.tabPanel:removeView(v.view)
+            end
+            Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
+            sendClientCommand("GN84-ECO", "load", nil)
+        end
+    end 
+end
 
 function ServerPointsUI:onReload()    
-
-    for i, v in ipairs(self.tabPanel.viewList) do
-        self.tabPanel:removeView(v.view)
+    if self.instance ~= nil then    
+        if self.instance.tabPanel.viewList ~= nil then
+            for i, v in ipairs(self.tabPanel.viewList) do
+                self.tabPanel:removeView(v.view)
+            end
+            Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
+            sendClientCommand("GN84-ECO", "load", nil)
+        end
     end
-    Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
-    sendClientCommand("GN84-ECO", "load", nil)
-    print("Refreshing Client Listings")    
-
 end
 
---Events.EveryOneMinute.Add(ServerPointsUI.autoRefreshClientListings)
 
 function ServerPointsUI.BuyType.ITEM(row)
     sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
@@ -360,9 +377,11 @@ function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
     -- Check for 'Out of Stock' Items
     if item.price == 999999999
     then
-        self:drawText("OUT OF STOCK", x, z, 0.7, 0.7, 0.7, 1.0, self.font)
-    else
-        self:drawText(tostring(item.price), x, z, 0.7, 0.7, 0.7, 1.0, self.font)
+        self:drawText("OUT OF STOCK", x, z, 0.875, 0.561, 0.341, 1.0, self.font)                    --  Out of Stock Items
+    elseif ServerPointsUI.instance.points < item.price then
+        self:drawText(tostring(item.price), x, z, 0.733, 0.247, 0.215, 1.0, self.font)              --  Insufficient Funds
+    else      
+        self:drawText(tostring(item.price), x, z, 0.905, 0.909, 0.898, 1.0, self.font)                 --  Purchaseable Items
     end
 end
 
@@ -384,9 +403,9 @@ function ServerPointsUI:render()
     local x = self.width - 10 * FONT_SCALE - FONT_HGT_LARGE
     self:drawTextureScaledAspect2(getSteamAvatarFromUsername(getPlayer():getUsername()), x, (z - FONT_HGT_LARGE) / 2, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
     x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
-    self:drawText(self.available, x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
+    --self:drawText("     ", x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
-    self:drawText(tostring(self.points), x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
+    self:drawText("Balance:  " .. tostring(self.points) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
 
@@ -426,15 +445,16 @@ function ServerPointsUI:render()
 end
 
 function ServerPointsUI:new(x, y, width, height)
-    local o = ISPanel:new(x, y, width, height)
+    local o = ISPanel:new(x, y, width, height + 100)
     setmetatable(o, self)
     self.__index = self
     o.variableColor = { r = 0.9, g = 0.55, b = 0.1, a = 1 }
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
     o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }
-    o.title = string.upper(SandboxVars.ServerPoints.PointsName) .. " SHOP"
-    o.available = SandboxVars.ServerPoints.PointsName .. " available"
+    --o.title = string.upper(SandboxVars.ServerPoints.PointsName) .. " SHOP"
+    o.title = "    THE SMOKEY SHOP"
+    o.available = " Balance     "
     o.serverMsg = SandboxVars.ServerPoints.ServerMessage
     o.points = 0
     ServerPointsUI.instance = o

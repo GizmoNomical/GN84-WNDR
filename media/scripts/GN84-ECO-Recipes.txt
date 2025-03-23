@@ -374,7 +374,7 @@ module GN84-ECO
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT,
+		Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT/Base.Necklace_Crucifix/AuthenticZLite.Necklace_B,
         
 		Result:Money,
 		CanBeDoneFromFloor:true,
@@ -400,7 +400,7 @@ module GN84-ECO
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Ring_Right_MiddleFinger_GoldRuby/Base.Ring_Left_MiddleFinger_GoldRuby/Base.Ring_Right_RingFinger_GoldRuby/Base.Ring_Left_RingFinger_GoldRuby/Base.Earring_Stone_Sapphire/Base.Earring_Stone_Emerald/Base.Earring_Stone_Ruby/Base.Earring_Pearl/Base.Earring_Dangly_Sapphire/Base.Earring_Dangly_Emerald/Base.Earring_Dangly_Ruby/Base.Earring_Dangly_Pearl/Base.Necklace_Choker_Sapphire/Base.NecklaceLong_SilverSapphire/Base.NecklaceLong_SilverEmerald/Base.Necklace_SilverSapphire/Base.Necklace_GoldRuby/Base.Necklace_Pearl/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingSilverAmethyst/Base.BellyButton_RingSilverRuby/Base.BellyButton_DangleGoldRuby,
+		Base.Ring_Right_MiddleFinger_GoldRuby/Base.Ring_Left_MiddleFinger_GoldRuby/Base.Ring_Right_RingFinger_GoldRuby/Base.Ring_Left_RingFinger_GoldRuby/Base.Earring_Stone_Sapphire/Base.Earring_Stone_Emerald/Base.Earring_Stone_Ruby/Base.Earring_Pearl/Base.Earring_Dangly_Sapphire/Base.Earring_Dangly_Emerald/Base.Earring_Dangly_Ruby/Base.Earring_Dangly_Pearl/Base.Necklace_Choker_Sapphire/Base.NecklaceLong_SilverSapphire/Base.NecklaceLong_SilverEmerald/Base.Necklace_SilverSapphire/Base.Necklace_GoldRuby/Base.Necklace_Pearl/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingSilverAmethyst/Base.BellyButton_RingSilverRuby/Base.BellyButton_DangleGoldRuby/Base.Necklace_Choker_Amber/Base.NecklaceLong_Amber,
 
         Result:Money,
 		CanBeDoneFromFloor:true,
@@ -530,7 +530,7 @@ module GN84-ECO
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles,
+		Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles/Base.Glasses_Napier,
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
@@ -556,7 +556,7 @@ module GN84-ECO
 	{
 		keep SmokeyShredderRecycler,
 
-		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap,
+		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap/Base.Camera/Base.CameraDisposable/Base.CameraExpensive/Base.Earbuds,
 		
 		Result:Money,
 		CanBeDoneFromFloor:true,
