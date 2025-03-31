@@ -14,10 +14,20 @@ local oldListings
 
 local function PointsTick()
     local players = getOnlinePlayers()
+    if IsoPlayer.allPlayersAsleep() then
+        --print ("All Players Sleeping..")
+        return    
+    end    
     for i = 0, players:size() - 1 do
-        local username = players:get(i):getUsername()
-        if not serverPointsData[username] then serverPointsData[username] = 0 end
-        serverPointsData[username] = serverPointsData[username] + SandboxVars.ServerPoints.PointsPerTick
+        if not players:get(i):isAsleep() then 
+            print (players:get(i), " is awake.")
+            local username = players:get(i):getUsername()
+            if not serverPointsData[username] then serverPointsData[username] = 0 end
+            serverPointsData[username] = serverPointsData[username] + SandboxVars.ServerPoints.PointsPerTick
+            --print ("Adding Points to:", players:get(i))
+        else
+            --print (players:get(i), "is sleeping...")
+        end        
     end
 end
 
