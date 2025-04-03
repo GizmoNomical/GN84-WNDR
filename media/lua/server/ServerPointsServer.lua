@@ -20,7 +20,7 @@ local function PointsTick()
     end    
     for i = 0, players:size() - 1 do
         if not players:get(i):isAsleep() then 
-            print (players:get(i), " is awake.")
+            --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not serverPointsData[username] then serverPointsData[username] = 0 end
             serverPointsData[username] = serverPointsData[username] + SandboxVars.ServerPoints.PointsPerTick
