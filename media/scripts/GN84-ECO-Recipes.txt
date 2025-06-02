@@ -578,6 +578,10 @@ module GN84-ECO
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
+
+
+
+
 	/*LOTTO AND TOKENS*/
 
 	recipe Scratch Lotto Ticket to Win
@@ -617,6 +621,299 @@ module GN84-ECO
 
 	}
 
+
+
+
+	/*RARE TICKETS FOR AMMO*/
+
+	recipe Redeem Rare Tickets for Random Box of Ammo
+	{
+		LottoTicketRare=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Money,
+		Time:100.0,
+		OnCreate:TradeRareTicketForRandomAmmo,
+
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - 9mm
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Bullets9mmBox,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - 12ga
+	{
+		LottoTicketRare=25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.ShotgunShellsBox,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .22
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.22Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .223
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.223Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .357
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GWP.357Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .38
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Bullets38Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .44
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Bullets44Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .45
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Bullets45Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .545
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.545Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .556
+	{
+		LottoTicketRare=25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.556Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - 7.62
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.762Box,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of Ammo - .308
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.308Box,
+		Time:100.0,
+	}
+
+
+
+
+	/*RARE TICKETS FOR ITEMS*/
+
+	recipe Redeem Rare Tickets for Crowbar
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Crowbar,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Katana
+	{
+		LottoTicketRare=35,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Katana,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Generator
+	{
+		LottoTicketRare=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.Generator,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Zomboxycycline Pills
+	{
+		LottoTicketRare=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:TheyKnew.Zomboxycycline,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Zomboxivir Ampule
+	{
+		LottoTicketRare=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:TheyKnew.Zomboxivir,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Vehicle Claim Orb
+	{
+		LottoTicketRare=8,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.AVCSClaimOrb,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Propane Tank
+	{
+		LottoTicketRare=3,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.PropaneTank,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Can of Fix-A-Flat
+	{
+		LottoTicketRare=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:FixAFlat.FixAFlat,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Spare Engine Part
+	{
+		LottoTicketRare=3,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.EngineParts,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Gun Cleaning Kit
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.CleaningKit,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Box of MREs
+	{
+		LottoTicketRare=15,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:USMRE.MREbox,
+		Time:100.0,
+	}
+
+	recipe Redeem Rare Tickets for Bound Journal
+	{
+		LottoTicketRare=1,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Base.SkillRecoveryBoundJournal,
+		Time:100.0,
+	}
+
+
+
+
+
+	/*RARE TICKETS FOR WHEEL SPINS*/
+
 	recipe Redeem Rare Tickets for Wheel Spin Token
 	{
 		LottoTicketRare=20,
@@ -639,6 +936,11 @@ module GN84-ECO
 		Time:70.0,
 	}
 
+
+
+
+	/*WHEEL SPINS UPGRADE*/
+
 	recipe Trade Wheel Spin Tokens for Super Wheel Spin Token
 	{
 		WheelSpinToken=5,
@@ -650,9 +952,14 @@ module GN84-ECO
 		Time:70.0,
 	}
 
+
+
+
+	/*VIP TOKENS*/
+
 	recipe Redeem VIP Token for Smokey Points
 	{
-		VIPToken,
+		VIPTokenNew,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -660,22 +967,11 @@ module GN84-ECO
 		Result:Money,
 		Time:120.0,		
 		OnCreate:GivePlayerSmokeyPointsVIPToken,
-	}
+	}	
 
-	recipe Redeem VIP Token for Wheel Spin Token
+	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
-		VIPToken,
-
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:GN84-ECO.WheelSpinToken,
-		Time:120.0,
-	}
-
-	recipe Redeem VIP Tokens for Super Wheel Spin Token
-	{
-		VIPToken=5,
+		VIPTokenNew,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -683,39 +979,67 @@ module GN84-ECO
 		Result:GN84-ECO.SuperWheelSpinToken,
 		Time:120.0,
 	}
-	
-	recipe Redeem Event Token for Smokey Points
+
+	recipe Redeem VIP Token for Wanderer Tokens
 	{
-		EventToken,
+		VIPTokenNew,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:GN84-ECO.WandererToken=100,
+		Time:120.0,
+	}
+
+
+	/*WANDERER TOKENS*/
+	
+	recipe Redeem Wanderer Token for Smokey Points
+	{
+		WandererToken,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
 		Result:Money,
 		Time:120.0,		
-		OnCreate:GivePlayerSmokeyPointsEventToken,
+		OnCreate:GivePlayerSmokeyPointsWandererToken,
 	}
 	
-	recipe Redeem Event Tokens for Wheel Spin Token
+	recipe Redeem Wanderer Tokens for Wheel Spin Token
 	{
-		EventToken=5,
+		WandererToken=30,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
 		Result:GN84-ECO.WheelSpinToken,
 		Time:120.0,
-	}
+	}	
 
-	recipe Redeem Event Tokens for Super Wheel Spin Token
+
+	/*UPDATE OLD TOKENS*/
+
+	recipe Update Legacy VIP Tokens to New Format
 	{
-		EventToken=25,
+		VIPToken=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-ECO.SuperWheelSpinToken,
+		Result:VIPTokenNew,
 		Time:120.0,
+	}
+
+	recipe Update Legacy Event Tokens to New Format
+	{
+		EventToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:WandererToken=2,
+		Time:30.0,
 	}
 
 }

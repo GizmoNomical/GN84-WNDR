@@ -17,8 +17,8 @@ local playerLuckBonus = SandboxVars.GN84ECO.PlayerLuckBonus or 1.2
 local playerUnluckyPenalty = SandboxVars.GN84ECO.PlayerUnluckyPenalty or 0.95
 local lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds or 3.25
 local rareTicketCashValue = SandboxVars.GN84ECO.RareTicketCashValue or 1          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue or 25000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-local EventTokenCashValue = SandboxVars.GN84ECO.EventTokenCashValue or 10000          -- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
+local VIPTokenCashValue = SandboxVars.GN84ECO.VIPTokenCashValue or 1000000          -- Value to trade in VIP Tokens for cash
+local WandererTokenCashValue = SandboxVars.GN84ECO.WandererTokenCashValue or 10000          -- Value to trade in Wanderer Tokens for cash
 --------------------------
 -- New Player Add Items
 --------------------------
@@ -73,8 +73,8 @@ function GivePlayerSmokeyPointsVIPToken()
 	sendClientCommand("GN84-ECO", "redeemVIPToken", {getPlayer():getUsername(), VIPTokenCashValue})
 end
 
-function GivePlayerSmokeyPointsEventToken()
-	sendClientCommand("GN84-ECO", "redeemEventToken", {getPlayer():getUsername(), EventTokenCashValue})
+function GivePlayerSmokeyPointsWandererToken()
+	sendClientCommand("GN84-ECO", "redeemWandererToken", {getPlayer():getUsername(), WandererTokenCashValue})
 end
 
 -- Add Smokey Points on Zombie Kill
@@ -239,6 +239,31 @@ end
 -- Scratch Lotto Tickets
 ----------------------------------------
 
+-- LIST OF BONUS PRIZES
+
+bonusPrizeRare = 
+{
+	[1] = "Base.Katana",
+}
+
+bonusPrizeHigh = 
+{
+	[1] = "Base.Crowbar",
+}
+
+bonusPrizeMed = 
+{	
+	[1] = "Base.Bleach",
+}
+
+bonusPrizeLow = 
+{
+	[1] = "Base.Lighter",
+	[2] = "Base.CandyPackage",
+}
+
+
+
 function CheckForWinner()
 
 -- Check for Luck
@@ -275,33 +300,36 @@ end
 function CalcLottoWinnings()
 
 	lottoTicketRoll = ZombRand(10000)+1;
+	lottoBonusPrizeRoll = ZombRand(100)+1;
+
+
 		--print ("Lotto Ticket Roll: ", lottoTicketRoll)
 		
 		if (lottoTicketRoll >= 9994)
 			then
 				lottoTicketWinnings = 50000
 
-		elseif (lottoTicketRoll >= 9953 and lottoTicketRoll <9994)
+		elseif (lottoTicketRoll >= 9953 and lottoTicketRoll < 9994)
 			then
 				lottoTicketWinnings = 25000
 
-		elseif (lottoTicketRoll >= 9851 and lottoTicketRoll <9953)
+		elseif (lottoTicketRoll >= 9851 and lottoTicketRoll < 9953)
 		then
 			lottoTicketWinnings = 10000		
 
-		elseif (lottoTicketRoll >= 9700 and lottoTicketRoll <9851)
+		elseif (lottoTicketRoll >= 9700 and lottoTicketRoll < 9851)
 		then
 			lottoTicketWinnings = 5000
 
-		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll <9700)
+		elseif (lottoTicketRoll >= 8290 and lottoTicketRoll < 9700)
 		then
 			lottoTicketWinnings = 2500
 
-		elseif (lottoTicketRoll >= 6034 and lottoTicketRoll <8290)
+		elseif (lottoTicketRoll >= 6034 and lottoTicketRoll < 8290)
 		then
 			lottoTicketWinnings = 1000
 		
-		elseif (lottoTicketRoll >= 3200 and lottoTicketRoll <6034)
+		elseif (lottoTicketRoll >= 3200 and lottoTicketRoll < 6034)
 		then
 			lottoTicketWinnings = 500
 
@@ -309,11 +337,33 @@ function CalcLottoWinnings()
 			lottoTicketWinnings = 250				
 		end
 
+
 		-- DEBUGGING
 		--print ("***Lottery Ticket Winnings -", lottoTicketWinnings, "***")
 		GivePlayerSmokeyPointsLottoTicket(lottoTicketWinnings)
 		winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
 		getPlayer():Say(winningText)
+
+
+		-- Roll for Bonus Prize	
+		
+		if lottoBonusPrizeRoll <= ((1 / lotteryTicketOdds) * 100) then
+			prizeCategory = ZombRand(10000)+1
+
+			if prizeCategory >= 9900 then
+					bonusPrize = bonusPrizeRare[ZombRand(1, #bonusPrizeRare)]
+			elseif (prizeCategory >= 8600 and prizeCategory < 9994) then
+					bonusPrize = bonusPrizeHigh[ZombRand(1, #bonusPrizeHigh)]
+			elseif (prizeCategory >= 5000 and prizeCategory < 8600) then
+					bonusPrize = bonusPrizeMed[ZombRand(1, #bonusPrizeMed)]
+			else
+					bonusPrize = bonusPrizeLow[ZombRand(1, #bonusPrizeLow)]
+			end
+			local bonusItem = ScriptManager.instance:getItem(bonusPrize):getName()
+			local bonusText = ("Bonus Prize!  You Won - " .. bonusItem)
+			getPlayer():getInventory():AddItem(bonusPrize)
+			getPlayer():Say(bonusText)
+		end
 	
 end
 
@@ -322,11 +372,11 @@ function ScratchLottoTicketStandard()
 
 		if CheckForWinner()
 			then
-				print("Ticket is a Winner!")
+				--print("Ticket is a Winner!")
 				CalcLottoWinnings()
 				PlayLottoWinnerSound()
 			else
-				print("Sorry, Ticket is Not a Winner..  Play again!")
+				--print("Sorry, Ticket is Not a Winner..  Play again!")
 				getPlayer():Say("Sorry, Ticket is Not a Winner..  Play Again!")
 				PlayLottoLoserSound()
 		end		
@@ -350,6 +400,27 @@ function TradeRareTicketForCashStack(items, result, player)
 			player:getInventory():AddItem("GN84-ECO.MoneyStack1000");
 			t = t+1
 		end
+end
+
+randomAmmoList =
+{
+	[1]  = "Base.Bullets9mmBox",
+	[2]  = "Base.ShotgunShellsBox",
+	[3]  = "Base.22Box",
+	[4]  = "Base.223Box",
+	[5]  = "GWP.357Box",
+	[6]  = "Base.Bullets38Box",
+	[7]  = "Base.Bullets44Box",
+	[8]  = "Base.Bullets45Box",
+	[9]  = "Base.545Box",
+	[10] = "Base.556Box",
+	[11] = "Base.762Box",
+	[12] = "Base.308Box",
+}
+
+function TradeRareTicketForRandomAmmo(items, result, player)
+	randNum = ZombRand(1, #randomAmmoList)
+	player:getInventory():AddItem(randomAmmoList[randNum]);
 end
 
 
@@ -397,7 +468,7 @@ end
 ----------------------------------------
 
 function GN84_AcceptItemCash(container, item)
-	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.MoneyStack1000000" or item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken" or item:getFullType() == "GN84-ECO.EventToken"or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit10" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit100" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit1000" or item:getFullType() == "GN84-ECO.AdditionalSafehousePermit" or item:getFullType() == "GN84-ECO.ResidentialPermitSmall" or item:getFullType() == "GN84-ECO.ResidentialPermitLarge" or item:getFullType() == "GN84-ECO.ResidentialPermitMansion" or item:getFullType() == "GN84-ECO.CommercialClaimPermit" or item:getFullType() == "GN84-ECO.FactionPermitSmall" or item:getFullType() == "GN84-ECO.FactionPermitLarge" or item:getFullType() == "GN84-ECO.FactionPermitMassive"
+	if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.MoneyStack1000000" or item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken" or item:getFullType() == "GN84-ECO.EventToken"or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit10" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit100" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit1000" or item:getFullType() == "GN84-ECO.AdditionalSafehousePermit" or item:getFullType() == "GN84-ECO.ResidentialPermitSmall" or item:getFullType() == "GN84-ECO.ResidentialPermitLarge" or item:getFullType() == "GN84-ECO.ResidentialPermitMansion" or item:getFullType() == "GN84-ECO.CommercialClaimPermit" or item:getFullType() == "GN84-ECO.FactionPermitSmall" or item:getFullType() == "GN84-ECO.FactionPermitLarge" or item:getFullType() == "GN84-ECO.FactionPermitMassive" or item:getFullType() == "Base.AVCSClaimOrb"
 	then
 		return true
 	end
@@ -470,7 +541,7 @@ function ShredderRecycleWatches(items, result, player)
 	
 	local t = 0;
 
-	print("Watch Value: ", watchesValueRoll)
+	--print("Watch Value: ", watchesValueRoll)
 
 	while(t ~= watchesValueRoll)
 		do
@@ -484,7 +555,7 @@ function ShredderRecycleJewelrySimple(items, result, player)
 	
 	local t = 0;
 
-	print("Jewelry Value: ", jewelryValueRoll)
+	--print("Jewelry Value: ", jewelryValueRoll)
 
 	while(t ~= jewelryValueRoll)
 		do
@@ -498,7 +569,7 @@ function ShredderRecycleJewelryPrecious(items, result, player)
 	
 	local t = 0;
 
-	print("Jewelry Value: ", jewelryValueRoll)
+	--print("Jewelry Value: ", jewelryValueRoll)
 
 	while(t ~= jewelryValueRoll)
 		do
@@ -512,7 +583,7 @@ function ShredderRecycleJewelryGemstones(items, result, player)
 	
 	local t = 0;
 
-	print("Jewelry Value: ", jewelryValueRoll)
+	--print("Jewelry Value: ", jewelryValueRoll)
 
 	while(t ~= jewelryValueRoll)
 		do
@@ -526,7 +597,7 @@ function ShredderRecycleJewelryDiamond(items, result, player)
 	
 	local t = 0;
 
-	print("Jewelry Value: ", jewelryValueRoll)
+	--print("Jewelry Value: ", jewelryValueRoll)
 
 	while(t ~= jewelryValueRoll)
 		do
@@ -543,7 +614,7 @@ function ShredderRecycleSimpleTool(items, result, player)
 	
 	local t = 0;
 
-	print("Tool Value: ", toolValueRoll)
+	--print("Tool Value: ", toolValueRoll)
 
 	while(t ~= toolValueRoll)
 		do
@@ -557,7 +628,7 @@ function ShredderRecycleLargeTool(items, result, player)
 	
 	local t = 0;
 
-	print("Tool Value: ", toolValueRoll)
+	--print("Tool Value: ", toolValueRoll)
 
 	while(t ~= toolValueRoll)
 		do
@@ -571,7 +642,7 @@ function ShredderRecycleComplexTool(items, result, player)
 	
 	local t = 0;
 
-	print("Tool Value: ", toolValueRoll)
+	--print("Tool Value: ", toolValueRoll)
 
 	while(t ~= toolValueRoll)
 		do
@@ -587,7 +658,7 @@ function ShredderRecycleLeather(items, result, player)
 	
 	local t = 0;
 
-	print("Leather Value: ", leatherValueRoll)
+	--print("Leather Value: ", leatherValueRoll)
 
 	while(t ~= leatherValueRoll)
 		do
@@ -601,7 +672,7 @@ function ShredderRecycleClothing(items, result, player)
 	
 	local t = 0;
 
-	print("Clothing Value: ", clothingValueRoll)
+	--print("Clothing Value: ", clothingValueRoll)
 
 	while(t ~= clothingValueRoll)
 		do
@@ -615,7 +686,7 @@ function ShredderRecycleBulletVest(items, result, player)
 	
 	local t = 0;
 
-	print("Vest Value: ", vestValueRoll)
+	--print("Vest Value: ", vestValueRoll)
 
 	while(t ~= vestValueRoll)
 		do
@@ -629,7 +700,7 @@ function ShredderRecycleGlasses(items, result, player)
 	
 	local t = 0;
 
-	print("Glasses Value: ", glassesValueRoll)
+	--print("Glasses Value: ", glassesValueRoll)
 
 	while(t ~= glassesValueRoll)
 		do
@@ -645,7 +716,7 @@ function ShredderRecyclePaperProduct(items, result, player)
 	
 	local t = 0;
 
-	print("Paper Value: ", paperValueRoll)
+	--print("Paper Value: ", paperValueRoll)
 
 	while(t ~= paperValueRoll)
 		do
@@ -661,7 +732,7 @@ function ShredderRecycleLowElectronics(items, result, player)
 	
 	local t = 0;
 
-	print("Electronic Value: ", electronicsValueRoll)
+	--print("Electronic Value: ", electronicsValueRoll)
 
 	while(t ~= electronicsValueRoll)
 		do
@@ -675,7 +746,7 @@ function ShredderRecycleHighElectronics(items, result, player)
 	
 	local t = 0;
 
-	print("Electronic Value: ", electronicsValueRoll)
+	--print("Electronic Value: ", electronicsValueRoll)
 
 	while(t ~= electronicsValueRoll)
 		do

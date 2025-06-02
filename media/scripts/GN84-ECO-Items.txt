@@ -302,23 +302,45 @@ module GN84-ECO
 
 	item VIPToken
 	{
+		DisplayName			=  Wanderers VIP Token (Deprecated),
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  VIPTokenOld,				
+		WorldStaticModel	=  VIPToken,
+		Tooltip 			=  Please contact an admin for redemption,
+	}
+
+	item VIPTokenNew
+	{
 		DisplayName			=  Wanderers VIP Token,
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  VIPToken,				
+		Icon				=  VIPTokenNew,				
 		WorldStaticModel	=  VIPToken,
 		Tooltip 			=  Thank you for Supporting The Wanderers!,
 	}
 
 	item EventToken
 	{
-		DisplayName			=  Wanderers Event Token,
+		DisplayName			=  Wanderers Event Token (Deprecated),
 		DisplayCategory		=  Junk,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  EventToken,				
 		WorldStaticModel	=  EventToken,
+		Tooltip 			=  Please contact an admin for redemption,
+	}
+
+	item WandererToken
+	{
+		DisplayName			=  Wanderer Token,
+		DisplayCategory		=  Junk,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 	

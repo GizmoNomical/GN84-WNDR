@@ -162,7 +162,7 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
  --REDEEM VIP TOKEN FOR POINTS
 function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
-    print("[WANDERERS VIP] ", args[1], " redeemed VIP Token for $", args[2], " Smokey Points!")
+    print("[WANDERERS TOKENS] ", args[1], " redeemed VIP Token for $", args[2], " Smokey Points!")
     print("###############")
      --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
@@ -170,9 +170,9 @@ function ServerPointsCommands.redeemVIPToken(module, command, player, args)
  end
 
  --REDEEM EVENT TOKEN FOR POINTS
-function ServerPointsCommands.redeemEventToken(module, command, player, args)
+function ServerPointsCommands.redeemWandererToken(module, command, player, args)
     print("#################")
-    print("[WANDERERS EVENT] ", args[1], " redeemed EVENT Token for $", args[2], " Smokey Points!")
+    print("[WANDERERS TOKENS] ", args[1], " redeemed WANDERER Token for $", args[2], " Smokey Points!")
     print("#################")
      --print(string.format("[SMOKEY POINTS] %s redeemed %d dollars for Smokey Points", player:getUsername(), args[1], args[2]))
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end

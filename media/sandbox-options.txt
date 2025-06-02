@@ -142,14 +142,14 @@ option GN84ECO.VIPTokenCashValue
 {
     type = integer,
     min = 0,
-    max = 1000000,
-    default = 25000,
+    max = 10000000,
+    default = 1000000,
 
     page = GN84ECO,
     translation = GN84ECO_VIPTokenCashValue,
 }
 
-option GN84ECO.EventTokenCashValue
+option GN84ECO.WandererTokenCashValue
 {
     type = integer,
     min = 0,
@@ -157,7 +157,7 @@ option GN84ECO.EventTokenCashValue
     default = 10000,
 
     page = GN84ECO,
-    translation = GN84ECO_EventTokenCashValue,
+    translation = GN84ECO_WandererTokenCashValue,
 }
 
 option GN84ECO.PlayerLuckBonus

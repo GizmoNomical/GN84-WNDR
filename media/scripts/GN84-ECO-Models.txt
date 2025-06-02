@@ -132,5 +132,12 @@ module GN84-ECO
 		scale = 1.35,
 	}
 
+	model WandererToken
+	{
+		mesh = worlditems/WandererToken,
+		texture = worlditems/WandererTokenModel,
+		scale = 1.35,
+	}
+
 }
 
