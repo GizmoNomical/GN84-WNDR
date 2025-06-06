@@ -159,6 +159,15 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
  end
 
+ -- BONUS PRIZE
+function ServerPointsCommands.redeemLottoTicketBonusPrize(module, command, player, args)
+    print("###############")
+    print("[ BONUS PRIZE ] ", args[1], " won a Bonus Prize - ", args[2])
+    print("###############")    
+ end
+
+
+
  --REDEEM VIP TOKEN FOR POINTS
 function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")

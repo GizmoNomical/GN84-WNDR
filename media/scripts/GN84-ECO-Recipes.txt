@@ -10,55 +10,19 @@ module GN84-ECO
 /* SEARCH WALLETS FOR MONEY */
 /* ------------------------ */
 
-
+		
 	recipe Search Wallet for Money
 	{
-		Wallet,
+		Wallet/Wallet2/Wallet3/Wallet4,
 		
 		InSameInventory:true,
-		Result:EmptyWallet1,
+		Result:Base.Money,
 		Time:40,			
 		AnimNode:Craft,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
+
 	}
-	
-	recipe Search Wallet for Money
-	{
-		Wallet2,
-		
-		InSameInventory:true,
-		Result:EmptyWallet2,
-		AnimNode:Craft,
-		Time:40,
-		Sound:SearchWallet,
-		OnCreate:CollectMoneyFromWallet,		
-	}
-	
-	recipe Search Wallet for Money
-	{
-		Wallet3,
-		
-		InSameInventory:true,
-		Result:EmptyWallet3,
-		AnimNode:Craft,
-		Time:40,
-		Sound:SearchWallet,
-		OnCreate:CollectMoneyFromWallet,
-	}
-	
-	recipe Search Wallet for Money
-	{
-		Wallet4,
-		
-		InSameInventory:true,
-		Result:EmptyWallet4,
-		AnimNode:Craft,
-		Time:40,
-		Sound:SearchWallet,
-		OnCreate:CollectMoneyFromWallet,
-	}
-		
 		
 /* CONVERT STACKS OF CASH */
 /* ---------------------- */
@@ -1038,7 +1002,7 @@ module GN84-ECO
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:WandererToken=2,
+		Result:WandererToken=3,
 		Time:30.0,
 	}
 

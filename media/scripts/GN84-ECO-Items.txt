@@ -15,13 +15,14 @@ module GN84-ECO
 		Capacity			 = 100,
 		Icon				 = MoneyClip,
 		OpenSound			 = MoneyClipShuffle,
-		AcceptItemFunction	 = GN84_AcceptItemCash,		
+		AcceptItemFunction	 = GN84_AcceptItemsMoneyClip,
+		Tooltip				 = Holds Cash - Tokens - and other Essential Items,
 	}
 
     item MoneyStack100
     {
         DisplayName          =  Stack of Cash - $100 - ,
-		DisplayCategory		 =  Junk,
+		DisplayCategory		 =  Money,
         Type                 =  Normal,
         Weight               =  0.001,
         Icon                 =  MoneyStack100,
@@ -32,7 +33,7 @@ module GN84-ECO
 	item MoneyStack1000
     {
         DisplayName          =  Stack of Cash - $1000 - ,
-		DisplayCategory		 =  Junk,
+		DisplayCategory		 =  Money,
         Type                 =  Normal,
         Weight               =  0.01,
         Icon                 =  MoneyStack1000,
@@ -43,7 +44,7 @@ module GN84-ECO
 	item MoneyStack10000
     {
         DisplayName          =  Stack of Cash - $10000 - ,
-		DisplayCategory		 =  Junk,
+		DisplayCategory		 =  Money,
         Type                 =  Normal,
         Weight               =  0.1,
         Icon                 =  MoneyStack10000,
@@ -54,7 +55,7 @@ module GN84-ECO
 	item MoneyStack100000
     {
         DisplayName          =  Stack of Cash - $100000 - ,
-		DisplayCategory		 =  Junk,
+		DisplayCategory		 =  Money,
         Type                 =  Normal,
         Weight               =  0.1,
         Icon                 =  MoneyStack10000,
@@ -65,7 +66,7 @@ module GN84-ECO
 	item MoneyStack1000000
     {
         DisplayName          =  Stack of Cash - $1000000 - ,
-		DisplayCategory		 =  Junk,
+		DisplayCategory		 =  Money,
         Type                 =  Normal,
         Weight               =  1.0,
         Icon                 =  MoneyStack10000,
@@ -116,121 +117,131 @@ module GN84-ECO
 	item SafehouseExpansionPermit10
 	{
 		DisplayName			=  Safehouse Expansion Permit - 10 Tiles,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  SafehouseExpansionPermit10,
 		WorldStaticModel	=  SafehouseExpansionPermit10,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
 	
 	}
 
 	item SafehouseExpansionPermit100
 	{
 		DisplayName			=  Safehouse Expansion Permit - 100 Tiles,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  SafehouseExpansionPermit100,
 		WorldStaticModel	=  SafehouseExpansionPermit100,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
 	
 	}
 
 	item SafehouseExpansionPermit1000
 	{
 		DisplayName			=  Safehouse Expansion Permit - 1000 Tiles,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  SafehouseExpansionPermit1000,
 		WorldStaticModel	=  SafehouseExpansionPermit1000,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
 	
 	}
 
 	item AdditionalSafehousePermit
 	{
-		DisplayName			=  Additional Safehouse Permit,
-		DisplayCategory		=  Junk,
+		DisplayName			=  Residential Real Estate License,
+		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  AdditionalSafehousePermit,
 		WorldStaticModel	=  AdditionalSafehousePermit,
-	
-	}
-
-	item ResidentialPermitSmall
-	{
-		DisplayName			=  Residential Claim Permit (Small House),
-		DisplayCategory		=  Junk,
-		Weight				=  0.1,
-		Type				=  Normal,
-		Icon				=  ResidentialClaimPermit,
-		WorldStaticModel	=  ResidentialClaimPermit,
-	
-	}
-
-	item ResidentialPermitLarge
-	{
-		DisplayName			=  Residential Claim Permit (Large House),
-		DisplayCategory		=  Junk,
-		Weight				=  0.1,
-		Type				=  Normal,
-		Icon				=  ResidentialClaimPermit,
-		WorldStaticModel	=  ResidentialClaimPermit,
-	
-	}
-
-	item ResidentialPermitMansion
-	{
-		DisplayName			=  Residential Claim Permit (Mansion),
-		DisplayCategory		=  Junk,
-		Weight				=  0.1,
-		Type				=  Normal,
-		Icon				=  ResidentialClaimPermit,
-		WorldStaticModel	=  ResidentialClaimPermit,
+		Tooltip				=  License to Own Multiple Properties,
 	
 	}
 
 	item CommercialClaimPermit
 	{
-		DisplayName			=  Commercial Claim Permit,
-		DisplayCategory		=  Junk,
+		DisplayName			=  Commercial Real Estate License,
+		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  CommercialClaimPermit,
 		WorldStaticModel	=  CommercialClaimPermit,
+		Tooltip				=  License to Own Commercial Properties,
+	
+	}
+
+	item ResidentialPermitSmall
+	{
+		DisplayName			=  Property Claim Permit (Small House),
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+		Tooltip				=  Required to claim a Small House,
+	}
+
+	item ResidentialPermitLarge
+	{
+		DisplayName			=  Property Claim Permit (Large House),
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+		Tooltip				=  Required to claim a Large House,
+	
+	}
+
+	item ResidentialPermitMansion
+	{
+		DisplayName			=  Property Claim Permit (Mansion),
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  ResidentialClaimPermit,
+		WorldStaticModel	=  ResidentialClaimPermit,
+		Tooltip				=  Required to claim a Mansion,
 	
 	}
 
 	item FactionPermitSmall
 	{
-		DisplayName			=  Faction Claim Permit (Small Bunker),
-		DisplayCategory		=  Junk,
+		DisplayName			=  Property Claim Permit (Small Bunker),
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  FactionBunkerClaimPermit,
 		WorldStaticModel	=  FactionBunkerClaimPermit,
+		Tooltip				=  Required to claim a Small Bunker,
 	
 	}
 
 	item FactionPermitLarge
 	{
-		DisplayName			=  Faction Claim Permit (Large Bunker),
-		DisplayCategory		=  Junk,
+		DisplayName			=  Property Claim Permit (Large Bunker),
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  FactionBunkerClaimPermit,
 		WorldStaticModel	=  FactionBunkerClaimPermit,
+		Tooltip				=  Required to claim a Large Bunker,
 	
 	}
 
 	item FactionPermitMassive
 	{
-		DisplayName			=  Faction Claim Permit (Massive Bunker),
-		DisplayCategory		=  Junk,
+		DisplayName			=  Property Claim Permit (Massive Bunker),
+		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  FactionBunkerClaimPermit,
 		WorldStaticModel	=  FactionBunkerClaimPermit,
+		Tooltip				=  Required to claim a Massive Bunker,
 	
 	}
 
@@ -242,13 +253,14 @@ module GN84-ECO
 		Type				=  Normal,
 		Icon				=  SmokeyShredderRecycler,
 		WorldStaticModel	=  SmokeyShredderRecycler,
+		Tooltip				=  Recycle Items for Cash!
 
 	}
 
 	item LottoTicketStandard
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Scratch to Win,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Lotto,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  LottoStandard,		
@@ -259,7 +271,7 @@ module GN84-ECO
 	item LottoTicketRare
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Rare Prize,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Lotto,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  LottoRare,				
@@ -270,7 +282,7 @@ module GN84-ECO
 	item LottoTicketGolden
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Golden Jackpot,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Lotto,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  LottoGolden,				
@@ -281,7 +293,7 @@ module GN84-ECO
 	item WheelSpinToken
 	{
 		DisplayName			=  Wanderers Lotto - Wheel Spin Token,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  WheelSpinToken,				
@@ -292,7 +304,7 @@ module GN84-ECO
 	item SuperWheelSpinToken
 	{
 		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  WheelSpinToken,				
@@ -303,7 +315,7 @@ module GN84-ECO
 	item VIPToken
 	{
 		DisplayName			=  Wanderers VIP Token (Deprecated),
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  VIPTokenOld,				
@@ -314,7 +326,7 @@ module GN84-ECO
 	item VIPTokenNew
 	{
 		DisplayName			=  Wanderers VIP Token,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  VIPTokenNew,				
@@ -325,7 +337,7 @@ module GN84-ECO
 	item EventToken
 	{
 		DisplayName			=  Wanderers Event Token (Deprecated),
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  EventToken,				
@@ -336,7 +348,7 @@ module GN84-ECO
 	item WandererToken
 	{
 		DisplayName			=  Wanderer Token,
-		DisplayCategory		=  Junk,
+		DisplayCategory		=  Token,
 		Weight				=  0.1,
 		Type				=  Normal,
 		Icon				=  WandererToken,				

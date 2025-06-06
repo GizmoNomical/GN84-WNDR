@@ -1,0 +1,7 @@
+IGUI_EN = {
+    IGUI_ItemCat_Money = "Money",
+    IGUI_ItemCat_Permit = "Permit",
+    IGUI_ItemCat_License = "License",
+    IGUI_ItemCat_Token = "Token",
+    IGUI_ItemCat_Lotto = "Lotto",
+}
