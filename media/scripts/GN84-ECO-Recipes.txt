@@ -918,20 +918,19 @@ module GN84-ECO
 
 
 
-
 	/*VIP TOKENS*/
 
-	recipe Redeem VIP Token for Smokey Points
-	{
-		VIPTokenNew,
+	// recipe Redeem VIP Token for Smokey Points
+	// {
+	// 	VIPTokenNew,
 
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:Money,
-		Time:120.0,		
-		OnCreate:GivePlayerSmokeyPointsVIPToken,
-	}	
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:Money,
+	// 	Time:120.0,		
+	// 	OnCreate:GivePlayerSmokeyPointsVIPToken,
+	// }	
 
 	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
@@ -951,7 +950,7 @@ module GN84-ECO
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-ECO.WandererToken=100,
+		Result:GN84-ECO.WandererToken=50,
 		Time:120.0,
 	}
 
@@ -972,7 +971,7 @@ module GN84-ECO
 	
 	recipe Redeem Wanderer Tokens for Wheel Spin Token
 	{
-		WandererToken=30,
+		WandererToken=15,
 
 		InSameInventory:true,
 		AnimNode:Craft,

@@ -230,23 +230,98 @@ end
 
 local bonusPrizeRare = 
 {
-	[1] = "Base.Katana",
+	"Base.Katana",	
+	"GN84-ECO.SuperWheelSpinToken",
+	"TWeapons.LongSword",
+	"GN84-HI.CrystalBall",
+	"DynamicBackpacks.UpgradeCapacityMilitary",
+	"DynamicBackpacks.UpgradeWeightReductionMilitary",
+	"GN84-ECO.WheelSpinToken",
 }
 
 local bonusPrizeHigh = 
 {
-	[1] = "Base.Crowbar",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.LottoTicketRare",
+	"Base.Bullets9mmBox",
+	"Base.ShotgunShellsBox",
+	"Base.22Box",
+	"Base.223Box",
+	"GWP.357Box",
+	"Base.Bullets38Box",
+	"Base.Bullets44Box",
+	"Base.Bullets45Box",
+	"Base.545Box",
+	"Base.556Box",
+	"Base.762Box",
+	"Base.308Box",
+	"MoreMedical.SyretteAdrenalin",
+	"MoreMedical.SyretteHighGradePainkillers",
+	"MoreMedical.BurnTreatment",
+	"MoreMedical.PowderPackHemostatic",
+	"TAD.CloseKosmotsars",	
 }
 
 local bonusPrizeMed = 
 {	
-	[1] = "Base.Bleach",
+	"DS77.DiabloSandwich",
+	"GN84-ECO.LottoTicketStandard",
+	"Greenfire.OzCannabis",
+	"Greenfire.PipeTobaccoBag",
+	"Greenfire.CannabisSeed",
+	"Greenfire.Hashish",
+	"Greenfire.GFCigarettes",
+	"Greenfire.GFMystery1",
+	"Greenfire.GFSuspect1",
+	"9301.SealedCassette9301",		
+	"FixAFlat.FixAFlat",
+	"MoreMedical.Tourniquet",
+	"vacsdrinksaddon.VacsDrinks_Can_5HourEnergyDrink",
+	"PompsItems.PIFireball",
 }
 
 local bonusPrizeLow = 
 {
-	[1] = "Base.Lighter",
-	[2] = "Base.CandyPackage",
+	"Base.Lighter",
+	"Greenfire.Blunt",
+	"Greenfire.GFCigar",
+	"Greenfire.DelCannaCigar",
+	"Greenfire.Joint",
+	"Greenfire.RollingPapers",
+	"Base.Battery",
+	"MoreBrews.BeerCanAmericanLager",
+	"MoreBrews.BeerCanAPA1",
+	"MoreBrews.BeerCanIPA2",
+	"MoreBrews.BeerCanAPA2",
+	"MoreBrews.BeerCanIPA1",
+	"MoreBrews.BeerCanLightLager",
+	"MoreBrews.BeerCanPilsner",
+	"MoreBrews.BeerCanPorter",
+	"MoreBrews.BeerCanSkunked",
+	"MoreBrews.BeerCanStout",
+	"MoreMedical.SealedBandage",
+	"farming.Bacon",
+	"PompsItems.PIPowderDonutBag",
+	"PompsItems.PIChocDonutBag",
+	"PompsItems.BittersBar",
+	"PompsItems.PIPopTartSWBox",
+	"PompsItems.PISpam",
+	"PompsItems.PICannedRavioli",
+	"PompsItems.PICheeseStickDip",
+	"PompsItems.Dabs",
+	"PompsItems.COreoPackage",
+	"PompsItems.GooberBar",
+	"PompsItems.Pomps",
+	"farming.Potato",
+	"Ramen.RamenChickenPack",
+	"vacsdrinks.VacsDrinks_Can_CocaCola",
+	"vacsdrinks.VacsDrinks_Can_DrPepper",
+	"vacsdrinks.VacsDrinks_Can_Fanta",
+	"vacsdrinks.VacsDrinks_Can_MountainDew",
+	"vacsdrinks.VacsDrinks_Can_MugRootBeer",
+	"vacsdrinks.VacsDrinks_Can_Pepsi",
+	"vacsdrinks.VacsDrinks_Can_Sprite",
 }
 
 
@@ -273,8 +348,8 @@ end
 
 function CalcLottoWinnings()
 
-	lottoTicketRoll = ZombRand(10000)+1
-	lottoBonusPrizeRoll = ZombRand(100)+1
+	local lottoTicketRoll = ZombRand(10000)+1
+	local lottoBonusPrizeRoll = ZombRand(100)+1
 
 
 	if (lottoTicketRoll >= 9994) then
@@ -303,18 +378,19 @@ function CalcLottoWinnings()
 	end
 		
 	GivePlayerSmokeyPointsLottoTicket(lottoTicketWinnings)
-	winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
+	local winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
 	getPlayer():Say(winningText)
 
 	-- Roll for Bonus Prize	
 	
 	if lottoBonusPrizeRoll <= ((1 / lotteryTicketOdds) * 100) then
-		prizeCategory = ZombRand(10000)+1
+		local prizeCategory = ZombRand(10000)+1
+		local bonusPrize = nil
 
-		if prizeCategory >= 9900 then
+		if prizeCategory >= 9933 then
 			bonusPrize = bonusPrizeRare[ZombRand(1, #bonusPrizeRare)]
 
-		elseif (prizeCategory >= 8600 and prizeCategory < 9994) then
+		elseif (prizeCategory >= 8600 and prizeCategory < 9933) then
 			bonusPrize = bonusPrizeHigh[ZombRand(1, #bonusPrizeHigh)]
 
 		elseif (prizeCategory >= 5000 and prizeCategory < 8600) then
@@ -333,6 +409,8 @@ function CalcLottoWinnings()
 		getPlayer():getInventory():AddItem(bonusPrize)
 		getPlayer():Say(bonusText)
 	end	
+
+	
 end
 
 
@@ -381,7 +459,7 @@ local randomAmmoList =
 }
 
 function TradeRareTicketForRandomAmmo(items, result, player)
-	randNum = ZombRand(1, #randomAmmoList)
+	local randNum = ZombRand(1, #randomAmmoList)
 	player:getInventory():AddItem(randomAmmoList[randNum])
 end
 
@@ -464,19 +542,7 @@ function GN84_AcceptItemsMoneyClip(container, item)
 			return true
 		end
 	end
-
-	-- if item:getFullType() == "Base.Money" or item:getFullType() == "GN84-ECO.MoneyStack100" or item:getFullType() == "GN84-ECO.MoneyStack1000" or 
-	-- item:getFullType() == "GN84-ECO.MoneyStack10000" or item:getFullType() == "GN84-ECO.MoneyStack100000" or item:getFullType() == "GN84-ECO.MoneyStack1000000" or 
-	-- item:getFullType() == "GN84-ECO.LottoTicketStandard" or item:getFullType() == "GN84-ECO.LottoTicketRare" or item:getFullType() == "GN84-ECO.LottoTicketGolden" or 
-	-- item:getFullType() == "GN84-ECO.WheelSpinToken" or item:getFullType() == "GN84-ECO.SuperWheelSpinToken" or item:getFullType() == "GN84-ECO.VIPToken" or 
-	-- item:getFullType() == "GN84-ECO.EventToken" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit10" or item:getFullType() == "GN84-ECO.SafehouseExpansionPermit100" or 
-	-- item:getFullType() == "GN84-ECO.SafehouseExpansionPermit1000" or item:getFullType() == "GN84-ECO.AdditionalSafehousePermit" or 
-	-- item:getFullType() == "GN84-ECO.ResidentialPermitSmall" or item:getFullType() == "GN84-ECO.ResidentialPermitLarge" or item:getFullType() == "GN84-ECO.ResidentialPermitMansion" or 
-	-- item:getFullType() == "GN84-ECO.CommercialClaimPermit" or item:getFullType() == "GN84-ECO.FactionPermitSmall" or item:getFullType() == "GN84-ECO.FactionPermitLarge" or 
-	-- item:getFullType() == "GN84-ECO.FactionPermitMassive" or item:getFullType() == "Base.AVCSClaimOrb"
-	-- then
-	-- 	return true
-	-- end
+	
 end
 
 
@@ -1268,9 +1334,8 @@ function debuggingKey(_keyPressed)
 	if getAccessLevel() == "admin" then
 		-- print (tostring(key))
 		if key == 71
-			then		
-				--ValidateSafehouseClaim()
-				--CheckSafehouseSizeDebug()
+			then
+				
 			end	
 	end
 end

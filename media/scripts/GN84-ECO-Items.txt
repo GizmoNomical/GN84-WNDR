@@ -152,7 +152,7 @@ module GN84-ECO
 
 	item AdditionalSafehousePermit
 	{
-		DisplayName			=  Residential Real Estate License,
+		DisplayName			=  Real Estate License - Residential,
 		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -164,7 +164,7 @@ module GN84-ECO
 
 	item CommercialClaimPermit
 	{
-		DisplayName			=  Commercial Real Estate License,
+		DisplayName			=  Real Estate License - Commercial,
 		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
