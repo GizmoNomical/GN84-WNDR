@@ -261,7 +261,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Scratch to Win,
 		DisplayCategory		=  Lotto,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  LottoStandard,		
 		WorldStaticModel	=  LottoTicketStandard,
@@ -272,7 +272,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Rare Prize,
 		DisplayCategory		=  Lotto,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  LottoRare,				
 		WorldStaticModel	=  LottoTicketRare,
@@ -283,7 +283,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Golden Jackpot,
 		DisplayCategory		=  Lotto,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  LottoGolden,				
 		WorldStaticModel	=  LottoTicketGolden,
@@ -294,7 +294,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Lotto - Wheel Spin Token,
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  WheelSpinToken,				
 		WorldStaticModel	=  LottoWheelSpinToken,
@@ -305,7 +305,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token,
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  WheelSpinToken,				
 		WorldStaticModel	=  LottoSuperWheelSpinToken,
@@ -316,7 +316,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers VIP Token (Deprecated),
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  VIPTokenOld,				
 		WorldStaticModel	=  VIPToken,
@@ -327,7 +327,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers VIP Token,
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  VIPTokenNew,				
 		WorldStaticModel	=  VIPToken,
@@ -338,7 +338,7 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderers Event Token (Deprecated),
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  EventToken,				
 		WorldStaticModel	=  EventToken,
@@ -349,11 +349,22 @@ module GN84-ECO
 	{
 		DisplayName			=  Wanderer Token,
 		DisplayCategory		=  Token,
-		Weight				=  0.1,
+		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  WandererToken,				
 		WorldStaticModel	=  WandererToken,
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WanderersRaffleTicket
+	{
+		DisplayName			=  Wanderers Raffle Ticket,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WanderersRaffleTicket,				
+		WorldStaticModel	=  WanderersRaffleTicket,
+		Tooltip 			=  Thanks for Playing!,
 	}
 	
 }

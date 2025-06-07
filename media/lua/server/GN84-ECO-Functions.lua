@@ -120,10 +120,12 @@ Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
 	
 function searchEFunds()
 
-	if getPlayer():HasTrait("Lucky") then		
+	local player = getPlayer()
+
+	if player:HasTrait("Lucky") then		
 		eFundOdds = SandboxVars.GN84ECO.EFundOdds + 5
 
-	elseif getPlayer():HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then		
 		eFundOdds = SandboxVars.GN84ECO.EFundOdds - 5
 
 	else		
@@ -132,7 +134,11 @@ function searchEFunds()
 
 	if (eFunds <= eFundOdds) then
 			eFundBill = ZombRand(100)+1			
-			
+		
+		if (eFundBill >= 75) then
+			player:getInventory():AddItem("GN84-ECO.WandererToken")
+		end
+
 		if (eFundBill >= 98) then
 				eFundCash = 200
 
@@ -232,17 +238,48 @@ local bonusPrizeRare =
 {
 	"Base.Katana",	
 	"GN84-ECO.SuperWheelSpinToken",
+	"GN84-ECO.WheelSpinToken",
 	"TWeapons.LongSword",
 	"GN84-HI.CrystalBall",
 	"DynamicBackpacks.UpgradeCapacityMilitary",
 	"DynamicBackpacks.UpgradeWeightReductionMilitary",
 	"GN84-ECO.WheelSpinToken",
+	"ToolsOfTheTrade.SpiffArmyKnife",
+	"ToolsOfTheTrade.UtensilTool",
+	"TWeapons.TacticalMachete",
+	"ToolsOfTheTrade.WarHammer",
+	"ToolsOfTheTrade.ExecutionersSword",
+	"ToolsOfTheTradeKnickKnacks.Mjolnir",
+	"Base.Sledgehammer",
+	"GWP.ColtPython357",
+	"GWP.Glock21",
+	"GWP.R870Police",
+	"GWP.VikingAxe",
+	"Base.Pistol3",
+	"Base.DoubleBarrelShotgun",
+	"Base.MAC10Unfolded",
+	"Base.Shotgun",
+	"Base.Makarov",
+	"Base.SKS",
 }
 
 local bonusPrizeHigh = 
 {
 	"GN84-ECO.WandererToken",
 	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
 	"GN84-ECO.LottoTicketRare",
 	"Base.Bullets9mmBox",
 	"Base.ShotgunShellsBox",
@@ -258,13 +295,56 @@ local bonusPrizeHigh =
 	"Base.308Box",
 	"MoreMedical.SyretteAdrenalin",
 	"MoreMedical.SyretteHighGradePainkillers",
+	"MoreMedical.SyrettePrescriptionAntibiotic",
 	"MoreMedical.BurnTreatment",
 	"MoreMedical.PowderPackHemostatic",
 	"TAD.CloseKosmotsars",	
+	"newcontainersnc.NCroughbox",
+	"TheyKnew.Zomboxivir",
+	"TheyKnew.Zomboxycycline",
+	"ScottsJumperCables.JumperCables",
+	"DynamicBackpacks.UpgradeCapacityLeather",
+	"DynamicBackpacks.UpgradeWeightReductionLeather",
+	"NalMac.CassettePack",
+	"NalMac.DancePack",
+	"NalMac.VinylPack",
+	"ToolsOfTheTrade.CombatKnife",
+	"Base.Aerosolbomb",
+	"Base.BoxOfBittersBars",
+	"Base.BoxOfPomps",
+	"Base.BoxOfHottieZ",
+	"Base.BoxOfCanChili",
+	"Base.ChipsBox",
+	"Base.Bag_DuffelBag",
+	"Base.FireKlean",
+	"Base.FirearmLubricant",
+	"Base.SwatFragGrenade",
+	"Base.PetrolCan",
+	"Base.GunPowder",
+	"Base.Bag_ALICEpack",
+	"Base.PipeBomb",
+	"Base.PonchoYellow",
+	"Base.SmokeBomb",
+	"Base.BaseballBatNails",
 }
 
 local bonusPrizeMed = 
 {	
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
+	"GN84-ECO.LottoTicketRare",
 	"DS77.DiabloSandwich",
 	"GN84-ECO.LottoTicketStandard",
 	"Greenfire.OzCannabis",
@@ -274,16 +354,58 @@ local bonusPrizeMed =
 	"Greenfire.GFCigarettes",
 	"Greenfire.GFMystery1",
 	"Greenfire.GFSuspect1",
-	"9301.SealedCassette9301",		
+	"9301.SealedCassette9301",
+	"LFM.SealedCassette",
 	"FixAFlat.FixAFlat",
 	"MoreMedical.Tourniquet",
 	"vacsdrinksaddon.VacsDrinks_Can_5HourEnergyDrink",
 	"PompsItems.PIFireball",
+	"ToolsOfTheTrade.ArmyCanOpener",
+	"ToolsOfTheTrade.BandageScissors",
+	"CanteensAndBottles.FlaskBourbon",
+	"CanteensAndBottles.FlaskPetrol",
+	"Computer.Disc_Game",
+	"DynamicBackpacks.UpgradeCapacityJean",
+	"DynamicBackpacks.UpgradeWeightReductionJean",
+	"DynamicBackpacks.UpgradeCapacityCloth",
+	"DynamicBackpacks.UpgradeWeightReductionCloth",
+	"GMH.BlackSageseed",
+	"GMH.Comfreyseed",
+	"GMH.CommonMallowseed",
+	"GMH.Ginsengseed",
+	"GMH.LemonGrassseed",
+	"GMH.Plantainseed",
+	"GMH.WildGarlicseed",
+	"Base.Pop2CanPack",
+	"Base.Baloney",
+	"Base.Book",
+	"Base.NailsBox",
+	"Base.ScrewsBox",
+	"Base.PaperclipBox",
+	"Base.PKCyanidePill",
+	"Base.DuctTape",	
+	"Base.Bag_FannyPackFront",
+	"Base.Glue",
+	"Base.HandAxe",
+	"Base.HandTorch",
+	"Base.AlcoholRippedSheets",
 }
 
 local bonusPrizeLow = 
 {
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.WandererToken",
+	"GN84-ECO.LottoTicketRare",
 	"Base.Lighter",
+	"Base.Matches",
 	"Greenfire.Blunt",
 	"Greenfire.GFCigar",
 	"Greenfire.DelCannaCigar",
@@ -302,6 +424,7 @@ local bonusPrizeLow =
 	"MoreBrews.BeerCanStout",
 	"MoreMedical.SealedBandage",
 	"farming.Bacon",
+	"farming.Potato",
 	"PompsItems.PIPowderDonutBag",
 	"PompsItems.PIChocDonutBag",
 	"PompsItems.BittersBar",
@@ -315,6 +438,12 @@ local bonusPrizeLow =
 	"PompsItems.Pomps",
 	"farming.Potato",
 	"Ramen.RamenChickenPack",
+	"Ramen.RamenBeefPack",
+	"Ramen.RamenCheesePack",
+	"Ramen.RamenChiliPack",
+	"Ramen.RamenOrientalPack",
+	"Ramen.RamenPorkPack",
+	"Ramen.RamenShrimpPack",
 	"vacsdrinks.VacsDrinks_Can_CocaCola",
 	"vacsdrinks.VacsDrinks_Can_DrPepper",
 	"vacsdrinks.VacsDrinks_Can_Fanta",
@@ -322,6 +451,25 @@ local bonusPrizeLow =
 	"vacsdrinks.VacsDrinks_Can_MugRootBeer",
 	"vacsdrinks.VacsDrinks_Can_Pepsi",
 	"vacsdrinks.VacsDrinks_Can_Sprite",
+	"vacsdrinksaddon.VacsDrinks_Can_Nos",
+	"vacsdrinksaddon.VacsDrinks_Can_Redbull",
+	"vacsdrinksaddon.VacsDrinks_Can_Rockstar",
+	"Base.Butter",
+	"Base.CandyCorn",
+	"Base.CandyPackage",
+	"Base.TinnedBeans",
+	"Base.CannedBolognese",
+	"Base.Carrots",
+	"Base.Crisps3",
+	"Base.Crisps",
+	"Base.Crisps2",
+	"Base.Crisps4",
+	"Base.Egg",
+	"Base.Log",
+	"Base.Pretzel",
+	"Base.RippedSheets",
+	"Base.TVDinner",
+	"Base.Taco",
 }
 
 
@@ -387,13 +535,13 @@ function CalcLottoWinnings()
 		local prizeCategory = ZombRand(10000)+1
 		local bonusPrize = nil
 
-		if prizeCategory >= 9933 then
+		if prizeCategory >= 9900 then
 			bonusPrize = bonusPrizeRare[ZombRand(1, #bonusPrizeRare)]
 
-		elseif (prizeCategory >= 8600 and prizeCategory < 9933) then
+		elseif (prizeCategory >= 8500 and prizeCategory < 9900) then
 			bonusPrize = bonusPrizeHigh[ZombRand(1, #bonusPrizeHigh)]
 
-		elseif (prizeCategory >= 5000 and prizeCategory < 8600) then
+		elseif (prizeCategory >= 5000 and prizeCategory < 8500) then
 			bonusPrize = bonusPrizeMed[ZombRand(1, #bonusPrizeMed)]
 
 		else
@@ -1208,10 +1356,10 @@ local function DisplayRequiredClaimPermit(squareFootage, residentialBuilding)
 			    return
             end
 
-            if getAccessLevel() == "admin" then
+            --if getAccessLevel() == "admin" then
                 --getPlayer():Say("Safehouse Single Floor Square Footage: " .. (buildingHeight * buildingWidth * 9))
                 getPlayer():Say("Safehouse Square Footage: " .. (squareFootage))
-            end   
+            --end   
 
             if residentialBuilding then
                 -- SMALL RESIDENTIAL CLAIM
@@ -1327,6 +1475,8 @@ function Recipe.OnTest.IsNotFavorited(item, result)
 end
 
 
+
+
 --  HOTKEY FOR DEBUGGING
 
 function debuggingKey(_keyPressed)
@@ -1340,4 +1490,6 @@ function debuggingKey(_keyPressed)
 	end
 end
 
-Events.OnKeyPressed.Add(debuggingKey);
+Events.OnKeyPressed.Add(debuggingKey)
+
+

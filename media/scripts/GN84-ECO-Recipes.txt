@@ -544,8 +544,6 @@ module GN84-ECO
 
 
 
-
-
 	/*LOTTO AND TOKENS*/
 
 	recipe Scratch Lotto Ticket to Win

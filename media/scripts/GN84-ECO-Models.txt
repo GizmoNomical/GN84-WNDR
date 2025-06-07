@@ -139,5 +139,14 @@ module GN84-ECO
 		scale = 1.35,
 	}
 
+	model WanderersRaffleTicket
+	{
+		mesh = worlditems/WanderersRaffleTicket,
+		texture = worlditems/WanderersRaffleTicket,
+		scale = 0.333,
+	}
+
+
+
 }
 
