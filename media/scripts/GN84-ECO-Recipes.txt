@@ -955,6 +955,140 @@ module GN84-ECO
 
 	/*WANDERER TOKENS*/
 	
+	
+	recipe Make 50 Stack of Wanderer Tokens
+	{
+		WandererToken=50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack50,
+		Time:120.0,
+	}
+
+	recipe Make 100 Stack of Wanderer Tokens
+	{
+		WandererToken=100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack100,
+		Time:120.0,
+	}
+
+	recipe Make 100 Stack of Wanderer Tokens
+	{
+		WandererTokenStack50=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack100,
+		Time:120.0,
+	}	
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererTokenStack100=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererToken=500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack100=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}	
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack500=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererToken=1000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererToken=50,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack50=2,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack100=5,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack1000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack500=2,
+		Time:120.0,
+	}
+
+
 	recipe Redeem Wanderer Token for Smokey Points
 	{
 		WandererToken,

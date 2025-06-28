@@ -683,6 +683,12 @@ function GN84_AcceptItemsMoneyClip(container, item)
 		[25] = "GN84-ECO.FactionPermitLarge",
 		[26] = "GN84-ECO.FactionPermitMassive",
 		[27] = "Base.AVCSClaimOrb",
+		[28] = "GN84-ECO.WandererTokenStack50",
+		[29] = "GN84-ECO.WandererTokenStack100",
+		[30] = "GN84-ECO.WandererTokenStack500",
+		[31] = "GN84-ECO.WandererTokenStack1000",
+		[32] = "TheyKnew.Zomboxivir",
+		[33] = "TheyKnew.Zomboxycycline",
 	}
 
 	for i, v in ipairs(moneyClipItems) do

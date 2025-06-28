@@ -366,5 +366,48 @@ module GN84-ECO
 		WorldStaticModel	=  WanderersRaffleTicket,
 		Tooltip 			=  Thanks for Playing!,
 	}
+
+	item WandererTokenStack50
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 50,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WandererTokenStack100
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 100,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
 	
+	item WandererTokenStack500
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 500,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+	
+	item WandererTokenStack1000
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 1000,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
 }
