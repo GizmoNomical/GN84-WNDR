@@ -308,7 +308,8 @@ module GN84-ECO
    	{
    		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
    		keep Scissors,
-   		Result:LeatherStrips=1,
+   		Result:LeatherStrips,
+		RemoveResultItem:true,
    		Time:60.0,
 		AnimNode:Craft,
 		OnCreate:CutLeatherWallet,

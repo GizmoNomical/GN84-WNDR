@@ -629,21 +629,23 @@ end
 
 local leatherRoll
 local extraLeatherOdds = 90
-local maxExtraLeather = 1
+local maxExtraLeather = 3
 local extraLeatherStrips
 
 function CutLeatherWallet(items, result, player)
 	leatherRoll = ZombRand(100)+1  -- Extra Leather Roll
+	--print("Extra Leather Roll?:  "  ..  leatherRoll)
 	extraLeatherStrips = 0
 	
 	if (leatherRoll >= extraLeatherOdds) then			
-		extraLeatherStrips = ZombRand(maxExtraLeather)
+		extraLeatherStrips = ZombRand(0, maxExtraLeather)
+		--print("Extra Leather: " .. extraLeatherStrips)
 	end
 		
 	local t = 0
 
 	while t ~= extraLeatherStrips do
-		player:getInventory():AddItem("LeatherStrips")
+		player:getInventory():AddItem("Base.LeatherStrips")
 		t = t+1
 	end
 end
@@ -689,6 +691,7 @@ function GN84_AcceptItemsMoneyClip(container, item)
 		[31] = "GN84-ECO.WandererTokenStack1000",
 		[32] = "TheyKnew.Zomboxivir",
 		[33] = "TheyKnew.Zomboxycycline",
+		[34] = "GN84-ECO.WanderersRaffleTicket",
 	}
 
 	for i, v in ipairs(moneyClipItems) do
