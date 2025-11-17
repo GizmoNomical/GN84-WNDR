@@ -7,12 +7,12 @@ require "ISUI/ISContextMenu"
 --------------------------
 
 local pointsPerZombieKill 		= SandboxVars.GN84ECO.PointsPerZombieKill 		or 18 				-- 6   - Smokey Points per Zombie Kill
-local eFundOdds 				= SandboxVars.GN84ECO.EFundOdds					or 10          		-- 10  - Must roll <= to this number to get eFunds
+local bonusCashOdds				= SandboxVars.GN84ECO.EFundOdds					or 10          		-- 10  - Must roll <= to this number to get eFundsRoll
 local walletCashMultiplier 		= SandboxVars.GN84ECO.WalletCashMultiplier 		or 1.0				-- 1.0 -   Adjust total Wallet Cash
 local eFundCashMultiplier 		= SandboxVars.GN84ECO.EFundCashMultiplier		or 1.0				-- 1.0 - Adjust total eFund Cash
-local wealthyCash 				= SandboxVars.GN84ECO.WealthyCash				or 50				-- 20 - Max cash found in Wealthy Zombie Wallet
-local averageCash 				= SandboxVars.GN84ECO.AverageCash				or 15				-- 10 - Max cash found in Average Zombie Wallet
-local poorCash 					= SandboxVars.GN84ECO.PoorCash 					or 5				-- 5  - Max cash found in Poor Zombie Wallet
+local wealthyCashAmount 		= SandboxVars.GN84ECO.WealthyCash				or 50				-- 20 - Max cash found in Wealthy Zombie Wallet
+local averageCashAmount 		= SandboxVars.GN84ECO.AverageCash				or 15				-- 10 - Max cash found in Average Zombie Wallet
+local poorCashAmount 			= SandboxVars.GN84ECO.PoorCash 					or 5				-- 5  - Max cash found in Poor Zombie Wallet
 local playerLuckBonus 			= SandboxVars.GN84ECO.PlayerLuckBonus 			or 1.2
 local playerUnluckyPenalty 		= SandboxVars.GN84ECO.PlayerUnluckyPenalty 		or 0.95
 local lotteryTicketOdds 		= SandboxVars.GN84ECO.LotteryTicketOdds 		or 3.25
@@ -48,20 +48,44 @@ function GivePlayerSmokeyPoints100()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 100})
 end
 
+function GivePlayerSmokeyPoints500()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 500})
+end
+
 function GivePlayerSmokeyPoints1000()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 1000})
+end
+
+function GivePlayerSmokeyPoints5000()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 5000})
 end
 
 function GivePlayerSmokeyPoints10000()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 10000})
 end
 
+function GivePlayerSmokeyPoints50000()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 50000})
+end
+
 function GivePlayerSmokeyPoints100000()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 100000})
 end
 
+function GivePlayerSmokeyPoints500000()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 500000})
+end
+
 function GivePlayerSmokeyPoints1000000()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 1000000})
+end
+
+function GivePlayerSmokeyPoints5000000()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 5000000})
+end
+
+function GivePlayerSmokeyPoints10000000()
+	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 10000000})
 end
 
 function GivePlayerSmokeyPointsVariable(amount)
@@ -96,7 +120,7 @@ function SmokeyPointsOnZombieKill(zombie)
 	end
 
 	if isoPlayer == lastAttacker then
-		sendClientCommand("GN84-ECO", "zombieKillPts", {getPlayer():getUsername(), pointsPerZombieKill})		
+		sendClientCommand("GN84-ECO", "zombieKillPts", {isoPlayer:getUsername(), pointsPerZombieKill})		
 	end	
 end
 
@@ -107,121 +131,176 @@ Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
 -- Searching Wallets for Money
 ------------------------------
 
---  VARIABLES
+local function checkWalletForCash(_player)
+	if _player == nil then return false end
 
-	local wealth 				-- Zombie Wealth - Upper Class, Middle Class, Lower Class
-	local eFunds 				-- Zombie EFunds Odds
-	local walletCash			-- Total Money found from Wallets
-	local eFundCash				-- Total Money found from hidden Emergency Funds
-	local combinedCash  		-- Total of Wallet / EFunds
-	local eFundBill				-- Efund Roll
-	local lottoTicketWinnings  	-- Lottery Ticket Winnings
-
+	local baseOdds = 80
+	local bonusOdds = 0
 	
-function searchEFunds()
-
-	local player = getPlayer()
-
-	if player:HasTrait("Lucky") then		
-		eFundOdds = SandboxVars.GN84ECO.EFundOdds + 5
-
-	elseif player:HasTrait("Unlucky") then		
-		eFundOdds = SandboxVars.GN84ECO.EFundOdds - 5
-
+	-- Check for Trait Bonuses
+	if _player:HasTrait("Lucky") then		
+		bonusOdds = baseOdds + 5
+	elseif _player:HasTrait("Unlucky") then		
+		bonusOdds = baseOdds - 5
 	else		
-		eFundOdds = SandboxVars.GN84ECO.EFundOdds
+		bonusOdds = baseOdds
 	end
 
-	if (eFunds <= eFundOdds) then
-			eFundBill = ZombRand(100)+1			
-		
-		if (eFundBill >= 75) then
-			player:getInventory():AddItem("GN84-ECO.WandererToken")
-		end
+	-- Roll Check for Cash
+	local cashRoll = ZombRand(100) + 1 
 
-		if (eFundBill >= 98) then
-				eFundCash = 200
-
-		elseif (eFundBill >= 90 and eFundBill <98) then
-				eFundCash = 100
-				
-		elseif (eFundBill <= 25) then
-				eFundCash = 50
-
-		elseif (eFundBill >28 and eFundBill <83) then
-				eFundCash = 20
-
-		else
-			--print ("eFund Roll Success but No Money...")
-		end
-
-		--print ("***Zombie Had Emergency Funds -", eFundCash, "***")
-	end
-end
-
-function searchWalletCash()
-	
-	if (wealth >=90) then
-			walletCash = ZombRand(wealthyCash)+1
-		
-	elseif (wealth < 40) then
-			walletCash = ZombRand(poorCash)+1
-			
-	elseif (wealth >=42 and wealth <=86) then
-			walletCash = ZombRand(averageCash)+1
-
+	if (cashRoll <= bonusOdds) then
+		--print("Standard Cash Roll Success!")
+		return true
 	else
-		--print ("Found NO Cash in Wallet...")
+		return false
+	end
+end
+
+
+local function calculateWalletCash(_player)
+	local cashFound = 0
+	local wealthRoll = ZombRand(100) + 1
+
+	--print("Wealth Roll: " .. wealthRoll)
+	-- Roll for Bonus Cash Stack
+	if (wealthRoll >= 95) then
+		_player:getInventory():AddItem("GN84-ECO.WandererToken")
 	end
 
-	--print ("Wallet Cash: ", walletCash)
+	-- Roll for Found Cash
+	local wealth = ZombRand(100) + 1
+
+	if (wealthRoll >=90) then
+			cashFound = ZombRand(wealthyCashAmount) + 1		
+	elseif (wealthRoll < 40) then
+			cashFound = ZombRand(poorCashAmount) + 1
+	elseif (wealthRoll >=42 and wealth <=86) then
+			cashFound = ZombRand(averageCashAmount) + 1
+	else		
+			cashFound = 1
+	end
+
+	return cashFound
 end
+
+
+
+
+local function checkWalletForBonusCash(_player)
+	if _player == nil then return false end
+
+	local baseOdds = SandboxVars.GN84ECO.EFundOdds
+	local bonusOdds = 0
+	
+	-- Check for Trait Bonuses
+	if _player:HasTrait("Lucky") then		
+		bonusOdds = baseOdds + 5
+	elseif _player:HasTrait("Unlucky") then		
+		bonusOdds = baseOdds - 5
+	else		
+		bonusOdds = baseOdds
+	end
+
+	-- Roll Check for Bonus Cash
+	local eFundsRoll = ZombRand(100) + 1 
+
+	if (eFundsRoll <= bonusOdds) then
+		--print("Bonus Cash Roll Success!")
+		return true
+	else		
+		return false
+	end
+end
+
+
+local function calculateBonusWalletCash(_player)
+	if _player == nil then return end	
+
+	local cashFound = 0
+	local bonusCashRoll = ZombRand(100) + 1	
+
+	--print("Bonus Cash Roll: " .. bonusCashRoll)
+
+	-- Roll for Bonus Wanderer Token
+	if (bonusCashRoll >= 95) then
+		_player:getInventory():AddItem("GN84-ECO.MoneyStack1000")
+	end
+
+	-- Calculate Bonus Cash
+	if (bonusCashRoll >= 98) then
+		cashFound = 200
+	elseif (bonusCashRoll >= 90 and bonusCashRoll < 98) then
+		cashFound = 100			
+	elseif (bonusCashRoll <= 25) then
+		cashFound = 50
+	elseif (bonusCashRoll > 28 and bonusCashRoll < 83) then
+		cashFound = 20
+	else			
+		cashFound = 10
+	end
+
+	return cashFound
+end
+
+
+
 
 function CollectMoneyFromWallet(sources, result, player, item)
-	
-	wealth = ZombRand(100)+1 -- Zombie Wealth Roll
-	eFunds = ZombRand(100)+1 -- Zombie EFunds Roll
-	walletCash = 0
-	eFundCash = 0
-	combinedCash = 0
-	eFundBill = 0
-
-	searchEFunds()
-	searchWalletCash()
+		
+	local walletCash = 0
+	local bonusCash = 0
+	local combinedCash = 0
 	
 	local t = 0
-	eFundCash  = eFundCash * eFundCashMultiplier      -- Adjusted by Multiplier
-	walletCash = walletCash * walletCashMultiplier    -- Adjusted by Multiplier
 	
+	if checkWalletForCash(player) then
+		walletCash = calculateWalletCash(player) * walletCashMultiplier    -- Adjusted by Multiplier
+		print("Wallet Cash: " .. walletCash)
+	end
+	
+	if checkWalletForBonusCash(player) then
+		bonusCash = calculateBonusWalletCash(player) * eFundCashMultiplier		
+		print("Bonus Cash: " .. walletCash)
+	end
+	
+	
+	-- Check for Luck Bonuses
 	local luckBonus = 1
 
-	if getPlayer():HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then		
 		luckBonus = playerLuckBonus
-
-	elseif getPlayer():HasTrait("Unlucky") then				
+	elseif player:HasTrait("Unlucky") then				
 		luckBonus = playerUnluckyPenalty
-	else		
-		luckBonus = 1
 	end
 	
-	combinedCash = math.floor((eFundCash + walletCash) * luckBonus)          -- Total Cash from Wallet
+	combinedCash = math.floor((walletCash + bonusCash) * luckBonus)          -- Total Cash Found in Wallet
 	
-	while t ~= combinedCash do
-		player:getInventory():AddItem("Money")
-		t = t+1
-	end
 
+	local playerInv = player:getInventory()
+	
+	-- Add Cash to Inventory
+	if combinedCash > 0 then
+
+		while t ~= combinedCash do
+			playerInv:AddItem("Money")
+			t = t+1
+		end
+
+	end	
+
+	-- Add Matching Empty Wallet to Inventory
 	if item:getFullType() == "Base.Wallet" then
-		player:getInventory():AddItem("GN84-ECO.EmptyWallet1")
+		playerInv:AddItem("GN84-ECO.EmptyWallet1")
 
 	elseif item:getFullType() == "Base.Wallet2" then
-		player:getInventory():AddItem("GN84-ECO.EmptyWallet2")
+		playerInv:AddItem("GN84-ECO.EmptyWallet2")
 
 	elseif item:getFullType() == "Base.Wallet3" then
-		player:getInventory():AddItem("GN84-ECO.EmptyWallet3")
+		playerInv:AddItem("GN84-ECO.EmptyWallet3")
 
 	elseif item:getFullType() == "Base.Wallet4" then
-		player:getInventory():AddItem("GN84-ECO.EmptyWallet4")
+		playerInv:AddItem("GN84-ECO.EmptyWallet4")
 
 	end
 
@@ -231,6 +310,15 @@ end
 ----------------------------------------
 -- LOTTO TICKET LOGIC
 ----------------------------------------
+
+local function PlayLottoWinnerSound()
+	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+end
+
+local function PlayLottoLoserSound()
+	getSoundManager():PlaySound("ShredLottoTicket", false, 1):setVolume(1)
+end
+
 
 -- LISTS OF BONUS PRIZES
 
@@ -474,13 +562,14 @@ local bonusPrizeLow =
 
 
 
-function CheckForWinner()
+local function CheckForWinner(player)
+	if player == nil then return end
 
 -- Check for Luck
 
-	if getPlayer():HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then		
 		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds - 0.15
-	elseif getPlayer():HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then		
 		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds + 0.15
 	else		
 		lotteryTicketOdds = SandboxVars.GN84ECO.LotteryTicketOdds
@@ -494,10 +583,14 @@ function CheckForWinner()
 	end
 end
 
-function CalcLottoWinnings()
 
-	local lottoTicketRoll = ZombRand(10000)+1
-	local lottoBonusPrizeRoll = ZombRand(100)+1
+
+local function CalcLottoWinnings(player)
+	if player == nil then return end
+
+	local lottoTicketWinnings = 0
+	local lottoTicketRoll = ZombRand(10000) + 1
+	local lottoBonusPrizeRoll = ZombRand(100) + 1
 
 
 	if (lottoTicketRoll >= 9994) then
@@ -527,12 +620,12 @@ function CalcLottoWinnings()
 		
 	GivePlayerSmokeyPointsLottoTicket(lottoTicketWinnings)
 	local winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
-	getPlayer():Say(winningText)
+	player:Say(winningText)
 
 	-- Roll for Bonus Prize	
 	
 	if lottoBonusPrizeRoll <= ((1 / lotteryTicketOdds) * 100) then
-		local prizeCategory = ZombRand(10000)+1
+		local prizeCategory = ZombRand(10000) + 1
 		local bonusPrize = nil
 
 		if prizeCategory >= 9900 then
@@ -549,30 +642,32 @@ function CalcLottoWinnings()
 
 		end
 
-		local bonusItem = ScriptManager.instance:getItem(bonusPrize):getName()
-		local bonusText = ("Bonus Prize!  You Won - " .. bonusItem)
-
+		if ScriptManager.instance:getItem(bonusPrize) == nil then
+			print("Error: Item Not Found")
+			return
+		else
+			local bonusItem = ScriptManager.instance:getItem(bonusPrize):getDisplayName()
+			local bonusText = ("Bonus Prize!  You Won - " .. bonusItem)
 		
-		GivePlayerLottoTicketBonusPrize(bonusItem)
-		getPlayer():getInventory():AddItem(bonusPrize)
-		getPlayer():Say(bonusText)
-	end	
-
-	
+			GivePlayerLottoTicketBonusPrize(bonusItem)
+			player:getInventory():AddItem(bonusPrize)
+			player:Say(bonusText)
+		end		
+	end		
 end
 
 
-function ScratchLottoTicketStandard()
-	if CheckForWinner()	then				
-		CalcLottoWinnings()
+function ScratchLottoTicketStandard(sources, result, player, item)
+	if CheckForWinner(player) then				
+		CalcLottoWinnings(player)
 		PlayLottoWinnerSound()
 	else			
-		getPlayer():Say("Sorry, Ticket is Not a Winner..  Play Again!")
+		player:Say("Sorry, Ticket is Not a Winner..  Play Again!")
 		PlayLottoLoserSound()
 	end		
 end
 
-function TradeRareTicketForStandardTickets(items, result, player)
+function TradeRareTicketForStandardTickets(sources, result, player)
 	local t = 0
 
 	while t ~= 5 do
@@ -581,7 +676,7 @@ function TradeRareTicketForStandardTickets(items, result, player)
 	end
 end
 
-function TradeRareTicketForCashStack(items, result, player)
+function TradeRareTicketForCashStack(sources, result, player)
 	local t = 0
 
 	while t ~= rareTicketCashValue do
@@ -606,45 +701,96 @@ local randomAmmoList =
 	[12] = "Base.308Box",
 }
 
-function TradeRareTicketForRandomAmmo(items, result, player)
-	local randNum = ZombRand(1, #randomAmmoList)
-	player:getInventory():AddItem(randomAmmoList[randNum])
+function TradeRareTicketForRandomAmmo(sources, result, player)
+	local randNum = ZombRand(1, #randomAmmoList + 1)
+
+	if ScriptManager.instance:getItem(randomAmmoList[randNum]) == nil then
+		print("Error: Item Not Found")
+		return
+	else
+		player:getInventory():AddItem(randomAmmoList[randNum])
+	end
 end
 
+----------------------------------------
+-- Wheel Spin Fragments
+----------------------------------------
 
-function PlayLottoWinnerSound()
-	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+
+local randomWheelSpinFragmentList =
+{
+	[1]  = "GN84-ECO.WheelSpinFragment1",
+	[2]  = "GN84-ECO.WheelSpinFragment2",
+	[3]  = "GN84-ECO.WheelSpinFragment3",
+	[4]  = "GN84-ECO.WheelSpinFragment4",
+	[5]  = "GN84-ECO.WheelSpinFragment5",
+}
+
+function GiveRandomWheelSpinFragment(sources, result, player)
+	local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
+	
+	if ScriptManager.instance:getItem(randomWheelSpinFragmentList[randNum]) == nil then
+		print("Error: Item Not Found")
+		return
+	else
+		player:getInventory():AddItem(randomWheelSpinFragmentList[randNum])
+	end
 end
 
-function PlayLottoLoserSound()
-	getSoundManager():PlaySound("ShredLottoTicket", false, 1):setVolume(1)
+function GiveFiveRandomWheelSpinFragments(sources, result, player)
+	
+	for i=0, 4, 1 do
+		local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
+	
+		if ScriptManager.instance:getItem(randomWheelSpinFragmentList[randNum]) == nil then
+			print("Error: Item Not Found")
+			return
+		else
+			player:getInventory():AddItem(randomWheelSpinFragmentList[randNum])
+		end
+	end
 end
+
 
 
 ----------------------------------------
 -- Cutting up Wallets for Leather Strips
 ----------------------------------------
 
---  VARIABLES
-
-local leatherRoll
-local extraLeatherOdds = 90
-local maxExtraLeather = 3
-local extraLeatherStrips
-
 function CutLeatherWallet(items, result, player)
-	leatherRoll = ZombRand(100)+1  -- Extra Leather Roll
-	--print("Extra Leather Roll?:  "  ..  leatherRoll)
-	extraLeatherStrips = 0
 	
-	if (leatherRoll >= extraLeatherOdds) then			
-		extraLeatherStrips = ZombRand(0, maxExtraLeather)
-		--print("Extra Leather: " .. extraLeatherStrips)
+	local leatherOdds = 20
+	local extraLeatherOdds = 10
+	local maxExtraLeather = 1
+	local leatherStrips = 0
+	local bonusOdds = 0
+
+	-- Check for Trait Bonuses
+	if player:HasTrait("Lucky") then		
+		bonusOdds = extraLeatherOdds + 3
+	elseif player:HasTrait("Unlucky") then		
+		bonusOdds = extraLeatherOdds - 3
+	else		
+		bonusOdds = extraLeatherOdds
 	end
+
+	
+	local leatherRoll = ZombRand(100) + 1  -- Extra Leather Roll
+	--print("Leather Roll?:  "  ..  leatherRoll)
 		
+	if (leatherRoll <= leatherOdds) then
+		--print("Wallet Had Leather")
+		leatherStrips = 1
+	end	
+
+	if (leatherRoll <= bonusOdds) then			
+		leatherStrips = leatherStrips + ZombRand(0, maxExtraLeather)
+		--print("Extra Leather: " .. leatherStrips)
+	end
+
 	local t = 0
 
-	while t ~= extraLeatherStrips do
+	while t ~= leatherStrips do
 		player:getInventory():AddItem("Base.LeatherStrips")
 		t = t+1
 	end
@@ -654,54 +800,147 @@ end
 -- LIMIT MONEY CLIP ITEMS
 ----------------------------------------
 
+-- function GN84_AcceptItemsMoneyClip(container, item)
+
+-- 	local moneyClipItems = 
+-- 	{
+-- 		[1]  = "Base.Money",
+-- 		[2]  = "GN84-ECO.MoneyStack100",
+-- 		[3]  = "GN84-ECO.MoneyStack1000",
+-- 		[4]  = "GN84-ECO.MoneyStack10000",
+-- 		[5]  = "GN84-ECO.MoneyStack100000",
+-- 		[6]  = "GN84-ECO.MoneyStack1000000",
+-- 		[7]  = "GN84-ECO.LottoTicketStandard",
+-- 		[8]  = "GN84-ECO.LottoTicketRare",
+-- 		[9]  = "GN84-ECO.LottoTicketGolden",
+-- 		[10] = "GN84-ECO.WheelSpinToken",
+-- 		[11] = "GN84-ECO.SuperWheelSpinToken",
+-- 		[12] = "GN84-ECO.VIPToken",
+-- 		[13] = "GN84-ECO.VIPTokenNew",
+-- 		[14] = "GN84-ECO.EventToken",
+-- 		[15] = "GN84-ECO.WandererToken",
+-- 		[16] = "GN84-ECO.SafehouseExpansionPermit10",
+-- 		[17] = "GN84-ECO.SafehouseExpansionPermit100",
+-- 		[18] = "GN84-ECO.SafehouseExpansionPermit1000",
+-- 		[19] = "GN84-ECO.AdditionalSafehousePermit",
+-- 		[20] = "GN84-ECO.CommercialClaimPermit",
+-- 		[21] = "GN84-ECO.ResidentialPermitSmall",
+-- 		[22] = "GN84-ECO.ResidentialPermitLarge",
+-- 		[23] = "GN84-ECO.ResidentialPermitMansion",
+-- 		[24] = "GN84-ECO.FactionPermitSmall",
+-- 		[25] = "GN84-ECO.FactionPermitLarge",
+-- 		[26] = "GN84-ECO.FactionPermitMassive",
+-- 		[27] = "Base.AVCSClaimOrb",
+-- 		[28] = "GN84-ECO.WandererTokenStack50",
+-- 		[29] = "GN84-ECO.WandererTokenStack100",
+-- 		[30] = "GN84-ECO.WandererTokenStack500",
+-- 		[31] = "GN84-ECO.WandererTokenStack1000",
+-- 		[32] = "TheyKnew.Zomboxivir",
+-- 		[33] = "TheyKnew.Zomboxycycline",
+-- 		[34] = "GN84-ECO.WanderersRaffleTicket",
+-- 		[35] = "GN84-ECO.WanderersVIPCoupon",
+-- 		[36] = "GN84-ECO.WheelSpinFragment1",
+-- 		[37] = "GN84-ECO.WheelSpinFragment2",
+-- 		[38] = "GN84-ECO.WheelSpinFragment3",
+-- 		[39] = "GN84-ECO.WheelSpinFragment4",
+-- 		[40] = "GN84-ECO.WheelSpinFragment5",
+-- 		[41] = "GN84-ECO.WheelSpinTokenNew",
+-- 		[42] = "GN84-ECO.SuperWheelSpinTokenNew",
+-- 		[43] = "GN84-ECO.MegaWheelSpinToken",
+-- 		[44] = "GN84-ECO.UltimateWheelSpinToken",
+-- 		[45] = "GN84-ECO.SafehouseExpansionPermit1",
+-- 		[46] = "GN84-ECO.SafehouseExpansionPermit50",
+-- 		[47] = "GN84-ECO.SafehouseExpansionPermit250",
+-- 		[48] = "GN84-ECO.SafehouseExpansionPermit500",
+-- 		[49] = "GN84-ECO.SafehouseExpansionPermit5000",
+-- 		[50] = "GN84-ECO.WandererTokenStack5",
+-- 		[51] = "GN84-ECO.WandererTokenStack10",
+-- 		[52] = "GN84-ECO.WandererTokenStack25",
+-- 		[53] = "GN84-ECO.WandererTokenStack250",
+-- 		[54] = "GN84-ECO.WandererTokenStack500",
+-- 		[55] = "GN84-ECO.WandererTokenStack5000",
+-- 	}
+
+-- 	for i, v in ipairs(moneyClipItems) do
+-- 		if item:getFullType() == v then
+-- 			return true
+-- 		end
+-- 	end
+	
+-- end
+
 function GN84_AcceptItemsMoneyClip(container, item)
 
 	local moneyClipItems = 
 	{
-		[1]  = "Base.Money",
-		[2]  = "GN84-ECO.MoneyStack100",
-		[3]  = "GN84-ECO.MoneyStack1000",
-		[4]  = "GN84-ECO.MoneyStack10000",
-		[5]  = "GN84-ECO.MoneyStack100000",
-		[6]  = "GN84-ECO.MoneyStack1000000",
-		[7]  = "GN84-ECO.LottoTicketStandard",
-		[8]  = "GN84-ECO.LottoTicketRare",
-		[9]  = "GN84-ECO.LottoTicketGolden",
-		[10] = "GN84-ECO.WheelSpinToken",
-		[11] = "GN84-ECO.SuperWheelSpinToken",
-		[12] = "GN84-ECO.VIPToken",
-		[13] = "GN84-ECO.VIPTokenNew",
-		[14] = "GN84-ECO.EventToken",
-		[15] = "GN84-ECO.WandererToken",
-		[16] = "GN84-ECO.SafehouseExpansionPermit10",
-		[17] = "GN84-ECO.SafehouseExpansionPermit100",
-		[18] = "GN84-ECO.SafehouseExpansionPermit1000",
-		[19] = "GN84-ECO.AdditionalSafehousePermit",
-		[20] = "GN84-ECO.CommercialClaimPermit",
-		[21] = "GN84-ECO.ResidentialPermitSmall",
-		[22] = "GN84-ECO.ResidentialPermitLarge",
-		[23] = "GN84-ECO.ResidentialPermitMansion",
-		[24] = "GN84-ECO.FactionPermitSmall",
-		[25] = "GN84-ECO.FactionPermitLarge",
-		[26] = "GN84-ECO.FactionPermitMassive",
-		[27] = "Base.AVCSClaimOrb",
-		[28] = "GN84-ECO.WandererTokenStack50",
-		[29] = "GN84-ECO.WandererTokenStack100",
-		[30] = "GN84-ECO.WandererTokenStack500",
-		[31] = "GN84-ECO.WandererTokenStack1000",
-		[32] = "TheyKnew.Zomboxivir",
-		[33] = "TheyKnew.Zomboxycycline",
-		[34] = "GN84-ECO.WanderersRaffleTicket",
+		"Base.Money",
+		"GN84-ECO.MoneyStack100",
+		"GN84-ECO.MoneyStack500",
+		"GN84-ECO.MoneyStack1000",
+		"GN84-ECO.MoneyStack5000",
+		"GN84-ECO.MoneyStack10000",
+		"GN84-ECO.MoneyStack50000",
+		"GN84-ECO.MoneyStack100000",
+		"GN84-ECO.MoneyStack500000",
+		"GN84-ECO.MoneyStack1000000",
+		"GN84-ECO.MoneyStack5000000",
+		"GN84-ECO.MoneyStack10000000",
+		"GN84-ECO.LottoTicketStandard",
+		"GN84-ECO.LottoTicketRare",
+		"GN84-ECO.LottoTicketGolden",
+		"GN84-ECO.WheelSpinToken",
+		"GN84-ECO.SuperWheelSpinToken",
+		"GN84-ECO.WheelSpinFragment1",
+		"GN84-ECO.WheelSpinFragment2",
+		"GN84-ECO.WheelSpinFragment3",
+		"GN84-ECO.WheelSpinFragment4",
+		"GN84-ECO.WheelSpinFragment5",
+		"GN84-ECO.WheelSpinTokenNew",
+		"GN84-ECO.SuperWheelSpinTokenNew",
+		"GN84-ECO.MegaWheelSpinToken",
+		"GN84-ECO.UltimateWheelSpinToken",
+		"GN84-ECO.WanderersRaffleTicket",
+		"GN84-ECO.WanderersVIPCoupon",
+		"GN84-ECO.VIPToken",
+		"GN84-ECO.VIPTokenNew",
+		"GN84-ECO.EventToken",
+		"GN84-ECO.WandererToken",
+		"GN84-ECO.WandererTokenStack5",
+		"GN84-ECO.WandererTokenStack10",
+		"GN84-ECO.WandererTokenStack25",
+		"GN84-ECO.WandererTokenStack50",
+		"GN84-ECO.WandererTokenStack100",
+		"GN84-ECO.WandererTokenStack250",
+		"GN84-ECO.WandererTokenStack500",
+		"GN84-ECO.WandererTokenStack1000",
+		"GN84-ECO.WandererTokenStack5000",
+		"GN84-ECO.SafehouseExpansionPermit5",
+		"GN84-ECO.SafehouseExpansionPermit10",
+		"GN84-ECO.SafehouseExpansionPermit50",
+		"GN84-ECO.SafehouseExpansionPermit100",
+		"GN84-ECO.SafehouseExpansionPermit250",
+		"GN84-ECO.SafehouseExpansionPermit500",
+		"GN84-ECO.SafehouseExpansionPermit1000",
+		"GN84-ECO.SafehouseExpansionPermit5000",
+		"GN84-ECO.AdditionalSafehousePermit",
+		"GN84-ECO.CommercialClaimPermit",
+		"GN84-ECO.ResidentialPermitSmall",
+		"GN84-ECO.ResidentialPermitLarge",
+		"GN84-ECO.ResidentialPermitMansion",
+		"GN84-ECO.FactionPermitSmall",
+		"GN84-ECO.FactionPermitLarge",
+		"GN84-ECO.FactionPermitMassive",
+		"Base.AVCSClaimOrb",		
+		"TheyKnew.Zomboxivir",
+		"TheyKnew.Zomboxycycline",		
 	}
 
-	for i, v in ipairs(moneyClipItems) do
-		if item:getFullType() == v then
+	for i = 1, #moneyClipItems do
+    	if item:getFullType() == moneyClipItems[i] then
 			return true
 		end
-	end
-	
+	end	
 end
-
 
 
 ---------------------------
@@ -754,17 +993,17 @@ local highElectronicsMaxValue = SandboxVars.GN84ECO.HighElectronicsMaxValue or 1
 
 
 -- TODO - NEEDS IMPLEMENTED
-function PlayGrinderSound()
+local function PlayGrinderSound()
 end
 
-function PlayCashoutSound()
+local function PlayCashoutSound()
 end
 -----------------------
 
 
 -- JEWELRY
 
-function ShredderRecycleWatches(items, result, player)
+function ShredderRecycleWatches(sources, result, player, item)
 	local watchesValueRoll = ZombRand(watchesMinValue, watchesMaxValue)+1	
 	local t = 0
 
@@ -776,7 +1015,7 @@ function ShredderRecycleWatches(items, result, player)
 	end
 end
 
-function ShredderRecycleJewelrySimple(items, result, player)
+function ShredderRecycleJewelrySimple(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelrySimpleMinValue, jewelrySimpleMaxValue)+1	
 	local t = 0
 
@@ -788,7 +1027,7 @@ function ShredderRecycleJewelrySimple(items, result, player)
 	end
 end
 
-function ShredderRecycleJewelryPrecious(items, result, player)
+function ShredderRecycleJewelryPrecious(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryPreciousMinValue, jewelryPreciousMaxValue)+1	
 	local t = 0
 
@@ -800,7 +1039,7 @@ function ShredderRecycleJewelryPrecious(items, result, player)
 	end
 end
 
-function ShredderRecycleJewelryGemstones(items, result, player)
+function ShredderRecycleJewelryGemstones(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryGemsMinValue, jewelryGemsMaxValue)+1	
 	local t = 0
 
@@ -812,7 +1051,7 @@ function ShredderRecycleJewelryGemstones(items, result, player)
 	end
 end
 
-function ShredderRecycleJewelryDiamond(items, result, player)
+function ShredderRecycleJewelryDiamond(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryDiamondMinValue, jewelryDiamondMaxValue)+1	
 	local t = 0
 
@@ -828,7 +1067,7 @@ end
 
 --TOOLS
 
-function ShredderRecycleSimpleTool(items, result, player)
+function ShredderRecycleSimpleTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(simpleToolMinValue, simpleToolMaxValue)+1	
 	local t = 0
 
@@ -840,7 +1079,7 @@ function ShredderRecycleSimpleTool(items, result, player)
 	end
 end
 
-function ShredderRecycleLargeTool(items, result, player)
+function ShredderRecycleLargeTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(largeToolMinValue, largeToolMaxValue)+1	
 	local t = 0
 
@@ -852,7 +1091,7 @@ function ShredderRecycleLargeTool(items, result, player)
 	end
 end
 
-function ShredderRecycleComplexTool(items, result, player)
+function ShredderRecycleComplexTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(complexToolMinValue, complexToolMaxValue)+1	
 	local t = 0
 
@@ -868,7 +1107,7 @@ end
 
 -- LEATHER / CLOTHING ITEMS
 
-function ShredderRecycleLeather(items, result, player)
+function ShredderRecycleLeather(sources, result, player, item)
 	local leatherValueRoll = ZombRand(leatherMinValue, leatherMaxValue)+1	
 	local t = 0
 
@@ -880,7 +1119,7 @@ function ShredderRecycleLeather(items, result, player)
 	end
 end
 
-function ShredderRecycleClothing(items, result, player)
+function ShredderRecycleClothing(sources, result, player, item)
 	local clothingValueRoll = ZombRand(clothingMinValue, clothingMaxValue)+1	
 	local t = 0
 
@@ -892,7 +1131,7 @@ function ShredderRecycleClothing(items, result, player)
 	end
 end
 
-function ShredderRecycleBulletVest(items, result, player)
+function ShredderRecycleBulletVest(sources, result, player, item)
 	local vestValueRoll = ZombRand(bulletVestMinValue, bulletVestMaxValue)+1	
 	local t = 0
 
@@ -904,7 +1143,7 @@ function ShredderRecycleBulletVest(items, result, player)
 	end
 end
 
-function ShredderRecycleGlasses(items, result, player)
+function ShredderRecycleGlasses(sources, result, player, item)
 	local glassesValueRoll = ZombRand(glassesMinValue, glassesMaxValue)+1	
 	local t = 0
 
@@ -920,7 +1159,7 @@ end
 
 -- PAPER PRODUCTS
 
-function ShredderRecyclePaperProduct(items, result, player)
+function ShredderRecyclePaperProduct(sources, result, player, item)
 	local paperValueRoll = ZombRand(paperProductMinValue, paperProductMaxValue)+1	
 	local t = 0
 
@@ -936,7 +1175,7 @@ end
 
 -- ELECTRONICS
 
-function ShredderRecycleLowElectronics(items, result, player)
+function ShredderRecycleLowElectronics(sources, result, player, item)
 	local electronicsValueRoll = ZombRand(lowElectronicsMinValue, lowElectronicsMaxValue)+1	
 	local t = 0
 
@@ -948,7 +1187,7 @@ function ShredderRecycleLowElectronics(items, result, player)
 	end
 end
 
-function ShredderRecycleHighElectronics(items, result, player)
+function ShredderRecycleHighElectronics(sources, result, player, item)
 	local electronicsValueRoll = ZombRand(highElectronicsMinValue, highElectronicsMaxValue)+1	
 	local t = 0
 
@@ -1237,7 +1476,7 @@ local function CalculateBuildingSize(worldobjects, square, player)
     end
 end
 
-function ValidateSafehouseClaim(worldobjects, square, player)
+local function ValidateSafehouseClaim(worldobjects, square, player)
 	
 	-- print ("Enteirng ValidateSafehouseClaim")
 	local squareFootage, residentialBuilding = CalculateBuildingSize()
@@ -1489,14 +1728,15 @@ end
 --  HOTKEY FOR DEBUGGING
 
 function debuggingKey(_keyPressed)
-	local key = _keyPressed
-	if getAccessLevel() == "admin" then
-		-- print (tostring(key))
-		if key == 71
-			then
+	-- local key = _keyPressed
+	-- if getAccessLevel() == "admin" then
+	-- 	-- print (tostring(key))
+	-- 	if key == 71
+	-- 		then
 				
-			end	
-	end
+	-- 		end	
+	-- end
+	return
 end
 
 Events.OnKeyPressed.Add(debuggingKey)

@@ -10,11 +10,26 @@ module GN84-ECO
     {
         category = Item,
         loop = false,
+        is3D = true,
         clip
             {
                 file = media/sound/SearchWallet.wav,
                 distanceMax = 10,
                 volume = 1.0,
+                
+            }
+    }
+
+    sound ScissorsCutLeather
+    {
+        category = Item,
+        loop = false,
+        is3D = true,
+        clip
+            {
+                file = media/sound/ScissorsCutLeather.wav,
+                distanceMax = 10,
+                volume = 0.25,
                 
             }
     }
@@ -61,6 +76,7 @@ module GN84-ECO
     {
         category = Item,
         loop = false,
+        is3D = true,
         clip
         {
             file = media/sound/ReceiptSound.wav,
@@ -73,6 +89,7 @@ module GN84-ECO
     {
         category = Item,
         loop = false,
+        is3D = true,
         clip
         {
             file = media/sound/ScratchLottoTicket.wav,
@@ -85,6 +102,7 @@ module GN84-ECO
     {
         category = Item,
         loop = false,
+        is3D = true,
         clip
         {
             file = media/sound/ShredLottoTicket.wav,
@@ -97,11 +115,38 @@ module GN84-ECO
     {
         category = Item,
         loop = false,
+        is3D = true,
         clip
         {
             file = media/sound/WinningTicketChime.wav,
             distanceMax = 10,
             volume = 0.7,
+        }
+    }
+
+    sound WheelSpinForge
+    {
+        category = Item,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/WheelSpinForge.wav,
+            distanceMax = 10,
+            volume = 1.0,
+        }
+    }
+
+    sound ShatterToken
+    {
+        category = Item,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/ShatterToken.wav,
+            distanceMax = 10,
+            volume = 1.0,
         }
     }
 

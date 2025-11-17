@@ -5,6 +5,8 @@ module GN84-ECO
         Base
     }
 
+	/*MONEY STACKS*/
+
 	item MoneyClip
 	{
 		DisplayName			 = Money Clip,
@@ -16,6 +18,7 @@ module GN84-ECO
 		Icon				 = MoneyClip,
 		OpenSound			 = MoneyClipShuffle,
 		AcceptItemFunction	 = GN84_AcceptItemsMoneyClip,
+		WorldStaticModel	 = MoneyClip,
 		Tooltip				 = Holds Cash - Tokens - and other Essential Items,
 	}
 
@@ -24,7 +27,18 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $100 - ,
 		DisplayCategory		 =  Money,
         Type                 =  Normal,
-        Weight               =  0.001,
+        Weight               =  0.0001,
+        Icon                 =  MoneyStack100,
+		WorldStaticModel	 =  MoneyStack100,
+		
+    }
+
+	item MoneyStack500
+    {
+        DisplayName          =  Stack of Cash - $500 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  0.0005,
         Icon                 =  MoneyStack100,
 		WorldStaticModel	 =  MoneyStack100,
 		
@@ -35,7 +49,18 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $1000 - ,
 		DisplayCategory		 =  Money,
         Type                 =  Normal,
-        Weight               =  0.01,
+        Weight               =  0.001,
+        Icon                 =  MoneyStack1000,
+		WorldStaticModel	 =  MoneyStack1000,
+		
+    }
+
+	item MoneyStack5000
+    {
+        DisplayName          =  Stack of Cash - $5000 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  0.005,
         Icon                 =  MoneyStack1000,
 		WorldStaticModel	 =  MoneyStack1000,
 		
@@ -46,7 +71,18 @@ module GN84-ECO
         DisplayName          =  Stack of Cash - $10000 - ,
 		DisplayCategory		 =  Money,
         Type                 =  Normal,
-        Weight               =  0.1,
+        Weight               =  0.01,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
+	item MoneyStack50000
+    {
+        DisplayName          =  Stack of Cash - $50000 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  0.05,
         Icon                 =  MoneyStack10000,
 		WorldStaticModel	 =  MoneyStack10000,
 		
@@ -63,6 +99,17 @@ module GN84-ECO
 		
     }
 
+	item MoneyStack500000
+    {
+        DisplayName          =  Stack of Cash - $500000 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  0.5,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
 	item MoneyStack1000000
     {
         DisplayName          =  Stack of Cash - $1000000 - ,
@@ -73,6 +120,30 @@ module GN84-ECO
 		WorldStaticModel	 =  MoneyStack10000,
 		
     }
+
+	item MoneyStack5000000
+    {
+        DisplayName          =  Stack of Cash - $5000000 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  1.0,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
+	item MoneyStack10000000
+    {
+        DisplayName          =  Stack of Cash - $10000000 - ,
+		DisplayCategory		 =  Money,
+        Type                 =  Normal,
+        Weight               =  1.0,
+        Icon                 =  MoneyStack10000,
+		WorldStaticModel	 =  MoneyStack10000,
+		
+    }
+
+	/*WALLETS*/
 	
 	item EmptyWallet1
 	{
@@ -114,9 +185,35 @@ module GN84-ECO
 		WorldStaticModel = Wallet4,
 	}	
 
+	/*PERMITS*/
+
+	item SafehouseExpansionPermit5
+	{
+		DisplayName			=  Safehouse Expansion Permit - 5 Tiles,
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit10,
+		WorldStaticModel	=  SafehouseExpansionPermit10,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
+	
+	}
+
 	item SafehouseExpansionPermit10
 	{
 		DisplayName			=  Safehouse Expansion Permit - 10 Tiles,
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit10,
+		WorldStaticModel	=  SafehouseExpansionPermit10,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
+	
+	}
+
+	item SafehouseExpansionPermit50
+	{
+		DisplayName			=  Safehouse Expansion Permit - 50 Tiles,
 		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -138,9 +235,45 @@ module GN84-ECO
 	
 	}
 
+	item SafehouseExpansionPermit250
+	{
+		DisplayName			=  Safehouse Expansion Permit - 250 Tiles,
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit100,
+		WorldStaticModel	=  SafehouseExpansionPermit100,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
+	
+	}
+
+	item SafehouseExpansionPermit500
+	{
+		DisplayName			=  Safehouse Expansion Permit - 500 Tiles,
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit100,
+		WorldStaticModel	=  SafehouseExpansionPermit100,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
+	
+	}
+
 	item SafehouseExpansionPermit1000
 	{
 		DisplayName			=  Safehouse Expansion Permit - 1000 Tiles,
+		DisplayCategory		=  Permit,
+		Weight				=  0.1,
+		Type				=  Normal,
+		Icon				=  SafehouseExpansionPermit1000,
+		WorldStaticModel	=  SafehouseExpansionPermit1000,
+		Tooltip				=  Contact an Admin on The Wanderers Discord to Expand your Property!,
+	
+	}
+
+	item SafehouseExpansionPermit5000
+	{
+		DisplayName			=  Safehouse Expansion Permit - 5000 Tiles,
 		DisplayCategory		=  Permit,
 		Weight				=  0.1,
 		Type				=  Normal,
@@ -257,6 +390,8 @@ module GN84-ECO
 
 	}
 
+	/*LOTTO TICKETS*/
+
 	item LottoTicketStandard
 	{
 		DisplayName			=  Wanderers Lotto Ticket - Scratch to Win,
@@ -290,27 +425,134 @@ module GN84-ECO
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Claim the Grand Prize!,
 	}
 
-	item WheelSpinToken
+	/*WHEEL SPINS TOKENS*/
+
+	item WheelSpinFragment1
 	{
-		DisplayName			=  Wanderers Lotto - Wheel Spin Token,
+		DisplayName			=  Wheel Spin Fragment - (A),
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinToken,				
-		WorldStaticModel	=  LottoWheelSpinToken,
-		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Wheel and Claim your Prize!,
+		Icon				=  WheelSpinFragment1,				
+		WorldStaticModel	=  LottoWheelSpinFragment1,
+		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
 	}
+
+	item WheelSpinFragment2
+	{
+		DisplayName			=  Wheel Spin Fragment - (B),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragment2,				
+		WorldStaticModel	=  LottoWheelSpinFragment2,
+		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+	}
+
+	item WheelSpinFragment3
+	{
+		DisplayName			=  Wheel Spin Fragment - (C),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragment3,				
+		WorldStaticModel	=  LottoWheelSpinFragment3,
+		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+	}
+
+	item WheelSpinFragment4
+	{
+		DisplayName			=  Wheel Spin Fragment - (D),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragment4,				
+		WorldStaticModel	=  LottoWheelSpinFragment4,
+		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+	}
+
+	item WheelSpinFragment5
+	{
+		DisplayName			=  Wheel Spin Fragment - (E),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragment5,				
+		WorldStaticModel	=  LottoWheelSpinFragment5,
+		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+	}
+
+	/* OLD TOKEN */
+
+	item WheelSpinToken
+	{
+		DisplayName			=  Wanderers Lotto - Wheel Spin Token (Legacy),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinTokenOld,				
+		WorldStaticModel	=  LottoWheelSpinTokenOld,
+		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain a useable fragment,
+	}	
 
 	item SuperWheelSpinToken
 	{
-		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token,
+		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token (Legacy),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinTokenOld,				
+		WorldStaticModel	=  LottoWheelSpinTokenOld,
+		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain useable fragments,
+	}	
+
+	item WheelSpinTokenNew
+	{
+		DisplayName			=  Wheel Spin Token,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
 		Icon				=  WheelSpinToken,				
-		WorldStaticModel	=  LottoSuperWheelSpinToken,
-		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Super Wheel and Claim your Prize!,
+		WorldStaticModel	=  Lotto-WheelSpinToken,
+		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Wheel and Claim your Prize!,
 	}
+
+	item SuperWheelSpinTokenNew
+	{
+		DisplayName			=  Super Wheel Spin Token,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  SuperWheelSpinToken,				
+		WorldStaticModel	=  Lotto-SuperWheelSpinToken,
+		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Super Wheel and Claim your Prize!,
+	}	
+
+	item MegaWheelSpinToken
+	{
+		DisplayName			=  Mega Wheel Spin Token,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  MegaWheelSpinToken,				
+		WorldStaticModel	=  Lotto-MegaWheelSpinToken,
+		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Mega Wheel and Claim your Prize!,
+	}	
+
+	item UltimateWheelSpinToken
+	{
+		DisplayName			=  Ultimate Wheel Spin Token,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  UltimateWheelSpinToken,				
+		WorldStaticModel	=  Lotto-UltimateWheelSpinToken,
+		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Ultimate Wheel and Claim your Prize!,
+	}
+
+
+
+	/*TOKENS AND COUPONS*/
 
 	item VIPToken
 	{
@@ -331,7 +573,7 @@ module GN84-ECO
 		Type				=  Normal,
 		Icon				=  VIPTokenNew,				
 		WorldStaticModel	=  VIPToken,
-		Tooltip 			=  Thank you for Supporting The Wanderers!,
+		Tooltip 			=  Thank you for Supporting The Wanderers!  Contact an Admin for additional redemption options!,
 	}
 
 	item EventToken
@@ -356,15 +598,38 @@ module GN84-ECO
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 
-	item WanderersRaffleTicket
+	
+	item WandererTokenStack5
 	{
-		DisplayName			=  Wanderers Raffle Ticket,
+		DisplayName			=  Wanderer Tokens - Stack of 5,
 		DisplayCategory		=  Token,
-		Weight				=  0.0001,
+		Weight				=  0.001,
 		Type				=  Normal,
-		Icon				=  WanderersRaffleTicket,				
-		WorldStaticModel	=  WanderersRaffleTicket,
-		Tooltip 			=  Thanks for Playing!,
+		Icon				=  WandererToken,				
+		WorldStaticModel	=  WandererToken,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WandererTokenStack10
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 10,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererTokenStackSmall,				
+		WorldStaticModel	=  WandererTokenStackSmall,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WandererTokenStack25
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 25,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererTokenStackSmall,				
+		WorldStaticModel	=  WandererTokenStackSmall,	
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 
 	item WandererTokenStack50
@@ -373,8 +638,8 @@ module GN84-ECO
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
-		Icon				=  WandererToken,				
-		WorldStaticModel	=  WandererToken,
+		Icon				=  WandererTokenStackSmall,				
+		WorldStaticModel	=  WandererTokenStackSmall,	
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 
@@ -384,8 +649,19 @@ module GN84-ECO
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
-		Icon				=  WandererToken,				
-		WorldStaticModel	=  WandererToken,
+		Icon				=  WandererTokenStackMedium,				
+		WorldStaticModel	=  WandererTokenStackMedium,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WandererTokenStack250
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 250,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererTokenStackMedium,				
+		WorldStaticModel	=  WandererTokenStackMedium,
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 	
@@ -395,8 +671,8 @@ module GN84-ECO
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
-		Icon				=  WandererToken,				
-		WorldStaticModel	=  WandererToken,
+		Icon				=  WandererTokenStackLarge,				
+		WorldStaticModel	=  WandererTokenStackLarge,
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 	
@@ -406,8 +682,41 @@ module GN84-ECO
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
-		Icon				=  WandererToken,				
-		WorldStaticModel	=  WandererToken,
+		Icon				=  WandererTokenStackLarge,				
+		WorldStaticModel	=  WandererTokenStackLarge,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WandererTokenStack5000
+	{
+		DisplayName			=  Wanderer Tokens - Stack of 5000,
+		DisplayCategory		=  Token,
+		Weight				=  0.001,
+		Type				=  Normal,
+		Icon				=  WandererTokenStackLarge,				
+		WorldStaticModel	=  WandererTokenStackLarge,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WanderersRaffleTicket
+	{
+		DisplayName			=  Wanderers Raffle Ticket,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WanderersRaffleTicket,				
+		WorldStaticModel	=  WanderersRaffleTicket,
+		Tooltip 			=  Thanks for Playing on The Wanderers!,
+	}
+
+	item WanderersVIPCoupon
+	{
+		DisplayName			=  Wanderers VIP Coupon,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WanderersVIPCoupon,				
+		WorldStaticModel	=  WanderersVIPCoupon,
 		Tooltip 			=  Thanks for Playing on The Wanderers!,
 	}
 }

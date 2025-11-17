@@ -104,25 +104,89 @@ module GN84-ECO
 		scale = 0.9,
 	}
 
-	model LottoWheelSpinToken
+
+
+	model LottoWheelSpinFragment1
 	{
-		mesh = worlditems/LottoWheelSpinToken,
-		texture = worlditems/LottoWheelSpinTokenModel,
-		scale = 1.35,
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/WheelSpinFragment1,
+		scale = 1.25,
 	}
 
-	model LottoSuperWheelSpinToken
+	model LottoWheelSpinFragment2
 	{
-		mesh = worlditems/LottoWheelSpinToken,
-		texture = worlditems/LottoWheelSpinTokenModel,
-		scale = 1.5,
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/WheelSpinFragment2,
+		scale = 1.25,
 	}
+
+	model LottoWheelSpinFragment3
+	{
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/WheelSpinFragment3,
+		scale = 1.25,
+	}
+
+	model LottoWheelSpinFragment4
+	{
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/WheelSpinFragment4,
+		scale = 1.25,
+	}
+
+	model LottoWheelSpinFragment5
+	{
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/WheelSpinFragment5,
+		scale = 1.25,
+	}
+
+
+
+	model LottoWheelSpinTokenOld
+	{
+		mesh = worlditems/LottoWheelSpinTokenOld,
+		texture = worlditems/LottoWheelSpinTokenModel,
+		scale = 1.25,
+	}
+
+
+
+	model Lotto-WheelSpinToken
+	{
+		mesh = worlditems/Lotto-WheelSpinToken,
+		texture = worlditems/Lotto-WheelSpinToken,
+		scale = 1.6,
+	}
+
+	model Lotto-SuperWheelSpinToken
+	{
+		mesh = worlditems/Lotto-SuperWheelSpinToken,
+		texture = worlditems/Lotto-SuperWheelSpinToken,
+		scale = 1.8,
+	}
+
+	model Lotto-MegaWheelSpinToken
+	{
+		mesh = worlditems/Lotto-MegaWheelSpinToken,
+		texture = worlditems/Lotto-MegaWheelSpinToken,
+		scale = 2.0,
+	}
+
+	model Lotto-UltimateWheelSpinToken
+	{
+		mesh = worlditems/Lotto-UltimateWheelSpinToken,
+		texture = worlditems/Lotto-UltimateWheelSpinToken,
+		scale = 2.25,
+	}
+
+
 
 	model VIPToken
 	{
 		mesh = worlditems/VIPToken,
 		texture = worlditems/VIPTokenModel,
-		scale = 1.35,
+		scale = 1.2,
 	}
 
 	model EventToken
@@ -135,8 +199,29 @@ module GN84-ECO
 	model WandererToken
 	{
 		mesh = worlditems/WandererToken,
-		texture = worlditems/WandererTokenModel,
-		scale = 1.35,
+		texture = worlditems/WandererTokenGreen,
+		scale = 1.0,
+	}
+
+	model WandererTokenStackSmall
+	{
+		mesh = worlditems/WandererToken,
+		texture = worlditems/WandererTokenYellow,
+		scale = 1.2,
+	}
+
+	model WandererTokenStackMedium
+	{
+		mesh = worlditems/WandererToken,
+		texture = worlditems/WandererTokenBlue,
+		scale = 1.4,
+	}
+
+	model WandererTokenStackLarge
+	{
+		mesh = worlditems/WandererToken,
+		texture = worlditems/WandererTokenRed,
+		scale = 1.6,
 	}
 
 	model WanderersRaffleTicket
@@ -146,7 +231,18 @@ module GN84-ECO
 		scale = 0.333,
 	}
 
+	model WanderersVIPCoupon
+	{
+		mesh = worlditems/WanderersVIPCoupon,
+		texture = worlditems/WanderersVIPCoupon,
+		scale = 1.25,
+	}
 
-
+	model MoneyClip
+	{
+		mesh = worlditems/MoneyClip,
+		texture = worlditems/MoneyClip,
+		scale = 0.5,
+	}
 }
 

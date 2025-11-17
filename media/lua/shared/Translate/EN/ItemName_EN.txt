@@ -1,9 +1,36 @@
 ItemName_EN = {
 
 ItemName_GN84-ECO.MoneyStack100 = "Stack of Cash - $100 - ",
+ItemName_GN84-ECO.MoneyStack500 = "Stack of Cash - $500 - ",
 ItemName_GN84-ECO.MoneyStack1000 = "Stack of Cash - $1,000 - ",
+ItemName_GN84-ECO.MoneyStack5000 = "Stack of Cash - $5,000 - ",
 ItemName_GN84-ECO.MoneyStack10000 = "Stack of Cash - $10,000 - ",
+ItemName_GN84-ECO.MoneyStack50000 = "Stack of Cash - $50,000 - ",
 ItemName_GN84-ECO.MoneyStack100000 = "Stack of Cash - $100,000 - ",
+ItemName_GN84-ECO.MoneyStack500000 = "Stack of Cash - $500,000 - ",
 ItemName_GN84-ECO.MoneyStack1000000 = "Stack of Cash - $1,000,000 - ",
+ItemName_GN84-ECO.MoneyStack5000000 = "Stack of Cash - $5,000,000 - ",
+ItemName_GN84-ECO.MoneyStack10000000 = "Stack of Cash - $10,000,000 - ",
+
+ItemName_GN84-ECO.SafehouseExpansionPermit5 = "Safehouse Expansion Permit - 5 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit10 = "Safehouse Expansion Permit - 10 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit50 = "Safehouse Expansion Permit - 50 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit100 = "Safehouse Expansion Permit - 100 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit250 = "Safehouse Expansion Permit - 250 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit500 = "Safehouse Expansion Permit - 500 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit1000 = "Safehouse Expansion Permit - 1,000 Tiles",
+ItemName_GN84-ECO.SafehouseExpansionPermit5000 = "Safehouse Expansion Permit - 5,000 Tiles",
+
+ItemName_GN84-ECO.WandererTokenStack5 = "Wanderer Tokens - Stack of 5 -",
+ItemName_GN84-ECO.WandererTokenStack10 = "Wanderer Tokens - Stack of 10 -",
+ItemName_GN84-ECO.WandererTokenStack25 = "Wanderer Tokens - Stack of 25 -",
+ItemName_GN84-ECO.WandererTokenStack50 = "Wanderer Tokens - Stack of 50 -",
+ItemName_GN84-ECO.WandererTokenStack100 = "Wanderer Tokens - Stack of 100 -",
+ItemName_GN84-ECO.WandererTokenStack250 = "Wanderer Tokens - Stack of 250 -",
+ItemName_GN84-ECO.WandererTokenStack500 = "Wanderer Tokens - Stack of 500 -",
+ItemName_GN84-ECO.WandererTokenStack1000 = "Wanderer Tokens - Stack of 1,000 -",
+ItemName_GN84-ECO.WandererTokenStack5000 = "Wanderer Tokens - Stack of 5,000 -",
+
+
 
 }

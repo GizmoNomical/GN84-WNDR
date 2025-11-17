@@ -39,6 +39,28 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Time:50,
 	}
+
+	recipe Make 500 Stack of Cash
+	{
+		Money=500,
+		
+		InSameInventory:true,
+		Result:MoneyStack500,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:50,
+	}
+
+	recipe Make 500 Stack of Cash
+	{
+		MoneyStack100=5,
+		
+		InSameInventory:true,
+		Result:MoneyStack500,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:50,
+	}	
 	
 	recipe Make 1000 Stack of Cash
 	{
@@ -61,10 +83,76 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Time:70,
 	}
+
+	recipe Make 1000 Stack of Cash
+	{
+		MoneyStack500=2,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 5000 Stack of Cash
+	{
+		Money=5000,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 5000 Stack of Cash
+	{
+		MoneyStack500=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 5000 Stack of Cash
+	{
+		MoneyStack1000=5,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 10000 Stack of Cash
+	{
+		Money=10000,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
 	
 	recipe Make 10000 Stack of Cash
 	{
 		MoneyStack100=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 10000 Stack of Cash
+	{
+		MoneyStack500=20,
 		
 		InSameInventory:true,
 		Result:MoneyStack10000,
@@ -84,12 +172,133 @@ module GN84-ECO
 		Time:70,
 	}
 
+	recipe Make 50000 Stack of Cash
+	{
+		MoneyStack500=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack50000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 50000 Stack of Cash
+	{
+		MoneyStack1000=50,
+		
+		InSameInventory:true,
+		Result:MoneyStack50000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 50000 Stack of Cash
+	{
+		MoneyStack5000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack50000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}	
+
+	recipe Make 50000 Stack of Cash
+	{
+		MoneyStack10000=5,
+		
+		InSameInventory:true,
+		Result:MoneyStack50000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Make 100000 Stack of Cash
+	{
+		MoneyStack5000=20,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
 	recipe Make 100000 Stack of Cash
 	{
 		MoneyStack10000=10,
 		
 		InSameInventory:true,
 		Result:MoneyStack100000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}	
+
+	recipe Make 100000 Stack of Cash
+	{
+		MoneyStack50000=2,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}	
+
+	recipe Make 500000 Stack of Cash
+	{
+		MoneyStack5000=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 500000 Stack of Cash
+	{
+		MoneyStack10000=50,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 500000 Stack of Cash
+	{
+		MoneyStack50000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 500000 Stack of Cash
+	{
+		MoneyStack100000=5,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 1000000 Stack of Cash
+	{
+		MoneyStack50000=20,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000000,
 		AnimNode:Craft,
 		Sound:CountingMoney,
 		Time:110,
@@ -105,6 +314,105 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Time:110,
 	}
+
+	recipe Make 1000000 Stack of Cash
+	{
+		MoneyStack500000=2,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 5000000 Stack of Cash
+	{
+		MoneyStack100000=50,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 5000000 Stack of Cash
+	{
+		MoneyStack1000000=5,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 5000000 Stack of Cash
+	{
+		MoneyStack500000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 10000000 Stack of Cash
+	{
+		MoneyStack100000=100,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 10000000 Stack of Cash
+	{
+		MoneyStack500000=20,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 10000000 Stack of Cash
+	{
+		MoneyStack5000000=2,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Make 10000000 Stack of Cash
+	{
+		MoneyStack1000000=10,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000000,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:110,
+	}
+
+	recipe Break Stack of Cash into 100s
+	{
+		MoneyStack500,
+		
+		InSameInventory:true,
+		Result:MoneyStack100=5,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:50,
+	}	
 	
 	recipe Break Stack of Cash into 100s
 	{
@@ -116,6 +424,7 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Time:50,
 	}	
+
 		
 	recipe Break Stack of Cash into 1000s
 	{
@@ -123,6 +432,17 @@ module GN84-ECO
 		
 		InSameInventory:true,
 		Result:MoneyStack1000=10,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 1000s
+	{
+		MoneyStack5000,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000=5,
 		AnimNode:Craft,
 		Sound:CountingMoney,
 		Time:70,
@@ -139,6 +459,17 @@ module GN84-ECO
 		Time:70,
 	}
 
+	recipe Break Stack of Cash into 10000s
+	{
+		MoneyStack50000,
+		
+		InSameInventory:true,
+		Result:MoneyStack10000=5,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
 	recipe Break Stack of Cash into 100000s
 	{
 		MoneyStack1000000,
@@ -148,7 +479,106 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:CountingMoney,
 		Time:70,
-	}			
+	}		
+
+	recipe Break Stack of Cash into 100000s
+	{
+		MoneyStack500000,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000=5,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}	
+
+	recipe Break Stack of Cash into 100000s
+	{
+		MoneyStack5000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000=50,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}	
+
+	recipe Break Stack of Cash into 100000s
+	{
+		MoneyStack10000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack100000=100,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}	
+
+	recipe Break Stack of Cash into 500000s
+	{
+		MoneyStack5000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000=10,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 500000s
+	{
+		MoneyStack1000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000=2,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 500000s
+	{
+		MoneyStack10000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack500000=20,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 1000000s
+	{
+		MoneyStack10000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000000=10,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 1000000s
+	{
+		MoneyStack5000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack1000000=5,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}
+
+	recipe Break Stack of Cash into 5000000s
+	{
+		MoneyStack10000000,
+		
+		InSameInventory:true,
+		Result:MoneyStack5000000=2,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Time:70,
+	}	
 		
 /* CONVERT CASH TO SMOKEY POINTS */
 /* ----------------------------- */	
@@ -157,7 +587,7 @@ module GN84-ECO
 
 	recipe Convert to 100 Smokey Points
 	{
-		MoneyStack100,
+		MoneyStack100=1,
 		
 		Result:SheetPaper2,
 		Time:80.0,
@@ -166,6 +596,32 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints100,	
+	}
+
+	recipe Convert to 500 Smokey Points
+	{
+		MoneyStack100=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500,	
+	}
+
+	recipe Convert to 500 Smokey Points
+	{
+		MoneyStack500=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500,	
 	}
 	
 	recipe Convert to 1000 Smokey Points
@@ -180,10 +636,10 @@ module GN84-ECO
 		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
-	
+
 	recipe Convert to 1000 Smokey Points
 	{
-		MoneyStack1000,
+		MoneyStack500=2,
 		
 		Result:SheetPaper2,
 		Time:80.0,
@@ -194,9 +650,74 @@ module GN84-ECO
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 	
+	recipe Convert to 1000 Smokey Points
+	{
+		MoneyStack1000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints1000,	
+	}
+
+	recipe Convert to 5000 Smokey Points
+	{
+		MoneyStack100=50,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000,	
+	}
+
+	recipe Convert to 5000 Smokey Points
+	{
+		MoneyStack1000=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000,	
+	}
+
+	recipe Convert to 5000 Smokey Points
+	{
+		MoneyStack5000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000,	
+	}	
+	
 	recipe Convert to 10000 Smokey Points
 	{
 		MoneyStack100=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 10000 Smokey Points
+	{
+		MoneyStack500=20,
 		
 		Result:SheetPaper2,
 		Time:80.0,
@@ -222,7 +743,7 @@ module GN84-ECO
 
 	recipe Convert to 10000 Smokey Points
 	{
-		MoneyStack10000,
+		MoneyStack5000=2,
 		
 		Result:SheetPaper2,
 		Time:80.0,
@@ -231,6 +752,85 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 10000 Smokey Points
+	{
+		MoneyStack10000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000,	
+	}
+
+	recipe Convert to 50000 Smokey Points
+	{
+		MoneyStack1000=50,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints50000,	
+	}
+
+	recipe Convert to 50000 Smokey Points
+	{
+		MoneyStack5000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints50000,	
+	}
+
+	recipe Convert to 50000 Smokey Points
+	{
+		MoneyStack10000=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints50000,	
+	}
+
+	recipe Convert to 50000 Smokey Points
+	{
+		MoneyStack50000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints50000,	
+	}
+
+
+	recipe Convert to 100000 Smokey Points
+	{
+		MoneyStack5000=20,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints100000,	
 	}
 
 	recipe Convert to 100000 Smokey Points
@@ -248,7 +848,7 @@ module GN84-ECO
 
 	recipe Convert to 100000 Smokey Points
 	{
-		MoneyStack100000,
+		MoneyStack100000=1,
 		
 		Result:SheetPaper2,
 		Time:80.0,
@@ -257,6 +857,71 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints100000,	
+	}
+
+	recipe Convert to 500000 Smokey Points
+	{
+		MoneyStack5000=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500000,	
+	}
+
+	recipe Convert to 500000 Smokey Points
+	{
+		MoneyStack10000=50,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500000,	
+	}
+
+	recipe Convert to 500000 Smokey Points
+	{
+		MoneyStack50000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500000,	
+	}
+
+	recipe Convert to 500000 Smokey Points
+	{
+		MoneyStack100000=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500000,	
+	}
+
+	recipe Convert to 500000 Smokey Points
+	{
+		MoneyStack500000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
 	recipe Convert to 1000000 Smokey Points
@@ -287,6 +952,19 @@ module GN84-ECO
 
 	recipe Convert to 1000000 Smokey Points
 	{
+		MoneyStack500000=2,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints1000000,	
+	}
+
+	recipe Convert to 1000000 Smokey Points
+	{
 		MoneyStack10000=100,
 		
 		Result:SheetPaper2,
@@ -297,7 +975,110 @@ module GN84-ECO
 		Sound:ReceiptSound,
 		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
+
+	recipe Convert to 5000000 Smokey Points
+	{
+		MoneyStack100000=50,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000000,	
+	}
+
+	recipe Convert to 5000000 Smokey Points
+	{
+		MoneyStack500000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000000,	
+	}
+
+	recipe Convert to 5000000 Smokey Points
+	{
+		MoneyStack1000000=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000000,	
+	}
+
+	recipe Convert to 5000000 Smokey Points
+	{
+		MoneyStack5000000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints5000000,	
+	}
+
+	recipe Convert to 10000000 Smokey Points
+	{
+		MoneyStack100000=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000000,	
+	}
+
+	recipe Convert to 10000000 Smokey Points
+	{
+		MoneyStack1000000=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000000,	
+	}
 	
+	recipe Convert to 10000000 Smokey Points
+	{
+		MoneyStack5000000=2,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000000,	
+	}
+
+	recipe Convert to 10000000 Smokey Points
+	{
+		MoneyStack10000000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints10000000,	
+	}
 
 
 /* CUT LEATHER STRIPS FROM WALLET */
@@ -312,7 +1093,9 @@ module GN84-ECO
 		RemoveResultItem:true,
    		Time:60.0,
 		AnimNode:Craft,
+		Sound:ScissorsCutLeather,
 		OnCreate:CutLeatherWallet,
+		Tooltip: "Attempt to Salvage Leather from Wallet",
    	}
 
 
@@ -545,7 +1328,7 @@ module GN84-ECO
 
 
 
-	/*LOTTO AND TOKENS*/
+	/*LOTTO TICKETS */
 
 	recipe Scratch Lotto Ticket to Win
 	{
@@ -877,59 +1660,215 @@ module GN84-ECO
 
 	/*RARE TICKETS FOR WHEEL SPINS*/
 
-	recipe Redeem Rare Tickets for Wheel Spin Token
+	recipe Redeem Rare Tickets for Wheel Spin Fragment
 	{
 		LottoTicketRare=20,
 
 		InSameInventory:true,
+		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-ECO.WheelSpinToken,
+		Result:Base.Money,
 		Time:70.0,
+		OnCreate:GiveRandomWheelSpinFragment,
 	}
 
-	recipe Redeem Rare Tickets for Super Wheel Spin Token
-	{
-		LottoTicketRare=100,
+	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 1)
+	// {
+	// 	LottoTicketRare=100,
 
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:GN84-ECO.SuperWheelSpinToken,
-		Time:70.0,
-	}
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:GN84-ECO.SuperWheelSpinToken,
+	// 	Time:70.0,
+	// }
+
+	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 2)
+	// {
+	// 	LottoTicketRare=300,
+
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:GN84-ECO.SuperWheelSpinToken2,
+	// 	Time:70.0,
+	// }
+
+	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 3)
+	// {
+	// 	LottoTicketRare=500,
+
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:GN84-ECO.SuperWheelSpinToken3,
+	// 	Time:70.0,
+	// }
 
 
 
 
 	/*WHEEL SPINS UPGRADE*/
 
-	recipe Trade Wheel Spin Tokens for Super Wheel Spin Token
+
+
+	recipe Shatter Legacy Wheel Spin Token into Fragment
 	{
-		WheelSpinToken=5,
+		WheelSpinToken=1,
+
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ShatterToken,
+		Result:Base.Money,
+		Tooltip: "This Legacy Token has lost it's magic..  Shatter it to regain a useable fragment",
+		Time:100.0,
+		OnCreate:GiveRandomWheelSpinFragment,
+	}
+
+	recipe Shatter Legacy Super Wheel Spin Token into Fragments
+	{
+		SuperWheelSpinToken=1,
+
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ShatterToken,
+		Result:Base.Money,
+		Tooltip: "This Legacy Token has lost it's magic..  Shatter it to regain useable fragments",
+		Time:100.0,
+		OnCreate:GiveFiveRandomWheelSpinFragments,
+	}
+
+	recipe Forge Wheel Spin Token
+	{
+		WheelSpinFragment1,
+		WheelSpinFragment2,
+		WheelSpinFragment3,
+		WheelSpinFragment4,
+		WheelSpinFragment5,
+		WandererTokenStack5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:GN84-ECO.SuperWheelSpinToken,
-		Time:70.0,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.WheelSpinTokenNew,
+		Time:120.0,
+		Tooltip: "Combine 5 Unique Wheel Spin Fragments to Forge a Wheel Spin Token!",
+	}
+
+	recipe Forge Super Wheel Spin Token
+	{
+		WheelSpinTokenNew=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.SuperWheelSpinTokenNew,
+		Time:120.0,	
+		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
+	}
+
+	recipe Forge Super Wheel Spin Token
+	{
+		WheelSpinTokenNew=1,
+		WandererTokenStack25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.SuperWheelSpinTokenNew,
+		Time:120.0,	
+		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
+	}
+
+	recipe Forge Mega Wheel Spin Token
+	{
+		SuperWheelSpinTokenNew=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.MegaWheelSpinToken,
+		Time:120.0,	
+		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
+	}
+
+	recipe Forge Mega Wheel Spin Token
+	{
+		SuperWheelSpinTokenNew=1,
+		WandererTokenStack100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.MegaWheelSpinToken,
+		Time:120.0,	
+		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
+	}
+
+	recipe Forge Ultimate Wheel Spin Token
+	{
+		MegaWheelSpinToken=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.UltimateWheelSpinToken,
+		Time:120.0,
+		Tooltip: "Combine 5 Mega Wheel Spin Tokens to Forge an Ultimate Wheel Spin Token!",
+	}
+
+	recipe Forge Ultimate Wheel Spin Token
+	{
+		MegaWheelSpinToken=1,
+		WandererTokenStack500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WheelSpinForge,
+		Result:GN84-ECO.UltimateWheelSpinToken,
+		Time:120.0,
+		Tooltip: "Combine 5 Mega Wheel Spin Tokens to Forge an Ultimate Wheel Spin Token!",
+	}
+
+	recipe Shatter Ultimate Wheel Spin Token into Lesser Tokens
+	{
+		UltimateWheelSpinToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ShatterToken,
+		Result:GN84-ECO.MegaWheelSpinToken=5,
+		Time:100.0,
+	}
+
+	recipe Shatter Mega Wheel Spin Token into Lesser Tokens
+	{
+		MegaWheelSpinToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ShatterToken,
+		Result:GN84-ECO.SuperWheelSpinTokenNew=5,
+		Time:100.0,
+	}
+
+	recipe Shatter Super Wheel Spin Token into Lesser Tokens
+	{
+		SuperWheelSpinTokenNew,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ShatterToken,
+		Result:GN84-ECO.WheelSpinTokenNew=5,
+		Time:100.0,
 	}
 
 
-
-	/*VIP TOKENS*/
-
-	// recipe Redeem VIP Token for Smokey Points
-	// {
-	// 	VIPTokenNew,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:Money,
-	// 	Time:120.0,		
-	// 	OnCreate:GivePlayerSmokeyPointsVIPToken,
-	// }	
+	
+	/* VIP TOKEN REDEMPTION */
 
 	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
@@ -938,25 +1877,88 @@ module GN84-ECO
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-ECO.SuperWheelSpinToken,
+		Result:GN84-ECO.SuperWheelSpinTokenNew,
 		Time:120.0,
 	}
 
-	recipe Redeem VIP Token for Wanderer Tokens
+	recipe Redeem VIP Token for Stack of Wanderer Tokens
 	{
 		VIPTokenNew,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-ECO.WandererToken=50,
+		Result:GN84-ECO.WandererTokenStack100,
 		Time:120.0,
 	}
 
 
+
+
 	/*WANDERER TOKENS*/
 	
+	/*   5   */
+	recipe Make 5 Stack of Wanderer Tokens
+	{
+		WandererToken=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack5,
+		Time:120.0,
+	}
+
+
+	/*   10   */
+	recipe Make 10 Stack of Wanderer Tokens
+	{
+		WandererToken=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack10,
+		Time:120.0,
+	}
+
+	recipe Make 10 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack10,
+		Time:120.0,
+	}
+
+
+	/*   25   */
+	recipe Make 25 Stack of Wanderer Tokens
+	{
+		WandererToken=25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack25,
+		Time:120.0,
+	}
+
+	recipe Make 25 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack25,
+		Time:120.0,
+	}
 	
+
+	/*   50   */
 	recipe Make 50 Stack of Wanderer Tokens
 	{
 		WandererToken=50,
@@ -968,9 +1970,77 @@ module GN84-ECO
 		Time:120.0,
 	}
 
+	recipe Make 50 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack50,
+		Time:120.0,
+	}
+
+	recipe Make 50 Stack of Wanderer Tokens
+	{
+		WandererTokenStack10=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack50,
+		Time:120.0,
+	}
+
+	recipe Make 50 Stack of Wanderer Tokens
+	{
+		WandererTokenStack25=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack50,
+		Time:120.0,
+	}
+
+
+	/*   100   */
 	recipe Make 100 Stack of Wanderer Tokens
 	{
 		WandererToken=100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack100,
+		Time:120.0,
+	}
+
+	recipe Make 100 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack100,
+		Time:120.0,
+	}
+
+	recipe Make 100 Stack of Wanderer Tokens
+	{
+		WandererTokenStack10=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack100,
+		Time:120.0,
+	}
+
+	recipe Make 100 Stack of Wanderer Tokens
+	{
+		WandererTokenStack25=4,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -990,6 +2060,87 @@ module GN84-ECO
 		Time:120.0,
 	}	
 
+	/*   250   */
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererToken=250,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererTokenStack10=25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererTokenStack25=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererTokenStack50=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+	recipe Make 250 Stack of Wanderer Tokens
+	{
+		WandererTokenStack50=1,
+		WandererTokenStack100=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack250,
+		Time:120.0,
+	}
+
+
+	/*   500   */
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererToken=500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
 	recipe Make 500 Stack of Wanderer Tokens
 	{
 		WandererTokenStack100=5,
@@ -1003,7 +2154,7 @@ module GN84-ECO
 
 	recipe Make 500 Stack of Wanderer Tokens
 	{
-		WandererToken=500,
+		WandererTokenStack250=2,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1011,6 +2162,97 @@ module GN84-ECO
 		Result:WandererTokenStack500,
 		Time:120.0,
 	}
+
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererTokenStack50=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererTokenStack25=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererTokenStack10=50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+	recipe Make 500 Stack of Wanderer Tokens
+	{
+		WandererTokenStack5=100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack500,
+		Time:120.0,
+	}
+
+
+	/*   1000   */
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererToken=1000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack10=100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}	
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack25=40,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}	
+
+	recipe Make 1000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack50=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack1000,
+		Time:120.0,
+	}	
 
 	recipe Make 1000 Stack of Wanderer Tokens
 	{
@@ -1036,12 +2278,60 @@ module GN84-ECO
 
 	recipe Make 1000 Stack of Wanderer Tokens
 	{
-		WandererToken=1000,
+		WandererTokenStack250=4,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
 		Result:WandererTokenStack1000,
+		Time:120.0,
+	}
+
+	recipe Make 5000 Stack of Wanderer Tokens
+	{
+		WandererTokenStack1000=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:WandererTokenStack5000,
+		Time:120.0,
+	}
+
+	
+
+	/*   UNSTACKING TOKENS   */
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererToken=5,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererToken=10,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererToken=25,
 		Time:120.0,
 	}
 
@@ -1063,7 +2353,18 @@ module GN84-ECO
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-ECO.WandererTokenStack50=2,
+		Result:GN84-ECO.WandererToken=100,
+		Time:120.0,
+	}
+
+	recipe Unstack Wanderer Tokens
+	{
+		WandererTokenStack250,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererToken=250,
 		Time:120.0,
 	}
 
@@ -1074,11 +2375,82 @@ module GN84-ECO
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-ECO.WandererTokenStack100=5,
+		Result:GN84-ECO.WandererToken=500,
+		Time:120.0,
+	}
+	
+
+
+
+	/*   SPLITTING TOKEN STACKS   */
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack5=2,
 		Time:120.0,
 	}
 
-	recipe Unstack Wanderer Tokens
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack25,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack5=5,
+		Time:120.0,
+	}	
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack10=5,
+		Time:120.0,
+	}	
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack50=2,
+		Time:120.0,
+	}		
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack250,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack50=5,
+		Time:120.0,
+	}		
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack100=5,
+		Time:120.0,
+	}			
+
+	recipe Split Stack of Wanderer Tokens
 	{
 		WandererTokenStack1000,
 
@@ -1087,8 +2459,243 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Result:GN84-ECO.WandererTokenStack500=2,
 		Time:120.0,
+	}	
+
+	recipe Split Stack of Wanderer Tokens
+	{
+		WandererTokenStack5000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.WandererTokenStack1000=5,
+		Time:120.0,
 	}
 
+
+
+
+	/*   SAFEHOUSE EXPANSION PERMITS   */
+
+	/*   CONSOLIDATE   */
+
+	recipe Consolidate Safehouse Expansion Permits - 10 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit5=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit10,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 50 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit5=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit50,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 50 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit10=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit50,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit5=20,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit100,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit50=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit100,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit10=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit100,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 250 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit50=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit250,
+		Time:120.0,
+	}	
+
+	recipe Consolidate Safehouse Expansion Permits - 500 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit250=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit500,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit250=4,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit1000,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 500 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit100=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit500,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit100=10,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit1000,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit500=2,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit1000,
+		Time:120.0,
+	}
+
+	recipe Consolidate Safehouse Expansion Permits - 5000 Tiles
+	{
+		GN84-ECO.SafehouseExpansionPermit1000=5,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit5000,
+		Time:120.0,
+	}
+
+
+
+	/*   SPLIT   */
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit5000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit1000=5,
+		Time:120.0,
+	}
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit1000,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit500=2,
+		Time:120.0,
+	}
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit500,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit100=5,
+		Time:120.0,
+	}
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit250,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit50=5,
+		Time:120.0,
+	}
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit100,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit50=2,
+		Time:120.0,
+	}
+
+	recipe Split Safehouse Expansion Permit
+	{
+		GN84-ECO.SafehouseExpansionPermit50,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:CountingMoney,
+		Result:GN84-ECO.SafehouseExpansionPermit10=5,
+		Time:120.0,
+	}
+
+	
+
+	
+	/*   REDEEMING WANDERER TOKENS   */
 
 	recipe Redeem Wanderer Token for Smokey Points
 	{
@@ -1102,16 +2709,7 @@ module GN84-ECO
 		OnCreate:GivePlayerSmokeyPointsWandererToken,
 	}
 	
-	recipe Redeem Wanderer Tokens for Wheel Spin Token
-	{
-		WandererToken=15,
-
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:GN84-ECO.WheelSpinToken,
-		Time:120.0,
-	}	
+	
 
 
 	/*UPDATE OLD TOKENS*/
@@ -1137,5 +2735,32 @@ module GN84-ECO
 		Result:WandererToken=3,
 		Time:30.0,
 	}
+
+	/*VIP TOKENS*/
+
+	// recipe Redeem VIP Token for Smokey Points
+	// {
+	// 	VIPTokenNew,
+
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:Money,
+	// 	Time:120.0,		
+	// 	OnCreate:GivePlayerSmokeyPointsVIPToken,
+	// }	
+
+
+	// recipe Redeem Wanderer Tokens for Wheel Spin Fragment
+	// {
+	// 	WandererToken=15,
+
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:GN84-ECO.WheelSpinToken,
+	// 	Time:120.0,
+	// }	
+
 
 }
