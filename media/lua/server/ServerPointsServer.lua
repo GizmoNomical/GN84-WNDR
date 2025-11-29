@@ -5,11 +5,26 @@ function Recipe.OnCreate.RedeemPoints(items, result, player)
     player:Say("Redeemed " .. points .. " " .. SandboxVars.ServerPoints.PointsName)
 end
 
+local ANSIPrinter = require 'asledgehammer/util/ANSIPrinter'
+
 if not isServer() then return end
 
 local serverPointsData
 local listings
 local oldListings
+
+-- ANSI Printer Init
+
+local mod = 'The Wanderers'
+local printer = ANSIPrinter:new(mod, { boolean = true})
+local info = function(message, ...) printer:info(message, ...) end
+local success = function(message, ...) printer:success(message, ...) end
+local warn = function(message, ...) printer:warn(message, ...) end
+local error = function(message, ...) printer:error(message, ...) end
+local fatal = function(message, ...) printer:fatal(message, ...) end
+local printf = function(message, ...) printer:printf(message, ...) end
+
+
 
 
 local function PointsTick()
@@ -113,14 +128,29 @@ function ServerPointsCommands.vehicle(module, command, player, args)
 end
 
 function ServerPointsCommands.add(module, command, player, args)
-    print("###############")
-    print(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
+    -- print("###############")
+    -- print(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
+    
+    -- if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
+    -- serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+
+    -- print("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
+    -- print("###############")
+
+
+    printf("###############", ANSIPrinter.KEYS['bright'] .. ANSIPrinter.KEYS['green'])
+    printf(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
     
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
 
-    print("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
-    print("###############")
+    printf("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
+    printf("###############")
+
+
+
+
+
 end
 
 
