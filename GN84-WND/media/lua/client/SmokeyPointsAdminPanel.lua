@@ -10,7 +10,7 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-ECO                                                  ##
+-- ##                                           GN84-WND                                                  ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
@@ -24,7 +24,7 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 
 local function OnServerCommand(module, command, arguments)
-    if module == "GN84-ECO" and command == "get" then
+    if module == "GN84-WND" and command == "get" then
         SmokeyPointsAdminPanel.instance.balance = "Balance: " .. tostring(arguments[1])
         Events.OnServerCommand.Remove(OnServerCommand)
     end
@@ -38,7 +38,7 @@ function SmokeyPointsAdminPanel:createChildren()
     local x = padBottom + getTextManager():MeasureStringX(UIFont.Medium, "Player:") + padBottom
     self.playerSelect = ISComboBox:new(x, padBottom * 2 + FONT_HGT_MEDIUM, self.width - x - padBottom, btnHgt, nil, function(_, combo)
         Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("GN84-ECO", "get", { combo.options[combo.selected] })
+        sendClientCommand("GN84-WND", "get", { combo.options[combo.selected] })
     end)
 
     self.playerSelect:initialise()
@@ -49,7 +49,7 @@ function SmokeyPointsAdminPanel:createChildren()
     table.sort(self.playerSelect.options)
     self.playerSelect.selected = 1
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-ECO", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-WND", "get", { self.playerSelect.options[self.playerSelect.selected] })
     self:addChild(self.playerSelect)
 
     local z = self.playerSelect.y + self.playerSelect.height + padBottom + FONT_HGT_MEDIUM + padBottom * 2
@@ -97,23 +97,23 @@ end
 
 function SmokeyPointsAdminPanel:onOptionMouseDown(button)
     if button.internal == "GIVE" then
-        sendClientCommand("GN84-ECO", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-WND", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
     elseif button.internal == "TAKE" then
-        sendClientCommand("GN84-ECO", "add", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-WND", "add", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
     end
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-ECO", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-WND", "get", { self.playerSelect.options[self.playerSelect.selected] })
 end
 
 -- function SmokeyPointsAdminPanel:onSpawn()
 --     local item = getPlayer():getInventory():AddItem("Base.ServerPoints")
 --     local points = tonumber(self.pointsEntry:getText())
 --     item:getModData().serverPoints = points
---     item:setName(points .. " " .. SandboxVars.ServerPoints.PointsName)
+--     item:setName(points .. " " .. SandboxVars.GN84WND.PointsName)
 -- end
 
 function SmokeyPointsAdminPanel.onReload()
-    sendClientCommand("GN84-ECO", "reload", nil)
+    sendClientCommand("GN84-WND", "reload", nil)
 end
 
 function SmokeyPointsAdminPanel:close()

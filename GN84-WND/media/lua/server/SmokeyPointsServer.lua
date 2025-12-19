@@ -10,7 +10,7 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-ECO                                                  ##
+-- ##                                           GN84-WND                                                  ##
 -- ##                                      The Wanderers Core                                             ##
 -- #########################################################################################################
 -- #########################################################################################################
@@ -18,8 +18,8 @@
 
 function Recipe.OnCreate.RedeemPoints(items, result, player)
     local points = items:get(0):getModData().serverPoints or 0
-    sendClientCommand("GN84-ECO", "add", { player:getUsername(), points })
-    player:Say("Redeemed " .. points .. " " .. SandboxVars.ServerPoints.PointsName)
+    sendClientCommand("GN84-WND", "add", { player:getUsername(), points })
+    player:Say("Redeemed " .. points .. " " .. SandboxVars.GN84WND.PointsName)
 end
 
 if not isServer() then return end
@@ -61,7 +61,7 @@ local function PointsTick()
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not serverPointsData[username] then serverPointsData[username] = 0 end
-            serverPointsData[username] = serverPointsData[username] + SandboxVars.ServerPoints.PointsPerTick
+            serverPointsData[username] = serverPointsData[username] + SandboxVars.GN84WND.PointsPerTick
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
@@ -101,7 +101,7 @@ local function LoadListings()
         --print ("listings are the same")
     else
         print ("Smokey Shop Listings Updated") 
-        sendServerCommand("GN84-ECO", "ServerForceRefresh", nil)        
+        sendServerCommand("GN84-WND", "ServerForceRefresh", nil)        
     end
 
     oldListings = lines    
@@ -122,11 +122,11 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 
     LoadListings()
 
-    if SandboxVars.ServerPoints.PointsFrequency == 2 then
+    if SandboxVars.GN84WND.PointsFrequency == 2 then
         Events.EveryTenMinutes.Add(PointsTick)
-    elseif SandboxVars.ServerPoints.PointsFrequency == 3 then
+    elseif SandboxVars.GN84WND.PointsFrequency == 3 then
         Events.EveryHours.Add(PointsTick)
-    elseif SandboxVars.ServerPoints.PointsFrequency == 4 then
+    elseif SandboxVars.GN84WND.PointsFrequency == 4 then
         Events.EveryDays.Add(PointsTick)
     end
 end)
@@ -152,19 +152,6 @@ function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
 end
 
-
---TODO:  REMOVE VEHICLE OPTIONS
-function ServerPointsCommands.vehicle(module, command, player, args)
-    local vehicle = addVehicleDebug(args[1], IsoDirections.S, nil, player:getSquare())
-    for i = 0, vehicle:getPartCount() - 1 do
-        local container = vehicle:getPartByIndex(i):getItemContainer()
-        if container then
-            container:removeAllItems()
-        end
-    end
-    vehicle:repair()
-    player:sendObjectChange("addItem", { item = vehicle:createVehicleKey() })
-end
 
 
 ------------------------------------------------------------------------
@@ -297,7 +284,7 @@ function ServerPointsCommands.reload(module, command, player, args)
 end
 
 Events.OnClientCommand.Add(function(module, command, player, args)
-    if module == "GN84-ECO" and ServerPointsCommands[command] then
+    if module == "GN84-WND" and ServerPointsCommands[command] then
         ServerPointsCommands[command](module, command, player, args)
     end
 end)

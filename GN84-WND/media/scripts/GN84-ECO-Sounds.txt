@@ -1,4 +1,4 @@
-module GN84-ECO
+module GN84-WND
 {
     imports
     {
