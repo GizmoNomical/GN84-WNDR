@@ -1,3 +1,20 @@
+-- #########################################################################################################
+-- #########################################################################################################
+-- ##                                                                                                     ##
+-- ##                                                                                                     ##
+-- ##       _____   _                              _   _                       _                  _       ##
+-- ##      / ____| (_)                            | \ | |                     (_)                | |      ##
+-- ##      | |  __   _   ____  _ __ ___     ___   |  \| |   ___    _ __ ___    _    ___    __ _  | |      ##
+-- ##      | | |_ | | | |_  / | '_ ` _ \   / _ \  | . ` |  / _ \  | '_ ` _ \  | |  / __|  / _` | | |      ##
+-- ##      | |__| | | |  / /  | | | | | | | (_) | | |\  | | (_) | | | | | | | | | | (__  | (_| | | |      ##
+-- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
+-- ##                                                                                                     ##
+-- ##                               Copyright © GizmoNomical - 2025                                       ##
+-- ##                                           GN84-ECO                                                  ##
+-- ##                                      The Wanderers Core                                             ##
+-- #########################################################################################################
+-- #########################################################################################################
+
 
 function Recipe.OnCreate.RedeemPoints(items, result, player)
     local points = items:get(0):getModData().serverPoints or 0
@@ -5,15 +22,17 @@ function Recipe.OnCreate.RedeemPoints(items, result, player)
     player:Say("Redeemed " .. points .. " " .. SandboxVars.ServerPoints.PointsName)
 end
 
-local ANSIPrinter = require 'asledgehammer/util/ANSIPrinter'
-
 if not isServer() then return end
 
 local serverPointsData
 local listings
 local oldListings
 
--- ANSI Printer Init
+------------------------------------------------------------------------
+--                          ANSI PRINTER INIT
+------------------------------------------------------------------------
+
+local ANSIPrinter = require 'asledgehammer/util/ANSIPrinter'
 
 local mod = 'The Wanderers'
 local printer = ANSIPrinter:new(mod, { boolean = true})
@@ -25,6 +44,10 @@ local fatal = function(message, ...) printer:fatal(message, ...) end
 local printf = function(message, ...) printer:printf(message, ...) end
 
 
+
+------------------------------------------------------------------------
+--            PLAYER POINTS PER TICK + SLEEP EXPLOIT REMOVAL
+------------------------------------------------------------------------
 
 
 local function PointsTick()
@@ -46,6 +69,10 @@ local function PointsTick()
     end
 end
 
+
+------------------------------------------------------------------------
+--                LOAD SMOKEY POINT LISTINGS FROM FILE
+------------------------------------------------------------------------
 
 local function LoadListings()
     local fileReader = getFileReader("SmokeyShopListings.ini", true)
@@ -81,7 +108,13 @@ local function LoadListings()
     
 end
 
--- Force Server Reload of Listings on a Timer
+
+
+
+------------------------------------------------------------------------
+--             FORCE SERVER RELOAD OF LISTINGS ON A TIMER
+------------------------------------------------------------------------
+
 Events.EveryTenMinutes.Add(LoadListings)
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
@@ -104,6 +137,10 @@ function ServerPointsCommands.get(module, command, player, args)
     sendServerCommand(player, module, command, { serverPointsData[args and args[1] or player:getUsername()] or 0 })
 end
 
+
+------------------------------------------------------------------------
+--                 PLAYER PURCHASE FROM SMOKEY SHOP
+------------------------------------------------------------------------
 function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY SHOP] %s bought %s for %d Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), args[1]))
@@ -115,6 +152,8 @@ function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
 end
 
+
+--TODO:  REMOVE VEHICLE OPTIONS
 function ServerPointsCommands.vehicle(module, command, player, args)
     local vehicle = addVehicleDebug(args[1], IsoDirections.S, nil, player:getSquare())
     for i = 0, vehicle:getPartCount() - 1 do
@@ -127,7 +166,13 @@ function ServerPointsCommands.vehicle(module, command, player, args)
     player:sendObjectChange("addItem", { item = vehicle:createVehicleKey() })
 end
 
+
+------------------------------------------------------------------------
+--                  ADMIN PANEL - GIVE SMOKEY POINTS
+------------------------------------------------------------------------
+
 function ServerPointsCommands.add(module, command, player, args)
+    --BACKUP - ORIGINAL WITHOUT ANSI
     -- print("###############")
     -- print(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
     
@@ -147,35 +192,24 @@ function ServerPointsCommands.add(module, command, player, args)
     printf("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
     printf("###############")
 
-
-
-
-
 end
 
 
 
---[[   OLD VERSION
--- PER ZOMBIE KILL POINTS
-function ServerPointsCommands.zombieKillPts(module, command, player, args)
-    local username = getPlayer():getUsername()
-    serverPointsData[username] = serverPointsData[username] + SandboxVars.GN84ECO.PointsPerZombieKill
-    print (username, " killed a zombie for: ", SandboxVars.GN84ECO.PointsPerZombieKill, " points!")
-end ]]
+------------------------------------------------------------------------
+--                    PER ZOMBIE - SMOKEY POINTS
+------------------------------------------------------------------------
 
-
---PER ZOMBIE KILL POINTS
-function ServerPointsCommands.zombieKillPts(module, command, player, args)
-   --print ("Entering ServerPointsCommands.zombieKillPts")
-   --print("[SMOKEY POINTS] ", args[1], " killed a zombie for ", args[2], " Smokey Points!")
-   --print(string.format("[SMOKEY POINTS] %s killed a zombie for %d Smokey Points", player:getUsername(), args[1], args[2]))
+function ServerPointsCommands.zombieKillPts(module, command, player, args)   
    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]      
 end
 
 
 
---REDEEM CASH FOR POINTS
+------------------------------------------------------------------------
+--                     REDEEM CASH FOR SMOKEY POINTS
+------------------------------------------------------------------------
 
 function ServerPointsCommands.redeemCash(module, command, player, args)
    print("###############")
@@ -190,9 +224,10 @@ function ServerPointsCommands.redeemCash(module, command, player, args)
 end
 
 
+------------------------------------------------------------------------
+--                 REDEEM LOTTO TICKET FOR SMOKEY POINTS
+------------------------------------------------------------------------
 
-
---REDEEM LOTTO TICKET FOR POINTS
 function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
     print("###############")
     print("[WANDERERS LOTTO] ", args[1], " redeemed Winning Lotto Ticket for $", args[2], " Smokey Points!")
@@ -204,7 +239,12 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
     print("###############")
  end
 
- -- BONUS PRIZE
+
+
+------------------------------------------------------------------------
+--                          LOTTO BONUS PRIZE
+------------------------------------------------------------------------
+
 function ServerPointsCommands.redeemLottoTicketBonusPrize(module, command, player, args)
     print("###############")
     print("[ BONUS PRIZE ] ", args[1], " won a Bonus Prize - ", args[2])
@@ -213,7 +253,10 @@ function ServerPointsCommands.redeemLottoTicketBonusPrize(module, command, playe
 
 
 
- --REDEEM VIP TOKEN FOR POINTS
+------------------------------------------------------------------------
+--            REDEEM VIP TOKEN FOR SMOKEY POINTS - DEPRECATED
+------------------------------------------------------------------------
+
 function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
     print("[VIP TOKENS] ", args[1], " redeemed VIP Token for $", args[2], " Smokey Points!")
@@ -225,7 +268,12 @@ function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
  end
 
- --REDEEM EVENT TOKEN FOR POINTS
+
+
+------------------------------------------------------------------------
+--                REDEEM WANDERER TOKEN FOR SMOKEY POINTS
+------------------------------------------------------------------------
+
 function ServerPointsCommands.redeemWandererToken(module, command, player, args)
     print("#################")
     print("[WANDERER TOKENS] ", args[1], " redeemed WANDERER Token for $", args[2], " Smokey Points!")
@@ -237,6 +285,8 @@ function ServerPointsCommands.redeemWandererToken(module, command, player, args)
     print("###############")
  end
 
+
+------------------------------------------------------------------------
 
 function ServerPointsCommands.load(module, command, player, args)
     sendServerCommand(player, module, command, listings)

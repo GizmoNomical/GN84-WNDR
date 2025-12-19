@@ -5,7 +5,11 @@ module GN84-ECO
         Base
     }
 
-	/*MONEY STACKS*/
+
+
+/*------------------------------------------------------------------------*/
+/*--                          MONEY STACKS                                */
+/*------------------------------------------------------------------------*/
 
 	item MoneyClip
 	{
@@ -143,7 +147,11 @@ module GN84-ECO
 		
     }
 
-	/*WALLETS*/
+
+
+/*------------------------------------------------------------------------*/
+/*--                          WALLETS                                     */
+/*------------------------------------------------------------------------*/
 	
 	item EmptyWallet1
 	{
@@ -185,7 +193,10 @@ module GN84-ECO
 		WorldStaticModel = Wallet4,
 	}	
 
-	/*PERMITS*/
+
+/*------------------------------------------------------------------------*/
+/*--                            PERMITS                                   */
+/*------------------------------------------------------------------------*/
 
 	item SafehouseExpansionPermit5
 	{
@@ -390,7 +401,12 @@ module GN84-ECO
 
 	}
 
-	/*LOTTO TICKETS*/
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                          LOTTO TICKET                                */
+/*------------------------------------------------------------------------*/
 
 	item LottoTicketStandard
 	{
@@ -425,7 +441,10 @@ module GN84-ECO
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Claim the Grand Prize!,
 	}
 
-	/*WHEEL SPINS TOKENS*/
+
+/*------------------------------------------------------------------------*/
+/*--                      WHEEL SPIN TOKENS                               */
+/*------------------------------------------------------------------------*/
 
 	item WheelSpinFragment1
 	{
@@ -482,30 +501,6 @@ module GN84-ECO
 		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
 	}
 
-	/* OLD TOKEN */
-
-	item WheelSpinToken
-	{
-		DisplayName			=  Wanderers Lotto - Wheel Spin Token (Legacy),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  WheelSpinTokenOld,				
-		WorldStaticModel	=  LottoWheelSpinTokenOld,
-		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain a useable fragment,
-	}	
-
-	item SuperWheelSpinToken
-	{
-		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token (Legacy),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  WheelSpinTokenOld,				
-		WorldStaticModel	=  LottoWheelSpinTokenOld,
-		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain useable fragments,
-	}	
-
 	item WheelSpinTokenNew
 	{
 		DisplayName			=  Wheel Spin Token,
@@ -552,7 +547,37 @@ module GN84-ECO
 
 
 
-	/*TOKENS AND COUPONS*/
+/*------------------------------------------------------------------------*/
+/*--                          LEGACY TOKENS                               */
+/*------------------------------------------------------------------------*/
+
+	item WheelSpinToken
+	{
+		DisplayName			=  Wanderers Lotto - Wheel Spin Token (Legacy),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinTokenOld,				
+		WorldStaticModel	=  LottoWheelSpinTokenOld,
+		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain a useable fragment,
+	}	
+
+	item SuperWheelSpinToken
+	{
+		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token (Legacy),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinTokenOld,				
+		WorldStaticModel	=  LottoWheelSpinTokenOld,
+		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain useable fragments,
+	}	
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                        TOKENS AND COUPONS                            */
+/*------------------------------------------------------------------------*/
 
 	item VIPToken
 	{

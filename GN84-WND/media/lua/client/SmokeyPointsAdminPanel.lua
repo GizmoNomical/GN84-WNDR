@@ -1,5 +1,22 @@
+-- #########################################################################################################
+-- #########################################################################################################
+-- ##                                                                                                     ##
+-- ##                                                                                                     ##
+-- ##       _____   _                              _   _                       _                  _       ##
+-- ##      / ____| (_)                            | \ | |                     (_)                | |      ##
+-- ##      | |  __   _   ____  _ __ ___     ___   |  \| |   ___    _ __ ___    _    ___    __ _  | |      ##
+-- ##      | | |_ | | | |_  / | '_ ` _ \   / _ \  | . ` |  / _ \  | '_ ` _ \  | |  / __|  / _` | | |      ##
+-- ##      | |__| | | |  / /  | | | | | | | (_) | | |\  | | (_) | | | | | | | | | | (__  | (_| | | |      ##
+-- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
+-- ##                                                                                                     ##
+-- ##                               Copyright © GizmoNomical - 2025                                       ##
+-- ##                                           GN84-ECO                                                  ##
+-- ##                                       The Wanderers Core                                            ##
+-- #########################################################################################################
+-- #########################################################################################################
 
-local ServerPointsAdminPanel = ISPanel:derive("ServerPointsAdminPanel")
+
+local SmokeyPointsAdminPanel = ISPanel:derive("SmokeyPointsAdminPanel")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -8,12 +25,12 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 local function OnServerCommand(module, command, arguments)
     if module == "GN84-ECO" and command == "get" then
-        ServerPointsAdminPanel.instance.balance = "Balance: " .. tostring(arguments[1])
+        SmokeyPointsAdminPanel.instance.balance = "Balance: " .. tostring(arguments[1])
         Events.OnServerCommand.Remove(OnServerCommand)
     end
 end
 
-function ServerPointsAdminPanel:createChildren()
+function SmokeyPointsAdminPanel:createChildren()
     local btnWid = 125 * FONT_SCALE
     local btnHgt = FONT_HGT_SMALL + 5 * 2 * FONT_SCALE
     local padBottom = 10 * FONT_SCALE
@@ -23,6 +40,7 @@ function ServerPointsAdminPanel:createChildren()
         Events.OnServerCommand.Add(OnServerCommand)
         sendClientCommand("GN84-ECO", "get", { combo.options[combo.selected] })
     end)
+
     self.playerSelect:initialise()
     local players = getOnlinePlayers()
     for i = 0, players:size() - 1 do
@@ -43,41 +61,41 @@ function ServerPointsAdminPanel:createChildren()
     self:addChild(self.pointsEntry)
 
     z = self.pointsEntry.y + self.pointsEntry.height + padBottom
-    self.addButton = ISButton:new((self.width - btnWid) / 2 - 5, z, btnWid / 2, btnHgt, "GIVE", self, ServerPointsAdminPanel.onOptionMouseDown)
+    self.addButton = ISButton:new((self.width - btnWid) / 2 - 5, z, btnWid / 2, btnHgt, "GIVE", self, SmokeyPointsAdminPanel.onOptionMouseDown)
     self.addButton.internal = "GIVE"
     self.addButton:initialise()
     self.addButton:instantiate()
     self:addChild(self.addButton)
 
-    self.takeButton = ISButton:new(self.width / 2 + 5, z, btnWid / 2, btnHgt, "TAKE", self, ServerPointsAdminPanel.onOptionMouseDown)
+    self.takeButton = ISButton:new(self.width / 2 + 5, z, btnWid / 2, btnHgt, "TAKE", self, SmokeyPointsAdminPanel.onOptionMouseDown)
     self.takeButton.internal = "TAKE"
     self.takeButton:initialise()
     self.takeButton:instantiate()
     self:addChild(self.takeButton)
 
-    self.spawnButton = ISButton:new((self.width - btnWid / 2) / 2, z + btnHgt + padBottom / 2, btnWid / 2, btnHgt, "SPAWN", self, ServerPointsAdminPanel.onSpawn)
-    self.spawnButton:initialise()
-    self.spawnButton:instantiate()
-    self:addChild(self.spawnButton)
+    -- self.spawnButton = ISButton:new((self.width - btnWid / 2) / 2, z + btnHgt + padBottom / 2, btnWid / 2, btnHgt, "SPAWN", self, SmokeyPointsAdminPanel.onSpawn)
+    -- self.spawnButton:initialise()
+    -- self.spawnButton:instantiate()
+    -- self:addChild(self.spawnButton)
 
-    self.cancelButton = ISButton:new((self.width - btnWid) / 2, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, ServerPointsAdminPanel.close)
+    self.cancelButton = ISButton:new((self.width - btnWid) / 2, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, SmokeyPointsAdminPanel.close)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
-    self.reloadButton = ISButton:new(self.cancelButton.x, self.cancelButton.y - padBottom - btnHgt, btnWid, btnHgt, "RELOAD CONFIG", nil, ServerPointsAdminPanel.onReload)
+    self.reloadButton = ISButton:new(self.cancelButton.x, self.cancelButton.y - padBottom - btnHgt, btnWid, btnHgt, "RELOAD CONFIG", nil, SmokeyPointsAdminPanel.onReload)
     self.reloadButton:initialise()
     self.reloadButton:instantiate()
     self:addChild(self.reloadButton)
 end
 
-function ServerPointsAdminPanel:render()
+function SmokeyPointsAdminPanel:render()
     self:drawTextCentre("Smokey Points Panel", self.width / 2, 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
     self:drawText("Player:", 10 * FONT_SCALE, self.playerSelect.y + (self.playerSelect.height - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     self:drawText(self.balance, 10 * FONT_SCALE, self.playerSelect.y + self.playerSelect.height + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
 end
 
-function ServerPointsAdminPanel:onOptionMouseDown(button)
+function SmokeyPointsAdminPanel:onOptionMouseDown(button)
     if button.internal == "GIVE" then
         sendClientCommand("GN84-ECO", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
     elseif button.internal == "TAKE" then
@@ -87,24 +105,24 @@ function ServerPointsAdminPanel:onOptionMouseDown(button)
     sendClientCommand("GN84-ECO", "get", { self.playerSelect.options[self.playerSelect.selected] })
 end
 
-function ServerPointsAdminPanel:onSpawn()
-    local item = getPlayer():getInventory():AddItem("Base.ServerPoints")
-    local points = tonumber(self.pointsEntry:getText())
-    item:getModData().serverPoints = points
-    item:setName(points .. " " .. SandboxVars.ServerPoints.PointsName)
-end
+-- function SmokeyPointsAdminPanel:onSpawn()
+--     local item = getPlayer():getInventory():AddItem("Base.ServerPoints")
+--     local points = tonumber(self.pointsEntry:getText())
+--     item:getModData().serverPoints = points
+--     item:setName(points .. " " .. SandboxVars.ServerPoints.PointsName)
+-- end
 
-function ServerPointsAdminPanel.onReload()
+function SmokeyPointsAdminPanel.onReload()
     sendClientCommand("GN84-ECO", "reload", nil)
 end
 
-function ServerPointsAdminPanel:close()
+function SmokeyPointsAdminPanel:close()
     self:setVisible(false)
     self:removeFromUIManager()
-    ServerPointsAdminPanel.instance = nil
+    SmokeyPointsAdminPanel.instance = nil
 end
 
-function ServerPointsAdminPanel:new(x, y, width, height)
+function SmokeyPointsAdminPanel:new(x, y, width, height)
     local o = ISPanel:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
@@ -112,18 +130,18 @@ function ServerPointsAdminPanel:new(x, y, width, height)
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
     o.moveWithMouse = true
     o.balance = "Balance: 0"
-    ServerPointsAdminPanel.instance = o
+    SmokeyPointsAdminPanel.instance = o
     return o
 end
 
 local function openUI(button)
-    if ServerPointsAdminPanel.instance then
-        ServerPointsAdminPanel.instance:close()
+    if SmokeyPointsAdminPanel.instance then
+        SmokeyPointsAdminPanel.instance:close()
     end
     local core = getCore()
     local width = 250 * FONT_SCALE
     local height = 270 * FONT_SCALE
-    local ui = ServerPointsAdminPanel:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
+    local ui = SmokeyPointsAdminPanel:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
     ui:initialise()
     ui:addToUIManager()
 end

@@ -6,10 +6,9 @@ module GN84-ECO
     }
 
 
-
-/* SEARCH WALLETS FOR MONEY */
-/* ------------------------ */
-
+/*------------------------------------------------------------------------*/
+/*--                    SEARCH WALLETS FOR MONEY                          */
+/*------------------------------------------------------------------------*/
 		
 	recipe Search Wallet for Money
 	{
@@ -21,13 +20,12 @@ module GN84-ECO
 		AnimNode:Craft,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
-
 	}
-		
-/* CONVERT STACKS OF CASH */
-/* ---------------------- */
+	
 
-
+/*------------------------------------------------------------------------*/
+/*--                CONVERT MONEY TO STACKS OF CASH                       */
+/*------------------------------------------------------------------------*/
 
 	recipe Make 100 Stack of Cash
 	{
@@ -579,12 +577,12 @@ module GN84-ECO
 		Sound:CountingMoney,
 		Time:70,
 	}	
-		
-/* CONVERT CASH TO SMOKEY POINTS */
-/* ----------------------------- */	
 
 
-
+/*------------------------------------------------------------------------*/
+/*--                    CONVERT CASH TO SMOKEY POINTS                     */
+/*------------------------------------------------------------------------*/
+	
 	recipe Convert to 100 Smokey Points
 	{
 		MoneyStack100=1,
@@ -1081,9 +1079,9 @@ module GN84-ECO
 	}
 
 
-/* CUT LEATHER STRIPS FROM WALLET */
-/* ------------------------------ */
-
+/*------------------------------------------------------------------------*/
+/*--                 CUT LEATHER STRIPS FROM WALLET                       */
+/*------------------------------------------------------------------------*/
 	
 	recipe Cut Leather Wallet
    	{
@@ -1099,11 +1097,13 @@ module GN84-ECO
    	}
 
 
-/* SHRED AND RECYCLE ITEMS */
-/* ------------------------------ */
+/*------------------------------------------------------------------------*/
+/*--                     SHRED AND RECYCLE ITEMS                          */
+/*------------------------------------------------------------------------*/
 
-
-	/*JEWELRY*/
+/*------------------------------------------------------------------------*/
+/*--                            JEWELRY                                   */
+/*------------------------------------------------------------------------*/
 
 	recipe Shred and Recycle Watch for Money
 	{
@@ -1170,7 +1170,11 @@ module GN84-ECO
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
-	/*TOOLS*/
+
+
+/*------------------------------------------------------------------------*/
+/*--                          OTHER ITEMS                                 */
+/*------------------------------------------------------------------------*/
 
 	recipe Shred and Recycle Tool for Money
 	{
@@ -1328,7 +1332,9 @@ module GN84-ECO
 
 
 
-	/*LOTTO TICKETS */
+/*------------------------------------------------------------------------*/
+/*--                          LOTTO TICKETS                               */
+/*------------------------------------------------------------------------*/
 
 	recipe Scratch Lotto Ticket to Win
 	{
@@ -1368,10 +1374,14 @@ module GN84-ECO
 	}
 
 
+/*------------------------------------------------------------------------*/
+/*--                       RARE TICKET REDEMPTIONs                        */
+/*------------------------------------------------------------------------*/
 
-
-	/*RARE TICKETS FOR AMMO*/
-
+/*------------------------------------------------------------------------*/
+/*--                         REDEEM - AMMO BOXES                          */
+/*------------------------------------------------------------------------*/
+	
 	recipe Redeem Rare Tickets for Random Box of Ammo
 	{
 		LottoTicketRare=10,
@@ -1518,9 +1528,9 @@ module GN84-ECO
 	}
 
 
-
-
-	/*RARE TICKETS FOR ITEMS*/
+/*------------------------------------------------------------------------*/
+/*--                         REDEEM - ITEMS                               */
+/*------------------------------------------------------------------------*/
 
 	recipe Redeem Rare Tickets for Crowbar
 	{
@@ -1656,9 +1666,9 @@ module GN84-ECO
 
 
 
-
-
-	/*RARE TICKETS FOR WHEEL SPINS*/
+/*------------------------------------------------------------------------*/
+/*--              RARE TICKETS FOR WHEEL SPIN FRAGMENTS                   */
+/*------------------------------------------------------------------------*/
 
 	recipe Redeem Rare Tickets for Wheel Spin Fragment
 	{
@@ -1673,45 +1683,10 @@ module GN84-ECO
 		OnCreate:GiveRandomWheelSpinFragment,
 	}
 
-	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 1)
-	// {
-	// 	LottoTicketRare=100,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:GN84-ECO.SuperWheelSpinToken,
-	// 	Time:70.0,
-	// }
-
-	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 2)
-	// {
-	// 	LottoTicketRare=300,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:GN84-ECO.SuperWheelSpinToken2,
-	// 	Time:70.0,
-	// }
-
-	// recipe Redeem Rare Tickets for Super Wheel Spin Token (Tier 3)
-	// {
-	// 	LottoTicketRare=500,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:GN84-ECO.SuperWheelSpinToken3,
-	// 	Time:70.0,
-	// }
-
-
-
-
-	/*WHEEL SPINS UPGRADE*/
-
-
+	
+/*------------------------------------------------------------------------*/
+/*--                      WHEEL SPIN UPGRADES                             */
+/*------------------------------------------------------------------------*/
 
 	recipe Shatter Legacy Wheel Spin Token into Fragment
 	{
@@ -1748,7 +1723,7 @@ module GN84-ECO
 		WheelSpinFragment3,
 		WheelSpinFragment4,
 		WheelSpinFragment5,
-		WandererTokenStack5,
+		WandererTokenStack50,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1773,7 +1748,7 @@ module GN84-ECO
 	recipe Forge Super Wheel Spin Token
 	{
 		WheelSpinTokenNew=1,
-		WandererTokenStack25,
+		WandererTokenStack100,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1798,7 +1773,7 @@ module GN84-ECO
 	recipe Forge Mega Wheel Spin Token
 	{
 		SuperWheelSpinTokenNew=1,
-		WandererTokenStack100,
+		WandererTokenStack250,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1823,7 +1798,7 @@ module GN84-ECO
 	recipe Forge Ultimate Wheel Spin Token
 	{
 		MegaWheelSpinToken=1,
-		WandererTokenStack500,
+		WandererTokenStack1000,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1867,8 +1842,9 @@ module GN84-ECO
 	}
 
 
-	
-	/* VIP TOKEN REDEMPTION */
+/*------------------------------------------------------------------------*/
+/*--                     VIP TOKEN REDEMPTIONS                            */
+/*------------------------------------------------------------------------*/	
 
 	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
@@ -1893,11 +1869,36 @@ module GN84-ECO
 	}
 
 
+/*------------------------------------------------------------------------*/
+/*--                         WANDERER TOKENS                              */
+/*------------------------------------------------------------------------*/
 
-
-	/*WANDERER TOKENS*/
+/*------------------------------------------------------------------------*/
+/*--                     REDEEMING WANDERER TOKENS                        */
+/*------------------------------------------------------------------------*/
 	
-	/*   5   */
+	/*   REDEEMING WANDERER TOKENS   */
+
+	recipe Redeem Wanderer Token for Smokey Points
+	{
+		WandererToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		Result:Money,
+		Time:120.0,		
+		OnCreate:GivePlayerSmokeyPointsWandererToken,
+	}
+
+
+/*------------------------------------------------------------------------*/
+/*--                         STACKING TOKENS                              */
+/*------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------*/
+/*--                             5 Tokens                                 */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 5 Stack of Wanderer Tokens
 	{
 		WandererToken=5,
@@ -1909,8 +1910,10 @@ module GN84-ECO
 		Time:120.0,
 	}
 
+/*------------------------------------------------------------------------*/
+/*--                            10 Tokens                                 */
+/*------------------------------------------------------------------------*/
 
-	/*   10   */
 	recipe Make 10 Stack of Wanderer Tokens
 	{
 		WandererToken=10,
@@ -1933,8 +1936,10 @@ module GN84-ECO
 		Time:120.0,
 	}
 
-
-	/*   25   */
+/*------------------------------------------------------------------------*/
+/*--                            25 Tokens                                 */
+/*------------------------------------------------------------------------*/
+	
 	recipe Make 25 Stack of Wanderer Tokens
 	{
 		WandererToken=25,
@@ -1958,7 +1963,10 @@ module GN84-ECO
 	}
 	
 
-	/*   50   */
+/*------------------------------------------------------------------------*/
+/*--                            50 Tokens                                 */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 50 Stack of Wanderer Tokens
 	{
 		WandererToken=50,
@@ -2004,7 +2012,10 @@ module GN84-ECO
 	}
 
 
-	/*   100   */
+/*------------------------------------------------------------------------*/
+/*--                            100 Tokens                                */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 100 Stack of Wanderer Tokens
 	{
 		WandererToken=100,
@@ -2060,7 +2071,10 @@ module GN84-ECO
 		Time:120.0,
 	}	
 
-	/*   250   */
+/*------------------------------------------------------------------------*/
+/*--                            250 Tokens                                */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 250 Stack of Wanderer Tokens
 	{
 		WandererToken=250,
@@ -2129,7 +2143,10 @@ module GN84-ECO
 	}
 
 
-	/*   500   */
+/*------------------------------------------------------------------------*/
+/*--                            500 Tokens                                */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 500 Stack of Wanderer Tokens
 	{
 		WandererToken=500,
@@ -2209,7 +2226,10 @@ module GN84-ECO
 	}
 
 
-	/*   1000   */
+/*------------------------------------------------------------------------*/
+/*--                            1000 Tokens                               */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 1000 Stack of Wanderer Tokens
 	{
 		WandererToken=1000,
@@ -2287,6 +2307,10 @@ module GN84-ECO
 		Time:120.0,
 	}
 
+/*------------------------------------------------------------------------*/
+/*--                            5000 Tokens                               */
+/*------------------------------------------------------------------------*/
+
 	recipe Make 5000 Stack of Wanderer Tokens
 	{
 		WandererTokenStack1000=5,
@@ -2299,8 +2323,9 @@ module GN84-ECO
 	}
 
 	
-
-	/*   UNSTACKING TOKENS   */
+/*------------------------------------------------------------------------*/
+/*--                       UNSTACKING TOKENS                              */
+/*------------------------------------------------------------------------*/
 
 	recipe Unstack Wanderer Tokens
 	{
@@ -2382,7 +2407,9 @@ module GN84-ECO
 
 
 
-	/*   SPLITTING TOKEN STACKS   */
+/*------------------------------------------------------------------------*/
+/*--                    SPLITTING TOKEN STACKS                            */
+/*------------------------------------------------------------------------*/
 
 	recipe Split Stack of Wanderer Tokens
 	{
@@ -2473,11 +2500,13 @@ module GN84-ECO
 	}
 
 
+/*------------------------------------------------------------------------*/
+/*--                    SAFEHOUSE EXPANSION PERMITS                       */
+/*------------------------------------------------------------------------*/
 
-
-	/*   SAFEHOUSE EXPANSION PERMITS   */
-
-	/*   CONSOLIDATE   */
+/*------------------------------------------------------------------------*/
+/*--                        CONSOLIDATE PERMITS                           */
+/*------------------------------------------------------------------------*/
 
 	recipe Consolidate Safehouse Expansion Permits - 10 Tiles
 	{
@@ -2623,8 +2652,9 @@ module GN84-ECO
 	}
 
 
-
-	/*   SPLIT   */
+/*------------------------------------------------------------------------*/
+/*--                          SPLIT PERMITS                               */
+/*------------------------------------------------------------------------*/
 
 	recipe Split Safehouse Expansion Permit
 	{
@@ -2695,24 +2725,9 @@ module GN84-ECO
 	
 
 	
-	/*   REDEEMING WANDERER TOKENS   */
-
-	recipe Redeem Wanderer Token for Smokey Points
-	{
-		WandererToken,
-
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:Money,
-		Time:120.0,		
-		OnCreate:GivePlayerSmokeyPointsWandererToken,
-	}
-	
-	
-
-
-	/*UPDATE OLD TOKENS*/
+/*------------------------------------------------------------------------*/
+/*--                     LEGACY TOKEN CONVERSIONS                         */
+/*------------------------------------------------------------------------*/
 
 	recipe Update Legacy VIP Tokens to New Format
 	{
@@ -2735,32 +2750,5 @@ module GN84-ECO
 		Result:WandererToken=3,
 		Time:30.0,
 	}
-
-	/*VIP TOKENS*/
-
-	// recipe Redeem VIP Token for Smokey Points
-	// {
-	// 	VIPTokenNew,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:Money,
-	// 	Time:120.0,		
-	// 	OnCreate:GivePlayerSmokeyPointsVIPToken,
-	// }	
-
-
-	// recipe Redeem Wanderer Tokens for Wheel Spin Fragment
-	// {
-	// 	WandererToken=15,
-
-	// 	InSameInventory:true,
-	// 	AnimNode:Craft,
-	// 	Sound:WinningTicketChime,
-	// 	Result:GN84-ECO.WheelSpinToken,
-	// 	Time:120.0,
-	// }	
-
 
 }

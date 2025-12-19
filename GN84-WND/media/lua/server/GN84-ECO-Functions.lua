@@ -1,48 +1,65 @@
+-- #########################################################################################################
+-- #########################################################################################################
+-- ##                                                                                                     ##
+-- ##                                                                                                     ##
+-- ##       _____   _                              _   _                       _                  _       ##
+-- ##      / ____| (_)                            | \ | |                     (_)                | |      ##
+-- ##      | |  __   _   ____  _ __ ___     ___   |  \| |   ___    _ __ ___    _    ___    __ _  | |      ##
+-- ##      | | |_ | | | |_  / | '_ ` _ \   / _ \  | . ` |  / _ \  | '_ ` _ \  | |  / __|  / _` | | |      ##
+-- ##      | |__| | | |  / /  | | | | | | | (_) | | |\  | | (_) | | | | | | | | | | (__  | (_| | | |      ##
+-- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
+-- ##                                                                                                     ##
+-- ##                               Copyright © GizmoNomical - 2025                                       ##
+-- ##                                           GN84-ECO                                                  ##
+-- ##                                       The Wanderers Core                                            ##
+-- #########################################################################################################
+-- #########################################################################################################
+
 require "recipecode"
 require "ISUI/ISContextMenu"
 
+------------------------------------------------------------------------
+--                       SANDBOX VARIABLES   
+------------------------------------------------------------------------
 
---------------------------
--- Sandbox Variables
---------------------------
-
-local pointsPerZombieKill 		= SandboxVars.GN84ECO.PointsPerZombieKill 		or 18 				-- 6   - Smokey Points per Zombie Kill
-local bonusCashOdds				= SandboxVars.GN84ECO.EFundOdds					or 10          		-- 10  - Must roll <= to this number to get eFundsRoll
-local walletCashMultiplier 		= SandboxVars.GN84ECO.WalletCashMultiplier 		or 1.0				-- 1.0 -   Adjust total Wallet Cash
-local eFundCashMultiplier 		= SandboxVars.GN84ECO.EFundCashMultiplier		or 1.0				-- 1.0 - Adjust total eFund Cash
-local wealthyCashAmount 		= SandboxVars.GN84ECO.WealthyCash				or 50				-- 20 - Max cash found in Wealthy Zombie Wallet
-local averageCashAmount 		= SandboxVars.GN84ECO.AverageCash				or 15				-- 10 - Max cash found in Average Zombie Wallet
-local poorCashAmount 			= SandboxVars.GN84ECO.PoorCash 					or 5				-- 5  - Max cash found in Poor Zombie Wallet
+local pointsPerZombieKill 		= SandboxVars.GN84ECO.PointsPerZombieKill 		or 18
+local bonusCashOdds				= SandboxVars.GN84ECO.EFundOdds					or 10
+local walletCashMultiplier 		= SandboxVars.GN84ECO.WalletCashMultiplier 		or 1.0
+local eFundCashMultiplier 		= SandboxVars.GN84ECO.EFundCashMultiplier		or 1.0
+local wealthyCashAmount 		= SandboxVars.GN84ECO.WealthyCash				or 50
+local averageCashAmount 		= SandboxVars.GN84ECO.AverageCash				or 15
+local poorCashAmount 			= SandboxVars.GN84ECO.PoorCash 					or 5
 local playerLuckBonus 			= SandboxVars.GN84ECO.PlayerLuckBonus 			or 1.2
 local playerUnluckyPenalty 		= SandboxVars.GN84ECO.PlayerUnluckyPenalty 		or 0.95
 local lotteryTicketOdds 		= SandboxVars.GN84ECO.LotteryTicketOdds 		or 3.25
-local rareTicketCashValue 		= SandboxVars.GN84ECO.RareTicketCashValue 		or 1          		-- Value to trade in Rare Blue Ticket for cash Stacks (in Thousands)
-local VIPTokenCashValue 		= SandboxVars.GN84ECO.VIPTokenCashValue 		or 1000000          -- Value to trade in VIP Tokens for cash
-local WandererTokenCashValue	= SandboxVars.GN84ECO.WandererTokenCashValue 	or 10000          	-- Value to trade in Wanderer Tokens for cash
+local rareTicketCashValue 		= SandboxVars.GN84ECO.RareTicketCashValue 		or 1
+local VIPTokenCashValue 		= SandboxVars.GN84ECO.VIPTokenCashValue 		or 1000000
+local WandererTokenCashValue	= SandboxVars.GN84ECO.WandererTokenCashValue 	or 10000
 
 
 
---------------------------
--- New Player Add Items
---------------------------
 
---[[ 
-function OnCreatePlayer(playerIndex, player)
-    if not player:getModData().wallet then
-        local wallet = player:getInventory():AddItem("VM.Leather_Wallet")
-        wallet:getInventory():AddItem("VM.10Bill")
-        wallet:getInventory():AddItem("VM.5Bill")
-        wallet:getInventory():AddItem("VM.5Bill")
-        player:getModData().wallet = true
-    end
-end
+------------------------------------------------------------------------
+--                          TODO: NEW PLAYER - ADD MONEY CLIP
+------------------------------------------------------------------------
 
-Events.OnCreatePlayer.Add(OnCreatePlayer) ]]
+-- function OnCreatePlayer(playerIndex, player)
+--     if not player:getModData().wallet then
+--         local wallet = player:getInventory():AddItem("VM.Leather_Wallet")
+--         wallet:getInventory():AddItem("VM.10Bill")
+--         wallet:getInventory():AddItem("VM.5Bill")
+--         wallet:getInventory():AddItem("VM.5Bill")
+--         player:getModData().wallet = true
+--     end
+-- end
+
+-- Events.OnCreatePlayer.Add(OnCreatePlayer)
 
 
---------------------------
--- Adding Smokey Points
---------------------------
+
+------------------------------------------------------------------------
+--                          ADDING SMOKEY POINTS
+------------------------------------------------------------------------
 
 function GivePlayerSmokeyPoints100()
 	sendClientCommand("GN84-ECO", "redeemCash", {getPlayer():getUsername(), 100})
@@ -108,39 +125,40 @@ function GivePlayerSmokeyPointsWandererToken()
 	sendClientCommand("GN84-ECO", "redeemWandererToken", {getPlayer():getUsername(), WandererTokenCashValue})
 end
 
--- Add Smokey Points on Zombie Kill
--- ------------------------------- --
+
+------------------------------------------------------------------------
+--                  ADD SMOKEY POINTS ON ZOMBIE KILL
+------------------------------------------------------------------------
 
 function SmokeyPointsOnZombieKill(zombie)	
+	local player = getPlayer()
+	if player == nil then return end
+
 	local lastAttacker = zombie:getAttackedBy()
-	local isoPlayer = getPlayer()
 
-	if isoPlayer == nil then
-		return
-	end
-
-	if isoPlayer == lastAttacker then
-		sendClientCommand("GN84-ECO", "zombieKillPts", {isoPlayer:getUsername(), pointsPerZombieKill})		
+	if player == lastAttacker then
+		sendClientCommand("GN84-ECO", "zombieKillPts", {player:getUsername(), pointsPerZombieKill})		
 	end	
 end
 
 Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
 	
 
-------------------------------
--- Searching Wallets for Money
-------------------------------
 
-local function checkWalletForCash(_player)
-	if _player == nil then return false end
+------------------------------------------------------------------------
+--                      SEARCH WALLETS FOR MONEY
+------------------------------------------------------------------------
+
+local function checkWalletForCash(player)
+	if player == nil then return false end
 
 	local baseOdds = 80
 	local bonusOdds = 0
 	
 	-- Check for Trait Bonuses
-	if _player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then		
 		bonusOdds = baseOdds + 5
-	elseif _player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then		
 		bonusOdds = baseOdds - 5
 	else		
 		bonusOdds = baseOdds
@@ -158,14 +176,14 @@ local function checkWalletForCash(_player)
 end
 
 
-local function calculateWalletCash(_player)
+local function calculateWalletCash(player)
 	local cashFound = 0
 	local wealthRoll = ZombRand(100) + 1
 
 	--print("Wealth Roll: " .. wealthRoll)
 	-- Roll for Bonus Cash Stack
 	if (wealthRoll >= 95) then
-		_player:getInventory():AddItem("GN84-ECO.WandererToken")
+		player:getInventory():AddItem("GN84-ECO.WandererToken")
 	end
 
 	-- Roll for Found Cash
@@ -187,16 +205,16 @@ end
 
 
 
-local function checkWalletForBonusCash(_player)
-	if _player == nil then return false end
+local function checkWalletForBonusCash(player)
+	if player == nil then return false end
 
 	local baseOdds = SandboxVars.GN84ECO.EFundOdds
 	local bonusOdds = 0
 	
 	-- Check for Trait Bonuses
-	if _player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then		
 		bonusOdds = baseOdds + 5
-	elseif _player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then		
 		bonusOdds = baseOdds - 5
 	else		
 		bonusOdds = baseOdds
@@ -214,8 +232,8 @@ local function checkWalletForBonusCash(_player)
 end
 
 
-local function calculateBonusWalletCash(_player)
-	if _player == nil then return end	
+local function calculateBonusWalletCash(player)
+	if player == nil then return end	
 
 	local cashFound = 0
 	local bonusCashRoll = ZombRand(100) + 1	
@@ -224,7 +242,7 @@ local function calculateBonusWalletCash(_player)
 
 	-- Roll for Bonus Wanderer Token
 	if (bonusCashRoll >= 95) then
-		_player:getInventory():AddItem("GN84-ECO.MoneyStack1000")
+		player:getInventory():AddItem("GN84-ECO.MoneyStack1000")
 	end
 
 	-- Calculate Bonus Cash
@@ -255,7 +273,7 @@ function CollectMoneyFromWallet(sources, result, player, item)
 	local t = 0
 	
 	if checkWalletForCash(player) then
-		walletCash = calculateWalletCash(player) * walletCashMultiplier    -- Adjusted by Multiplier
+		walletCash = calculateWalletCash(player) * walletCashMultiplier
 		print("Wallet Cash: " .. walletCash)
 	end
 	
@@ -274,8 +292,8 @@ function CollectMoneyFromWallet(sources, result, player, item)
 		luckBonus = playerUnluckyPenalty
 	end
 	
-	combinedCash = math.floor((walletCash + bonusCash) * luckBonus)          -- Total Cash Found in Wallet
-	
+	-- Total Cash Found in Wallet
+	combinedCash = math.floor((walletCash + bonusCash) * luckBonus)
 
 	local playerInv = player:getInventory()
 	
@@ -286,7 +304,6 @@ function CollectMoneyFromWallet(sources, result, player, item)
 			playerInv:AddItem("Money")
 			t = t+1
 		end
-
 	end	
 
 	-- Add Matching Empty Wallet to Inventory
@@ -303,13 +320,13 @@ function CollectMoneyFromWallet(sources, result, player, item)
 		playerInv:AddItem("GN84-ECO.EmptyWallet4")
 
 	end
-
 end
 
 
-----------------------------------------
--- LOTTO TICKET LOGIC
-----------------------------------------
+
+------------------------------------------------------------------------
+--                          LOTTO TICKETS
+------------------------------------------------------------------------
 
 local function PlayLottoWinnerSound()
 	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
@@ -321,7 +338,6 @@ end
 
 
 -- LISTS OF BONUS PRIZES
-
 local bonusPrizeRare = 
 {
 	"Base.Katana",	
@@ -712,10 +728,12 @@ function TradeRareTicketForRandomAmmo(sources, result, player)
 	end
 end
 
-----------------------------------------
--- Wheel Spin Fragments
-----------------------------------------
 
+
+
+------------------------------------------------------------------------
+--                       WHEEL SPIN FRAGMENTS   
+------------------------------------------------------------------------
 
 local randomWheelSpinFragmentList =
 {
@@ -753,9 +771,10 @@ end
 
 
 
-----------------------------------------
--- Cutting up Wallets for Leather Strips
-----------------------------------------
+
+------------------------------------------------------------------------
+--                 CUTTING UP WALLETS FOR LEATHER STRIPS 
+------------------------------------------------------------------------
 
 function CutLeatherWallet(items, result, player)
 	
@@ -796,78 +815,10 @@ function CutLeatherWallet(items, result, player)
 	end
 end
 
-----------------------------------------
--- LIMIT MONEY CLIP ITEMS
-----------------------------------------
 
--- function GN84_AcceptItemsMoneyClip(container, item)
-
--- 	local moneyClipItems = 
--- 	{
--- 		[1]  = "Base.Money",
--- 		[2]  = "GN84-ECO.MoneyStack100",
--- 		[3]  = "GN84-ECO.MoneyStack1000",
--- 		[4]  = "GN84-ECO.MoneyStack10000",
--- 		[5]  = "GN84-ECO.MoneyStack100000",
--- 		[6]  = "GN84-ECO.MoneyStack1000000",
--- 		[7]  = "GN84-ECO.LottoTicketStandard",
--- 		[8]  = "GN84-ECO.LottoTicketRare",
--- 		[9]  = "GN84-ECO.LottoTicketGolden",
--- 		[10] = "GN84-ECO.WheelSpinToken",
--- 		[11] = "GN84-ECO.SuperWheelSpinToken",
--- 		[12] = "GN84-ECO.VIPToken",
--- 		[13] = "GN84-ECO.VIPTokenNew",
--- 		[14] = "GN84-ECO.EventToken",
--- 		[15] = "GN84-ECO.WandererToken",
--- 		[16] = "GN84-ECO.SafehouseExpansionPermit10",
--- 		[17] = "GN84-ECO.SafehouseExpansionPermit100",
--- 		[18] = "GN84-ECO.SafehouseExpansionPermit1000",
--- 		[19] = "GN84-ECO.AdditionalSafehousePermit",
--- 		[20] = "GN84-ECO.CommercialClaimPermit",
--- 		[21] = "GN84-ECO.ResidentialPermitSmall",
--- 		[22] = "GN84-ECO.ResidentialPermitLarge",
--- 		[23] = "GN84-ECO.ResidentialPermitMansion",
--- 		[24] = "GN84-ECO.FactionPermitSmall",
--- 		[25] = "GN84-ECO.FactionPermitLarge",
--- 		[26] = "GN84-ECO.FactionPermitMassive",
--- 		[27] = "Base.AVCSClaimOrb",
--- 		[28] = "GN84-ECO.WandererTokenStack50",
--- 		[29] = "GN84-ECO.WandererTokenStack100",
--- 		[30] = "GN84-ECO.WandererTokenStack500",
--- 		[31] = "GN84-ECO.WandererTokenStack1000",
--- 		[32] = "TheyKnew.Zomboxivir",
--- 		[33] = "TheyKnew.Zomboxycycline",
--- 		[34] = "GN84-ECO.WanderersRaffleTicket",
--- 		[35] = "GN84-ECO.WanderersVIPCoupon",
--- 		[36] = "GN84-ECO.WheelSpinFragment1",
--- 		[37] = "GN84-ECO.WheelSpinFragment2",
--- 		[38] = "GN84-ECO.WheelSpinFragment3",
--- 		[39] = "GN84-ECO.WheelSpinFragment4",
--- 		[40] = "GN84-ECO.WheelSpinFragment5",
--- 		[41] = "GN84-ECO.WheelSpinTokenNew",
--- 		[42] = "GN84-ECO.SuperWheelSpinTokenNew",
--- 		[43] = "GN84-ECO.MegaWheelSpinToken",
--- 		[44] = "GN84-ECO.UltimateWheelSpinToken",
--- 		[45] = "GN84-ECO.SafehouseExpansionPermit1",
--- 		[46] = "GN84-ECO.SafehouseExpansionPermit50",
--- 		[47] = "GN84-ECO.SafehouseExpansionPermit250",
--- 		[48] = "GN84-ECO.SafehouseExpansionPermit500",
--- 		[49] = "GN84-ECO.SafehouseExpansionPermit5000",
--- 		[50] = "GN84-ECO.WandererTokenStack5",
--- 		[51] = "GN84-ECO.WandererTokenStack10",
--- 		[52] = "GN84-ECO.WandererTokenStack25",
--- 		[53] = "GN84-ECO.WandererTokenStack250",
--- 		[54] = "GN84-ECO.WandererTokenStack500",
--- 		[55] = "GN84-ECO.WandererTokenStack5000",
--- 	}
-
--- 	for i, v in ipairs(moneyClipItems) do
--- 		if item:getFullType() == v then
--- 			return true
--- 		end
--- 	end
-	
--- end
+------------------------------------------------------------------------
+--                     MONEY CLIP ITEM VALIDATION  
+------------------------------------------------------------------------
 
 function GN84_AcceptItemsMoneyClip(container, item)
 
@@ -943,11 +894,9 @@ function GN84_AcceptItemsMoneyClip(container, item)
 end
 
 
----------------------------
--- SHREDDING AND RECYCLING
----------------------------
-
--- VARIABLES
+------------------------------------------------------------------------
+--                     SHREDDING AND RECYCLING     
+------------------------------------------------------------------------
 
 local watchesMinValue = SandboxVars.GN84ECO.WatchesMinValue	or 3	
 local watchesMaxValue = SandboxVars.GN84ECO.WatchesMaxValue	or 10	
@@ -991,17 +940,23 @@ local highElectronicsMaxValue = SandboxVars.GN84ECO.HighElectronicsMaxValue or 1
 
 
 
+------------------------------------------------------------------------
+--                   TODO: IMPLEMENT RECYCLER SOUNDS   
+------------------------------------------------------------------------
 
--- TODO - NEEDS IMPLEMENTED
 local function PlayGrinderSound()
 end
 
 local function PlayCashoutSound()
 end
------------------------
 
 
--- JEWELRY
+
+
+
+------------------------------------------------------------------------
+--                              JEWELRY
+------------------------------------------------------------------------
 
 function ShredderRecycleWatches(sources, result, player, item)
 	local watchesValueRoll = ZombRand(watchesMinValue, watchesMaxValue)+1	
@@ -1065,7 +1020,10 @@ end
 
 
 
---TOOLS
+
+------------------------------------------------------------------------
+--                            TOOLS
+------------------------------------------------------------------------
 
 function ShredderRecycleSimpleTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(simpleToolMinValue, simpleToolMaxValue)+1	
@@ -1105,7 +1063,10 @@ end
 
 
 
--- LEATHER / CLOTHING ITEMS
+
+------------------------------------------------------------------------
+--                     LEATHER / CLOTHING ITEMS
+------------------------------------------------------------------------
 
 function ShredderRecycleLeather(sources, result, player, item)
 	local leatherValueRoll = ZombRand(leatherMinValue, leatherMaxValue)+1	
@@ -1157,7 +1118,9 @@ end
 
 
 
--- PAPER PRODUCTS
+------------------------------------------------------------------------
+--                          PAPER PRODUCTS
+------------------------------------------------------------------------
 
 function ShredderRecyclePaperProduct(sources, result, player, item)
 	local paperValueRoll = ZombRand(paperProductMinValue, paperProductMaxValue)+1	
@@ -1173,7 +1136,9 @@ end
 
 
 
--- ELECTRONICS
+------------------------------------------------------------------------
+--                          ELECTRONICS
+------------------------------------------------------------------------
 
 function ShredderRecycleLowElectronics(sources, result, player, item)
 	local electronicsValueRoll = ZombRand(lowElectronicsMinValue, lowElectronicsMaxValue)+1	
@@ -1203,11 +1168,9 @@ end
 
 
 
-
-
-----------------------------------
--- Safehouse Validation & Claiming
-----------------------------------
+------------------------------------------------------------------------
+--                  SAFEHOUSE VALIDATION & CLAIMING
+------------------------------------------------------------------------
 
 local residentialPermitSmall = SandboxVars.GN84ECO.ResidentialPermitSmall or 1500
 local residentialPermitLarge = SandboxVars.GN84ECO.ResidentialPermitLarge or 3500
@@ -1217,8 +1180,9 @@ local factionPermitLarge = SandboxVars.GN84ECO.FactionPermitLarge or 25000
 local factionPermitMassive = SandboxVars.GN84ECO.FactionPermitMassive or 50000
 
 local function CalculateBuildingSize(worldobjects, square, player)	
-		
-    local player = getPlayer()
+	
+	local player = getPlayer()	
+
     local buildingSqFootage = nil
 
     local isResidential = nil
@@ -1391,8 +1355,8 @@ local function CalculateBuildingSize(worldobjects, square, player)
 			--  Building Height Checks  --
 			-------------------------------
 			
-			
-                for i, v in ipairs(tileCheckList) do                       
+				--for i = 1, #tileCheckList do          -- TEST FOR PERFORMANCE
+                 for i, v in ipairs(tileCheckList) do                       
                         
                     currentTile = currentCell:getGridSquare(tileCheckList[i]["X"], tileCheckList[i]["Y"], z)  
 
@@ -1478,11 +1442,13 @@ end
 
 local function ValidateSafehouseClaim(worldobjects, square, player)
 	
+	local player = getPlayer()
+
 	-- print ("Enteirng ValidateSafehouseClaim")
 	local squareFootage, residentialBuilding = CalculateBuildingSize()
 
 	if (squareFootage == nil) or (residentialBuilding == nil) then
-				getPlayer():Say("Error: Invalid Claim")
+				player:Say("Error: Invalid Claim")
 		return
 	end
 
@@ -1491,14 +1457,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		-- SMALL HOUSE CLAIM
 		if squareFootage >= residentialPermitSmall and squareFootage < residentialPermitLarge then
 			
-			if getPlayer():getInventory():contains("ResidentialPermitSmall") then
+			if player:getInventory():contains("ResidentialPermitSmall") then
 					
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("ResidentialPermitSmall")
-				getPlayer():Say("Claimed Property (Small House)")
+				player:getInventory():RemoveOneOf("ResidentialPermitSmall")
+				player:Say("Claimed Property (Small House)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Small House) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Small House) to Claim this Building!")
 				return
 			end					
 		return
@@ -1506,14 +1472,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		-- LARGE HOUSE CLAIM
 		elseif squareFootage >= residentialPermitLarge and squareFootage < residentialPermitMansion	then
 			
-			if getPlayer():getInventory():contains("ResidentialPermitLarge") then
+			if player:getInventory():contains("ResidentialPermitLarge") then
 					
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("ResidentialPermitLarge")
-				getPlayer():Say("Claimed Property (Large House)")
+				player:getInventory():RemoveOneOf("ResidentialPermitLarge")
+				player:Say("Claimed Property (Large House)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Large House) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Large House) to Claim this Building!")
 				return
 			end					
 		return
@@ -1521,14 +1487,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		-- MANSION CLAIM
 		elseif squareFootage >= residentialPermitMansion and squareFootage < factionPermitSmall	then
 			
-			if getPlayer():getInventory():contains("ResidentialPermitMansion") then
+			if player:getInventory():contains("ResidentialPermitMansion") then
 				
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("ResidentialPermitMansion")
-				getPlayer():Say("Claimed Property (Mansion)")
+				player:getInventory():RemoveOneOf("ResidentialPermitMansion")
+				player:Say("Claimed Property (Mansion)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Mansion) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Mansion) to Claim this Building!")
 				return
 			end					
 		return
@@ -1536,14 +1502,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		--SMALL BUNKER CLAIM
 		elseif squareFootage >= factionPermitSmall and squareFootage < factionPermitLarge then
 					
-			if getPlayer():getInventory():contains("FactionPermitSmall") then
+			if player:getInventory():contains("FactionPermitSmall") then
 				
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("FactionPermitSmall")
-				getPlayer():Say("Claimed Property (Small Bunker)")
+				player:getInventory():RemoveOneOf("FactionPermitSmall")
+				player:Say("Claimed Property (Small Bunker)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Small Bunker) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Small Bunker) to Claim this Building!")
 				return
 			end				
 		return
@@ -1551,14 +1517,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		--LARGE FACTION BUNKER CLAIM
 		elseif squareFootage >= factionPermitLarge and squareFootage < factionPermitMassive	then
 			
-			if getPlayer():getInventory():contains("FactionPermitLarge") then
+			if player:getInventory():contains("FactionPermitLarge") then
 					-- print ("You can claim this building")
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("FactionPermitLarge")
-				getPlayer():Say("Claimed Property (Large Bunker)")
+				player:getInventory():RemoveOneOf("FactionPermitLarge")
+				player:Say("Claimed Property (Large Bunker)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Large Bunker) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Large Bunker) to Claim this Building!")
 				return
 			end				
 		return
@@ -1566,14 +1532,14 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		-- MASSIVE BUNKER CLAIM
 		elseif squareFootage >= factionPermitMassive then
 			
-			if getPlayer():getInventory():contains("FactionPermitMassive") then
+			if player:getInventory():contains("FactionPermitMassive") then
 				
 				playerSafehouseClaim()												
-				getPlayer():getInventory():RemoveOneOf("FactionPermitMassive")
-				getPlayer():Say("Claimed Property (Massive Bunker)")
+				player:getInventory():RemoveOneOf("FactionPermitMassive")
+				player:Say("Claimed Property (Massive Bunker)")
 				return
 			else
-				getPlayer():Say("You must purchase a Property Claim Permit (Massive Bunker) to Claim this Building!")
+				player:Say("You must purchase a Property Claim Permit (Massive Bunker) to Claim this Building!")
 				return
 			end				
 		return
@@ -1587,66 +1553,68 @@ local function ValidateSafehouseClaim(worldobjects, square, player)
 		else
 			
 			playerSafehouseClaim()
-			getPlayer():Say("Claimed Property (Bungalow)")
+			player:Say("Claimed Property (Bungalow)")
 					
 		end
 
 	elseif not residentialBuilding then
-			getPlayer():Say("--Non-Residential Building--")
-			getPlayer():Say("Contact an Admin for Assistance")
+			player:Say("--Non-Residential Building--")
+			player:Say("Contact an Admin for Assistance")
 	end	
 end
 
 local function DisplayRequiredClaimPermit(squareFootage, residentialBuilding)
 
-			if (squareFootage == nil) or (residentialBuilding == nil) then
-				-- print ("Error in Returning Safehouse Size")
-			    return
-            end
+	local player = getPlayer()
 
-            --if getAccessLevel() == "admin" then
-                --getPlayer():Say("Safehouse Single Floor Square Footage: " .. (buildingHeight * buildingWidth * 9))
-                getPlayer():Say("Safehouse Square Footage: " .. (squareFootage))
-            --end   
+	if (squareFootage == nil) or (residentialBuilding == nil) then
+		-- print ("Error in Returning Safehouse Size")
+		return
+	end
 
-            if residentialBuilding then
-                -- SMALL RESIDENTIAL CLAIM
-                if squareFootage >= residentialPermitSmall and squareFootage < residentialPermitLarge then
-                        getPlayer():Say("Property Claim Permit (Small House) Required!")					
+	--if getAccessLevel() == "admin" then
+		--getPlayer():Say("Safehouse Single Floor Square Footage: " .. (buildingHeight * buildingWidth * 9))
+		player:Say("Safehouse Square Footage: " .. (squareFootage))
+	--end   
 
-                -- MEDIUM RESIDENTIAL CLAIM
-                elseif squareFootage >= residentialPermitLarge and squareFootage < residentialPermitMansion then				
-                        getPlayer():Say("Property Claim Permit (Large House) Required!")					
+	if residentialBuilding then
+		-- SMALL RESIDENTIAL CLAIM
+		if squareFootage >= residentialPermitSmall and squareFootage < residentialPermitLarge then
+				player:Say("Property Claim Permit (Small House) Required!")					
 
-                -- LARGE RESIDENTIAL CLAIM
-                elseif squareFootage >= residentialPermitMansion and squareFootage < factionPermitSmall then				
-                        getPlayer():Say("Property Claim Permit (Mansion) Required!")					
+		-- MEDIUM RESIDENTIAL CLAIM
+		elseif squareFootage >= residentialPermitLarge and squareFootage < residentialPermitMansion then				
+				player:Say("Property Claim Permit (Large House) Required!")					
 
-                        --SMALL FACTION BUNKER CLAIM
-                elseif squareFootage >= factionPermitSmall and squareFootage < factionPermitLarge then		
-                        getPlayer():Say("Property Claim Permit (Small Bunker) Required!")					
+		-- LARGE RESIDENTIAL CLAIM
+		elseif squareFootage >= residentialPermitMansion and squareFootage < factionPermitSmall then				
+				player:Say("Property Claim Permit (Mansion) Required!")					
 
-                            --LARGE FACTION BUNKER CLAIM
-                elseif squareFootage >= factionPermitLarge and squareFootage < factionPermitMassive then
-                        getPlayer():Say("Property Claim Permit (Large Bunker) Required!")					
+				--SMALL FACTION BUNKER CLAIM
+		elseif squareFootage >= factionPermitSmall and squareFootage < factionPermitLarge then		
+				player:Say("Property Claim Permit (Small Bunker) Required!")					
 
-                -- MASSIVE FACTION BUNKER CLAIM
-                elseif squareFootage >= factionPermitMassive then				
-                        getPlayer():Say("Property Claim Permit (Massive Bunker) Required!")					
+					--LARGE FACTION BUNKER CLAIM
+		elseif squareFootage >= factionPermitLarge and squareFootage < factionPermitMassive then
+				player:Say("Property Claim Permit (Large Bunker) Required!")					
 
-                elseif squareFootage == 0 then -- Invalid Safehouse			
-                        print ("Invalid Safehouse")					
+		-- MASSIVE FACTION BUNKER CLAIM
+		elseif squareFootage >= factionPermitMassive then				
+				player:Say("Property Claim Permit (Massive Bunker) Required!")					
 
-                else  -- Standard Claim			
-                        getPlayer():Say("No Permit Required to Claim!")
-                            
-                end
-            end
+		elseif squareFootage == 0 then -- Invalid Safehouse			
+				print ("Invalid Safehouse")					
 
-            if not residentialBuilding then
-                getPlayer():Say("--Non-Residential Building--")
-                getPlayer():Say("Contact an Admin for Assistance")
-            end
+		else  -- Standard Claim			
+				player:Say("No Permit Required to Claim!")
+					
+		end
+	end
+
+	if not residentialBuilding then
+		player:Say("--Non-Residential Building--")
+		player:Say("Contact an Admin for Assistance")
+	end
 end
 
 local function DisplayPermitAction()
@@ -1680,6 +1648,7 @@ end
 
 
 local function Context_safezone(player, context, worldobjects, test)
+
 	local option = nil
     for _, opt in pairs(context.options) do
         if opt.name == getText("ContextMenu_SafehouseClaim") then
@@ -1687,8 +1656,11 @@ local function Context_safezone(player, context, worldobjects, test)
             break
         end
     end
-    if not option then return end    
-        option.onSelect = ValidateSafehouseClaim   
+
+    if not option then return end
+
+    option.onSelect = ValidateSafehouseClaim   
+
 end
 
 local function ShowCheckPermitContextOption(player, context, worldobjects, test)
@@ -1712,11 +1684,16 @@ end
 Events.OnFillWorldObjectContextMenu.Add(Context_safezone)
 Events.OnFillWorldObjectContextMenu.Add(ShowCheckPermitContextOption)
 
-----------------------------
--- ADMIN DEBUGGING FUNCTIONS
-----------------------------
 
---  CHECK FOR FAVORITED OR EQUIPPED ITEM
+
+
+------------------------------------------------------------------------
+--                      ADMIN DEBUGGING FUNCTIONS 
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+--                CHECK FOR FAVORITED OR EQUIPPED ITEMS
+------------------------------------------------------------------------
 
 function Recipe.OnTest.IsNotFavorited(item, result)
     return not item:isFavorite() and not item:isEquipped()
@@ -1724,10 +1701,12 @@ end
 
 
 
-
---  HOTKEY FOR DEBUGGING
+------------------------------------------------------------------------
+--                        DEBUGGING HOTKEY
+------------------------------------------------------------------------
 
 function debuggingKey(_keyPressed)
+
 	-- local key = _keyPressed
 	-- if getAccessLevel() == "admin" then
 	-- 	-- print (tostring(key))
@@ -1736,9 +1715,8 @@ function debuggingKey(_keyPressed)
 				
 	-- 		end	
 	-- end
+
 	return
 end
 
 Events.OnKeyPressed.Add(debuggingKey)
-
-

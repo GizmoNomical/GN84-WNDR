@@ -1,10 +1,27 @@
+-- #########################################################################################################
+-- #########################################################################################################
+-- ##                                                                                                     ##
+-- ##                                                                                                     ##
+-- ##       _____   _                              _   _                       _                  _       ##
+-- ##      / ____| (_)                            | \ | |                     (_)                | |      ##
+-- ##      | |  __   _   ____  _ __ ___     ___   |  \| |   ___    _ __ ___    _    ___    __ _  | |      ##
+-- ##      | | |_ | | | |_  / | '_ ` _ \   / _ \  | . ` |  / _ \  | '_ ` _ \  | |  / __|  / _` | | |      ##
+-- ##      | |__| | | |  / /  | | | | | | | (_) | | |\  | | (_) | | | | | | | | | | (__  | (_| | | |      ##
+-- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
+-- ##                                                                                                     ##
+-- ##                               Copyright © GizmoNomical - 2025                                       ##
+-- ##                                           GN84-ECO                                                  ##
+-- ##                                       The Wanderers Core                                            ##
+-- #########################################################################################################
+-- #########################################################################################################
+
 require "ISUI/ISPanel"
 
-local ServerPointsUI = ISPanel:derive("ServerPointsUI")
-ServerPointsUI.BuyType = {}
-ServerPointsUI.DrawType = {}
-ServerPointsUI.LoadType = {}
-ServerPointsUI.PreviewType = {}
+local SmokeyPointsUI = ISPanel:derive("SmokeyPointsUI")
+SmokeyPointsUI.BuyType = {}
+SmokeyPointsUI.DrawType = {}
+SmokeyPointsUI.LoadType = {}
+SmokeyPointsUI.PreviewType = {}
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -14,12 +31,12 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 local function OnServerCommand(module, command, arguments)
     if module == "GN84-ECO" and command == "get" then
-        ServerPointsUI.instance.points = arguments[1]
+        SmokeyPointsUI.instance.points = arguments[1]
         Events.OnServerCommand.Remove(OnServerCommand)
     end
 end
 
-function ServerPointsUI:setVisible(visible)
+function SmokeyPointsUI:setVisible(visible)
     if self.javaObject == nil then
         self:instantiate()
     end
@@ -30,11 +47,11 @@ function ServerPointsUI:setVisible(visible)
     if visible then
         Events.OnServerCommand.Add(OnServerCommand)
         sendClientCommand("GN84-ECO", "get", nil)
-        ServerPointsUI.automaticRefresh()
+        SmokeyPointsUI.automaticRefresh()
     end
 end
 
-function ServerPointsUI.LoadType.ITEM(row, entry)    
+function SmokeyPointsUI.LoadType.ITEM(row, entry)    
     local item = getScriptManager():getItem(entry.target)
     if item then
         --print (item)
@@ -44,18 +61,18 @@ function ServerPointsUI.LoadType.ITEM(row, entry)
     end
 end
 
-function ServerPointsUI.LoadType.VEHICLE(row, entry)
+function SmokeyPointsUI.LoadType.VEHICLE(row, entry)
     row.text = getScriptManager():getVehicle(entry.target):getName()
     row.texture = getTexture("Item_CarKey")
 end
 
-function ServerPointsUI.LoadType.XP(row, entry)
+function SmokeyPointsUI.LoadType.XP(row, entry)
     row.quantity = entry.quantity or 1
     row.text = entry.target .. " XP"
     row.texture = getTexture("media/ui/Moodle_internal_plus_green.png")
 end
 
-function ServerPointsUI.LoadType.DIV(row, entry)
+function SmokeyPointsUI.LoadType.DIV(row, entry)
     row.target = row.target or {}
     if type(entry.target) == "string" then
         row.target = {}
@@ -65,23 +82,23 @@ function ServerPointsUI.LoadType.DIV(row, entry)
     row.fontHeight = getTextManager():getFontHeight(row.font)
 end
 
---function ServerPointsUI.LoadType.XPBOOST(row, entry)
+--function SmokeyPointsUI.LoadType.XPBOOST(row, entry)
 --  row.text = entry.target .. " Boost"
 --  row.texture = getTexture("chevron_double")
 --end
 
-function ServerPointsUI.LoadListings(module, command, arguments)
+function SmokeyPointsUI.LoadListings(module, command, arguments)
     if module == "GN84-ECO" and command == "load" then
-        Events.OnServerCommand.Remove(ServerPointsUI.LoadListings)
+        Events.OnServerCommand.Remove(SmokeyPointsUI.LoadListings)
         for k, v in pairs(arguments) do
-            local scrollingList = ISScrollingListBox:new(1, 0, ServerPointsUI.instance.tabPanel.width - 2, ServerPointsUI.instance.tabPanel.height - ServerPointsUI.instance.tabPanel.tabHeight)
+            local scrollingList = ISScrollingListBox:new(1, 0, SmokeyPointsUI.instance.tabPanel.width - 2, SmokeyPointsUI.instance.tabPanel.height - SmokeyPointsUI.instance.tabPanel.tabHeight)
             scrollingList.itemPadY = 10 * FONT_SCALE
             scrollingList.itemheight = FONT_HGT_LARGE + scrollingList.itemPadY * 2 + 1 * FONT_SCALE + FONT_HGT_SMALL
             scrollingList.textureHeight = scrollingList.itemheight - scrollingList.itemPadY * 2
             scrollingList.mouseoverselected = -1
             scrollingList:initialise()
-            scrollingList.doDrawItem = ServerPointsUI.doDrawItem
-            ServerPointsUI.instance.tabPanel:addView(k, scrollingList)
+            scrollingList.doDrawItem = SmokeyPointsUI.doDrawItem
+            SmokeyPointsUI.instance.tabPanel:addView(k, scrollingList)
 
             for _, entry in ipairs(v) do
                 local listItem = getScriptManager():getItem(tostring(entry.target))  -- Check if Item is Valid and Continue to next if not
@@ -91,8 +108,8 @@ function ServerPointsUI.LoadListings(module, command, arguments)
                     row.type = entry.type
                     row.target = entry.target
                     row.price = entry.price or 0
-                    if ServerPointsUI.LoadType[entry.type] then                        
-                            ServerPointsUI.LoadType[entry.type](row, entry)                        
+                    if SmokeyPointsUI.LoadType[entry.type] then                        
+                            SmokeyPointsUI.LoadType[entry.type](row, entry)                        
                     else
                         row.text = entry.type .. ":" .. tostring(entry.target)
                     end 
@@ -104,11 +121,11 @@ end
 
 local function OnTick()
     Events.OnTick.Remove(OnTick)
-    Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
+    Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
     sendClientCommand("GN84-ECO", "load", nil)
 end
 
-function ServerPointsUI:createChildren()
+function SmokeyPointsUI:createChildren()
     local z = 15 * FONT_SCALE * 2 + FONT_HGT_LARGE + 1
     local btnWid = 125 * FONT_SCALE
     local btnHgt = FONT_HGT_SMALL + 5 * 2 * FONT_SCALE
@@ -123,7 +140,7 @@ function ServerPointsUI:createChildren()
     self:addChild(self.tabPanel)
     Events.OnTick.Add(OnTick)
     
-    self.previewButton = ISButton:new(self.width - 200 * FONT_SCALE - padBottom * 2, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "PREVIEW", self, ServerPointsUI.onPreview)
+    self.previewButton = ISButton:new(self.width - 200 * FONT_SCALE - padBottom * 2, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "PREVIEW", self, SmokeyPointsUI.onPreview)
     self.previewButton:initialise()
     self.previewButton:instantiate()
     self.previewButton.borderColor = self.buttonBorderColor
@@ -131,7 +148,7 @@ function ServerPointsUI:createChildren()
     self.previewButton.font = UIFont.Medium
     self:addChild(self.previewButton)
 
-    self.buyButton = ISButton:new(self.width - 120 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "BUY", self, ServerPointsUI.onBuy)
+    self.buyButton = ISButton:new(self.width - 120 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "BUY", self, SmokeyPointsUI.onBuy)
     self.buyButton:initialise()
     self.buyButton:instantiate()
     self.buyButton.borderColor = self.buttonBorderColor
@@ -139,20 +156,20 @@ function ServerPointsUI:createChildren()
     self.buyButton.font = UIFont.Medium
     self:addChild(self.buyButton)
 
-    self.cancelButton = ISButton:new(self.width - padBottom - btnWid, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, ServerPointsUI.close)
+    self.cancelButton = ISButton:new(self.width - padBottom - btnWid, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, SmokeyPointsUI.close)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
     
-    self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "REFRESH LISTINGS", self, ServerPointsUI.onReload)
+    self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "REFRESH LISTINGS", self, SmokeyPointsUI.onReload)
     self.reloadButton:initialise()
     self.reloadButton:instantiate()
     self:addChild(self.reloadButton)
    
 end
 
-function ServerPointsUI:autoCloseWindow()
+function SmokeyPointsUI:autoCloseWindow()
     if not MainScreen.instance:isVisible() then
         if MainScreen.instance.serverPoints:isVisible() then            
             MainScreen.instance.serverPoints:setVisible(false)
@@ -160,72 +177,72 @@ function ServerPointsUI:autoCloseWindow()
     end
 end
 
-function ServerPointsUI:close()
+function SmokeyPointsUI:close()
     self:setVisible(false) 
-    ServerPointsUI:removeFromUIManager()
+    SmokeyPointsUI:removeFromUIManager()
 end
 
 function serverForceRefresh(module, command, player, args)
     if module == "GN84-ECO" and command == "ServerForceRefresh" then
-        ServerPointsUI.automaticRefresh()
+        SmokeyPointsUI.automaticRefresh()
         --print ("Server Updated Shop Listings")
     end
 end
 
 Events.OnServerCommand.Add(serverForceRefresh)
 
-function ServerPointsUI:automaticRefresh()  
-    if ServerPointsUI.instance ~= nil then
-        if ServerPointsUI.instance.tabPanel.viewList ~= nil then
-            for i, v in ipairs(ServerPointsUI.instance.tabPanel.viewList) do
-                ServerPointsUI.instance.tabPanel:removeView(v.view)
+function SmokeyPointsUI:automaticRefresh()  
+    if SmokeyPointsUI.instance ~= nil then
+        if SmokeyPointsUI.instance.tabPanel.viewList ~= nil then
+            for i, v in ipairs(SmokeyPointsUI.instance.tabPanel.viewList) do
+                SmokeyPointsUI.instance.tabPanel:removeView(v.view)
             end
-            Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
+            Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
             sendClientCommand("GN84-ECO", "load", nil)
         end
     end 
 end
 
-function ServerPointsUI:onReload()    
+function SmokeyPointsUI:onReload()    
     if self.instance ~= nil then    
         if self.instance.tabPanel.viewList ~= nil then
             for i, v in ipairs(self.tabPanel.viewList) do
                 self.tabPanel:removeView(v.view)
             end
-            Events.OnServerCommand.Add(ServerPointsUI.LoadListings)
+            Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
             sendClientCommand("GN84-ECO", "load", nil)
         end
     end
 end
 
 
-function ServerPointsUI.BuyType.ITEM(row)
+function SmokeyPointsUI.BuyType.ITEM(row)
     sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
     getPlayer():getInventory():AddItems(row.target, row.quantity)
     getSoundManager():PlaySound("CashRegisterSound", false, 1)
 end
 
-function ServerPointsUI.BuyType.VEHICLE(row)
+function SmokeyPointsUI.BuyType.VEHICLE(row)
     sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
     sendClientCommand("GN84-ECO", "vehicle", { row.target })
 end
 
-function ServerPointsUI.BuyType.XP(row)
+function SmokeyPointsUI.BuyType.XP(row)
     sendClientCommand("GN84-ECO", "buy", { row.price, row.target })
     getPlayer():getXp():AddXP(Perks[row.target], row.quantity, true, false, false)
 end
 
-function ServerPointsUI:onBuy()
+function SmokeyPointsUI:onBuy()
     local row = self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected]
     self.points = self.points - row.price
-    if ServerPointsUI.BuyType[row.type] then
-        ServerPointsUI.BuyType[row.type](row)
+    if SmokeyPointsUI.BuyType[row.type] then
+        SmokeyPointsUI.BuyType[row.type](row)
     end
     Events.OnServerCommand.Add(OnServerCommand)
     sendClientCommand("GN84-ECO", "get", nil)
 end
 
-function ServerPointsUI.PreviewType.VEHICLE(self)
+function SmokeyPointsUI.PreviewType.VEHICLE(self)
     self.preview = ISUI3DScene:new(self.x + self.width, self.y, 400 * FONT_SCALE, self.height)
     self.preview:initialise()
     self.parent:addChild(self.preview)
@@ -254,7 +271,7 @@ function ServerPointsUI.PreviewType.VEHICLE(self)
     self.preview.closeButton = ISButton:new(self.preview.width - 15 * FONT_SCALE, 5 * FONT_SCALE, 10 * FONT_SCALE, 10 * FONT_SCALE, nil, self.preview, function(self)
         self:setVisible(false)
         self:removeFromUIManager()
-        ServerPointsUI.instance.preview = nil
+        SmokeyPointsUI.instance.preview = nil
     end)
     self.preview.closeButton:setDisplayBackground(false)
     self.preview.closeButton:setImage(getTexture("media/ui/Dialog_Titlebar_CloseIcon.png"))
@@ -263,18 +280,18 @@ function ServerPointsUI.PreviewType.VEHICLE(self)
     self.preview:addChild(self.preview.closeButton)
 end
 
-function ServerPointsUI:onPreview()
+function SmokeyPointsUI:onPreview()
     if self.preview then
         self.preview:setVisible(false)
         self.preview:removeFromUIManager()
-        ServerPointsUI.instance.preview = nil
+        SmokeyPointsUI.instance.preview = nil
     end
-    if ServerPointsUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type] then
-        ServerPointsUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type](self)
+    if SmokeyPointsUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type] then
+        SmokeyPointsUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type](self)
     end
 end
 
-function ServerPointsUI:tabPanelRender()
+function SmokeyPointsUI:tabPanelRender()
     local inset = 1 -- assumes a 1-pixel window border on the left to avoid
 
     local x = inset + self.scrollX
@@ -324,7 +341,7 @@ function ServerPointsUI:tabPanelRender()
     self:drawRect(0, self.height, self.width, 1, 1, 0.4, 0.4, 0.4)
 end
 
-function ServerPointsUI:addView(name, view)
+function SmokeyPointsUI:addView(name, view)
     local viewObject = {}
     viewObject.name = name
     viewObject.view = view
@@ -346,7 +363,7 @@ function ServerPointsUI:addView(name, view)
     end
 end
 
-function ServerPointsUI.DrawType.DIV(self, y, item, alt)
+function SmokeyPointsUI.DrawType.DIV(self, y, item, alt)
     self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
     y = y + (item.height - #item.target * item.fontHeight) / 2
     for i, v in ipairs(item.target) do
@@ -355,7 +372,7 @@ function ServerPointsUI.DrawType.DIV(self, y, item, alt)
     end
 end
 
-function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
+function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
     local x = self.itemPadY
     local z = y + self.itemPadY
@@ -378,24 +395,24 @@ function ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
     if item.price == 999999999
     then
         self:drawText("OUT OF STOCK", x, z, 0.875, 0.561, 0.341, 1.0, self.font)                    --  Out of Stock Items
-    elseif ServerPointsUI.instance.points < item.price then
+    elseif SmokeyPointsUI.instance.points < item.price then
         self:drawText(tostring(item.price), x, z, 0.733, 0.247, 0.215, 1.0, self.font)              --  Insufficient Funds
     else      
         self:drawText(tostring(item.price), x, z, 0.905, 0.909, 0.898, 1.0, self.font)                 --  Purchaseable Items
     end
 end
 
-function ServerPointsUI:doDrawItem(y, item, alt)
-    if ServerPointsUI.DrawType[item.type] then
-        ServerPointsUI.DrawType[item.type](self, y, item, alt)
+function SmokeyPointsUI:doDrawItem(y, item, alt)
+    if SmokeyPointsUI.DrawType[item.type] then
+        SmokeyPointsUI.DrawType[item.type](self, y, item, alt)
     else
-        ServerPointsUI.DrawType.DEFAULT(self, y, item, alt)
+        SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     end
 
     return y + item.height
 end
 
-function ServerPointsUI:render()
+function SmokeyPointsUI:render()
     local z = 15 * FONT_SCALE
     self:drawText(self.title, 10 * FONT_SCALE, z, 1, 1, 1, 1, UIFont.Large)
 
@@ -420,7 +437,7 @@ function ServerPointsUI:render()
         local row = view.items[view.mouseoverselected]
         z = (view.mouseoverselected - 1) * view.itemheight + view:getYScroll() + view.itemPadY + view.y + view.parent.y
 
-        if ServerPointsUI.BuyType[row.type] then
+        if SmokeyPointsUI.BuyType[row.type] then
             self.buyButton:setY(z)
             self.buyButton:setVisible(true)
             if row.price == 999999999 then
@@ -435,7 +452,7 @@ function ServerPointsUI:render()
             self.buyButton:setVisible(false)
         end
 
-        if ServerPointsUI.PreviewType[row.type] then
+        if SmokeyPointsUI.PreviewType[row.type] then
             self.previewButton:setY(z)
             self.previewButton:setVisible(true)
         else
@@ -444,7 +461,7 @@ function ServerPointsUI:render()
     end
 end
 
-function ServerPointsUI:new(x, y, width, height)
+function SmokeyPointsUI:new(x, y, width, height)
     local o = ISPanel:new(x, y, width, height + 100)
     setmetatable(o, self)
     self.__index = self
@@ -457,8 +474,8 @@ function ServerPointsUI:new(x, y, width, height)
     o.available = " Balance     "
     o.serverMsg = SandboxVars.ServerPoints.ServerMessage
     o.points = 0
-    ServerPointsUI.instance = o
+    SmokeyPointsUI.instance = o
     return o
 end
 
-return ServerPointsUI
+return SmokeyPointsUI
