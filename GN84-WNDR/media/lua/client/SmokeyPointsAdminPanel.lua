@@ -26,7 +26,7 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 local function OnServerCommand(module, command, arguments)
     if module == "GN84-WNDR" and command == "get" then
-        SmokeyPointsAdminPanel.instance.balance = "Balance: " .. tostring(arguments[1])
+        SmokeyPointsAdminPanel.instance.balance = "Balance:  $" .. tostring(arguments[1])
         Events.OnServerCommand.Remove(OnServerCommand)
     end
 end
@@ -88,7 +88,7 @@ end
 function SmokeyPointsAdminPanel:render()
     self:drawTextCentre("Smokey Points Panel", self.width / 2, 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
     self:drawText("Player:", 10 * FONT_SCALE, self.playerSelect.y + (self.playerSelect.height - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
-    self:drawText(Utils.CurrencyFormatter(self.balance), 10 * FONT_SCALE, self.playerSelect.y + self.playerSelect.height + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
+    self:drawText(Utils.CurrencyFormatter(self.balance), 12 * FONT_SCALE, self.playerSelect.y + self.playerSelect.height + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
 end
 
 function SmokeyPointsAdminPanel:onOptionMouseDown(button)
@@ -120,7 +120,7 @@ function SmokeyPointsAdminPanel:new(x, y, width, height)
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
     o.moveWithMouse = true
-    o.balance = "Balance: 0"
+    o.balance = "Balance: $0"
     SmokeyPointsAdminPanel.instance = o
     return o
 end
@@ -143,7 +143,7 @@ function ISAdminPanelUI:create()
 
     if getAccessLevel() == "admin" then
         local lastButton = self.children[self.IDMax-1].internal == "CANCEL" and self.children[self.IDMax-2] or self.children[self.IDMax-1]
-        self.serverPointsBtn = ISButton:new(lastButton.x, lastButton.y + 5 + lastButton.height, self.sandboxOptionsBtn.width, self.sandboxOptionsBtn.height, "Smokey Points Options", nil, openUI)
+        self.serverPointsBtn = ISButton:new(lastButton.x, lastButton.y + 5 + lastButton.height, self.sandboxOptionsBtn.width, self.sandboxOptionsBtn.height, "Smokey Points Panel", nil, openUI)
         self.serverPointsBtn.internal = "SERVERPOINTS"
         self.serverPointsBtn:initialise()
         self.serverPointsBtn:instantiate()

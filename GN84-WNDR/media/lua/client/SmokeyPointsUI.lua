@@ -120,6 +120,9 @@ function SmokeyPointsUI.LoadListings(module, command, arguments)
                     row.type = entry.type
                     row.target = entry.target
                     row.price = entry.price or 0
+                    row.mult = entry.mult or 1.0
+                    row.instock = entry.instock or "true"
+
                     if SmokeyPointsUI.LoadType[entry.type] then                        
                             SmokeyPointsUI.LoadType[entry.type](row, entry)                        
                     else
@@ -279,7 +282,7 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.BuyType.ITEM(row)
-    sendClientCommand("GN84-WNDR", "buy", { row.price, row.target })
+    sendClientCommand("GN84-WNDR", "buy", { (row.price * row.mult), row.target })
     getPlayer():getInventory():AddItems(row.target, row.quantity)
     getSoundManager():PlaySound("CashRegisterSound", false, 1)
 end
@@ -290,7 +293,7 @@ end
 
 function SmokeyPointsUI:onBuy()
     local row = self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected]
-    self.points = self.points - row.price
+    self.points = self.points - (row.price * row.mult)
     if SmokeyPointsUI.BuyType[row.type] then
         SmokeyPointsUI.BuyType[row.type](row)
     end
@@ -433,8 +436,8 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     x = x + self.itemPadY + self.textureHeight
 
     if item.quantity then
-        self:drawText("Quantity: ", x, z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Small)
-        self:drawText(tostring(item.quantity), x + getTextManager():MeasureStringX(UIFont.Small, "Quantity: "), z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Small)
+        self:drawText("Quantity:  ", x, z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Medium)
+        self:drawText(tostring(item.quantity), x + getTextManager():MeasureStringX(UIFont.Medium, "Quantity:  "), z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Medium)
     else
         z = y + (item.height - FONT_HGT_LARGE) / 2
     end
@@ -446,15 +449,19 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     z = y + (item.height - FONT_HGT_LARGE) / 2
 
     -- CHECK FOR OUT OF STOCK ITEMS
-    if item.price == 999999999 then
-        self:drawText("OUT OF STOCK", x, z, 0.875, 0.561, 0.341, 1.0, self.font)                    --  Out of Stock Items
+    if item.instock == "false" then
+        self:drawText("OUT OF STOCK", x, z, 0.871, 0.478, 0.341, 1.0, self.font) -- Out of Stock
 
-    elseif SmokeyPointsUI.instance.points < item.price then
-        self:drawText(tostring(item.price), x, z, 0.733, 0.247, 0.215, 1.0, self.font)              --  Insufficient Funds
-
-    else      
-        self:drawText(tostring(item.price), x, z, 0.905, 0.909, 0.898, 1.0, self.font)                 --  Purchaseable Items
-
+    elseif SmokeyPointsUI.instance.points < (item.price * item.mult) then
+        self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
+    else   
+        if item.mult > 1.0 then
+            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
+        elseif item.mult < 1.0 then
+            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
+        else
+            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+        end
     end
 end
 
@@ -486,7 +493,7 @@ function SmokeyPointsUI:render()
     x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
     --self:drawText("     ", x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
-    self:drawText("Balance:   " .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
+    self:drawText("Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
 
@@ -506,11 +513,11 @@ function SmokeyPointsUI:render()
             self.buyButton:setY(z)
             self.buyButton:setVisible(true)
 
-            if row.price == 999999999 then
+            if row.instock == "false" then
                 self.buyButton:setEnable(false)
                 self.buyButton:setVisible(false)
 
-            elseif self.points < row.price then
+            elseif self.points < (row.price * row.mult) then
                 self.buyButton:setEnable(false)
 
             else
