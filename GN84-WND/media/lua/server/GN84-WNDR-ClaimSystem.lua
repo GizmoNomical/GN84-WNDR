@@ -10,7 +10,7 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-WND                                                  ##
+-- ##                                           GN84-WNDR                                                  ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
@@ -19,12 +19,12 @@
 --                  SAFEHOUSE VALIDATION & CLAIMING
 ------------------------------------------------------------------------
 
-local residentialPermitSmall = SandboxVars.GN84WND.ResidentialPermitSmall or 1500
-local residentialPermitLarge = SandboxVars.GN84WND.ResidentialPermitLarge or 3500
-local residentialPermitMansion = SandboxVars.GN84WND.ResidentialPermitMansion or 7500
-local factionPermitSmall = SandboxVars.GN84WND.FactionPermitSmall or 10000
-local factionPermitLarge = SandboxVars.GN84WND.FactionPermitLarge or 25000
-local factionPermitMassive = SandboxVars.GN84WND.FactionPermitMassive or 50000
+local residentialPermitSmall = SandboxVars.GN84WNDR.ResidentialPermitSmall or 1500
+local residentialPermitLarge = SandboxVars.GN84WNDR.ResidentialPermitLarge or 3500
+local residentialPermitMansion = SandboxVars.GN84WNDR.ResidentialPermitMansion or 7500
+local factionPermitSmall = SandboxVars.GN84WNDR.FactionPermitSmall or 10000
+local factionPermitLarge = SandboxVars.GN84WNDR.FactionPermitLarge or 25000
+local factionPermitMassive = SandboxVars.GN84WNDR.FactionPermitMassive or 50000
 
 local function CalculateBuildingSize(worldobjects, square, player)	
 	

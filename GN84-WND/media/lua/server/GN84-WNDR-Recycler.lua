@@ -10,7 +10,7 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-WND                                                  ##
+-- ##                                           GN84-WNDR                                                  ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
@@ -20,44 +20,44 @@
 --                     SHREDDING AND RECYCLING     
 ------------------------------------------------------------------------
 
-local watchesMinValue = SandboxVars.GN84WND.WatchesMinValue	or 3	
-local watchesMaxValue = SandboxVars.GN84WND.WatchesMaxValue	or 10	
-local jewelrySimpleMinValue = SandboxVars.GN84WND.JewelrySimpleMinValue or 1
-local jewelrySimpleMaxValue = SandboxVars.GN84WND.JewelrySimpleMaxValue or 5
-local jewelryPreciousMinValue = SandboxVars.GN84WND.JewelryPreciousMinValue or 10
-local jewelryPreciousMaxValue = SandboxVars.GN84WND.JewelryPreciousMaxValue or 50
-local jewelryGemsMinValue = SandboxVars.GN84WND.JewelryGemsMinValue or 25
-local jewelryGemsMaxValue = SandboxVars.GN84WND.JewelryGemsMaxValue or 100
-local jewelryDiamondMinValue = SandboxVars.GN84WND.JewelryDiamondMinValue or 100
-local jewelryDiamondMaxValue = SandboxVars.GN84WND.JewelryDiamondMaxValue or 200
+local watchesMinValue = SandboxVars.GN84WNDR.WatchesMinValue	or 3	
+local watchesMaxValue = SandboxVars.GN84WNDR.WatchesMaxValue	or 10	
+local jewelrySimpleMinValue = SandboxVars.GN84WNDR.JewelrySimpleMinValue or 1
+local jewelrySimpleMaxValue = SandboxVars.GN84WNDR.JewelrySimpleMaxValue or 5
+local jewelryPreciousMinValue = SandboxVars.GN84WNDR.JewelryPreciousMinValue or 10
+local jewelryPreciousMaxValue = SandboxVars.GN84WNDR.JewelryPreciousMaxValue or 50
+local jewelryGemsMinValue = SandboxVars.GN84WNDR.JewelryGemsMinValue or 25
+local jewelryGemsMaxValue = SandboxVars.GN84WNDR.JewelryGemsMaxValue or 100
+local jewelryDiamondMinValue = SandboxVars.GN84WNDR.JewelryDiamondMinValue or 100
+local jewelryDiamondMaxValue = SandboxVars.GN84WNDR.JewelryDiamondMaxValue or 200
 
-local simpleToolMinValue = SandboxVars.GN84WND.SimpleToolMinValue or 1
-local simpleToolMaxValue = SandboxVars.GN84WND.simpleToolMaxValue or 10
-local largeToolMinValue = SandboxVars.GN84WND.LargeToolMinValue or 10
-local largeToolMaxValue = SandboxVars.GN84WND.LargeToolMaxValue or 40
-local complexToolMinValue = SandboxVars.GN84WND.ComplexToolMinValue or 40
-local complexToolMaxValue = SandboxVars.GN84WND.ComplexToolMaxValue or 100
+local simpleToolMinValue = SandboxVars.GN84WNDR.SimpleToolMinValue or 1
+local simpleToolMaxValue = SandboxVars.GN84WNDR.simpleToolMaxValue or 10
+local largeToolMinValue = SandboxVars.GN84WNDR.LargeToolMinValue or 10
+local largeToolMaxValue = SandboxVars.GN84WNDR.LargeToolMaxValue or 40
+local complexToolMinValue = SandboxVars.GN84WNDR.ComplexToolMinValue or 40
+local complexToolMaxValue = SandboxVars.GN84WNDR.ComplexToolMaxValue or 100
 
-local leatherMinValue = SandboxVars.GN84WND.LeatherMinValue or 20
-local leatherMaxValue = SandboxVars.GN84WND.LeatherMaxValue or 50
+local leatherMinValue = SandboxVars.GN84WNDR.LeatherMinValue or 20
+local leatherMaxValue = SandboxVars.GN84WNDR.LeatherMaxValue or 50
 
-local clothingMinValue = SandboxVars.GN84WND.ClothingMinValue or 5
-local clothingMaxValue = SandboxVars.GN84WND.ClothingMaxValue or 25
+local clothingMinValue = SandboxVars.GN84WNDR.ClothingMinValue or 5
+local clothingMaxValue = SandboxVars.GN84WNDR.ClothingMaxValue or 25
 
-local bulletVestMinValue = SandboxVars.GN84WND.BulletVestMinValue or 100
-local bulletVestMaxValue = SandboxVars.GN84WND.BulletVestMaxValue or 250
+local bulletVestMinValue = SandboxVars.GN84WNDR.BulletVestMinValue or 100
+local bulletVestMaxValue = SandboxVars.GN84WNDR.BulletVestMaxValue or 250
 
-local glassesMinValue = SandboxVars.GN84WND.GlassesMinValue or 5
-local glassesMaxValue = SandboxVars.GN84WND.GlassesMaxValue or 20
+local glassesMinValue = SandboxVars.GN84WNDR.GlassesMinValue or 5
+local glassesMaxValue = SandboxVars.GN84WNDR.GlassesMaxValue or 20
 
-local paperProductMinValue = SandboxVars.GN84WND.PaperProductMinValue or 5
-local paperProductMaxValue = SandboxVars.GN84WND.PaperProductMaxValue or 10
+local paperProductMinValue = SandboxVars.GN84WNDR.PaperProductMinValue or 5
+local paperProductMaxValue = SandboxVars.GN84WNDR.PaperProductMaxValue or 10
 
-local lowElectronicsMinValue = SandboxVars.GN84WND.LowElectronicsMinValue or 15
-local lowElectronicsMaxValue = SandboxVars.GN84WND.LowElectronicsMaxValue or 35
+local lowElectronicsMinValue = SandboxVars.GN84WNDR.LowElectronicsMinValue or 15
+local lowElectronicsMaxValue = SandboxVars.GN84WNDR.LowElectronicsMaxValue or 35
 
-local highElectronicsMinValue = SandboxVars.GN84WND.HighElectronicsMinValue or 50
-local highElectronicsMaxValue = SandboxVars.GN84WND.HighElectronicsMaxValue or 100
+local highElectronicsMinValue = SandboxVars.GN84WNDR.HighElectronicsMinValue or 50
+local highElectronicsMaxValue = SandboxVars.GN84WNDR.HighElectronicsMaxValue or 100
 
 
 

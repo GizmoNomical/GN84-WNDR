@@ -10,16 +10,18 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-WND                                                  ##
+-- ##                                           GN84-WNDR                                                  ##
 -- ##                                      The Wanderers Core                                             ##
 -- #########################################################################################################
 -- #########################################################################################################
 
+local Utils = require "Gizmo/GN84LIB_Utils"
+
 
 function Recipe.OnCreate.RedeemPoints(items, result, player)
     local points = items:get(0):getModData().serverPoints or 0
-    sendClientCommand("GN84-WND", "add", { player:getUsername(), points })
-    player:Say("Redeemed " .. points .. " " .. SandboxVars.GN84WND.PointsName)
+    sendClientCommand("GN84-WNDR", "add", { player:getUsername(), points })
+    player:Say("Redeemed " .. points .. " " .. SandboxVars.GN84WNDR.PointsName)
 end
 
 if not isServer() then return end
@@ -61,7 +63,7 @@ local function PointsTick()
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not serverPointsData[username] then serverPointsData[username] = 0 end
-            serverPointsData[username] = serverPointsData[username] + SandboxVars.GN84WND.PointsPerTick
+            serverPointsData[username] = serverPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
@@ -101,7 +103,7 @@ local function LoadListings()
         --print ("listings are the same")
     else
         print ("Smokey Shop Listings Updated") 
-        sendServerCommand("GN84-WND", "ServerForceRefresh", nil)        
+        sendServerCommand("GN84-WNDR", "ServerForceRefresh", nil)        
     end
 
     oldListings = lines    
@@ -122,11 +124,11 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 
     LoadListings()
 
-    if SandboxVars.GN84WND.PointsFrequency == 2 then
+    if SandboxVars.GN84WNDR.PointsFrequency == 2 then
         Events.EveryTenMinutes.Add(PointsTick)
-    elseif SandboxVars.GN84WND.PointsFrequency == 3 then
+    elseif SandboxVars.GN84WNDR.PointsFrequency == 3 then
         Events.EveryHours.Add(PointsTick)
-    elseif SandboxVars.GN84WND.PointsFrequency == 4 then
+    elseif SandboxVars.GN84WNDR.PointsFrequency == 4 then
         Events.EveryDays.Add(PointsTick)
     end
 end)
@@ -143,12 +145,12 @@ end
 ------------------------------------------------------------------------
 function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
-    print(string.format("[SMOKEY SHOP] %s bought %s for %d Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), args[1]))
+    print(string.format("[SMOKEY SHOP]        %s bought %s for %s Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
     
     if not serverPointsData[player:getUsername()] then serverPointsData[player:getUsername()] = 0 end
     serverPointsData[player:getUsername()] = serverPointsData[player:getUsername()] - math.abs(args[1])
 
-    print("[SMOKEY POINTS] ", "Balance: ", serverPointsData[player:getUsername()], " Smokey Points!")
+    print("[SMOKEY POINTS] Balance:  " .. Utils.CurrencyFormatter(serverPointsData[player:getUsername()]) .. " Smokey Points!")
     print("###############")
 end
 
@@ -160,24 +162,25 @@ end
 
 function ServerPointsCommands.add(module, command, player, args)
     --BACKUP - ORIGINAL WITHOUT ANSI
-    -- print("###############")
-    -- print(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
     
-    -- if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    -- serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
-
-    -- print("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
-    -- print("###############")
-
-
-    printf("###############", ANSIPrinter.KEYS['bright'] .. ANSIPrinter.KEYS['green'])
-    printf(string.format("[SMOKEY POINTS] %s gave %s %d Smokey Points", player:getUsername(), args[1], args[2]))
+    print("###############")
+    print(string.format("[SMOKEY POINTS]        %s gave %s %s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
     
     if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
     serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
 
-    printf("[SMOKEY POINTS] ", "Balance: ", serverPointsData[args[1]], " Smokey Points!")
-    printf("###############")
+    print("[SMOKEY POINTS] Balance:  " .. serverPointsData[args[1]] .. " Smokey Points!")
+    print("###############")
+
+    -- TEST ANSI CODE
+    -- printf("###############", ANSIPrinter.KEYS['bright'] .. ANSIPrinter.KEYS['green'])
+    -- printf(string.format("[SMOKEY POINTS]          %s gave %s %s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
+    
+    -- if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
+    -- serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+
+    -- printf("[SMOKEY POINTS] ", "Balance: " .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    -- printf("###############")
 
 end
 
@@ -284,7 +287,7 @@ function ServerPointsCommands.reload(module, command, player, args)
 end
 
 Events.OnClientCommand.Add(function(module, command, player, args)
-    if module == "GN84-WND" and ServerPointsCommands[command] then
+    if module == "GN84-WNDR" and ServerPointsCommands[command] then
         ServerPointsCommands[command](module, command, player, args)
     end
 end)

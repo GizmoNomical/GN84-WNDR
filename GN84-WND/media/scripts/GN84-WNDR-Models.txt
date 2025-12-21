@@ -1,4 +1,4 @@
-module GN84-WND
+module GN84-WNDR
 {
     imports
     {

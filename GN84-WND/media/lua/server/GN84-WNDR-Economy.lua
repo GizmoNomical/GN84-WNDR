@@ -10,7 +10,7 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-WND                                                  ##
+-- ##                                           GN84-WNDR                                                  ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
@@ -22,19 +22,19 @@ require "ISUI/ISContextMenu"
 --                       SANDBOX VARIABLES   
 ------------------------------------------------------------------------
 
-local pointsPerZombieKill 		= SandboxVars.GN84WND.PointsPerZombieKill 		or 18
-local bonusCashOdds				= SandboxVars.GN84WND.EFundOdds					or 10
-local walletCashMultiplier 		= SandboxVars.GN84WND.WalletCashMultiplier 		or 1.0
-local eFundCashMultiplier 		= SandboxVars.GN84WND.EFundCashMultiplier		or 1.0
-local wealthyCashAmount 		= SandboxVars.GN84WND.WealthyCash				or 50
-local averageCashAmount 		= SandboxVars.GN84WND.AverageCash				or 15
-local poorCashAmount 			= SandboxVars.GN84WND.PoorCash 					or 5
-local playerLuckBonus 			= SandboxVars.GN84WND.PlayerLuckBonus 			or 1.2
-local playerUnluckyPenalty 		= SandboxVars.GN84WND.PlayerUnluckyPenalty 		or 0.95
-local lotteryTicketOdds 		= SandboxVars.GN84WND.LotteryTicketOdds 		or 3.25
-local rareTicketCashValue 		= SandboxVars.GN84WND.RareTicketCashValue 		or 1
-local VIPTokenCashValue 		= SandboxVars.GN84WND.VIPTokenCashValue 		or 1000000
-local WandererTokenCashValue	= SandboxVars.GN84WND.WandererTokenCashValue 	or 10000
+local pointsPerZombieKill 		= SandboxVars.GN84WNDR.PointsPerZombieKill 		or 18
+local bonusCashOdds				= SandboxVars.GN84WNDR.EFundOdds					or 10
+local walletCashMultiplier 		= SandboxVars.GN84WNDR.WalletCashMultiplier 		or 1.0
+local eFundCashMultiplier 		= SandboxVars.GN84WNDR.EFundCashMultiplier		or 1.0
+local wealthyCashAmount 		= SandboxVars.GN84WNDR.WealthyCash				or 50
+local averageCashAmount 		= SandboxVars.GN84WNDR.AverageCash				or 15
+local poorCashAmount 			= SandboxVars.GN84WNDR.PoorCash 					or 5
+local playerLuckBonus 			= SandboxVars.GN84WNDR.PlayerLuckBonus 			or 1.2
+local playerUnluckyPenalty 		= SandboxVars.GN84WNDR.PlayerUnluckyPenalty 		or 0.95
+local lotteryTicketOdds 		= SandboxVars.GN84WNDR.LotteryTicketOdds 		or 3.25
+local rareTicketCashValue 		= SandboxVars.GN84WNDR.RareTicketCashValue 		or 1
+local VIPTokenCashValue 		= SandboxVars.GN84WNDR.VIPTokenCashValue 		or 1000000
+local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 	or 10000
 
 
 
@@ -62,67 +62,67 @@ local WandererTokenCashValue	= SandboxVars.GN84WND.WandererTokenCashValue 	or 10
 ------------------------------------------------------------------------
 
 function GivePlayerSmokeyPoints100()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 100})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 100})
 end
 
 function GivePlayerSmokeyPoints500()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 500})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 500})
 end
 
 function GivePlayerSmokeyPoints1000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 1000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 1000})
 end
 
 function GivePlayerSmokeyPoints5000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 5000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 5000})
 end
 
 function GivePlayerSmokeyPoints10000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 10000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 10000})
 end
 
 function GivePlayerSmokeyPoints50000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 50000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 50000})
 end
 
 function GivePlayerSmokeyPoints100000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 100000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 100000})
 end
 
 function GivePlayerSmokeyPoints500000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 500000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 500000})
 end
 
 function GivePlayerSmokeyPoints1000000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 1000000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 1000000})
 end
 
 function GivePlayerSmokeyPoints5000000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 5000000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 5000000})
 end
 
 function GivePlayerSmokeyPoints10000000()
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), 10000000})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 10000000})
 end
 
 function GivePlayerSmokeyPointsVariable(amount)
-	sendClientCommand("GN84-WND", "redeemCash", {getPlayer():getUsername(), amount})
+	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), amount})
 end
 
 function GivePlayerSmokeyPointsLottoTicket(amount)
-	sendClientCommand("GN84-WND", "redeemLottoTicket", {getPlayer():getUsername(), amount})
+	sendClientCommand("GN84-WNDR", "redeemLottoTicket", {getPlayer():getUsername(), amount})
 end
 
 function GivePlayerLottoTicketBonusPrize(item)
-	sendClientCommand("GN84-WND", "redeemLottoTicketBonusPrize", {getPlayer():getUsername(), item})
+	sendClientCommand("GN84-WNDR", "redeemLottoTicketBonusPrize", {getPlayer():getUsername(), item})
 end
 
 function GivePlayerSmokeyPointsVIPToken()
-	sendClientCommand("GN84-WND", "redeemVIPToken", {getPlayer():getUsername(), VIPTokenCashValue})
+	sendClientCommand("GN84-WNDR", "redeemVIPToken", {getPlayer():getUsername(), VIPTokenCashValue})
 end
 
 function GivePlayerSmokeyPointsWandererToken()
-	sendClientCommand("GN84-WND", "redeemWandererToken", {getPlayer():getUsername(), WandererTokenCashValue})
+	sendClientCommand("GN84-WNDR", "redeemWandererToken", {getPlayer():getUsername(), WandererTokenCashValue})
 end
 
 
@@ -137,7 +137,7 @@ function SmokeyPointsOnZombieKill(zombie)
 	local lastAttacker = zombie:getAttackedBy()
 
 	if player == lastAttacker then
-		sendClientCommand("GN84-WND", "zombieKillPts", {player:getUsername(), pointsPerZombieKill})		
+		sendClientCommand("GN84-WNDR", "zombieKillPts", {player:getUsername(), pointsPerZombieKill})		
 	end	
 end
 
@@ -183,7 +183,7 @@ local function calculateWalletCash(player)
 	--print("Wealth Roll: " .. wealthRoll)
 	-- Roll for Bonus Cash Stack
 	if (wealthRoll >= 95) then
-		player:getInventory():AddItem("GN84-WND.WandererToken")
+		player:getInventory():AddItem("GN84-WNDR.WandererToken")
 	end
 
 	-- Roll for Found Cash
@@ -208,7 +208,7 @@ end
 local function checkWalletForBonusCash(player)
 	if player == nil then return false end
 
-	local baseOdds = SandboxVars.GN84WND.EFundOdds
+	local baseOdds = SandboxVars.GN84WNDR.EFundOdds
 	local bonusOdds = 0
 	
 	-- Check for Trait Bonuses
@@ -242,7 +242,7 @@ local function calculateBonusWalletCash(player)
 
 	-- Roll for Bonus Wanderer Token
 	if (bonusCashRoll >= 95) then
-		player:getInventory():AddItem("GN84-WND.MoneyStack1000")
+		player:getInventory():AddItem("GN84-WNDR.MoneyStack1000")
 	end
 
 	-- Calculate Bonus Cash
@@ -308,16 +308,16 @@ function CollectMoneyFromWallet(sources, result, player, item)
 
 	-- Add Matching Empty Wallet to Inventory
 	if item:getFullType() == "Base.Wallet" then
-		playerInv:AddItem("GN84-WND.EmptyWallet1")
+		playerInv:AddItem("GN84-WNDR.EmptyWallet1")
 
 	elseif item:getFullType() == "Base.Wallet2" then
-		playerInv:AddItem("GN84-WND.EmptyWallet2")
+		playerInv:AddItem("GN84-WNDR.EmptyWallet2")
 
 	elseif item:getFullType() == "Base.Wallet3" then
-		playerInv:AddItem("GN84-WND.EmptyWallet3")
+		playerInv:AddItem("GN84-WNDR.EmptyWallet3")
 
 	elseif item:getFullType() == "Base.Wallet4" then
-		playerInv:AddItem("GN84-WND.EmptyWallet4")
+		playerInv:AddItem("GN84-WNDR.EmptyWallet4")
 
 	end
 end
@@ -341,13 +341,13 @@ end
 local bonusPrizeRare = 
 {
 	"Base.Katana",	
-	"GN84-WND.SuperWheelSpinToken",
-	"GN84-WND.WheelSpinToken",
+	"GN84-WNDR.SuperWheelSpinToken",
+	"GN84-WNDR.WheelSpinToken",
 	"TWeapons.LongSword",
 	"GN84-HI.CrystalBall",
 	"DynamicBackpacks.UpgradeCapacityMilitary",
 	"DynamicBackpacks.UpgradeWeightReductionMilitary",
-	"GN84-WND.WheelSpinToken",
+	"GN84-WNDR.WheelSpinToken",
 	"ToolsOfTheTrade.SpiffArmyKnife",
 	"ToolsOfTheTrade.UtensilTool",
 	"TWeapons.TacticalMachete",
@@ -369,22 +369,22 @@ local bonusPrizeRare =
 
 local bonusPrizeHigh = 
 {
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
 	"Base.Bullets9mmBox",
 	"Base.ShotgunShellsBox",
 	"Base.22Box",
@@ -434,23 +434,23 @@ local bonusPrizeHigh =
 
 local bonusPrizeMed = 
 {	
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
-	"GN84-WND.LottoTicketRare",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
+	"GN84-WNDR.LottoTicketRare",
 	"DS77.DiabloSandwich",
-	"GN84-WND.LottoTicketStandard",
+	"GN84-WNDR.LottoTicketStandard",
 	"Greenfire.OzCannabis",
 	"Greenfire.PipeTobaccoBag",
 	"Greenfire.CannabisSeed",
@@ -497,17 +497,17 @@ local bonusPrizeMed =
 
 local bonusPrizeLow = 
 {
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.WandererToken",
-	"GN84-WND.LottoTicketRare",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.WandererToken",
+	"GN84-WNDR.LottoTicketRare",
 	"Base.Lighter",
 	"Base.Matches",
 	"Greenfire.Blunt",
@@ -584,11 +584,11 @@ local function CheckForWinner(player)
 -- Check for Luck
 
 	if player:HasTrait("Lucky") then		
-		lotteryTicketOdds = SandboxVars.GN84WND.LotteryTicketOdds - 0.15
+		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds - 0.15
 	elseif player:HasTrait("Unlucky") then		
-		lotteryTicketOdds = SandboxVars.GN84WND.LotteryTicketOdds + 0.15
+		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds + 0.15
 	else		
-		lotteryTicketOdds = SandboxVars.GN84WND.LotteryTicketOdds
+		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds
 	end
 
 	isWinner = ZombRand(100)+1
@@ -687,7 +687,7 @@ function TradeRareTicketForStandardTickets(sources, result, player)
 	local t = 0
 
 	while t ~= 5 do
-		player:getInventory():AddItem("GN84-WND.LottoTicketStandard")
+		player:getInventory():AddItem("GN84-WNDR.LottoTicketStandard")
 		t = t+1
 	end
 end
@@ -696,7 +696,7 @@ function TradeRareTicketForCashStack(sources, result, player)
 	local t = 0
 
 	while t ~= rareTicketCashValue do
-		player:getInventory():AddItem("GN84-WND.MoneyStack1000")
+		player:getInventory():AddItem("GN84-WNDR.MoneyStack1000")
 		t = t+1
 	end
 end
@@ -737,11 +737,11 @@ end
 
 local randomWheelSpinFragmentList =
 {
-	"GN84-WND.WheelSpinFragment1",
-	"GN84-WND.WheelSpinFragment2",
-	"GN84-WND.WheelSpinFragment3",
-	"GN84-WND.WheelSpinFragment4",
-	"GN84-WND.WheelSpinFragment5",
+	"GN84-WNDR.WheelSpinFragment1",
+	"GN84-WNDR.WheelSpinFragment2",
+	"GN84-WNDR.WheelSpinFragment3",
+	"GN84-WNDR.WheelSpinFragment4",
+	"GN84-WNDR.WheelSpinFragment5",
 }
 
 function GiveRandomWheelSpinFragment(sources, result, player)
@@ -825,62 +825,62 @@ function GN84_AcceptItemsMoneyClip(container, item)
 	local moneyClipItems = 
 	{
 		"Base.Money",
-		"GN84-WND.MoneyStack100",
-		"GN84-WND.MoneyStack500",
-		"GN84-WND.MoneyStack1000",
-		"GN84-WND.MoneyStack5000",
-		"GN84-WND.MoneyStack10000",
-		"GN84-WND.MoneyStack50000",
-		"GN84-WND.MoneyStack100000",
-		"GN84-WND.MoneyStack500000",
-		"GN84-WND.MoneyStack1000000",
-		"GN84-WND.MoneyStack5000000",
-		"GN84-WND.MoneyStack10000000",
-		"GN84-WND.LottoTicketStandard",
-		"GN84-WND.LottoTicketRare",
-		"GN84-WND.LottoTicketGolden",
-		"GN84-WND.WheelSpinToken",
-		"GN84-WND.SuperWheelSpinToken",
-		"GN84-WND.WheelSpinFragment1",
-		"GN84-WND.WheelSpinFragment2",
-		"GN84-WND.WheelSpinFragment3",
-		"GN84-WND.WheelSpinFragment4",
-		"GN84-WND.WheelSpinFragment5",
-		"GN84-WND.WheelSpinTokenNew",
-		"GN84-WND.SuperWheelSpinTokenNew",
-		"GN84-WND.MegaWheelSpinToken",
-		"GN84-WND.UltimateWheelSpinToken",
-		"GN84-WND.WanderersRaffleTicket",
-		"GN84-WND.WanderersVIPCoupon",
-		"GN84-WND.VIPToken",
-		"GN84-WND.VIPTokenNew",
-		"GN84-WND.EventToken",
-		"GN84-WND.WandererToken",
-		"GN84-WND.WandererTokenStack5",
-		"GN84-WND.WandererTokenStack10",
-		"GN84-WND.WandererTokenStack25",
-		"GN84-WND.WandererTokenStack50",
-		"GN84-WND.WandererTokenStack100",
-		"GN84-WND.WandererTokenStack250",
-		"GN84-WND.WandererTokenStack500",
-		"GN84-WND.WandererTokenStack1000",
-		"GN84-WND.WandererTokenStack5000",
-		"GN84-WND.SafehouseExpansionPermit5",
-		"GN84-WND.SafehouseExpansionPermit10",
-		"GN84-WND.SafehouseExpansionPermit50",
-		"GN84-WND.SafehouseExpansionPermit100",
-		"GN84-WND.SafehouseExpansionPermit250",
-		"GN84-WND.SafehouseExpansionPermit500",
-		"GN84-WND.SafehouseExpansionPermit1000",
-		"GN84-WND.SafehouseExpansionPermit5000",
-		"GN84-WND.AdditionalSafehousePermit",
-		"GN84-WND.CommercialClaimPermit",
-		"GN84-WND.ResidentialPermitSmall",
-		"GN84-WND.ResidentialPermitLarge",
-		"GN84-WND.ResidentialPermitMansion",
-		"GN84-WND.FactionPermitSmall",
-		"GN84-WND.FactionPermitLarge",
-		"GN84-WND.FactionPermitMassive",
+		"GN84-WNDR.MoneyStack100",
+		"GN84-WNDR.MoneyStack500",
+		"GN84-WNDR.MoneyStack1000",
+		"GN84-WNDR.MoneyStack5000",
+		"GN84-WNDR.MoneyStack10000",
+		"GN84-WNDR.MoneyStack50000",
+		"GN84-WNDR.MoneyStack100000",
+		"GN84-WNDR.MoneyStack500000",
+		"GN84-WNDR.MoneyStack1000000",
+		"GN84-WNDR.MoneyStack5000000",
+		"GN84-WNDR.MoneyStack10000000",
+		"GN84-WNDR.LottoTicketStandard",
+		"GN84-WNDR.LottoTicketRare",
+		"GN84-WNDR.LottoTicketGolden",
+		"GN84-WNDR.WheelSpinToken",
+		"GN84-WNDR.SuperWheelSpinToken",
+		"GN84-WNDR.WheelSpinFragment1",
+		"GN84-WNDR.WheelSpinFragment2",
+		"GN84-WNDR.WheelSpinFragment3",
+		"GN84-WNDR.WheelSpinFragment4",
+		"GN84-WNDR.WheelSpinFragment5",
+		"GN84-WNDR.WheelSpinTokenNew",
+		"GN84-WNDR.SuperWheelSpinTokenNew",
+		"GN84-WNDR.MegaWheelSpinToken",
+		"GN84-WNDR.UltimateWheelSpinToken",
+		"GN84-WNDR.WanderersRaffleTicket",
+		"GN84-WNDR.WanderersVIPCoupon",
+		"GN84-WNDR.VIPToken",
+		"GN84-WNDR.VIPTokenNew",
+		"GN84-WNDR.EventToken",
+		"GN84-WNDR.WandererToken",
+		"GN84-WNDR.WandererTokenStack5",
+		"GN84-WNDR.WandererTokenStack10",
+		"GN84-WNDR.WandererTokenStack25",
+		"GN84-WNDR.WandererTokenStack50",
+		"GN84-WNDR.WandererTokenStack100",
+		"GN84-WNDR.WandererTokenStack250",
+		"GN84-WNDR.WandererTokenStack500",
+		"GN84-WNDR.WandererTokenStack1000",
+		"GN84-WNDR.WandererTokenStack5000",
+		"GN84-WNDR.SafehouseExpansionPermit5",
+		"GN84-WNDR.SafehouseExpansionPermit10",
+		"GN84-WNDR.SafehouseExpansionPermit50",
+		"GN84-WNDR.SafehouseExpansionPermit100",
+		"GN84-WNDR.SafehouseExpansionPermit250",
+		"GN84-WNDR.SafehouseExpansionPermit500",
+		"GN84-WNDR.SafehouseExpansionPermit1000",
+		"GN84-WNDR.SafehouseExpansionPermit5000",
+		"GN84-WNDR.AdditionalSafehousePermit",
+		"GN84-WNDR.CommercialClaimPermit",
+		"GN84-WNDR.ResidentialPermitSmall",
+		"GN84-WNDR.ResidentialPermitLarge",
+		"GN84-WNDR.ResidentialPermitMansion",
+		"GN84-WNDR.FactionPermitSmall",
+		"GN84-WNDR.FactionPermitLarge",
+		"GN84-WNDR.FactionPermitMassive",
 		"Base.AVCSClaimOrb",		
 		"TheyKnew.Zomboxivir",
 		"TheyKnew.Zomboxycycline",		

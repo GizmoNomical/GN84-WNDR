@@ -10,12 +10,15 @@
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
 -- ##                               Copyright © GizmoNomical - 2025                                       ##
--- ##                                           GN84-WND                                                  ##
+-- ##                                           GN84-WNDR                                                  ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
 
 require "ISUI/ISPanel"
+local Utils = require "Gizmo/GN84LIB_Utils"
+
+
 
 local SmokeyPointsUI = ISPanel:derive("SmokeyPointsUI")
 SmokeyPointsUI.BuyType = {}
@@ -30,12 +33,13 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 local FONT_SCALE = FONT_HGT_SMALL / 14
 
 
+
 ------------------------------------------------------------------------
 --                    GET PLAYER'S SMOKEY POINTS  
 ------------------------------------------------------------------------
 
 local function OnServerCommand(module, command, arguments)
-    if module == "GN84-WND" and command == "get" then
+    if module == "GN84-WNDR" and command == "get" then
         SmokeyPointsUI.instance.points = arguments[1]
         Events.OnServerCommand.Remove(OnServerCommand)
     end
@@ -53,7 +57,7 @@ function SmokeyPointsUI:setVisible(visible)
     self.javaObject:setVisible(visible)    
     if visible then
         Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("GN84-WND", "get", nil)
+        sendClientCommand("GN84-WNDR", "get", nil)
         SmokeyPointsUI.automaticRefresh()
     end
 end
@@ -91,14 +95,14 @@ end
 
 
 ------------------------------------------------------------------------
---                     LOAD LISTINGS INTO SHOP   
+--                     LOAD LISTINGS INTO SHOP UI
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.LoadListings(module, command, arguments)
-    if module == "GN84-WND" and command == "load" then
+    if module == "GN84-WNDR" and command == "load" then
         Events.OnServerCommand.Remove(SmokeyPointsUI.LoadListings)
         for k, v in pairs(arguments) do
-            local scrollingList = ISScrollingListBox:new(1, 0, SmokeyPointsUI.instance.tabPanel.width - 2, SmokeyPointsUI.instance.tabPanel.height - SmokeyPointsUI.instance.tabPanel.tabHeight) -- TEST TO ADJUST TAB WINDOW HEIGHT
+            local scrollingList = ISScrollingListBox:new(1, 0, SmokeyPointsUI.instance.tabPanel.width - 2, SmokeyPointsUI.instance.tabPanel.height - SmokeyPointsUI.instance.tabPanel.tabHeight * 3)
             scrollingList.itemPadY = 10 * FONT_SCALE
             scrollingList.itemheight = FONT_HGT_LARGE + scrollingList.itemPadY * 2 + 1 * FONT_SCALE + FONT_HGT_SMALL
             scrollingList.textureHeight = scrollingList.itemheight - scrollingList.itemPadY * 2
@@ -111,6 +115,7 @@ function SmokeyPointsUI.LoadListings(module, command, arguments)
                 local listItem = getScriptManager():getItem(tostring(entry.target))  -- Check if Item is Valid and Continue to next if not
                 if listItem or entry.type == "DIV" then
 
+                    
                     local row = scrollingList:addItem(entry.type, nil)
                     row.type = entry.type
                     row.target = entry.target
@@ -134,7 +139,7 @@ end
 local function OnTick()
     Events.OnTick.Remove(OnTick)
     Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
-    sendClientCommand("GN84-WND", "load", nil)
+    sendClientCommand("GN84-WNDR", "load", nil)
 end
 
 
@@ -224,7 +229,7 @@ end
 ------------------------------------------------------------------------
 
 function serverForceRefresh(module, command, player, args)
-    if module == "GN84-WND" and command == "ServerForceRefresh" then
+    if module == "GN84-WNDR" and command == "ServerForceRefresh" then
         SmokeyPointsUI.automaticRefresh()
         --print ("Server Updated Shop Listings")
     end
@@ -246,7 +251,7 @@ function SmokeyPointsUI:automaticRefresh()
                 SmokeyPointsUI.instance.tabPanel:removeView(v.view)
             end
             Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
-            sendClientCommand("GN84-WND", "load", nil)
+            sendClientCommand("GN84-WNDR", "load", nil)
         end
     end 
 end
@@ -263,7 +268,7 @@ function SmokeyPointsUI:onReload()
                 self.tabPanel:removeView(v.view)
             end
             Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
-            sendClientCommand("GN84-WND", "load", nil)
+            sendClientCommand("GN84-WNDR", "load", nil)
         end
     end
 end
@@ -274,7 +279,7 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.BuyType.ITEM(row)
-    sendClientCommand("GN84-WND", "buy", { row.price, row.target })
+    sendClientCommand("GN84-WNDR", "buy", { row.price, row.target })
     getPlayer():getInventory():AddItems(row.target, row.quantity)
     getSoundManager():PlaySound("CashRegisterSound", false, 1)
 end
@@ -290,7 +295,7 @@ function SmokeyPointsUI:onBuy()
         SmokeyPointsUI.BuyType[row.type](row)
     end
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-WND", "get", nil)
+    sendClientCommand("GN84-WNDR", "get", nil)
 end
 
 
@@ -379,7 +384,7 @@ function SmokeyPointsUI:addView(name, view)
     viewObject.fade = UITransition.new()
 
     table.insert(self.viewList, viewObject)
-    view:setY(self.tabHeight)
+    view:setY(self.tabHeight * 3)
     self:addChild(view)
     view.parent = self
 
@@ -481,7 +486,7 @@ function SmokeyPointsUI:render()
     x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
     --self:drawText("     ", x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
-    self:drawText("Balance:  " .. tostring(self.points) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
+    self:drawText("Balance:   " .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
 
@@ -530,11 +535,10 @@ function SmokeyPointsUI:new(x, y, width, height)
     o.variableColor = { r = 0.9, g = 0.55, b = 0.1, a = 1 }
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
-    o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }
-    --o.title = string.upper(SandboxVars.GN84WND.PointsName) .. " SHOP"
+    o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }    
     o.title = "    THE SMOKEY SHOP"
     o.available = " Balance     "
-    o.serverMsg = SandboxVars.GN84WND.ServerMessage
+    o.serverMsg = SandboxVars.GN84WNDR.ServerMessage
     o.points = 0
     SmokeyPointsUI.instance = o
     return o

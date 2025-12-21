@@ -1,4 +1,4 @@
-module GN84-WND
+module GN84-WNDR
 {
     imports
     {
@@ -1728,7 +1728,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.WheelSpinTokenNew,
+		Result:GN84-WNDR.WheelSpinTokenNew,
 		Time:120.0,
 		Tooltip: "Combine 5 Unique Wheel Spin Fragments to Forge a Wheel Spin Token!",
 	}
@@ -1740,7 +1740,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinTokenNew,
 		Time:120.0,	
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
@@ -1753,7 +1753,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinTokenNew,
 		Time:120.0,	
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
@@ -1765,7 +1765,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.MegaWheelSpinToken,
+		Result:GN84-WNDR.MegaWheelSpinToken,
 		Time:120.0,	
 		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
 	}
@@ -1778,7 +1778,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.MegaWheelSpinToken,
+		Result:GN84-WNDR.MegaWheelSpinToken,
 		Time:120.0,	
 		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
 	}
@@ -1790,7 +1790,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.UltimateWheelSpinToken,
+		Result:GN84-WNDR.UltimateWheelSpinToken,
 		Time:120.0,
 		Tooltip: "Combine 5 Mega Wheel Spin Tokens to Forge an Ultimate Wheel Spin Token!",
 	}
@@ -1803,7 +1803,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WND.UltimateWheelSpinToken,
+		Result:GN84-WNDR.UltimateWheelSpinToken,
 		Time:120.0,
 		Tooltip: "Combine 5 Mega Wheel Spin Tokens to Forge an Ultimate Wheel Spin Token!",
 	}
@@ -1815,7 +1815,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:ShatterToken,
-		Result:GN84-WND.MegaWheelSpinToken=5,
+		Result:GN84-WNDR.MegaWheelSpinToken=5,
 		Time:100.0,
 	}
 
@@ -1826,7 +1826,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:ShatterToken,
-		Result:GN84-WND.SuperWheelSpinTokenNew=5,
+		Result:GN84-WNDR.SuperWheelSpinTokenNew=5,
 		Time:100.0,
 	}
 
@@ -1837,7 +1837,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:ShatterToken,
-		Result:GN84-WND.WheelSpinTokenNew=5,
+		Result:GN84-WNDR.WheelSpinTokenNew=5,
 		Time:100.0,
 	}
 
@@ -1853,7 +1853,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-WND.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinTokenNew,
 		Time:120.0,
 	}
 
@@ -1864,7 +1864,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-WND.WandererTokenStack100,
+		Result:GN84-WNDR.WandererTokenStack100,
 		Time:120.0,
 	}
 
@@ -2334,7 +2334,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=5,
+		Result:GN84-WNDR.WandererToken=5,
 		Time:120.0,
 	}
 
@@ -2345,7 +2345,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=10,
+		Result:GN84-WNDR.WandererToken=10,
 		Time:120.0,
 	}
 
@@ -2356,7 +2356,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=25,
+		Result:GN84-WNDR.WandererToken=25,
 		Time:120.0,
 	}
 
@@ -2367,7 +2367,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=50,
+		Result:GN84-WNDR.WandererToken=50,
 		Time:120.0,
 	}
 
@@ -2378,7 +2378,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=100,
+		Result:GN84-WNDR.WandererToken=100,
 		Time:120.0,
 	}
 
@@ -2389,7 +2389,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=250,
+		Result:GN84-WNDR.WandererToken=250,
 		Time:120.0,
 	}
 
@@ -2400,7 +2400,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererToken=500,
+		Result:GN84-WNDR.WandererToken=500,
 		Time:120.0,
 	}
 	
@@ -2418,7 +2418,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack5=2,
+		Result:GN84-WNDR.WandererTokenStack5=2,
 		Time:120.0,
 	}
 
@@ -2429,7 +2429,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack5=5,
+		Result:GN84-WNDR.WandererTokenStack5=5,
 		Time:120.0,
 	}	
 
@@ -2440,7 +2440,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack10=5,
+		Result:GN84-WNDR.WandererTokenStack10=5,
 		Time:120.0,
 	}	
 
@@ -2451,7 +2451,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack50=2,
+		Result:GN84-WNDR.WandererTokenStack50=2,
 		Time:120.0,
 	}		
 
@@ -2462,7 +2462,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack50=5,
+		Result:GN84-WNDR.WandererTokenStack50=5,
 		Time:120.0,
 	}		
 
@@ -2473,7 +2473,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack100=5,
+		Result:GN84-WNDR.WandererTokenStack100=5,
 		Time:120.0,
 	}			
 
@@ -2484,7 +2484,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack500=2,
+		Result:GN84-WNDR.WandererTokenStack500=2,
 		Time:120.0,
 	}	
 
@@ -2495,7 +2495,7 @@ module GN84-WND
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.WandererTokenStack1000=5,
+		Result:GN84-WNDR.WandererTokenStack1000=5,
 		Time:120.0,
 	}
 
@@ -2510,144 +2510,144 @@ module GN84-WND
 
 	recipe Consolidate Safehouse Expansion Permits - 10 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit5=2,
+		GN84-WNDR.SafehouseExpansionPermit5=2,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit10,
+		Result:GN84-WNDR.SafehouseExpansionPermit10,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 50 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit5=10,
+		GN84-WNDR.SafehouseExpansionPermit5=10,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit50,
+		Result:GN84-WNDR.SafehouseExpansionPermit50,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 50 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit10=5,
+		GN84-WNDR.SafehouseExpansionPermit10=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit50,
+		Result:GN84-WNDR.SafehouseExpansionPermit50,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit5=20,
+		GN84-WNDR.SafehouseExpansionPermit5=20,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit100,
+		Result:GN84-WNDR.SafehouseExpansionPermit100,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit50=2,
+		GN84-WNDR.SafehouseExpansionPermit50=2,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit100,
+		Result:GN84-WNDR.SafehouseExpansionPermit100,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 100 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit10=10,
+		GN84-WNDR.SafehouseExpansionPermit10=10,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit100,
+		Result:GN84-WNDR.SafehouseExpansionPermit100,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 250 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit50=5,
+		GN84-WNDR.SafehouseExpansionPermit50=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit250,
+		Result:GN84-WNDR.SafehouseExpansionPermit250,
 		Time:120.0,
 	}	
 
 	recipe Consolidate Safehouse Expansion Permits - 500 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit250=2,
+		GN84-WNDR.SafehouseExpansionPermit250=2,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit500,
+		Result:GN84-WNDR.SafehouseExpansionPermit500,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit250=4,
+		GN84-WNDR.SafehouseExpansionPermit250=4,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit1000,
+		Result:GN84-WNDR.SafehouseExpansionPermit1000,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 500 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit100=5,
+		GN84-WNDR.SafehouseExpansionPermit100=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit500,
+		Result:GN84-WNDR.SafehouseExpansionPermit500,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit100=10,
+		GN84-WNDR.SafehouseExpansionPermit100=10,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit1000,
+		Result:GN84-WNDR.SafehouseExpansionPermit1000,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 1000 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit500=2,
+		GN84-WNDR.SafehouseExpansionPermit500=2,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit1000,
+		Result:GN84-WNDR.SafehouseExpansionPermit1000,
 		Time:120.0,
 	}
 
 	recipe Consolidate Safehouse Expansion Permits - 5000 Tiles
 	{
-		GN84-WND.SafehouseExpansionPermit1000=5,
+		GN84-WNDR.SafehouseExpansionPermit1000=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit5000,
+		Result:GN84-WNDR.SafehouseExpansionPermit5000,
 		Time:120.0,
 	}
 
@@ -2658,67 +2658,67 @@ module GN84-WND
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit5000,
+		GN84-WNDR.SafehouseExpansionPermit5000,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit1000=5,
+		Result:GN84-WNDR.SafehouseExpansionPermit1000=5,
 		Time:120.0,
 	}
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit1000,
+		GN84-WNDR.SafehouseExpansionPermit1000,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit500=2,
+		Result:GN84-WNDR.SafehouseExpansionPermit500=2,
 		Time:120.0,
 	}
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit500,
+		GN84-WNDR.SafehouseExpansionPermit500,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit100=5,
+		Result:GN84-WNDR.SafehouseExpansionPermit100=5,
 		Time:120.0,
 	}
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit250,
+		GN84-WNDR.SafehouseExpansionPermit250,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit50=5,
+		Result:GN84-WNDR.SafehouseExpansionPermit50=5,
 		Time:120.0,
 	}
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit100,
+		GN84-WNDR.SafehouseExpansionPermit100,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit50=2,
+		Result:GN84-WNDR.SafehouseExpansionPermit50=2,
 		Time:120.0,
 	}
 
 	recipe Split Safehouse Expansion Permit
 	{
-		GN84-WND.SafehouseExpansionPermit50,
+		GN84-WNDR.SafehouseExpansionPermit50,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:CountingMoney,
-		Result:GN84-WND.SafehouseExpansionPermit10=5,
+		Result:GN84-WNDR.SafehouseExpansionPermit10=5,
 		Time:120.0,
 	}
 
