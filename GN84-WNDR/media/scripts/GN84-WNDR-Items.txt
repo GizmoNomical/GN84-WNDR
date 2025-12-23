@@ -26,6 +26,17 @@ module GN84-WNDR
 		Tooltip				 = Holds Cash - Tokens - and other Essential Items,
 	}
 
+	item MoneyStackX
+	{
+		DisplayName			 = Stack of Cash - $0,
+		DisplayCategory		 = Money,
+		Weight				 = 1.0,
+		Type 				 = Normal,
+		Icon				 = MoneyStack10000,
+		WorldStaticModel	 = MoneyStack10000,
+		Tooltip				 = Consolidated Stack of Cash,
+	}
+
     item MoneyStack100
     {
         DisplayName          =  Stack of Cash - $100 - ,

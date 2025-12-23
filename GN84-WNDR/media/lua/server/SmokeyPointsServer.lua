@@ -26,7 +26,7 @@ end
 
 if not isServer() then return end
 
-local serverPointsData
+local smokeyPointsData
 local listings
 local oldListings
 
@@ -62,8 +62,8 @@ local function PointsTick()
         if not players:get(i):isAsleep() then 
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
-            if not serverPointsData[username] then serverPointsData[username] = 0 end
-            serverPointsData[username] = serverPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
+            if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
+            smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
@@ -120,7 +120,7 @@ end
 Events.EveryTenMinutes.Add(LoadListings)
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
-    serverPointsData = ModData.getOrCreate("serverPointsData")
+    smokeyPointsData = ModData.getOrCreate("smokeyPointsData")
 
     LoadListings()
 
@@ -136,7 +136,7 @@ end)
 local ServerPointsCommands = {}
 
 function ServerPointsCommands.get(module, command, player, args)
-    sendServerCommand(player, module, command, { serverPointsData[args and args[1] or player:getUsername()] or 0 })
+    sendServerCommand(player, module, command, { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })
 end
 
 
@@ -147,10 +147,10 @@ function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY SHOP]          %s bought %s for $%s Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
     
-    if not serverPointsData[player:getUsername()] then serverPointsData[player:getUsername()] = 0 end
-    serverPointsData[player:getUsername()] = serverPointsData[player:getUsername()] - math.abs(args[1])
+    if not smokeyPointsData[player:getUsername()] then smokeyPointsData[player:getUsername()] = 0 end
+    smokeyPointsData[player:getUsername()] = smokeyPointsData[player:getUsername()] - math.abs(args[1])
 
-    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[player:getUsername()]) .. " Smokey Points!")
+    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[player:getUsername()]) .. " Smokey Points!")
     print("###############")
 end
 
@@ -166,20 +166,20 @@ function ServerPointsCommands.add(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY POINTS]        %s gave %s $%s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
     
-    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
-    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     print("###############")
 
     -- TEST ANSI CODE
     -- printf("###############", ANSIPrinter.KEYS['bright'] .. ANSIPrinter.KEYS['green'])
     -- printf(string.format("[SMOKEY POINTS]          %s gave %s %s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
     
-    -- if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    -- serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    -- if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+    -- smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
-    -- printf("[SMOKEY POINTS] ", "Balance: " .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    -- printf("[SMOKEY POINTS] ", "Balance: " .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     -- printf("###############")
 
 end
@@ -191,8 +191,8 @@ end
 ------------------------------------------------------------------------
 
 function ServerPointsCommands.zombieKillPts(module, command, player, args)   
-   if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-   serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]      
+   if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+   smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]      
 end
 
 
@@ -205,10 +205,10 @@ function ServerPointsCommands.redeemCash(module, command, player, args)
    print("###############")
    print("[SMOKEY POINTS]        " .. args[1] .. " redeemed $" .. Utils.CurrencyFormatter(args[2]) .. " dollars for Smokey Points!")      
    
-    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-   serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+   smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
    
-   print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+   print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
    print("###############")
 
 end
@@ -222,10 +222,10 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
     print("###############")
     print("[WANDERERS LOTTO]      " .. args[1] .. " redeemed Winning Lotto Ticket for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
     
-    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
-    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     print("###############")
  end
 
@@ -251,10 +251,10 @@ function ServerPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
     print("[VIP TOKENS]           " .. args[1] .. " redeemed VIP Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
         
-    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
-    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     print("###############")
  end
 
@@ -268,10 +268,10 @@ function ServerPointsCommands.redeemWandererToken(module, command, player, args)
     print("#################")
     print("[WANDERER TOKENS]      " .. args[1] .. " redeemed WANDERER Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
         
-    if not serverPointsData[args[1]] then serverPointsData[args[1]] = 0 end
-    serverPointsData[args[1]] = serverPointsData[args[1]] + args[2]
+    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
+    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
-    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(serverPointsData[args[1]]) .. " Smokey Points!")
+    print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     print("###############")
  end
 

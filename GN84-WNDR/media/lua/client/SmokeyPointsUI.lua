@@ -493,7 +493,7 @@ function SmokeyPointsUI:render()
     x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
     --self:drawText("     ", x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
-    self:drawText("Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Large)
+    self:drawText("Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1.0, 0.66, 0.11, 1, UIFont.Large)
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
 

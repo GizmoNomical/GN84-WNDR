@@ -126,6 +126,96 @@ function GivePlayerSmokeyPointsWandererToken()
 end
 
 
+
+------------------------------------------------------------------------
+--                     BIND / UNBIND MONEY CLIP TO PLAYER
+------------------------------------------------------------------------
+
+local function BindMoneyClipToPlayer(target, player, item)
+
+	local MoneyClipData = item:getModData()	
+	if not MoneyClipData then return end
+
+	local username = player:getUsername()
+
+	if not MoneyClipData.Owner then
+		MoneyClipData.Owner = username
+		MoneyClipData.AutoConsolidate = false
+		--MoneyClipData.Owner = "Test User"
+	end
+
+	-- Change Item Name to Reflect Bound Status + Favorite Money Clip
+	local itemName = item:getName()
+	if itemName == "Money Clip" then
+		item:setName(username .. "'s Money Clip")		
+	end	
+	item:setFavorite(true)
+end
+
+
+local function UnBindMoneyClip(target, player, item)
+	local MoneyClipData = item:getModData()
+	if not MoneyClipData then return end
+
+	MoneyClipData.Owner = nil
+	MoneyClipData.SmokeyPointBalance = nil
+	MoneyClipData.CashBalance = nil
+	MoneyClipData.WandererTokenBalance = nil
+end
+
+local function ToggleAutoConsolidation(target, player, item)
+	local MoneyClipData = item:getModData()	
+	if not MoneyClipData then return end
+
+	MoneyClipData.AutoConsolidate = not MoneyClipData.AutoConsolidate
+end
+
+local function ConsolidateCurrencies(item)
+	ConsolidateMoneyClip(item)
+end
+
+function MoneyClipContext(playerNum, context, items)
+
+	local player = getSpecificPlayer(playerNum)
+    items = ISInventoryPane.getActualItems(items)
+
+	for _, item in ipairs(items) do
+		if item:getType() == "MoneyClip" then
+			if not item:isInPlayerInventory() then return end
+
+			local MoneyClipData = item:getModData()
+			if MoneyClipData.Owner == nil then			
+				context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
+
+			elseif player:getAccessLevel() == "Admin" then
+				context:addOptionOnTop("Un-Bind Money Clip (Admin)", items, UnBindMoneyClip, player, item)
+				if MoneyClipData.Owner == player:getUsername() then
+					if not MoneyClipData.AutoConsolidate then
+						context:addOptionOnTop("Enable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
+					else
+						context:addOptionOnTop("Disable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
+					end
+					context:addOptionOnTop("Consolidate Currency", items, function() ConsolidateCurrencies(item) end, player, item)
+				end
+			elseif MoneyClipData.Owner == player:getUsername() then
+				context:addOptionOnTop("Un-Bind Money Clip", items, UnBindMoneyClip, player, item)
+				if not MoneyClipData.AutoConsolidate then
+					context:addOptionOnTop("Enable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
+				else
+					context:addOptionOnTop("Disable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
+				end
+				context:addOptionOnTop("Consolidate Currency", items, function() ConsolidateCurrencies(item) end, player, item)
+			end			
+		end
+    end
+end
+
+Events.OnFillInventoryObjectContextMenu.Add(MoneyClipContext)
+
+
+
+
+
 ------------------------------------------------------------------------
 --                  ADD SMOKEY POINTS ON ZOMBIE KILL
 ------------------------------------------------------------------------
