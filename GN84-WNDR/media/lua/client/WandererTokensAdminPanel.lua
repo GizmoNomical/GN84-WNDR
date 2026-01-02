@@ -17,7 +17,7 @@
 
 local Utils = require "Gizmo/GN84LIB_Utils"
 
-local SmokeyPointsAdminPanel = ISPanel:derive("SmokeyPointsAdminPanel")
+local WandererTokensAdminPanel = ISPanel:derive("WandererTokensAdminPanel")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -25,13 +25,13 @@ local FONT_SCALE = FONT_HGT_SMALL / 14
 
 
 local function OnServerCommand(module, command, arguments)
-    if module == "GN84-WNDR" and command == "get" then
-        SmokeyPointsAdminPanel.instance.balance = "Balance:  $" .. tostring(arguments[1])
+    if module == "GN84-WNDR" and command == "getTokens" then
+        WandererTokensAdminPanel.instance.balance = "Balance:   " .. tostring(arguments[1])
         Events.OnServerCommand.Remove(OnServerCommand)
     end
 end
 
-function SmokeyPointsAdminPanel:createChildren()
+function WandererTokensAdminPanel:createChildren()
     local btnWid = 125 * FONT_SCALE
     local btnHgt = FONT_HGT_SMALL + 5 * 2 * FONT_SCALE
     local padBottom = 10 * FONT_SCALE
@@ -39,7 +39,7 @@ function SmokeyPointsAdminPanel:createChildren()
     local x = padBottom + getTextManager():MeasureStringX(UIFont.Medium, "Player:") + padBottom
     self.playerSelect = ISComboBox:new(x, padBottom * 2 + FONT_HGT_MEDIUM, self.width - x - padBottom, btnHgt, nil, function(_, combo)
         Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("GN84-WNDR", "get", { combo.options[combo.selected] })
+        sendClientCommand("GN84-WNDR", "getTokens", { combo.options[combo.selected] })
     end)
 
     self.playerSelect:initialise()
@@ -50,7 +50,7 @@ function SmokeyPointsAdminPanel:createChildren()
     table.sort(self.playerSelect.options)
     self.playerSelect.selected = 1
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-WNDR", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-WNDR", "getTokens", { self.playerSelect.options[self.playerSelect.selected] })
     self:addChild(self.playerSelect)
 
     local z = self.playerSelect.y + self.playerSelect.height + padBottom + FONT_HGT_MEDIUM + padBottom * 2
@@ -62,77 +62,77 @@ function SmokeyPointsAdminPanel:createChildren()
     self:addChild(self.pointsEntry)
 
     z = self.pointsEntry.y + self.pointsEntry.height + padBottom
-    self.addButton = ISButton:new((self.width - btnWid) / 2 - 5, z, btnWid / 2, btnHgt, "GIVE", self, SmokeyPointsAdminPanel.onOptionMouseDown)
+    self.addButton = ISButton:new((self.width - btnWid) / 2 - 5, z, btnWid / 2, btnHgt, "GIVE", self, WandererTokensAdminPanel.onOptionMouseDown)
     self.addButton.internal = "GIVE"
     self.addButton:initialise()
     self.addButton:instantiate()
     self:addChild(self.addButton)
 
-    self.takeButton = ISButton:new(self.width / 2 + 5, z, btnWid / 2, btnHgt, "TAKE", self, SmokeyPointsAdminPanel.onOptionMouseDown)
+    self.takeButton = ISButton:new(self.width / 2 + 5, z, btnWid / 2, btnHgt, "TAKE", self, WandererTokensAdminPanel.onOptionMouseDown)
     self.takeButton.internal = "TAKE"
     self.takeButton:initialise()
     self.takeButton:instantiate()
     self:addChild(self.takeButton)
 
-    self.cancelButton = ISButton:new((self.width - btnWid) / 2, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, SmokeyPointsAdminPanel.close)
+    self.cancelButton = ISButton:new((self.width - btnWid) / 2, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, WandererTokensAdminPanel.close)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
-    self.reloadButton = ISButton:new(self.cancelButton.x, self.cancelButton.y - padBottom - btnHgt, btnWid, btnHgt, "RELOAD CONFIG", nil, SmokeyPointsAdminPanel.onReload)
+    self.reloadButton = ISButton:new(self.cancelButton.x, self.cancelButton.y - padBottom - btnHgt, btnWid, btnHgt, "RELOAD CONFIG", nil, WandererTokensAdminPanel.onReload)
     self.reloadButton:initialise()
     self.reloadButton:instantiate()
     self:addChild(self.reloadButton)
 end
 
-function SmokeyPointsAdminPanel:render()
-    self:drawTextCentre("Smokey Points Panel", self.width / 2, 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
+function WandererTokensAdminPanel:render()
+    self:drawTextCentre("Wanderer Tokens Panel", self.width / 2, 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
     self:drawText("Player:", 10 * FONT_SCALE, self.playerSelect.y + (self.playerSelect.height - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     self:drawText(Utils.CurrencyFormatter(self.balance), 12 * FONT_SCALE, self.playerSelect.y + self.playerSelect.height + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
 end
 
-function SmokeyPointsAdminPanel:onOptionMouseDown(button)
+function WandererTokensAdminPanel:onOptionMouseDown(button)
     if button.internal == "GIVE" then
-        sendClientCommand("GN84-WNDR", "add", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-WNDR", "addTokens", { self.playerSelect:getSelectedText(), tonumber(self.pointsEntry:getText()) })
     elseif button.internal == "TAKE" then
-        sendClientCommand("GN84-WNDR", "add", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
+        sendClientCommand("GN84-WNDR", "addTokens", { self.playerSelect:getSelectedText(), -tonumber(self.pointsEntry:getText()) })
     end
     Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-WNDR", "get", { self.playerSelect.options[self.playerSelect.selected] })
+    sendClientCommand("GN84-WNDR", "getTokens", { self.playerSelect.options[self.playerSelect.selected] })
 end
 
 
 
-function SmokeyPointsAdminPanel.onReload()
+function WandererTokensAdminPanel.onReload()
     sendClientCommand("GN84-WNDR", "reload", nil)
 end
 
-function SmokeyPointsAdminPanel:close()
+function WandererTokensAdminPanel:close()
     self:setVisible(false)
     self:removeFromUIManager()
-    SmokeyPointsAdminPanel.instance = nil
+    WandererTokensAdminPanel.instance = nil
 end
 
-function SmokeyPointsAdminPanel:new(x, y, width, height)
+function WandererTokensAdminPanel:new(x, y, width, height)
     local o = ISPanel:new(x, y, width, height)
     setmetatable(o, self)
     self.__index = self
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
     o.moveWithMouse = true
-    o.balance = "Balance: $0"
-    SmokeyPointsAdminPanel.instance = o
+    o.balance = "Balance:  0"
+    WandererTokensAdminPanel.instance = o
     return o
 end
 
 local function openUI(button)
-    if SmokeyPointsAdminPanel.instance then
-        SmokeyPointsAdminPanel.instance:close()
+    if WandererTokensAdminPanel.instance then
+        WandererTokensAdminPanel.instance:close()
     end
     local core = getCore()
     local width = 250 * FONT_SCALE
     local height = 270 * FONT_SCALE
-    local ui = SmokeyPointsAdminPanel:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
+    local ui = WandererTokensAdminPanel:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
     ui:initialise()
     ui:addToUIManager()
 end
@@ -143,11 +143,11 @@ function ISAdminPanelUI:create()
 
     if getAccessLevel() == "admin" then
         local lastButton = self.children[self.IDMax-1].internal == "CANCEL" and self.children[self.IDMax-2] or self.children[self.IDMax-1]
-        self.SmokeyPointsBtn = ISButton:new(lastButton.x, lastButton.y + 5 + lastButton.height, self.sandboxOptionsBtn.width, self.sandboxOptionsBtn.height, "Smokey Points Panel", nil, openUI)
-        self.SmokeyPointsBtn.internal = "SMOKEYPOINTSPANEL"
-        self.SmokeyPointsBtn:initialise()
-        self.SmokeyPointsBtn:instantiate()
-        self.SmokeyPointsBtn.borderColor = self.buttonBorderColor
-        self:addChild(self.SmokeyPointsBtn)
+        self.WandererTokensBtn = ISButton:new(lastButton.x, lastButton.y + 5 + lastButton.height, self.sandboxOptionsBtn.width, self.sandboxOptionsBtn.height, "Wanderer Tokens Panel", nil, openUI)
+        self.WandererTokensBtn.internal = "WANDERERTOKENSPANEL"
+        self.WandererTokensBtn:initialise()
+        self.WandererTokensBtn:instantiate()
+        self.WandererTokensBtn.borderColor = self.buttonBorderColor
+        self:addChild(self.WandererTokensBtn)
     end
 end

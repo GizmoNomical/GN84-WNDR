@@ -30,6 +30,17 @@ option GN84WNDR.PointsPerTick
     translation = GN84WNDR_PointsPerTick,
 }
 
+option GN84WNDR.TokensPerTick
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 1,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_TokensPerTick,
+}
+
 option GN84WNDR.ServerMessage
 {
     type = string,

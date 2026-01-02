@@ -115,6 +115,24 @@ end
 --                      CURRENCY CONSOLIDATION
 ------------------------------------------------------------------------
 
+
+local listOfMoneyStacks = 
+{
+    Money                   =   {type = "Base.Money",                       value = 1,              },
+    MoneyStack100           =   {type = "GN84-WNDR.MoneyStack100",          value = 100,            },
+    MoneyStack500           =   {type = "GN84-WNDR.MoneyStack500",          value = 500,            },
+    MoneyStack1000          =   {type = "GN84-WNDR.MoneyStack1000",         value = 1000,           },
+    MoneyStack5000          =   {type = "GN84-WNDR.MoneyStack5000",         value = 5000,           },
+    MoneyStack10000         =   {type = "GN84-WNDR.MoneyStack10000",        value = 10000,          },
+    MoneyStack50000         =   {type = "GN84-WNDR.MoneyStack50000",        value = 50000,          },
+    MoneyStack100000        =   {type = "GN84-WNDR.MoneyStack100000",       value = 100000,         },
+    MoneyStack500000        =   {type = "GN84-WNDR.MoneyStack500000",       value = 500000,         },
+    MoneyStack1000000       =   {type = "GN84-WNDR.MoneyStack1000000",      value = 1000000,        },
+    MoneyStack5000000       =   {type = "GN84-WNDR.MoneyStack5000000",      value = 5000000,        },
+    MoneyStack10000000      =   {type = "GN84-WNDR.MoneyStack10000000",     value = 10000000,       },
+}
+
+
 local function ConsolidateCash(moneyclip)
     local modData = moneyclip:getModData()
     local moneyClipContainer = moneyclip:getItemContainer()
@@ -126,12 +144,30 @@ local function ConsolidateCash(moneyclip)
         
         for i = items:size()-1, 0, -1 do
             local item = items:get(i)
-        
-            if item:getType() == "MoneyStack100" then
-                print(item:getType())
-                moneyClipContainer:DoRemoveItem(item)
-                runningTotal = runningTotal + 100
+
+            -- Standard Cash Stacks
+            for _moneyStack, _stats in pairs(listOfMoneyStacks) do
+                if item:getType() == _moneyStack then
+                    print(item:getType())
+                    print("Value: " .. _stats.value)
+
+                    moneyClipContainer:DoRemoveItem(item)                         
+                    runningTotal = runningTotal + _stats.value
+                    print("Total: " .. runningTotal)
+                end
             end
+
+            --Variable Cash Stacks
+            if item:getType() == "MoneyStackX" then
+                print(item:getType())
+                local cashStack = item:getModData()
+                cashAmount = cashStack.Total or 0
+                print("Value: " .. cashAmount)
+                moneyClipContainer:DoRemoveItem(item)
+                runningTotal = runningTotal + cashAmount
+                print("Total: " .. runningTotal)
+             end
+        
         end
 
         local cashBalance = modData.CashBalance or 0

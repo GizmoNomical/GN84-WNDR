@@ -62,51 +62,55 @@ local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 	or 1
 ------------------------------------------------------------------------
 
 function GivePlayerSmokeyPoints100()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 100})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 100})
 end
 
 function GivePlayerSmokeyPoints500()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 500})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 500})
 end
 
 function GivePlayerSmokeyPoints1000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 1000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 1000})
 end
 
 function GivePlayerSmokeyPoints5000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 5000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 5000})
 end
 
 function GivePlayerSmokeyPoints10000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 10000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 10000})
 end
 
 function GivePlayerSmokeyPoints50000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 50000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 50000})
 end
 
 function GivePlayerSmokeyPoints100000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 100000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 100000})
 end
 
 function GivePlayerSmokeyPoints500000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 500000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 500000})
 end
 
 function GivePlayerSmokeyPoints1000000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 1000000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 1000000})
 end
 
 function GivePlayerSmokeyPoints5000000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 5000000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 5000000})
 end
 
 function GivePlayerSmokeyPoints10000000()
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), 10000000})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), 10000000})
 end
 
 function GivePlayerSmokeyPointsVariable(amount)
-	sendClientCommand("GN84-WNDR", "redeemCash", {getPlayer():getUsername(), amount})
+	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
+end
+
+function GivePlayerWandererTokensVariable(amount)
+	sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), amount})
 end
 
 function GivePlayerSmokeyPointsLottoTicket(amount)
@@ -131,6 +135,7 @@ end
 --                     BIND / UNBIND MONEY CLIP TO PLAYER
 ------------------------------------------------------------------------
 
+
 local function BindMoneyClipToPlayer(target, player, item)
 
 	local MoneyClipData = item:getModData()	
@@ -140,16 +145,51 @@ local function BindMoneyClipToPlayer(target, player, item)
 
 	if not MoneyClipData.Owner then
 		MoneyClipData.Owner = username
-		MoneyClipData.AutoConsolidate = false
-		--MoneyClipData.Owner = "Test User"
+		MoneyClipData.AutoConsolidate = true				
 	end
 
 	-- Change Item Name to Reflect Bound Status + Favorite Money Clip
 	local itemName = item:getName()
 	if itemName == "Money Clip" then
 		item:setName(username .. "'s Money Clip")		
-	end	
+	end
+
 	item:setFavorite(true)
+
+	-- Spawn Dummy Tooltip Items if not already Spawned
+
+	-- local cashItem = InventoryItemFactory.CreateItem("GN84-WNDR.ConsolidatedCash")
+	local moneyClipContainer = item:getItemContainer()
+    local items = moneyClipContainer:getItems()
+
+    if items then        
+        for i = items:size()-1, 0, -1 do
+            local item = items:get(i)
+        
+            if item:getType() == "BankBalance" then
+                print("Bank Balance Item Already Instaniated")                
+			else
+				moneyClipContainer:AddItem("GN84-WNDR.BankBalance")
+            end
+
+			if item:getType() == "CashBalance" then
+                print("Cash Balance Item Already Instaniated")                
+			else
+				moneyClipContainer:AddItem("GN84-WNDR.CashBalance")
+            end
+
+			if item:getType() == "TokenBalance" then
+                print("Token Balance Item Already Instaniated")                
+			else
+				moneyClipContainer:AddItem("GN84-WNDR.TokenBalance")
+            end
+        end
+	elseif not items then
+		print("Adding Dummy Items")
+		moneyClipContainer:AddItem("GN84-WNDR.BankBalance")
+		moneyClipContainer:AddItem("GN84-WNDR.CashBalance")
+		moneyClipContainer:AddItem("GN84-WNDR.TokenBalance")
+	end
 end
 
 
@@ -184,28 +224,27 @@ function MoneyClipContext(playerNum, context, items)
 			if not item:isInPlayerInventory() then return end
 
 			local MoneyClipData = item:getModData()
+
 			if MoneyClipData.Owner == nil then			
 				context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
 
-			elseif player:getAccessLevel() == "Admin" then
-				context:addOptionOnTop("Un-Bind Money Clip (Admin)", items, UnBindMoneyClip, player, item)
-				if MoneyClipData.Owner == player:getUsername() then
-					if not MoneyClipData.AutoConsolidate then
-						context:addOptionOnTop("Enable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
-					else
-						context:addOptionOnTop("Disable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
-					end
-					context:addOptionOnTop("Consolidate Currency", items, function() ConsolidateCurrencies(item) end, player, item)
-				end
 			elseif MoneyClipData.Owner == player:getUsername() then
-				context:addOptionOnTop("Un-Bind Money Clip", items, UnBindMoneyClip, player, item)
+				
 				if not MoneyClipData.AutoConsolidate then
 					context:addOptionOnTop("Enable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
 				else
 					context:addOptionOnTop("Disable Auto-Consolidation", items, ToggleAutoConsolidation, player, item)
 				end
-				context:addOptionOnTop("Consolidate Currency", items, function() ConsolidateCurrencies(item) end, player, item)
-			end			
+					context:addOptionOnTop("Consolidate Currency", items, function() ConsolidateCurrencies(item) end, player, item)
+			end	
+
+			-- Admin Un-Bind Option
+			if player:getAccessLevel() == "Admin" then
+				if MoneyClipData.Owner ~= nil then	
+				context:addOptionOnTop("Un-Bind Money Clip (Admin)", items, UnBindMoneyClip, player, item)
+				end
+			end
+
 		end
     end
 end
@@ -539,8 +578,8 @@ local bonusPrizeMed =
 	"GN84-WNDR.LottoTicketRare",
 	"GN84-WNDR.LottoTicketRare",
 	"GN84-WNDR.LottoTicketRare",
-	"DS77.DiabloSandwich",
 	"GN84-WNDR.LottoTicketStandard",
+	"DS77.DiabloSandwich",
 	"Greenfire.OzCannabis",
 	"Greenfire.PipeTobaccoBag",
 	"Greenfire.CannabisSeed",
@@ -915,6 +954,11 @@ function GN84_AcceptItemsMoneyClip(container, item)
 	local moneyClipItems = 
 	{
 		"Base.Money",
+		"GN84-WNDR.BankBalance",
+		"GN84-WNDR.CashBalance",
+		"GN84-WNDR.TokenBalance",
+		"GN84-WNDR.MoneyStackX",
+		"GN84-WNDR.WandererTokenStackX",
 		"GN84-WNDR.MoneyStack100",
 		"GN84-WNDR.MoneyStack500",
 		"GN84-WNDR.MoneyStack1000",

@@ -17,16 +17,10 @@
 
 local Utils = require "Gizmo/GN84LIB_Utils"
 
-
-function Recipe.OnCreate.RedeemPoints(items, result, player)
-    local points = items:get(0):getModData().serverPoints or 0
-    sendClientCommand("GN84-WNDR", "add", { player:getUsername(), points })
-    player:Say("Redeemed " .. points .. " " .. SandboxVars.GN84WNDR.PointsName)
-end
-
 if not isServer() then return end
 
 local smokeyPointsData
+local smokeyTokensData
 local listings
 local oldListings
 
@@ -48,7 +42,7 @@ local printf = function(message, ...) printer:printf(message, ...) end
 
 
 ------------------------------------------------------------------------
---            PLAYER POINTS PER TICK + SLEEP EXPLOIT REMOVAL
+--        PLAYER POINTS PER 10 MIN TICK + SLEEP EXPLOIT REMOVAL
 ------------------------------------------------------------------------
 
 
@@ -57,13 +51,37 @@ local function PointsTick()
     if IsoPlayer.allPlayersAsleep() then
         --print ("All Players Sleeping..")
         return    
-    end    
+    end   
+
     for i = 0, players:size() - 1 do
         if not players:get(i):isAsleep() then 
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
             smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
+            --print ("Adding Points to:", players:get(i))
+        else
+            --print (players:get(i), "is sleeping...")
+        end        
+    end
+end
+
+------------------------------------------------------------------------
+--                   PLAYER PER HOUR TICK - TOKENS        
+------------------------------------------------------------------------
+local function TokensTick()
+    local players = getOnlinePlayers()
+    if IsoPlayer.allPlayersAsleep() then
+        --print ("All Players Sleeping..")
+        return    
+    end    
+
+    for i = 0, players:size() - 1 do
+        if not players:get(i):isAsleep() then 
+            --print (players:get(i), " is awake.")
+            local username = players:get(i):getUsername()
+            if not smokeyTokensData[username] then smokeyTokensData[username] = 0 end
+            smokeyTokensData[username] = smokeyTokensData[username] + SandboxVars.GN84WNDR.TokensPerTick
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
@@ -120,30 +138,40 @@ end
 Events.EveryTenMinutes.Add(LoadListings)
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
+    -- Get / Create Smokey Points Data
     smokeyPointsData = ModData.getOrCreate("smokeyPointsData")
+
+    -- Get / Create Wanderer Tokens Data
+    smokeyTokensData = ModData.getOrCreate("smokeyTokensData")
 
     LoadListings()
 
-    if SandboxVars.GN84WNDR.PointsFrequency == 2 then
-        Events.EveryTenMinutes.Add(PointsTick)
-    elseif SandboxVars.GN84WNDR.PointsFrequency == 3 then
-        Events.EveryHours.Add(PointsTick)
-    elseif SandboxVars.GN84WNDR.PointsFrequency == 4 then
-        Events.EveryDays.Add(PointsTick)
-    end
+    -- Smokey Points Every 10 Minutes
+    Events.EveryTenMinutes.Add(PointsTick)
+
+    -- Wanderer Token every 1 Hour
+    Events.EveryHours.Add(TokensTick)
+
 end)
 
-local ServerPointsCommands = {}
+local SmokeyPointsCommands = {}
 
-function ServerPointsCommands.get(module, command, player, args)
+function SmokeyPointsCommands.get(module, command, player, args)
     sendServerCommand(player, module, command, { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })
 end
 
+function SmokeyPointsCommands.getTokens(module, command, player, args)
+    sendServerCommand(player, module, command, { smokeyTokensData[args and args[1] or player:getUsername()] or 0 })
+end
 
 ------------------------------------------------------------------------
 --                 PLAYER PURCHASE FROM SMOKEY SHOP
 ------------------------------------------------------------------------
-function ServerPointsCommands.buy(module, command, player, args)
+------------------------------------------------------------------------
+--                          SMOKEY POINTS
+------------------------------------------------------------------------
+
+function SmokeyPointsCommands.buy(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY SHOP]          %s bought %s for $%s Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
     
@@ -154,15 +182,28 @@ function ServerPointsCommands.buy(module, command, player, args)
     print("###############")
 end
 
+------------------------------------------------------------------------
+--                          WANDERER TOKENS
+------------------------------------------------------------------------
+function SmokeyPointsCommands.buyTokens(module, command, player, args)
+    print("###############")
+    print(string.format("[SMOKEY SHOP]          %s bought %s for $%s Wanderer Tokens", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
+    
+    if not smokeyTokensData[player:getUsername()] then smokeyTokensData[player:getUsername()] = 0 end
+    smokeyTokensData[player:getUsername()] = smokeyTokensData[player:getUsername()] - math.abs(args[1])
+
+    print("[SMOKEY POINTS]        Balance:   " .. Utils.CurrencyFormatter(smokeyPointsData[player:getUsername()]) .. " Wanderer Tokens!")
+    print("###############")
+end
+
 
 
 ------------------------------------------------------------------------
 --                  ADMIN PANEL - GIVE SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.add(module, command, player, args)
-    --BACKUP - ORIGINAL WITHOUT ANSI
-    
+function SmokeyPointsCommands.add(module, command, player, args)
+     
     print("###############")
     print(string.format("[SMOKEY POINTS]        %s gave %s $%s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
     
@@ -172,15 +213,22 @@ function ServerPointsCommands.add(module, command, player, args)
     print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
     print("###############")
 
-    -- TEST ANSI CODE
-    -- printf("###############", ANSIPrinter.KEYS['bright'] .. ANSIPrinter.KEYS['green'])
-    -- printf(string.format("[SMOKEY POINTS]          %s gave %s %s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
-    
-    -- if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
-    -- smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
+end
 
-    -- printf("[SMOKEY POINTS] ", "Balance: " .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
-    -- printf("###############")
+------------------------------------------------------------------------
+--                  ADMIN PANEL - GIVE WANDERER TOKENS
+------------------------------------------------------------------------
+
+function SmokeyPointsCommands.addTokens(module, command, player, args)
+       
+    print("###############")
+    print(string.format("[WANDERER TOKENS]      %s gave %s %s Wanderer Tokens", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
+    
+    if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
+    smokeyTokensData[args[1]] = smokeyTokensData[args[1]] + args[2]
+
+    print("[WANDERER TOKENS]      Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Wanderer Tokens!")
+    print("###############")
 
 end
 
@@ -190,7 +238,7 @@ end
 --                    PER ZOMBIE - SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.zombieKillPts(module, command, player, args)   
+function SmokeyPointsCommands.zombieKillPts(module, command, player, args)   
    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]      
 end
@@ -198,17 +246,33 @@ end
 
 
 ------------------------------------------------------------------------
---                     REDEEM CASH FOR SMOKEY POINTS
+--                     DEPOSIT CASH FOR SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.redeemCash(module, command, player, args)
+function SmokeyPointsCommands.depositCash(module, command, player, args)
    print("###############")
-   print("[SMOKEY POINTS]        " .. args[1] .. " redeemed $" .. Utils.CurrencyFormatter(args[2]) .. " dollars for Smokey Points!")      
+   print("[SMOKEY BANK]          " .. args[1] .. " deposited $" .. Utils.CurrencyFormatter(args[2]) .. " dollars into their Smokey Bank!")      
    
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
    
-   print("[SMOKEY POINTS]        Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
+   print("[SMOKEY BANK]          Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
+   print("###############")
+
+end
+
+------------------------------------------------------------------------
+--                     DEPOSIT WANDERER TOKENS
+------------------------------------------------------------------------
+
+function SmokeyPointsCommands.depositTokens(module, command, player, args)
+   print("###############")
+   print("[SMOKEY BANK]          " .. args[1] .. " deposited " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens into their Smokey Bank!")      
+   
+    if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
+   smokeyTokensData[args[1]] = smokeyTokensData[args[1]] + args[2]
+   
+   print("[SMOKEY BANK]          Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Wanderer Tokens!")
    print("###############")
 
 end
@@ -218,7 +282,7 @@ end
 --                 REDEEM LOTTO TICKET FOR SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
+function SmokeyPointsCommands.redeemLottoTicket(module, command, player, args)
     print("###############")
     print("[WANDERERS LOTTO]      " .. args[1] .. " redeemed Winning Lotto Ticket for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
     
@@ -235,7 +299,7 @@ function ServerPointsCommands.redeemLottoTicket(module, command, player, args)
 --                          LOTTO BONUS PRIZE
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.redeemLottoTicketBonusPrize(module, command, player, args)
+function SmokeyPointsCommands.redeemLottoTicketBonusPrize(module, command, player, args)
     print("###############")
     print("[ BONUS PRIZE ]        " .. args[1] .. " won a Bonus Prize - " .. args[2])
     print("###############")    
@@ -247,7 +311,7 @@ function ServerPointsCommands.redeemLottoTicketBonusPrize(module, command, playe
 --            REDEEM VIP TOKEN FOR SMOKEY POINTS - DEPRECATED
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.redeemVIPToken(module, command, player, args)
+function SmokeyPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
     print("[VIP TOKENS]           " .. args[1] .. " redeemed VIP Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
         
@@ -264,7 +328,7 @@ function ServerPointsCommands.redeemVIPToken(module, command, player, args)
 --                REDEEM WANDERER TOKEN FOR SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.redeemWandererToken(module, command, player, args)
+function SmokeyPointsCommands.redeemWandererToken(module, command, player, args)
     print("#################")
     print("[WANDERER TOKENS]      " .. args[1] .. " redeemed WANDERER Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
         
@@ -278,18 +342,18 @@ function ServerPointsCommands.redeemWandererToken(module, command, player, args)
 
 ------------------------------------------------------------------------
 
-function ServerPointsCommands.load(module, command, player, args)
+function SmokeyPointsCommands.load(module, command, player, args)
     sendServerCommand(player, module, command, listings)
 end
 
-function ServerPointsCommands.reload(module, command, player, args)
+function SmokeyPointsCommands.reload(module, command, player, args)
     LoadListings()
 end
 
 Events.OnClientCommand.Add(function(module, command, player, args)
-    if module == "GN84-WNDR" and ServerPointsCommands[command] then
-        ServerPointsCommands[command](module, command, player, args)
+    if module == "GN84-WNDR" and SmokeyPointsCommands[command] then
+        SmokeyPointsCommands[command](module, command, player, args)
     end
 end)
 
-return ServerPointsCommands
+return SmokeyPointsCommands

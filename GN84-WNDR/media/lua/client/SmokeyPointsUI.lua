@@ -210,8 +210,8 @@ end
 
 function SmokeyPointsUI:autoCloseWindow()
     if not MainScreen.instance:isVisible() then
-        if MainScreen.instance.serverPoints:isVisible() then            
-            MainScreen.instance.serverPoints:setVisible(false)
+        if MainScreen.instance.SmokeyPoints:isVisible() then            
+            MainScreen.instance.SmokeyPoints:setVisible(false)
         end  
     end
 end

@@ -26,15 +26,59 @@ module GN84-WNDR
 		Tooltip				 = Holds Cash - Tokens - and other Essential Items,
 	}
 
-	item MoneyStackX
+	item BankBalance
 	{
-		DisplayName			 = Stack of Cash - $0,
+		DisplayName			 = --[   Bank Balance,
+		DisplayCategory		 = Money,
+		Weight				 = 1.0,
+		Type 				 = Normal,
+		Icon				 = BankBalance,
+		WorldStaticModel	 = BankBalance,
+		Tooltip				 = Smokey Bank Balance,
+	}
+
+	item CashBalance
+	{
+		DisplayName			 = --[   Cash Balance,
 		DisplayCategory		 = Money,
 		Weight				 = 1.0,
 		Type 				 = Normal,
 		Icon				 = MoneyStack10000,
 		WorldStaticModel	 = MoneyStack10000,
-		Tooltip				 = Consolidated Stack of Cash,
+		Tooltip				 = Consolidated Cash Balance,
+	}
+
+	item TokenBalance
+	{
+		DisplayName			 = --[   Token Balance,
+		DisplayCategory		 = Money,
+		Weight				 = 1.0,
+		Type 				 = Normal,
+		Icon				=  WandererTokenStackMedium,
+		WorldStaticModel	=  WandererTokenStackMedium,
+		Tooltip				 = Wanderer Token Balance,
+	}
+
+	item MoneyStackX
+	{
+		DisplayName			 = Stack of Cash,
+		DisplayCategory		 = Money,
+		Weight				 = 1.0,
+		Type 				 = Normal,
+		Icon				 = MoneyStack10000,
+		WorldStaticModel	 = MoneyStack10000,
+		Tooltip				 = A Stack of Cash,
+	}
+
+	item WandererTokenStackX
+	{
+		DisplayName			 = Stack of Wanderer Tokens,
+		DisplayCategory		 = Money,
+		Weight				 = 1.0,
+		Type 				 = Normal,
+		Icon				 =  WandererTokenStackSmall,				
+		WorldStaticModel	 =  WandererTokenStackSmall,	
+		Tooltip				 = A Stack of Wanderer Tokens,
 	}
 
     item MoneyStack100

@@ -74,7 +74,8 @@ Sandbox_EN = {
     Sandbox_GN84WNDR_PointsFrequency_option3 = "Every Hour",
     Sandbox_GN84WNDR_PointsFrequency_option4 = "Every Day",
 
-    Sandbox_GN84WNDR_PointsPerTick = "Points Per Tick",
+    Sandbox_GN84WNDR_PointsPerTick = "Smokey Points Per Tick",
+    Sandbox_GN84WNDR_TokensPerTick = "Wanderer Tokens Per Tick",
 
     Sandbox_GN84WNDR_ServerMessage = "Server Message",
 

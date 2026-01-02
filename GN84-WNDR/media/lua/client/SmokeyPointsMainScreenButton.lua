@@ -35,12 +35,12 @@ function MainScreen:instantiate()
         local core = getCore()
         local width = 800 * FONT_SCALE
         local height = 600 * FONT_SCALE
-        self.serverPoints = SmokeyPointsUI:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
-        self.serverPoints:initialise()
-        self.serverPoints:setVisible(false)
-        self.serverPoints:setAnchorRight(true)
-        self.serverPoints:setAnchorBottom(true)
-        self:addChild(self.serverPoints)
+        self.SmokeyPoints = SmokeyPointsUI:new((core:getScreenWidth() - width) / 2, (core:getScreenHeight() - height) / 2, width, height)
+        self.SmokeyPoints:initialise()
+        self.SmokeyPoints:setVisible(false)
+        self.SmokeyPoints:setAnchorRight(true)
+        self.SmokeyPoints:setAnchorBottom(true)
+        self:addChild(self.SmokeyPoints)
 
         local labelHgt = getTextManager():getFontHeight(UIFont.Large) + 8 * 2
         self.pointsOption = ISLabel:new(self.quitToDesktop.x, self.quitToDesktop.y + labelHgt + 16, labelHgt, "THE SMOKEY SHOP", 1, 1, 1, 1, UIFont.Large, true)
@@ -50,7 +50,7 @@ function MainScreen:instantiate()
         self.render = newRender
         self.pointsOption.onMouseDown = function()
             getSoundManager():playUISound("UIActivateMainMenuItem")
-            MainScreen.instance.serverPoints:setVisible(true)
+            MainScreen.instance.SmokeyPoints:setVisible(true)
         end
         self.pointsOption.onMouseMove = function(self)
             self.fade:setFadeIn(true)
