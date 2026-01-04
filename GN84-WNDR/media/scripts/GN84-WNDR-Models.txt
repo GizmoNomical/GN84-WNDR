@@ -244,5 +244,12 @@ module GN84-WNDR
 		texture = worlditems/MoneyClip,
 		scale = 0.5,
 	}
+
+	model BankCard
+	{
+		mesh = worlditems/BankCard,
+		texture = worlditems/BankCard,
+		scale = 0.6,
+	}
 }
 

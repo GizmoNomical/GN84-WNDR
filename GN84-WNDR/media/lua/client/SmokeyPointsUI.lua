@@ -32,17 +32,33 @@ local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 local FONT_SCALE = FONT_HGT_SMALL / 14
 
-
+-- ITEM TEXTURES
+local BankTexture
+local CashTexture
+local TokenTexture
 
 ------------------------------------------------------------------------
---                    GET PLAYER'S SMOKEY POINTS  
+--            GET PLAYER'S SMOKEY POINTS  & TOKEN COUNTS
 ------------------------------------------------------------------------
 
-local function OnServerCommand(module, command, arguments)
+local function GetBankBalance(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if not SmokeyPointsUI then return end
+
     if module == "GN84-WNDR" and command == "get" then
         SmokeyPointsUI.instance.points = arguments[1]
-        Events.OnServerCommand.Remove(OnServerCommand)
     end
+end
+
+local function GetTokenBalance(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if not SmokeyPointsUI then return end
+
+    if module == "GN84-WNDR" and command == "getTokens" then
+        SmokeyPointsUI.instance.tokens = arguments[1]
+    end    
 end
 
 
@@ -56,13 +72,15 @@ function SmokeyPointsUI:setVisible(visible)
     end
     self.javaObject:setVisible(visible)    
     if visible then
-        Events.OnServerCommand.Add(OnServerCommand)
+        
         sendClientCommand("GN84-WNDR", "get", nil)
+        sendClientCommand("GN84-WNDR", "getTokens", nil)
         SmokeyPointsUI.automaticRefresh()
     end
 end
 
-
+Events.OnServerCommand.Add(GetBankBalance)
+Events.OnServerCommand.Add(GetTokenBalance)
 
 ------------------------------------------------------------------------
 --                      ITEM LIST OBJECT      
@@ -299,6 +317,7 @@ function SmokeyPointsUI:onBuy()
     end
     Events.OnServerCommand.Add(OnServerCommand)
     sendClientCommand("GN84-WNDR", "get", nil)
+    sendClientCommand("GN84-WNDR", "getTokens", nil)
 end
 
 
@@ -484,23 +503,42 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:render()
+
+    if BankTexture == nil then
+        local BankCard = InventoryItemFactory.CreateItem("GN84-WNDR.BankBalance")
+        BankTexture = BankCard:getTexture()
+    end
+    
+    if TokenTexture == nil then
+        local TokenItem = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStack100")
+        TokenTexture = TokenItem:getTexture()
+    end
+
+    local titleLength = getTextManager():MeasureStringX(UIFont.Large, self.title)
+
     local z = 15 * FONT_SCALE
-    self:drawText(self.title, 10 * FONT_SCALE, z, 1, 1, 1, 1, UIFont.Large)
+    self:drawText(self.title, (self.width / 2) - (titleLength / 2), z, 1, 1, 1, 1, UIFont.Large)
 
     z = z + FONT_HGT_LARGE + z
     local x = self.width - 10 * FONT_SCALE - FONT_HGT_LARGE
-    self:drawTextureScaledAspect2(getSteamAvatarFromUsername(getPlayer():getUsername()), x, (z - FONT_HGT_LARGE) / 2, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-    x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
-    --self:drawText("     ", x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
-    x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
-    self:drawText("Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 50, (z - FONT_HGT_MEDIUM) / 2, 1.0, 0.66, 0.11, 1, UIFont.Large)
+
+    -- Draw Wanderer Token Icon & Token Bank Balance
+    self:drawTextureScaledAspect2(TokenTexture, 20, (z - FONT_HGT_LARGE) / 2, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+    local tokenBalanceLength = getTextManager():MeasureStringX(UIFont.Medium, "Token Balance:    " .. tostring(Utils.CurrencyFormatter(self.tokens)) .. "     ")
+    self:drawText("Token Balance:    " .. tostring(Utils.CurrencyFormatter(self.tokens)) .. "     ", 60, (z - FONT_HGT_MEDIUM) / 2, 0.0, 0.886, 1.0, 1, UIFont.Large)
+
+    -- Draw Bank Card Icon & Smokey Bank Balance
+    self:drawTextureScaledAspect2(BankTexture, x-10, (z - FONT_HGT_LARGE) / 2, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+    x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, "Bank Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ")
+    self:drawText("Bank Balance:   $" .. tostring(Utils.CurrencyFormatter(self.points)) .. "     ", x - 40, (z - FONT_HGT_MEDIUM) / 2, 1.0, 0.66, 0.11, 1, UIFont.Large)
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
-
     self:drawText(self.serverMsg, 10 * FONT_SCALE, self.tabPanel:getBottom() + 1 + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
 
     local view = self.tabPanel.activeView
     if view then view = view.view else return end
+
+
 
     -- MOUSEOVER SHOW BUY BUTTON
     if view.mouseoverselected == -1 then
@@ -544,9 +582,11 @@ function SmokeyPointsUI:new(x, y, width, height)
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
     o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }    
     o.title = "    THE SMOKEY SHOP"
-    o.available = " Balance     "
+    o.available = " Bank Balance     "
     o.serverMsg = SandboxVars.GN84WNDR.ServerMessage
     o.points = 0
+    o.tokens = 0
+
     SmokeyPointsUI.instance = o
     return o
 end

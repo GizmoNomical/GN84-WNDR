@@ -157,11 +157,11 @@ end)
 local SmokeyPointsCommands = {}
 
 function SmokeyPointsCommands.get(module, command, player, args)
-    sendServerCommand(player, module, command, { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })
+    sendServerCommand(player, module, "get", { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })
 end
 
 function SmokeyPointsCommands.getTokens(module, command, player, args)
-    sendServerCommand(player, module, command, { smokeyTokensData[args and args[1] or player:getUsername()] or 0 })
+    sendServerCommand(player, module, "getTokens", { smokeyTokensData[args and args[1] or player:getUsername()] or 0 })
 end
 
 ------------------------------------------------------------------------

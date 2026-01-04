@@ -28,29 +28,29 @@ module GN84-WNDR
 
 	item BankBalance
 	{
-		DisplayName			 = --[   Bank Balance,
+		DisplayName			 = -----[   Bank Balance,
 		DisplayCategory		 = Money,
 		Weight				 = 1.0,
 		Type 				 = Normal,
-		Icon				 = BankBalance,
-		WorldStaticModel	 = BankBalance,
+		Icon				 = BankCard,
+		WorldStaticModel	 = BankCard,
 		Tooltip				 = Smokey Bank Balance,
 	}
 
 	item CashBalance
 	{
-		DisplayName			 = --[   Cash Balance,
+		DisplayName			 = -----[   Cash Balance,
 		DisplayCategory		 = Money,
 		Weight				 = 1.0,
 		Type 				 = Normal,
 		Icon				 = MoneyStack10000,
 		WorldStaticModel	 = MoneyStack10000,
-		Tooltip				 = Consolidated Cash Balance,
+		Tooltip				 = Cash Balance,
 	}
 
 	item TokenBalance
 	{
-		DisplayName			 = --[   Token Balance,
+		DisplayName			 = -----[   Token Balance,
 		DisplayCategory		 = Money,
 		Weight				 = 1.0,
 		Type 				 = Normal,
@@ -76,8 +76,8 @@ module GN84-WNDR
 		DisplayCategory		 = Money,
 		Weight				 = 1.0,
 		Type 				 = Normal,
-		Icon				 =  WandererTokenStackSmall,				
-		WorldStaticModel	 =  WandererTokenStackSmall,	
+		Icon				 = WandererTokenStackMedium,				
+		WorldStaticModel	 = WandererTokenStackMedium,	
 		Tooltip				 = A Stack of Wanderer Tokens,
 	}
 
