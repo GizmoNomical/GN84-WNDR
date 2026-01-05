@@ -8,83 +8,91 @@ module GN84-WNDR
 
 
 /*------------------------------------------------------------------------*/
-/*--                          MONEY STACKS                                */
+/*--                        MONEY CLIP ITEMS                              */
 /*------------------------------------------------------------------------*/
 
 	item MoneyClip
 	{
-		DisplayName			 = Money Clip,
-		DisplayCategory		 = Container,
-		WeightReduction		 = 100,
-		Weight				 = 0.1,
-		Type 				 = Container,
-		Capacity			 = 100,
-		Icon				 = MoneyClip,
-		OpenSound			 = MoneyClipShuffle,
-		AcceptItemFunction	 = GN84_AcceptItemsMoneyClip,
-		WorldStaticModel	 = MoneyClip,
-		Tooltip				 = Holds Cash - Tokens - and other Essential Items,
+		DisplayName			 = 	Money Clip,
+		DisplayCategory		 = 	Wanderers,
+		WeightReduction		 = 	100,
+		Weight				 = 	0.1,
+		Type 				 = 	Container,
+		Capacity			 = 	100,
+		Icon				 = 	MoneyClip,
+		OpenSound			 = 	MoneyClipShuffle,
+		AcceptItemFunction	 = 	GN84_AcceptItemsMoneyClip,
+		WorldStaticModel	 = 	MoneyClip,
+		Tooltip				 = 	Holds Cash - Tokens - and other Essential Items,
 	}
 
 	item BankBalance
 	{
-		DisplayName			 = -----[   Bank Balance,
-		DisplayCategory		 = Money,
-		Weight				 = 1.0,
-		Type 				 = Normal,
-		Icon				 = BankCard,
-		WorldStaticModel	 = BankCard,
-		Tooltip				 = Smokey Bank Balance,
+		DisplayName			 = 	-----[   Bank Balance,
+		DisplayCategory		 = 	Information,
+		Weight				 = 	1.0,
+		Type 				 = 	Normal,
+		Icon				 = 	BankCard,
+		WorldStaticModel	 = 	BankCard,
+		Tooltip				 = 	Smokey Bank Balance,
 	}
 
 	item CashBalance
 	{
-		DisplayName			 = -----[   Cash Balance,
-		DisplayCategory		 = Money,
-		Weight				 = 1.0,
-		Type 				 = Normal,
-		Icon				 = MoneyStack10000,
-		WorldStaticModel	 = MoneyStack10000,
-		Tooltip				 = Cash Balance,
+		DisplayName			 = 	-----[   Cash Balance,
+		DisplayCategory		 = 	Information,
+		Weight				 = 	1.0,
+		Type 				 = 	Normal,
+		Icon				 = 	MoneyStack10000,
+		WorldStaticModel	 = 	MoneyStack10000,
+		Tooltip				 = 	Cash Balance,
 	}
 
 	item TokenBalance
 	{
-		DisplayName			 = -----[   Token Balance,
-		DisplayCategory		 = Money,
-		Weight				 = 1.0,
-		Type 				 = Normal,
-		Icon				=  WandererTokenStackMedium,
-		WorldStaticModel	=  WandererTokenStackMedium,
-		Tooltip				 = Wanderer Token Balance,
+		DisplayName			 =  -----[   Token Balance,
+		DisplayCategory		 =  Information,
+		Weight				 =  1.0,
+		Type 				 =  Normal,
+		Icon				 =  WandererTokenStackMedium,
+		WorldStaticModel	 =  WandererTokenStackMedium,
+		Tooltip				 =  Wanderer Token Balance,
 	}
+
+/*------------------------------------------------------------------------*/
+/*--                     MONEY / TOKEN STACKS - NEW                       */
+/*------------------------------------------------------------------------*/
 
 	item MoneyStackX
 	{
-		DisplayName			 = Stack of Cash,
-		DisplayCategory		 = Money,
-		Weight				 = 1.0,
-		Type 				 = Normal,
-		Icon				 = MoneyStack10000,
-		WorldStaticModel	 = MoneyStack10000,
-		Tooltip				 = A Stack of Cash,
+		DisplayName			 =  Stack of Cash,
+		DisplayCategory		 =  Currency,
+		Weight				 = 	1.0,
+		Type 				 = 	Normal,
+		Icon				 = 	MoneyStack10000,
+		WorldStaticModel	 = 	MoneyStack10000,
+		Tooltip				 = 	A Stack of Cash,
 	}
 
 	item WandererTokenStackX
 	{
-		DisplayName			 = Stack of Wanderer Tokens,
-		DisplayCategory		 = Money,
-		Weight				 = 1.0,
-		Type 				 = Normal,
-		Icon				 = WandererTokenStackMedium,				
-		WorldStaticModel	 = WandererTokenStackMedium,	
-		Tooltip				 = A Stack of Wanderer Tokens,
+		DisplayName			 =  Stack of Wanderer Tokens,
+		DisplayCategory		 =  Token,
+		Weight				 = 	1.0,
+		Type 				 = 	Normal,
+		Icon				 = 	WandererTokenStackMedium,				
+		WorldStaticModel	 = 	WandererTokenStackMedium,	
+		Tooltip				 = 	A Stack of Wanderer Tokens,
 	}
+
+/*------------------------------------------------------------------------*/
+/*--                    MONEY STACKS - LEGACY                             */
+/*------------------------------------------------------------------------*/	
 
     item MoneyStack100
     {
         DisplayName          =  Stack of Cash - $100 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.0001,
         Icon                 =  MoneyStack100,
@@ -95,7 +103,7 @@ module GN84-WNDR
 	item MoneyStack500
     {
         DisplayName          =  Stack of Cash - $500 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.0005,
         Icon                 =  MoneyStack100,
@@ -106,7 +114,7 @@ module GN84-WNDR
 	item MoneyStack1000
     {
         DisplayName          =  Stack of Cash - $1000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.001,
         Icon                 =  MoneyStack1000,
@@ -117,7 +125,7 @@ module GN84-WNDR
 	item MoneyStack5000
     {
         DisplayName          =  Stack of Cash - $5000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.005,
         Icon                 =  MoneyStack1000,
@@ -128,7 +136,7 @@ module GN84-WNDR
 	item MoneyStack10000
     {
         DisplayName          =  Stack of Cash - $10000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.01,
         Icon                 =  MoneyStack10000,
@@ -139,7 +147,7 @@ module GN84-WNDR
 	item MoneyStack50000
     {
         DisplayName          =  Stack of Cash - $50000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.05,
         Icon                 =  MoneyStack10000,
@@ -150,7 +158,7 @@ module GN84-WNDR
 	item MoneyStack100000
     {
         DisplayName          =  Stack of Cash - $100000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.1,
         Icon                 =  MoneyStack10000,
@@ -161,7 +169,7 @@ module GN84-WNDR
 	item MoneyStack500000
     {
         DisplayName          =  Stack of Cash - $500000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.5,
         Icon                 =  MoneyStack10000,
@@ -172,7 +180,7 @@ module GN84-WNDR
 	item MoneyStack1000000
     {
         DisplayName          =  Stack of Cash - $1000000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
         Icon                 =  MoneyStack10000,
@@ -183,7 +191,7 @@ module GN84-WNDR
 	item MoneyStack5000000
     {
         DisplayName          =  Stack of Cash - $5000000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
         Icon                 =  MoneyStack10000,
@@ -194,7 +202,7 @@ module GN84-WNDR
 	item MoneyStack10000000
     {
         DisplayName          =  Stack of Cash - $10000000 - ,
-		DisplayCategory		 =  Money,
+		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
         Icon                 =  MoneyStack10000,
@@ -210,42 +218,42 @@ module GN84-WNDR
 	
 	item EmptyWallet1
 	{
-		DisplayName = Empty Wallet,
-		DisplayCategory = Junk,
-		Weight = 0.01,
-		Type = Normal,
-		Icon = Wallet_01,
-		WorldStaticModel = Wallet,
+		DisplayName 		 =  Empty Wallet,
+		DisplayCategory 	 =  Junk,
+		Weight 				 =  0.01,
+		Type 				 =  Normal,
+		Icon 				 =  Wallet_01,
+		WorldStaticModel 	 =  Wallet,
 	}
 
 	item EmptyWallet2
 	{
-		DisplayName = Empty Wallet,
-		DisplayCategory = Junk,
-		Weight = 0.01,
-		Type = Normal,
-		Icon = Wallet_02,
-		WorldStaticModel = Wallet2,
+		DisplayName 		 =  Empty Wallet,
+		DisplayCategory 	 =  Junk,
+		Weight 				 =  0.01,
+		Type 				 =  Normal,
+		Icon 				 =  Wallet_02,
+		WorldStaticModel 	 =  Wallet2,
 	}
 
 	item EmptyWallet3
 	{
-		DisplayName = Empty Wallet,
-		DisplayCategory = Junk,
-		Weight = 0.01,
-		Type = Normal,
-		Icon = Wallet_03,
-		WorldStaticModel = Wallet3,
+		DisplayName 		 =  Empty Wallet,
+		DisplayCategory 	 =  Junk,
+		Weight 				 =  0.01,
+		Type 				 =  Normal,
+		Icon 				 =  Wallet_03,
+		WorldStaticModel 	 =  Wallet3,
 	}
 
 	item EmptyWallet4
 	{
-		DisplayName = Empty Wallet,
-		DisplayCategory = Junk,
-		Weight = 0.01,
-		Type = Normal,
-		Icon = Wallet_04,
-		WorldStaticModel = Wallet4,
+		DisplayName 		 =  Empty Wallet,
+		DisplayCategory 	 =  Junk,
+		Weight 				 =  0.01,
+		Type 				 =  Normal,
+		Icon 				 =  Wallet_04,
+		WorldStaticModel 	 =  Wallet4,
 	}	
 
 
@@ -447,7 +455,7 @@ module GN84-WNDR
 	item SmokeyShredderRecycler
 	{
 		DisplayName			=  Smokey's All-In-One Shredder Recycler,
-		DisplayCategory		=  Tool,
+		DisplayCategory		=  Wanderers,
 		Weight				=  50.0,
 		Type				=  Normal,
 		Icon				=  SmokeyShredderRecycler,

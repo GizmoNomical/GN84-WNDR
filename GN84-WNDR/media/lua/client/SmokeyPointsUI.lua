@@ -58,21 +58,21 @@ local function GetTokenBalance(module, command, arguments)
 
     if module == "GN84-WNDR" and command == "getTokens" then
         SmokeyPointsUI.instance.tokens = arguments[1]
-    end    
+    end
 end
 
 
 ------------------------------------------------------------------------
---          SHOW SMOKEY POINTS WINDOW + REFRESH LISTINGS      
+--          SHOW SMOKEY POINTS WINDOW + REFRESH LISTINGS
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:setVisible(visible)
     if self.javaObject == nil then
         self:instantiate()
     end
-    self.javaObject:setVisible(visible)    
+    self.javaObject:setVisible(visible)
     if visible then
-        
+
         sendClientCommand("GN84-WNDR", "get", nil)
         sendClientCommand("GN84-WNDR", "getTokens", nil)
         SmokeyPointsUI.automaticRefresh()
@@ -83,10 +83,10 @@ Events.OnServerCommand.Add(GetBankBalance)
 Events.OnServerCommand.Add(GetTokenBalance)
 
 ------------------------------------------------------------------------
---                      ITEM LIST OBJECT      
+--                      ITEM LIST OBJECT
 ------------------------------------------------------------------------
 
-function SmokeyPointsUI.LoadType.ITEM(row, entry)    
+function SmokeyPointsUI.LoadType.ITEM(row, entry)
     local item = getScriptManager():getItem(entry.target)
     if item then
         --print (item)
@@ -133,7 +133,7 @@ function SmokeyPointsUI.LoadListings(module, command, arguments)
                 local listItem = getScriptManager():getItem(tostring(entry.target))  -- Check if Item is Valid and Continue to next if not
                 if listItem or entry.type == "DIV" then
 
-                    
+
                     local row = scrollingList:addItem(entry.type, nil)
                     row.type = entry.type
                     row.target = entry.target
@@ -141,11 +141,11 @@ function SmokeyPointsUI.LoadListings(module, command, arguments)
                     row.mult = entry.mult or 1.0
                     row.instock = entry.instock or "true"
 
-                    if SmokeyPointsUI.LoadType[entry.type] then                        
-                            SmokeyPointsUI.LoadType[entry.type](row, entry)                        
+                    if SmokeyPointsUI.LoadType[entry.type] then
+                            SmokeyPointsUI.LoadType[entry.type](row, entry)
                     else
                         row.text = entry.type .. ":" .. tostring(entry.target)
-                    end 
+                    end
                 end
             end
         end
@@ -154,7 +154,7 @@ end
 
 
 ------------------------------------------------------------------------
---                    LOAD LISTINGS ON GAME START   
+--                    LOAD LISTINGS ON GAME START
 ------------------------------------------------------------------------
 
 local function OnTick()
@@ -185,11 +185,11 @@ function SmokeyPointsUI:createChildren()
     self.tabPanel.addView = self.addView
     self:addChild(self.tabPanel)
     Events.OnTick.Add(OnTick)
-    
+
 ------------------------------------------------------------------------
---                          BUY BUTTON 
+--                          BUY BUTTON
 ------------------------------------------------------------------------
-    
+
     self.buyButton = ISButton:new(self.width - 120 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "BUY", self, SmokeyPointsUI.onBuy)
     self.buyButton:initialise()
     self.buyButton:instantiate()
@@ -201,21 +201,21 @@ function SmokeyPointsUI:createChildren()
 ------------------------------------------------------------------------
 --                        CLOSE UI BUTTON
 ------------------------------------------------------------------------
-    
+
     self.cancelButton = ISButton:new(self.width - padBottom - btnWid, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, SmokeyPointsUI.close)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
 ------------------------------------------------------------------------
---                         RELOAD BUTTON     
+--                         RELOAD BUTTON
 ------------------------------------------------------------------------
-    
+
     self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, "REFRESH LISTINGS", self, SmokeyPointsUI.onReload)
     self.reloadButton:initialise()
     self.reloadButton:instantiate()
     self:addChild(self.reloadButton)
-   
+
 end
 
 
@@ -223,30 +223,30 @@ end
 
 
 ------------------------------------------------------------------------
---                AUTO-CLOSE WINDOW WHEN NOT FOCUSED  
+--                AUTO-CLOSE WINDOW WHEN NOT FOCUSED
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:autoCloseWindow()
     if not MainScreen.instance:isVisible() then
-        if MainScreen.instance.SmokeyPoints:isVisible() then            
+        if MainScreen.instance.SmokeyPoints:isVisible() then
             MainScreen.instance.SmokeyPoints:setVisible(false)
-        end  
+        end
     end
 end
 
 ------------------------------------------------------------------------
---                    CLOSE / DESTROY WINDOW      
+--                    CLOSE / DESTROY WINDOW
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:close()
-    self:setVisible(false) 
+    self:setVisible(false)
     SmokeyPointsUI:removeFromUIManager()
 end
 
 
 
 ------------------------------------------------------------------------
---                SERVER COMMAND - FORCE REFRESH          
+--                SERVER COMMAND - FORCE REFRESH
 ------------------------------------------------------------------------
 
 function serverForceRefresh(module, command, player, args)
@@ -262,10 +262,10 @@ Events.OnServerCommand.Add(serverForceRefresh)
 
 
 ------------------------------------------------------------------------
---                 RELOAD LISTINGS - AUTOMATIC REFRESH 
+--                 RELOAD LISTINGS - AUTOMATIC REFRESH
 ------------------------------------------------------------------------
 
-function SmokeyPointsUI:automaticRefresh()  
+function SmokeyPointsUI:automaticRefresh()
     if SmokeyPointsUI.instance ~= nil then
         if SmokeyPointsUI.instance.tabPanel.viewList ~= nil then
             for i, v in ipairs(SmokeyPointsUI.instance.tabPanel.viewList) do
@@ -274,7 +274,7 @@ function SmokeyPointsUI:automaticRefresh()
             Events.OnServerCommand.Add(SmokeyPointsUI.LoadListings)
             sendClientCommand("GN84-WNDR", "load", nil)
         end
-    end 
+    end
 end
 
 
@@ -282,8 +282,8 @@ end
 --                     RELOAD LISTINGS  - MANUAL
 ------------------------------------------------------------------------
 
-function SmokeyPointsUI:onReload()    
-    if self.instance ~= nil then    
+function SmokeyPointsUI:onReload()
+    if self.instance ~= nil then
         if self.instance.tabPanel.viewList ~= nil then
             for i, v in ipairs(self.tabPanel.viewList) do
                 self.tabPanel:removeView(v.view)
@@ -296,7 +296,7 @@ end
 
 
 ------------------------------------------------------------------------
---              ADD ITEMS TO PLAYER + PLAY PURCHASE SOUND        
+--              ADD ITEMS TO PLAYER + PLAY PURCHASE SOUND
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.BuyType.ITEM(row)
@@ -306,7 +306,7 @@ function SmokeyPointsUI.BuyType.ITEM(row)
 end
 
 ------------------------------------------------------------------------
---                 BUY BUTTON CLICKED - BUY COMMAND   
+--                 BUY BUTTON CLICKED - BUY COMMAND
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:onBuy()
@@ -324,7 +324,7 @@ end
 
 
 ------------------------------------------------------------------------
---                          UI RENDERING    
+--                          UI RENDERING
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 --                        RENDER TAB PANEL
@@ -396,7 +396,7 @@ end
 
 
 ------------------------------------------------------------------------
---                     RENDER OBJECTS IN LIST   
+--                     RENDER OBJECTS IN LIST
 ------------------------------------------------------------------------
 function SmokeyPointsUI:addView(name, view)
     local viewObject = {}
@@ -426,7 +426,7 @@ end
 
 
 ------------------------------------------------------------------------
---                       RENDER OBJECT - DIV   
+--                       RENDER OBJECT - DIV
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.DrawType.DIV(self, y, item, alt)
@@ -473,7 +473,7 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
 
     elseif SmokeyPointsUI.instance.points < (item.price * item.mult) then
         self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
-    else   
+    else
         if item.mult > 1.0 then
             self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
         elseif item.mult < 1.0 then
@@ -499,7 +499,7 @@ end
 
 
 ------------------------------------------------------------------------
---                       RENDER MAIN PANEL   
+--                       RENDER MAIN PANEL
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI:render()
@@ -508,7 +508,7 @@ function SmokeyPointsUI:render()
         local BankCard = InventoryItemFactory.CreateItem("GN84-WNDR.BankBalance")
         BankTexture = BankCard:getTexture()
     end
-    
+
     if TokenTexture == nil then
         local TokenItem = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStack100")
         TokenTexture = TokenItem:getTexture()
@@ -542,7 +542,7 @@ function SmokeyPointsUI:render()
 
     -- MOUSEOVER SHOW BUY BUTTON
     if view.mouseoverselected == -1 then
-        self.buyButton:setVisible(false)        
+        self.buyButton:setVisible(false)
     else
         local row = view.items[view.mouseoverselected]
         z = (view.mouseoverselected - 1) * view.itemheight + view:getYScroll() + view.itemPadY + view.y + view.parent.y
@@ -565,13 +565,13 @@ function SmokeyPointsUI:render()
         else
             self.buyButton:setVisible(false)
 
-        end        
+        end
     end
 end
 
 
 ------------------------------------------------------------------------
---                         CONSTRUCTOR   
+--                         CONSTRUCTOR
 ------------------------------------------------------------------------
 function SmokeyPointsUI:new(x, y, width, height)
     local o = ISPanel:new(x, y, width + 100, height + 100)
@@ -580,7 +580,7 @@ function SmokeyPointsUI:new(x, y, width, height)
     o.variableColor = { r = 0.9, g = 0.55, b = 0.1, a = 1 }
     o.borderColor = { r = 0.4, g = 0.4, b = 0.4, a = 1 }
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0.8 }
-    o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }    
+    o.buttonBorderColor = { r = 0.7, g = 0.7, b = 0.7, a = 0.5 }
     o.title = "    THE SMOKEY SHOP"
     o.available = " Bank Balance     "
     o.serverMsg = SandboxVars.GN84WNDR.ServerMessage

@@ -19,7 +19,7 @@ require "recipecode"
 require "ISUI/ISContextMenu"
 
 ------------------------------------------------------------------------
---                       SANDBOX VARIABLES   
+--                       SANDBOX VARIABLES
 ------------------------------------------------------------------------
 
 local pointsPerZombieKill 		= SandboxVars.GN84WNDR.PointsPerZombieKill 		or 18
@@ -33,7 +33,7 @@ local playerLuckBonus 			= SandboxVars.GN84WNDR.PlayerLuckBonus 			or 1.2
 local playerUnluckyPenalty 		= SandboxVars.GN84WNDR.PlayerUnluckyPenalty 		or 0.95
 local lotteryTicketOdds 		= SandboxVars.GN84WNDR.LotteryTicketOdds 		or 3.25
 local rareTicketCashValue 		= SandboxVars.GN84WNDR.RareTicketCashValue 		or 1
-local VIPTokenCashValue 		= SandboxVars.GN84WNDR.VIPTokenCashValue 		or 1000000
+local VIPTokenCashValue 		= SandboxVars.GN84WNDR.VIPTokenCashValue 		or 100000
 local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 	or 10000
 
 
@@ -134,19 +134,19 @@ end
 --                  ADD SMOKEY POINTS ON ZOMBIE KILL
 ------------------------------------------------------------------------
 
-function SmokeyPointsOnZombieKill(zombie)	
+function SmokeyPointsOnZombieKill(zombie)
 	local player = getPlayer()
 	if player == nil then return end
 
 	local lastAttacker = zombie:getAttackedBy()
 
 	if player == lastAttacker then
-		sendClientCommand("GN84-WNDR", "zombieKillPts", {player:getUsername(), pointsPerZombieKill})		
-	end	
+		sendClientCommand("GN84-WNDR", "zombieKillPts", {player:getUsername(), pointsPerZombieKill})
+	end
 end
 
 Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
-	
+
 
 
 ------------------------------------------------------------------------
@@ -158,18 +158,18 @@ local function checkWalletForCash(player)
 
 	local baseOdds = 80
 	local bonusOdds = 0
-	
+
 	-- Check for Trait Bonuses
-	if player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then
 		bonusOdds = baseOdds + 5
-	elseif player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then
 		bonusOdds = baseOdds - 5
-	else		
+	else
 		bonusOdds = baseOdds
 	end
 
 	-- Roll Check for Cash
-	local cashRoll = ZombRand(100) + 1 
+	local cashRoll = ZombRand(100) + 1
 
 	if (cashRoll <= bonusOdds) then
 		--print("Standard Cash Roll Success!")
@@ -194,12 +194,12 @@ local function calculateWalletCash(player)
 	local wealth = ZombRand(100) + 1
 
 	if (wealthRoll >=90) then
-			cashFound = ZombRand(wealthyCashAmount) + 1		
+			cashFound = ZombRand(wealthyCashAmount) + 1
 	elseif (wealthRoll < 40) then
 			cashFound = ZombRand(poorCashAmount) + 1
 	elseif (wealthRoll >=42 and wealth <=86) then
 			cashFound = ZombRand(averageCashAmount) + 1
-	else		
+	else
 			cashFound = 1
 	end
 
@@ -214,33 +214,33 @@ local function checkWalletForBonusCash(player)
 
 	local baseOdds = SandboxVars.GN84WNDR.EFundOdds
 	local bonusOdds = 0
-	
+
 	-- Check for Trait Bonuses
-	if player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then
 		bonusOdds = baseOdds + 5
-	elseif player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then
 		bonusOdds = baseOdds - 5
-	else		
+	else
 		bonusOdds = baseOdds
 	end
 
 	-- Roll Check for Bonus Cash
-	local eFundsRoll = ZombRand(100) + 1 
+	local eFundsRoll = ZombRand(100) + 1
 
 	if (eFundsRoll <= bonusOdds) then
 		--print("Bonus Cash Roll Success!")
 		return true
-	else		
+	else
 		return false
 	end
 end
 
 
 local function calculateBonusWalletCash(player)
-	if player == nil then return end	
+	if player == nil then return end
 
 	local cashFound = 0
-	local bonusCashRoll = ZombRand(100) + 1	
+	local bonusCashRoll = ZombRand(100) + 1
 
 	--print("Bonus Cash Roll: " .. bonusCashRoll)
 
@@ -253,12 +253,12 @@ local function calculateBonusWalletCash(player)
 	if (bonusCashRoll >= 98) then
 		cashFound = 200
 	elseif (bonusCashRoll >= 90 and bonusCashRoll < 98) then
-		cashFound = 100			
+		cashFound = 100
 	elseif (bonusCashRoll <= 25) then
 		cashFound = 50
 	elseif (bonusCashRoll > 28 and bonusCashRoll < 83) then
 		cashFound = 20
-	else			
+	else
 		cashFound = 10
 	end
 
@@ -269,38 +269,38 @@ end
 
 
 function CollectMoneyFromWallet(sources, result, player, item)
-		
+
 	local walletCash = 0
 	local bonusCash = 0
 	local combinedCash = 0
-	
+
 	local t = 0
-	
+
 	if checkWalletForCash(player) then
 		walletCash = calculateWalletCash(player) * walletCashMultiplier
 		print("Wallet Cash: " .. walletCash)
 	end
-	
+
 	if checkWalletForBonusCash(player) then
-		bonusCash = calculateBonusWalletCash(player) * eFundCashMultiplier		
+		bonusCash = calculateBonusWalletCash(player) * eFundCashMultiplier
 		print("Bonus Cash: " .. walletCash)
 	end
-	
-	
+
+
 	-- Check for Luck Bonuses
 	local luckBonus = 1
 
-	if player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then
 		luckBonus = playerLuckBonus
-	elseif player:HasTrait("Unlucky") then				
+	elseif player:HasTrait("Unlucky") then
 		luckBonus = playerUnluckyPenalty
 	end
-	
+
 	-- Total Cash Found in Wallet
 	combinedCash = math.floor((walletCash + bonusCash) * luckBonus)
 
 	local playerInv = player:getInventory()
-	
+
 	-- Add Cash to Inventory
 	if combinedCash > 0 then
 
@@ -308,7 +308,7 @@ function CollectMoneyFromWallet(sources, result, player, item)
 			playerInv:AddItem("Money")
 			t = t+1
 		end
-	end	
+	end
 
 	-- Add Matching Empty Wallet to Inventory
 	if item:getFullType() == "Base.Wallet" then
@@ -342,9 +342,9 @@ end
 
 
 -- LISTS OF BONUS PRIZES
-local bonusPrizeRare = 
+local bonusPrizeRare =
 {
-	"Base.Katana",	
+	"Base.Katana",
 	"GN84-WNDR.SuperWheelSpinToken",
 	"GN84-WNDR.WheelSpinToken",
 	"TWeapons.LongSword",
@@ -371,7 +371,7 @@ local bonusPrizeRare =
 	"Base.SKS",
 }
 
-local bonusPrizeHigh = 
+local bonusPrizeHigh =
 {
 	"GN84-WNDR.WandererToken",
 	"GN84-WNDR.WandererToken",
@@ -406,7 +406,7 @@ local bonusPrizeHigh =
 	"MoreMedical.SyrettePrescriptionAntibiotic",
 	"MoreMedical.BurnTreatment",
 	"MoreMedical.PowderPackHemostatic",
-	"TAD.CloseKosmotsars",	
+	"TAD.CloseKosmotsars",
 	"newcontainersnc.NCroughbox",
 	"TheyKnew.Zomboxivir",
 	"TheyKnew.Zomboxycycline",
@@ -436,8 +436,8 @@ local bonusPrizeHigh =
 	"Base.BaseballBatNails",
 }
 
-local bonusPrizeMed = 
-{	
+local bonusPrizeMed =
+{
 	"GN84-WNDR.WandererToken",
 	"GN84-WNDR.WandererToken",
 	"GN84-WNDR.WandererToken",
@@ -491,7 +491,7 @@ local bonusPrizeMed =
 	"Base.ScrewsBox",
 	"Base.PaperclipBox",
 	"Base.PKCyanidePill",
-	"Base.DuctTape",	
+	"Base.DuctTape",
 	"Base.Bag_FannyPackFront",
 	"Base.Glue",
 	"Base.HandAxe",
@@ -499,7 +499,7 @@ local bonusPrizeMed =
 	"Base.AlcoholRippedSheets",
 }
 
-local bonusPrizeLow = 
+local bonusPrizeLow =
 {
 	"GN84-WNDR.WandererToken",
 	"GN84-WNDR.WandererToken",
@@ -587,18 +587,18 @@ local function CheckForWinner(player)
 
 -- Check for Luck
 
-	if player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then
 		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds - 0.15
-	elseif player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then
 		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds + 0.15
-	else		
+	else
 		lotteryTicketOdds = SandboxVars.GN84WNDR.LotteryTicketOdds
 	end
 
 	isWinner = ZombRand(100)+1
 	if isWinner <= ((1 / lotteryTicketOdds) * 100) then
 		return true
-	else		
+	else
 		return false
 	end
 end
@@ -630,20 +630,20 @@ local function CalcLottoWinnings(player)
 
 	elseif (lottoTicketRoll >= 6034 and lottoTicketRoll < 8290)	then
 		lottoTicketWinnings = 2500
-				
+
 	elseif(lottoTicketRoll >= 3200 and lottoTicketRoll < 6034)	then
 		lottoTicketWinnings = 1000
 
 	else
-		lottoTicketWinnings = 250				
+		lottoTicketWinnings = 250
 	end
-		
+
 	GivePlayerSmokeyPointsLottoTicket(lottoTicketWinnings)
 	local winningText = ("Ticket is a Winner!  You Won " .. lottoTicketWinnings .. " Smokey Points!")
 	player:Say(winningText)
 
-	-- Roll for Bonus Prize	
-	
+	-- Roll for Bonus Prize
+
 	if lottoBonusPrizeRoll <= ((1 / lotteryTicketOdds) * 100) then
 		local prizeCategory = ZombRand(10000) + 1
 		local bonusPrize = nil
@@ -668,23 +668,23 @@ local function CalcLottoWinnings(player)
 		else
 			local bonusItem = ScriptManager.instance:getItem(bonusPrize):getDisplayName()
 			local bonusText = ("Bonus Prize!  You Won - " .. bonusItem)
-		
+
 			GivePlayerLottoTicketBonusPrize(bonusItem)
 			player:getInventory():AddItem(bonusPrize)
 			player:Say(bonusText)
-		end		
-	end		
+		end
+	end
 end
 
 
 function ScratchLottoTicketStandard(sources, result, player, item)
-	if CheckForWinner(player) then				
+	if CheckForWinner(player) then
 		CalcLottoWinnings(player)
 		PlayLottoWinnerSound()
-	else			
+	else
 		player:Say("Sorry, Ticket is Not a Winner..  Play Again!")
 		PlayLottoLoserSound()
-	end		
+	end
 end
 
 function TradeRareTicketForStandardTickets(sources, result, player)
@@ -736,7 +736,7 @@ end
 
 
 ------------------------------------------------------------------------
---                       WHEEL SPIN FRAGMENTS   
+--                       WHEEL SPIN FRAGMENTS
 ------------------------------------------------------------------------
 
 local randomWheelSpinFragmentList =
@@ -750,7 +750,7 @@ local randomWheelSpinFragmentList =
 
 function GiveRandomWheelSpinFragment(sources, result, player)
 	local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
-	
+
 	if ScriptManager.instance:getItem(randomWheelSpinFragmentList[randNum]) == nil then
 		print("Error: Item Not Found")
 		return
@@ -760,10 +760,10 @@ function GiveRandomWheelSpinFragment(sources, result, player)
 end
 
 function GiveFiveRandomWheelSpinFragments(sources, result, player)
-	
+
 	for i=0, 4, 1 do
 		local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
-	
+
 		if ScriptManager.instance:getItem(randomWheelSpinFragmentList[randNum]) == nil then
 			print("Error: Item Not Found")
 			return
@@ -777,11 +777,11 @@ end
 
 
 ------------------------------------------------------------------------
---                 CUTTING UP WALLETS FOR LEATHER STRIPS 
+--                 CUTTING UP WALLETS FOR LEATHER STRIPS
 ------------------------------------------------------------------------
 
 function CutLeatherWallet(items, result, player)
-	
+
 	local leatherOdds = 20
 	local extraLeatherOdds = 10
 	local maxExtraLeather = 1
@@ -789,24 +789,24 @@ function CutLeatherWallet(items, result, player)
 	local bonusOdds = 0
 
 	-- Check for Trait Bonuses
-	if player:HasTrait("Lucky") then		
+	if player:HasTrait("Lucky") then
 		bonusOdds = extraLeatherOdds + 3
-	elseif player:HasTrait("Unlucky") then		
+	elseif player:HasTrait("Unlucky") then
 		bonusOdds = extraLeatherOdds - 3
-	else		
+	else
 		bonusOdds = extraLeatherOdds
 	end
 
-	
+
 	local leatherRoll = ZombRand(100) + 1  -- Extra Leather Roll
 	--print("Leather Roll?:  "  ..  leatherRoll)
-		
+
 	if (leatherRoll <= leatherOdds) then
 		--print("Wallet Had Leather")
 		leatherStrips = 1
-	end	
+	end
 
-	if (leatherRoll <= bonusOdds) then			
+	if (leatherRoll <= bonusOdds) then
 		leatherStrips = leatherStrips + ZombRand(0, maxExtraLeather)
 		--print("Extra Leather: " .. leatherStrips)
 	end
@@ -821,12 +821,12 @@ end
 
 
 ------------------------------------------------------------------------
---                     MONEY CLIP ITEM VALIDATION  
+--                     MONEY CLIP ITEM VALIDATION
 ------------------------------------------------------------------------
 
 function GN84_AcceptItemsMoneyClip(container, item)
 
-	local moneyClipItems = 
+	local moneyClipItems =
 	{
 		"Base.Money",
 		"GN84-WNDR.BankBalance",
@@ -890,22 +890,22 @@ function GN84_AcceptItemsMoneyClip(container, item)
 		"GN84-WNDR.FactionPermitSmall",
 		"GN84-WNDR.FactionPermitLarge",
 		"GN84-WNDR.FactionPermitMassive",
-		"Base.AVCSClaimOrb",		
+		"Base.AVCSClaimOrb",
 		"TheyKnew.Zomboxivir",
-		"TheyKnew.Zomboxycycline",		
+		"TheyKnew.Zomboxycycline",
 	}
 
 	for i = 1, #moneyClipItems do
     	if item:getFullType() == moneyClipItems[i] then
 			return true
 		end
-	end	
+	end
 end
 
 
 
 ------------------------------------------------------------------------
---                      ADMIN DEBUGGING FUNCTIONS 
+--                      ADMIN DEBUGGING FUNCTIONS
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------

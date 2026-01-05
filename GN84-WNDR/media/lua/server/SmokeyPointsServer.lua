@@ -277,6 +277,22 @@ function SmokeyPointsCommands.depositTokens(module, command, player, args)
 
 end
 
+------------------------------------------------------------------------
+--                     WITHDRAW WANDERER TOKENS
+------------------------------------------------------------------------
+
+function SmokeyPointsCommands.withdrawTokens(module, command, player, args)
+   print("###############")
+   print("[SMOKEY BANK]          " .. args[1] .. " withdrew " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens from their Smokey Bank!")      
+   
+    if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
+   smokeyTokensData[args[1]] = smokeyTokensData[args[1]] - args[2]
+   
+   print("[SMOKEY BANK]          Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Wanderer Tokens!")
+   print("###############")
+
+end
+
 
 ------------------------------------------------------------------------
 --                 REDEEM LOTTO TICKET FOR SMOKEY POINTS

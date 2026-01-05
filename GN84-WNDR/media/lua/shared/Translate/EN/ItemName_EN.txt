@@ -1,5 +1,6 @@
 ItemName_EN = {
 
+ItemName_GN84-WNDR.MoneyStackX = "Stack of Cash",
 ItemName_GN84-WNDR.MoneyStack100 = "Stack of Cash - $100 - ",
 ItemName_GN84-WNDR.MoneyStack500 = "Stack of Cash - $500 - ",
 ItemName_GN84-WNDR.MoneyStack1000 = "Stack of Cash - $1,000 - ",
@@ -21,6 +22,7 @@ ItemName_GN84-WNDR.SafehouseExpansionPermit500 = "Safehouse Expansion Permit - 5
 ItemName_GN84-WNDR.SafehouseExpansionPermit1000 = "Safehouse Expansion Permit - 1,000 Tiles",
 ItemName_GN84-WNDR.SafehouseExpansionPermit5000 = "Safehouse Expansion Permit - 5,000 Tiles",
 
+ItemName_GN84-WNDR.WandererTokenStackX = "Stack of Wanderer Tokens",
 ItemName_GN84-WNDR.WandererTokenStack5 = "Wanderer Tokens - Stack of 5 -",
 ItemName_GN84-WNDR.WandererTokenStack10 = "Wanderer Tokens - Stack of 10 -",
 ItemName_GN84-WNDR.WandererTokenStack25 = "Wanderer Tokens - Stack of 25 -",

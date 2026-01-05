@@ -85,6 +85,18 @@ module GN84-WNDR
         }
     }
 
+    sound BindMoneyClip
+    {
+        category = Item,
+        loop = false,        
+        clip
+            {
+                file = media/sound/BindMoneyClip.ogg,
+                distanceMax = 10,
+                volume = 1.0,                
+            }
+    }
+
     sound ScratchLottoTicket
     {
         category = Item,
