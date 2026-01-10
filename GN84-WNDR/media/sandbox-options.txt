@@ -35,7 +35,7 @@ option GN84WNDR.TokensPerTick
     type = integer,
     min = 0,
     max = 2147483647,
-    default = 1,
+    default = 3,
 
     page = GN84WNDR,
     translation = GN84WNDR_TokensPerTick,

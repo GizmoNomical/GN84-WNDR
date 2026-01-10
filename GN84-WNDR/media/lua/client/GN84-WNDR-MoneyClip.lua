@@ -155,9 +155,14 @@ local function BindMoneyClipToPlayer(target, player, item)
 	local username = player:getUsername()
     if not username then return end
 
+    ---@type InventoryItem
+    item2 = item
+
+
     -- Set Default Values
 	if not modData.Owner then
-		modData.Owner = username
+		--modData.Owner = username
+        modData.Owner = "TestUser"
 		modData.AutoConsolidate = true
         modData.UUID = getRandomUUID()
         modData.BankBalance = 0
@@ -323,11 +328,14 @@ local function BankBalanceContext(playerNum, context, items)
 		if item:getType() == "BankBalance" then
 			if not item:isInPlayerInventory() then return end
 
+            if not item:getContainer():getContainingItem() then return end
+
             local moneyClip = item:getContainer():getContainingItem()
             if moneyClip:getType() == "MoneyClip" then
                 local modData = moneyClip:getModData()
 
                 if modData == nil then return end
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
                 if modData.CashBalance == nil then return end
 
                 if modData.CashBalance > 0 then
@@ -475,11 +483,14 @@ local function CashBalanceContext(playerNum, context, items)
 		if item:getType() == "CashBalance" then
 			if not item:isInPlayerInventory() then return end
 
+            if not item:getContainer():getContainingItem() then return end
+
             local moneyClip = item:getContainer():getContainingItem()
             if moneyClip:getType() == "MoneyClip" then
 
                 local modData = moneyClip:getModData()
                 if modData == nil then return end
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
                 if modData.CashBalance == nil then modData.CashBalance = 0 end
 
                 if modData.CashBalance > 0 then
@@ -615,9 +626,14 @@ local function TokenBalanceContext(playerNum, context, items)
 		if item:getType() == "TokenBalance" then
 			if not item:isInPlayerInventory() then return end
 
+            if not item:getContainer():getContainingItem() then return end
+
             local moneyClip = item:getContainer():getContainingItem()
             if moneyClip:getType() == "MoneyClip" then
 
+                local modData = moneyClip:getModData()
+                if modData == nil then return end
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
                 if MoneyClipData == nil then return end
                 if MoneyClipData.TokenBalance == nil then return end
 
@@ -701,8 +717,12 @@ UpdateAllMoneyClips = function()
     if MoneyClips == nil then return end
 
     for k, v in pairs(MoneyClips) do
-        UpdateMoneyClipData(v, true)
-        UpdateBalanceItems(v)
+
+        if v:getModData().Owner ~= nil then
+            CreateBalanceItems(v)
+            UpdateMoneyClipData(v, true)
+            UpdateBalanceItems(v)
+        end
     end
 end
 
@@ -951,7 +971,7 @@ ConsolidateCash = function(item)
                     local moneyStackX = cashStack:getModData()
                     local cashAmount = moneyStackX.CashAmount or 0
 
-                    moneyClipContainer:DoRemoveItem(moneyStackX)
+                    moneyClipContainer:DoRemoveItem(cashStack)
                     runningTotal = runningTotal + cashAmount
 
                 end
@@ -1029,6 +1049,80 @@ ConsolidateTokens = function(item)
             getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
         end
 end
+
+
+
+------------------------------------------------------------------------
+--                         AUTO-CONSOLIDATE
+------------------------------------------------------------------------
+
+local oldTransferPerform = ISInventoryTransferAction.perform
+
+function ISInventoryTransferAction:perform()    
+    local moneyClip = nil
+
+    if self.destContainer and self.destContainer:getType() == "MoneyClip" then
+        moneyClip = self.destContainer:getContainingItem()
+    end
+
+    oldTransferPerform(self)
+
+    if not moneyClip then return end    
+
+    -- Run once all items are transferred
+    if #self.queueList == 0 then    
+        ConsolidateAllCurrency(moneyClip)
+    end    
+end
+
+
+------------------------------------------------------------------------
+--    PREVENT UNAUTHORIZED ACCESS OF ITEMS / MOVING OF BALANCE ITEMS
+------------------------------------------------------------------------
+
+local oldTransferIsValid = ISInventoryTransferAction.isValid
+
+function ISInventoryTransferAction:isValid()
+    if not self.item then return false end
+
+    local item = self.item
+
+
+    -- Limit Movement of Balance Items by Non Admins
+        if item:getType() == "BankBalance" or item:getType() == "CashBalance" or item:getType() == "TokenBalance" then
+            if getAccessLevel() == "admin" then
+                return true
+            else
+                return false
+            end
+        end
+
+    -- Limit Manipulation of Items from Unauthorized Players
+    if item:getContainer() and item:getContainer():getContainingItem() and item:getContainer():getContainingItem():getType() == "MoneyClip" then
+        local moneyClip = item:getContainer():getContainingItem()
+        local modData = moneyClip:getModData()
+        local player = getPlayer()
+        local username = player:getUsername()
+
+        if username ~= modData.Owner then
+            if getAccessLevel() == "admin" then
+                return true
+            else
+                player:Say("Error:  Unauthorized")
+                return false
+            end
+        elseif username == modData.Owner then
+            return true
+        end
+    end
+
+    -- Run Original Function After Custom Checks
+    return oldTransferIsValid(self)
+end
+
+
+
+
 
 
 

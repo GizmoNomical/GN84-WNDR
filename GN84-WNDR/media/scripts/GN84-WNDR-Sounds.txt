@@ -13,7 +13,7 @@ module GN84-WNDR
         is3D = true,
         clip
             {
-                file = media/sound/SearchWallet.wav,
+                file = media/sound/SearchWallet.ogg,
                 distanceMax = 10,
                 volume = 1.0,
                 
@@ -27,7 +27,7 @@ module GN84-WNDR
         is3D = true,
         clip
             {
-                file = media/sound/ScissorsCutLeather.wav,
+                file = media/sound/ScissorsCutLeather.ogg,
                 distanceMax = 10,
                 volume = 0.25,
                 
@@ -40,7 +40,7 @@ module GN84-WNDR
         loop = false,        
         clip
             {
-                file = media/sound/MoneyClipShuffle.wav,
+                file = media/sound/MoneyClipShuffle.ogg,
                 distanceMax = 10,
                 volume = 1.0,
                 
@@ -54,7 +54,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/CountingMoney.wav,
+            file = media/sound/CountingMoney.ogg,
             distanceMax = 10,
             volume = 0.45,
         }
@@ -66,7 +66,7 @@ module GN84-WNDR
         loop = false,
         clip
         {
-            file = media/sound/CashRegisterSound.wav,
+            file = media/sound/CashRegisterSound.ogg,
             distanceMax = 10,
             volume = 0.75,
         }
@@ -79,7 +79,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/ReceiptSound.wav,
+            file = media/sound/ReceiptSound.ogg,
             distanceMax = 10,
             volume = 0.7,
         }
@@ -104,7 +104,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/ScratchLottoTicket.wav,
+            file = media/sound/ScratchLottoTicket.ogg,
             distanceMax = 10,
             volume = 0.7,
         }
@@ -117,7 +117,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/ShredLottoTicket.wav,
+            file = media/sound/ShredLottoTicket.ogg,
             distanceMax = 10,
             volume = 0.7,
         }
@@ -130,7 +130,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/WinningTicketChime.wav,
+            file = media/sound/WinningTicketChime.ogg,
             distanceMax = 10,
             volume = 0.7,
         }
@@ -143,7 +143,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/WheelSpinForge.wav,
+            file = media/sound/WheelSpinForge.ogg,
             distanceMax = 10,
             volume = 1.0,
         }
@@ -156,7 +156,7 @@ module GN84-WNDR
         is3D = true,
         clip
         {
-            file = media/sound/ShatterToken.wav,
+            file = media/sound/ShatterToken.ogg,
             distanceMax = 10,
             volume = 1.0,
         }

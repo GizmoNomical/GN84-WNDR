@@ -150,7 +150,7 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     Events.EveryTenMinutes.Add(PointsTick)
 
     -- Wanderer Token every 1 Hour
-    Events.EveryHours.Add(TokensTick)
+    Events.EveryDays.Add(TokensTick)
 
 end)
 
@@ -187,7 +187,7 @@ end
 ------------------------------------------------------------------------
 function SmokeyPointsCommands.buyTokens(module, command, player, args)
     print("###############")
-    print(string.format("[SMOKEY SHOP]          %s bought %s for $%s Wanderer Tokens", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
+    print(string.format("[SMOKEY SHOP]          %s bought %s for %s Wanderer Tokens", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
     
     if not smokeyTokensData[player:getUsername()] then smokeyTokensData[player:getUsername()] = 0 end
     smokeyTokensData[player:getUsername()] = smokeyTokensData[player:getUsername()] - math.abs(args[1])

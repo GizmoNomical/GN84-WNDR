@@ -137,9 +137,11 @@ function SmokeyPointsUI.LoadListings(module, command, arguments)
                     local row = scrollingList:addItem(entry.type, nil)
                     row.type = entry.type
                     row.target = entry.target
-                    row.price = entry.price or 0
+                    row.price = entry.price or 0                    
                     row.mult = entry.mult or 1.0
                     row.instock = entry.instock or "true"
+                    row.tokensale = entry.tokensale or "false"
+                    row.tokenprice = entry.tokenprice or 0
 
                     if SmokeyPointsUI.LoadType[entry.type] then
                             SmokeyPointsUI.LoadType[entry.type](row, entry)
@@ -300,9 +302,17 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsUI.BuyType.ITEM(row)
-    sendClientCommand("GN84-WNDR", "buy", { (row.price * row.mult), row.target })
-    getPlayer():getInventory():AddItems(row.target, row.quantity)
-    getSoundManager():PlaySound("CashRegisterSound", false, 1)
+
+    if (row.tokensale == "false") then
+        sendClientCommand("GN84-WNDR", "buy", { (row.price * row.mult), row.target })
+        getPlayer():getInventory():AddItems(row.target, row.quantity)
+        getSoundManager():PlaySound("CashRegisterSound", false, 1)
+
+    elseif (row.tokensale == "true") then
+        sendClientCommand("GN84-WNDR", "buyTokens", { (row.tokenprice * row.mult), row.target })
+        getPlayer():getInventory():AddItems(row.target, row.quantity)
+        getSoundManager():PlaySound("CashRegisterSound", false, 1)
+    end    
 end
 
 ------------------------------------------------------------------------
@@ -311,13 +321,23 @@ end
 
 function SmokeyPointsUI:onBuy()
     local row = self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected]
-    self.points = self.points - (row.price * row.mult)
-    if SmokeyPointsUI.BuyType[row.type] then
-        SmokeyPointsUI.BuyType[row.type](row)
+    
+    if (row.tokensale == "false") then
+        self.points = self.points - (row.price * row.mult)
+        if SmokeyPointsUI.BuyType[row.type] then
+            SmokeyPointsUI.BuyType[row.type](row)
+        end        
+
+    elseif (row.tokensale == "true") then
+        self.tokens = self.tokens - (row.tokenprice * row.mult)
+        if SmokeyPointsUI.BuyType[row.type] then
+            SmokeyPointsUI.BuyType[row.type](row)
+        end
     end
-    Events.OnServerCommand.Add(OnServerCommand)
-    sendClientCommand("GN84-WNDR", "get", nil)
-    sendClientCommand("GN84-WNDR", "getTokens", nil)
+
+        Events.OnServerCommand.Add(OnServerCommand)
+        sendClientCommand("GN84-WNDR", "get", nil)
+        sendClientCommand("GN84-WNDR", "getTokens", nil)    
 end
 
 
@@ -469,17 +489,54 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
 
     -- CHECK FOR OUT OF STOCK ITEMS
     if item.instock == "false" then
-        self:drawText("OUT OF STOCK", x, z, 0.871, 0.478, 0.341, 1.0, self.font) -- Out of Stock
+        self:drawText("OUT OF STOCK", x, z, 0.871, 0.478, 0.341, 1.0, self.font) -- Out of Stock        
+    
+    
+    -- Smokey Points Sales
+    elseif item.tokensale == "false" then
+        if item.price > 0 then
+            if SmokeyPointsUI.instance.points < (item.price * item.mult) then
+                    self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
+            else            
+                if item.mult > 1.0 then
+                    self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)                
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
+                elseif item.mult < 1.0 then
+                    self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)                
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
+                else
+                    self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+                end        
+            end
 
-    elseif SmokeyPointsUI.instance.points < (item.price * item.mult) then
-        self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
-    else
-        if item.mult > 1.0 then
-            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
-        elseif item.mult < 1.0 then
-            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
-        else
-            self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+        elseif item.price == 0 then
+            self:drawText("FREE", x, z, 0.0, 0.886, 1.0, 1, self.font) -- FREE
+        end
+        
+
+    -- Token Sales
+    elseif item.tokensale == "true" then
+        if item.tokenprice > 0 then
+            if SmokeyPointsUI.instance.tokens < (item.tokenprice * item.mult) then
+                    self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
+            else
+                if item.mult > 1.0 then
+                    self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
+                elseif item.mult < 1.0 then
+                    self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
+                else
+                    self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+                end                
+            end
+
+        elseif item.tokenprice == 0 then
+            self:drawText("FREE", x, z, 0.0, 0.886, 1.0, 1, self.font) -- FREE
         end
     end
 end
@@ -555,16 +612,23 @@ function SmokeyPointsUI:render()
                 self.buyButton:setEnable(false)
                 self.buyButton:setVisible(false)
 
-            elseif self.points < (row.price * row.mult) then
-                self.buyButton:setEnable(false)
-
-            else
-                self.buyButton:setEnable(true)
-
-            end
+            elseif row.tokensale == "false" then
+                if self.points < (row.price * row.mult) then
+                    self.buyButton:setEnable(false)
+                else
+                    self.buyButton:setEnable(true)
+                end 
+                
+            elseif row.tokensale == "true" then
+                if self.tokens < (row.tokenprice * row.mult) then
+                    self.buyButton:setEnable(false)
+                else
+                    self.buyButton:setEnable(true)
+                end   
+            end  
+            
         else
             self.buyButton:setVisible(false)
-
         end
     end
 end
