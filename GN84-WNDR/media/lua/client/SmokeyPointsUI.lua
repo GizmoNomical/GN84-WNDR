@@ -304,12 +304,16 @@ end
 function SmokeyPointsUI.BuyType.ITEM(row)
 
     if (row.tokensale == "false") then
-        sendClientCommand("GN84-WNDR", "buy", { (row.price * row.mult), row.target })
+        local purchasePrice = math.ceil(row.price * row.mult)
+
+        sendClientCommand("GN84-WNDR", "buy", { purchasePrice, row.target })
         getPlayer():getInventory():AddItems(row.target, row.quantity)
         getSoundManager():PlaySound("CashRegisterSound", false, 1)
 
     elseif (row.tokensale == "true") then
-        sendClientCommand("GN84-WNDR", "buyTokens", { (row.tokenprice * row.mult), row.target })
+        local purchasePrice = math.ceil(row.tokenprice * row.mult)
+
+        sendClientCommand("GN84-WNDR", "buyTokens", { purchasePrice, row.target })
         getPlayer():getInventory():AddItems(row.target, row.quantity)
         getSoundManager():PlaySound("CashRegisterSound", false, 1)
     end    
@@ -323,13 +327,15 @@ function SmokeyPointsUI:onBuy()
     local row = self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected]
     
     if (row.tokensale == "false") then
-        self.points = self.points - (row.price * row.mult)
+        local purchasePrice = math.ceil(row.price * row.mult)
+        self.points = self.points - purchasePrice
         if SmokeyPointsUI.BuyType[row.type] then
             SmokeyPointsUI.BuyType[row.type](row)
         end        
 
     elseif (row.tokensale == "true") then
-        self.tokens = self.tokens - (row.tokenprice * row.mult)
+        local purchasePrice = math.ceil(row.tokenprice * row.mult)
+        self.tokens = self.tokens - purchasePrice
         if SmokeyPointsUI.BuyType[row.type] then
             SmokeyPointsUI.BuyType[row.type](row)
         end
@@ -495,19 +501,20 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     -- Smokey Points Sales
     elseif item.tokensale == "false" then
         if item.price > 0 then
-            if SmokeyPointsUI.instance.points < (item.price * item.mult) then
+            local purchasePrice = math.ceil(item.price * item.mult)
+            if SmokeyPointsUI.instance.points < purchasePrice then
                     self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
             else            
                 if item.mult > 1.0 then
                     self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)                
-                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
                 elseif item.mult < 1.0 then
                     self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)                
-                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
                 else
                     self:drawTextureScaledAspect2(BankTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(item.price * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+                    self:drawText("$" .. tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
                 end        
             end
 
@@ -519,19 +526,20 @@ function SmokeyPointsUI.DrawType.DEFAULT(self, y, item, alt)
     -- Token Sales
     elseif item.tokensale == "true" then
         if item.tokenprice > 0 then
-            if SmokeyPointsUI.instance.tokens < (item.tokenprice * item.mult) then
+            local purchasePrice = math.ceil(item.tokenprice * item.mult)
+            if SmokeyPointsUI.instance.tokens < purchasePrice then
                     self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
+                    self:drawText(tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.733, 0.247, 0.215, 1.0, self.font) -- Insufficient Funds
             else
                 if item.mult > 1.0 then
                     self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
+                    self:drawText(tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.871, 0.655, 0.341, 1.0, self.font) -- Overpriced
                 elseif item.mult < 1.0 then
                     self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
+                    self:drawText(tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.655, 0.871, 0.341, 1.0, self.font) -- Discounted
                 else
                     self:drawTextureScaledAspect2(TokenTexture, x - 35, z + 3, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
-                    self:drawText(tostring(Utils.CurrencyFormatter(item.tokenprice * item.mult)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
+                    self:drawText(tostring(Utils.CurrencyFormatter(purchasePrice)), x, z, 0.905, 0.909, 0.898, 1.0, self.font) -- Standard Price
                 end                
             end
 

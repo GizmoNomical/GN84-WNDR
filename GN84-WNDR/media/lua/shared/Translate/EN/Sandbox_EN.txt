@@ -1,6 +1,6 @@
 Sandbox_EN = {
         
-    Sandbox_GN84WNDR = "The Wanderers Economy",
+    Sandbox_GN84WNDR = "The Wanderers - Core",
     
     Sandbox_GN84WNDR_PointsPerZombieKill = "Points per Zombie Kill",
     Sandbox_GN84WNDR_EFundOdds = "Emergency Fund Odds",

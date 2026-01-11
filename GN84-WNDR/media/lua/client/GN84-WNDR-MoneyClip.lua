@@ -27,7 +27,8 @@ local UpdateBalanceItems
 local updateWandererTokenBalance
 local updateSmokeyPointBalance
 
-local ConsolidateAllCurrency
+local ConsolidateAll
+local ConsolidateAllOnTransfer
 local CreateCashStack
 local CreateTokenStack
 local ConsolidateCash
@@ -219,26 +220,35 @@ end
 ------------------------------------------------------------------------
 --                     CONTEXT MENUS & FUNCTIONS
 ------------------------------------------------------------------------
-
-------------------------------------------------------------------------
---                      MONEY CLIP CONTEXT MENU
-------------------------------------------------------------------------
 ------------------------------------------------------------------------
 --                     CONSOLIDATE ALL CURRENCY
 ------------------------------------------------------------------------
 
-ConsolidateAllCurrency = function(moneyclip)
+-- Daily Consolidation / Manual Consolidation
+local function ConsolidateAll(moneyclip)
     getPlayer():Say("Consolidating All Currency")
-    ConsolidateCash(moneyclip)
-    ConsolidateTokens(moneyclip)
+    ConsolidateCash(moneyclip, true)
+    ConsolidateTokens(moneyclip, true)
+    UpdateMoneyClipData(moneyclip, true)
+end
+
+-- On Transfer Consolidation
+ConsolidateAllOnTransfer = function(moneyclip)    
+    ConsolidateCash(moneyclip, false)
+    ConsolidateTokens(moneyclip, false)
     UpdateMoneyClipData(moneyclip, true)
 end
 
 
 -- Pasthrough Function
-local function _ConsolidateAllCurrency(item)
-	ConsolidateAllCurrency(item)
+local function _ConsolidateAll(item)
+	ConsolidateAll(item)
 end
+
+
+------------------------------------------------------------------------
+--                      MONEY CLIP CONTEXT MENU
+------------------------------------------------------------------------
 
 local function MoneyClipContext(playerNum, context, items)
 
@@ -258,7 +268,7 @@ local function MoneyClipContext(playerNum, context, items)
 				context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
 
 			elseif moneyClip.Owner == player:getUsername() then
-					context:addOptionOnTop("Consolidate All Currency", items, function() _ConsolidateAllCurrency(item) end, player, item)
+					context:addOptionOnTop("Consolidate All Currency", items, function() _ConsolidateAll(item) end, player, item)
 			end
 
 			-- Admin Un-Bind Option
@@ -339,12 +349,12 @@ local function BankBalanceContext(playerNum, context, items)
                 if modData.CashBalance == nil then return end
 
                 if modData.CashBalance > 0 then
-                    local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
-                    option.notAvailable = false
+                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
+                    -- option.notAvailable = false
 
                 elseif modData.CashBalance == 0 then
-                    local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
-                    option.notAvailable = true
+                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
+                    -- option.notAvailable = true
 
                 end
             end
@@ -462,7 +472,7 @@ local function _GrabStackOfCash(item)
 end
 
 local function _ConsolidateCash(item)
-    ConsolidateCash(item)
+    ConsolidateCash(item, true)
     UpdateAllMoneyClips()
 end
 
@@ -494,15 +504,21 @@ local function CashBalanceContext(playerNum, context, items)
                 if modData.CashBalance == nil then modData.CashBalance = 0 end
 
                 if modData.CashBalance > 0 then
-                    local variableStack = context:addOptionOnTop("Grab a Stack of Cash", items, function () _GrabStackOfCash(moneyClip) end, player, item)
+                    local variableStack = context:addOptionOnTop("Grab a Stack of Cash (Amount)", items, function () _GrabStackOfCash(moneyClip) end, player, item)
                     variableStack.notAvailable = true
 
-                    local fullStack = context:addOptionOnTop("Grab a Stack of Cash (Full Balance)", items, function () _GrabFullStackOfCash(moneyClip) end, player, item)
+                    local fullStack = context:addOptionOnTop("Grab a Stack of Cash (All)", items, function () _GrabFullStackOfCash(moneyClip) end, player, item)
                     fullStack.notAvailable = false
+
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
+                    depositBalance.notAvailable = false
 
                 elseif modData.CashBalance == 0 then
                     local option = context:addOptionOnTop("Grab a Stack of Cash", items, nil, player, item)
                     option.notAvailable = true
+
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
+                    depositBalance.notAvailable = true
                 end
 
                 local inv = moneyClip:getItemContainer():getItems()
@@ -571,7 +587,7 @@ end
 --                      GRAB FULL STACK OF TOKENS
 ------------------------------------------------------------------------
 
-local function GrabFullTokenStack(item)
+local function WithdrawAllTokens(item)
         if item == nil then return end
 
         local moneyClip = item
@@ -593,7 +609,7 @@ local function GrabFullTokenStack(item)
                     sendClientCommand("GN84-WNDR", "withdrawTokens", {getPlayer():getUsername(), MoneyClipData.TokenBalance})
                     getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
                 else
-                    print("Error: Grabbing Full Stack of Wanderer Tokens Failed!")
+                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
                 end
             else
                 getPlayer():Say("Error:  Unauthorized")
@@ -604,13 +620,13 @@ end
 
 
 -- Passthrough Functions
-local function _GrabFullTokenStack(item)
-	GrabFullTokenStack(item)
+local function _WithdrawAllTokens(item)
+	WithdrawAllTokens(item)
     UpdateAllMoneyClips()
 end
 
 local function _ConsolidateTokens(item)
-    ConsolidateTokens(item)
+    ConsolidateTokens(item, true)
     UpdateAllMoneyClips()
 end
 
@@ -638,14 +654,14 @@ local function TokenBalanceContext(playerNum, context, items)
                 if MoneyClipData.TokenBalance == nil then return end
 
                 if MoneyClipData.TokenBalance > 0 then
-                    local variableStack = context:addOptionOnTop("Grab a Stack of Wanderer Tokens", items, function () _GrabTokenStack(moneyClip) end, player, item)
+                    local variableStack = context:addOptionOnTop("Withdraw (Amount)", items, function () _GrabTokenStack(moneyClip) end, player, item)
                     variableStack.notAvailable = true
 
-                    local fullStack = context:addOptionOnTop("Grab a Stack of Wanderer Tokens (Full Balance)", items, function () _GrabFullTokenStack(moneyClip) end, player, item)
+                    local fullStack = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllTokens(moneyClip) end, player, item)
                     fullStack.notAvailable = false
 
                 elseif MoneyClipData.TokenBalance == 0 then
-                    local option = context:addOptionOnTop("Grab a Stack of Wanderer Tokens", items, nil, player, item)
+                    local option = context:addOptionOnTop("Withdraw", items, nil, player, item)
                     option.notAvailable = true
                 end
 
@@ -668,7 +684,7 @@ local function TokenBalanceContext(playerNum, context, items)
                     end
                 end
 
-                local consolidate = context:addOptionOnTop("Consolidate Wanderer Tokens", items, function () _ConsolidateTokens(moneyClip) end, player, item)
+                local consolidate = context:addOptionOnTop("Deposit Wanderer Tokens into Smokey Bank", items, function () _ConsolidateTokens(moneyClip) end, player, item)
                 consolidate.notAvailable = hideConsolidate
 		    end
         end
@@ -863,36 +879,54 @@ UpdateBalanceItems = function(item)
 
         elseif items:size() ~= 0 then
 
+            local player = getPlayer()
+            local username = player:getUsername()
+            local isOwner = nil
+
+            if (modData.Owner) then
+                if modData.Owner ~= username then
+                    isOwner = false
+                elseif modData.Owner == username then
+                    isOwner = true
+                end                   
+            end
+
             for i = items:size()-1, 0, -1 do
                 local infoItem = items:get(i)
 
                 local BankBalance = MoneyClipData.BankBalance
                 local CashBalance = modData.CashBalance
                 local TokenBalance = MoneyClipData.TokenBalance
-
+                
 
                 if infoItem:getType() == "BankBalance" then
                     if BankBalance == nil then
                         infoItem:setName("-----[   Bank Balance:     ... ... ...")
-                    else
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Bank Balance:     ... ... ...")
+                    elseif isOwner == true then
                         infoItem:setName("-----[   Bank Balance:     $" ..  Utils.CurrencyFormatter(BankBalance))
                     end
 
                 elseif infoItem:getType() == "CashBalance" then
                     if CashBalance == nil then
                         infoItem:setName("-----[   Cash Balance:     ... ... ...")
-                    else
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Cash Balance:     ... ... ...")
+                    elseif isOwner == true then
                         infoItem:setName("-----[   Cash Balance:     $" ..  Utils.CurrencyFormatter(CashBalance))
                     end
 
                 elseif infoItem:getType() == "TokenBalance" then
                     if TokenBalance == nil then
                         infoItem:setName("-----[   Token Balance:    ... ... ...")
-                    else
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Token Balance:    ... ... ...")
+                    elseif isOwner == true then
                         infoItem:setName("-----[   Token Balance:    " ..  Utils.CurrencyFormatter(TokenBalance))
                     end
-
                 end
+
             end
         end
     end
@@ -939,7 +973,7 @@ listOfMoneyStacks =
 }
 
 
-ConsolidateCash = function(item)
+ConsolidateCash = function(item, playSound)
     if not item then return end
     local moneyClip = item
 
@@ -983,7 +1017,9 @@ ConsolidateCash = function(item)
         modData.CashBalance = cashBalance
 
         UpdateAllMoneyClips()
-        getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+        if playSound then
+            getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+        end
 end
 
 
@@ -1008,7 +1044,7 @@ listOfTokenStacks =
 }
 
 
-ConsolidateTokens = function(item)
+ConsolidateTokens = function(item, playSound)
     if not item then return end
     local moneyClip = item
 
@@ -1045,8 +1081,9 @@ ConsolidateTokens = function(item)
         if runningTotal > 0 then
             sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), runningTotal})
             UpdateAllMoneyClips()
-
-            getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+            if playSound then
+                getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)                
+            end
         end
 end
 
@@ -1071,7 +1108,7 @@ function ISInventoryTransferAction:perform()
 
     -- Run once all items are transferred
     if #self.queueList == 0 then    
-        ConsolidateAllCurrency(moneyClip)
+        ConsolidateAllOnTransfer(moneyClip)
     end    
 end
 
@@ -1124,13 +1161,32 @@ end
 
 
 
+------------------------------------------------------------------------
+--                     DAILY AUTO-CONSOLIDATE     
+------------------------------------------------------------------------
+
+local function DailyAutoConsolidate()
+
+    local MoneyClips = GetAllMoneyClips()
+    if MoneyClips == nil then return end
+
+    for k, v in pairs(MoneyClips) do
+
+        if v:getModData().Owner ~= nil then
+            ConsolidateAll(v)
+        end
+    end
+end
+
+Events.EveryDays.Add(DailyAutoConsolidate)
+
+
+
 
 
 ------------------------------------------------------------------------
 --                       SERVER REQUEST TIMER
 ------------------------------------------------------------------------
-
-
 
 local function ReCheckDataTimer()
     if recheckTimer == false then
