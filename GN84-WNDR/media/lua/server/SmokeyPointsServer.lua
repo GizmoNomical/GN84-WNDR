@@ -50,42 +50,45 @@ local function PointsTick()
     local players = getOnlinePlayers()
     if IsoPlayer.allPlayersAsleep() then
         --print ("All Players Sleeping..")
-        return    
-    end   
+        return
+    end
 
     for i = 0, players:size() - 1 do
-        if not players:get(i):isAsleep() then 
+        if not players:get(i):isAsleep() then
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
             smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
-        end        
+        end
     end
 end
 
 ------------------------------------------------------------------------
---                   PLAYER PER HOUR TICK - TOKENS        
+--                   PLAYER PER HOUR TICK - TOKENS
 ------------------------------------------------------------------------
 local function TokensTick()
     local players = getOnlinePlayers()
     if IsoPlayer.allPlayersAsleep() then
         --print ("All Players Sleeping..")
-        return    
-    end    
+        return
+    end
 
     for i = 0, players:size() - 1 do
-        if not players:get(i):isAsleep() then 
+        if not players:get(i):isAsleep() then
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not smokeyTokensData[username] then smokeyTokensData[username] = 0 end
             smokeyTokensData[username] = smokeyTokensData[username] + SandboxVars.GN84WNDR.TokensPerTick
+
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
             --print ("Adding Points to:", players:get(i))
         else
             --print (players:get(i), "is sleeping...")
-        end        
+        end
     end
 end
 
@@ -105,8 +108,8 @@ local function LoadListings()
     fileReader:close()
     listings = loadstring(table.concat(lines, "\n"))() or { ["Missing Configuration"] = {} }
 
-    
-    local sameContents = true        
+
+    local sameContents = true
     for i, value in ipairs(lines) do
         -- print (lines[i])
         if oldListings ~= nil then
@@ -114,18 +117,18 @@ local function LoadListings()
                 sameContents = false
                 break
             end
-        end        
+        end
     end
 
     if sameContents then
         --print ("listings are the same")
     else
-        print ("Smokey Shop Listings Updated") 
-        sendServerCommand("GN84-WNDR", "ServerForceRefresh", nil)        
+        print ("Smokey Shop Listings Updated")
+        sendServerCommand("GN84-WNDR", "ServerForceRefresh", nil)
     end
 
-    oldListings = lines    
-    
+    oldListings = lines
+
 end
 
 
@@ -147,7 +150,10 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
     LoadListings()
 
     -- Smokey Points Every 10 Minutes
-    Events.EveryTenMinutes.Add(PointsTick)
+    --Events.EveryTenMinutes.Add(PointsTick)
+
+    -- TESTING
+    Events.EveryOneMinute.Add(PointsTick)
 
     -- Wanderer Token every 1 Hour
     Events.EveryDays.Add(TokensTick)
@@ -157,11 +163,11 @@ end)
 local SmokeyPointsCommands = {}
 
 function SmokeyPointsCommands.get(module, command, player, args)
-    sendServerCommand(player, module, "get", { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })
+    sendServerCommand(player, module, "get", { smokeyPointsData[args and args[1] or player:getUsername()] or 0 })    
 end
 
 function SmokeyPointsCommands.getTokens(module, command, player, args)
-    sendServerCommand(player, module, "getTokens", { smokeyTokensData[args and args[1] or player:getUsername()] or 0 })
+    sendServerCommand(player, module, "getTokens", { smokeyTokensData[args and args[1] or player:getUsername()] or 0 })    
 end
 
 ------------------------------------------------------------------------
@@ -174,7 +180,7 @@ end
 function SmokeyPointsCommands.buy(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY SHOP]          %s bought %s for $%s Smokey Points", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
-    
+
     if not smokeyPointsData[player:getUsername()] then smokeyPointsData[player:getUsername()] = 0 end
     smokeyPointsData[player:getUsername()] = smokeyPointsData[player:getUsername()] - math.abs(args[1])
 
@@ -188,7 +194,7 @@ end
 function SmokeyPointsCommands.buyTokens(module, command, player, args)
     print("###############")
     print(string.format("[SMOKEY SHOP]          %s bought %s for %s Wanderer Tokens", player:getUsername(), ScriptManager.instance:getItem(args[2]):getDisplayName(), Utils.CurrencyFormatter(args[1])))
-    
+
     if not smokeyTokensData[player:getUsername()] then smokeyTokensData[player:getUsername()] = 0 end
     smokeyTokensData[player:getUsername()] = smokeyTokensData[player:getUsername()] - math.abs(args[1])
 
@@ -203,10 +209,10 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsCommands.add(module, command, player, args)
-     
+
     print("###############")
     print(string.format("[SMOKEY POINTS]        %s gave %s $%s Smokey Points", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
-    
+
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
     smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
@@ -220,10 +226,10 @@ end
 ------------------------------------------------------------------------
 
 function SmokeyPointsCommands.addTokens(module, command, player, args)
-       
+
     print("###############")
     print(string.format("[WANDERER TOKENS]      %s gave %s %s Wanderer Tokens", player:getUsername(), args[1], Utils.CurrencyFormatter(args[2])))
-    
+
     if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
     smokeyTokensData[args[1]] = smokeyTokensData[args[1]] + args[2]
 
@@ -238,9 +244,9 @@ end
 --                    PER ZOMBIE - SMOKEY POINTS
 ------------------------------------------------------------------------
 
-function SmokeyPointsCommands.zombieKillPts(module, command, player, args)   
+function SmokeyPointsCommands.zombieKillPts(module, command, player, args)
    if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
-   smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]      
+   smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 end
 
 
@@ -251,15 +257,37 @@ end
 
 function SmokeyPointsCommands.depositCash(module, command, player, args)
    print("###############")
-   print("[SMOKEY BANK]          " .. args[1] .. " deposited $" .. Utils.CurrencyFormatter(args[2]) .. " dollars into their Smokey Bank!")      
-   
+   print("[SMOKEY BANK]          " .. args[1] .. " deposited $" .. Utils.CurrencyFormatter(args[2]) .. " dollars into their Smokey Bank!")
+
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
    smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
-   
+
    print("[SMOKEY BANK]          Balance:  $" .. Utils.CurrencyFormatter(smokeyPointsData[args[1]]) .. " Smokey Points!")
    print("###############")
 
+   sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
+
 end
+
+------------------------------------------------------------------------
+--                     WITHDRAW SMOKEY POINTS
+------------------------------------------------------------------------
+
+function SmokeyPointsCommands.withdrawCash(module, command, player, args)
+   print("###############")
+   print("[SMOKEY BANK]          " .. args[1] .. " withdrew $" .. Utils.CurrencyFormatter(args[2]) .. " dollars from their Smokey Bank!")
+
+    if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
+   smokeyTokensData[args[1]] = smokeyTokensData[args[1]] - args[2]
+
+   print("[SMOKEY BANK]          Balance:   $" .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Smokey Points!")
+   print("###############")
+
+   sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
+
+end
+
+
 
 ------------------------------------------------------------------------
 --                     DEPOSIT WANDERER TOKENS
@@ -267,13 +295,15 @@ end
 
 function SmokeyPointsCommands.depositTokens(module, command, player, args)
    print("###############")
-   print("[SMOKEY BANK]          " .. args[1] .. " deposited " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens into their Smokey Bank!")      
-   
+   print("[SMOKEY BANK]          " .. args[1] .. " deposited " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens into their Smokey Bank!")
+
     if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
    smokeyTokensData[args[1]] = smokeyTokensData[args[1]] + args[2]
-   
+
    print("[SMOKEY BANK]          Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Wanderer Tokens!")
    print("###############")
+
+   sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
 
 end
 
@@ -283,13 +313,15 @@ end
 
 function SmokeyPointsCommands.withdrawTokens(module, command, player, args)
    print("###############")
-   print("[SMOKEY BANK]          " .. args[1] .. " withdrew " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens from their Smokey Bank!")      
-   
+   print("[SMOKEY BANK]          " .. args[1] .. " withdrew " .. Utils.CurrencyFormatter(args[2]) .. " Wanderer Tokens from their Smokey Bank!")
+
     if not smokeyTokensData[args[1]] then smokeyTokensData[args[1]] = 0 end
    smokeyTokensData[args[1]] = smokeyTokensData[args[1]] - args[2]
-   
+
    print("[SMOKEY BANK]          Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[args[1]]) .. " Wanderer Tokens!")
    print("###############")
+
+   sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
 
 end
 
@@ -301,7 +333,7 @@ end
 function SmokeyPointsCommands.redeemLottoTicket(module, command, player, args)
     print("###############")
     print("[WANDERERS LOTTO]      " .. args[1] .. " redeemed Winning Lotto Ticket for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
-    
+
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
     smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
@@ -318,7 +350,7 @@ function SmokeyPointsCommands.redeemLottoTicket(module, command, player, args)
 function SmokeyPointsCommands.redeemLottoTicketBonusPrize(module, command, player, args)
     print("###############")
     print("[ BONUS PRIZE ]        " .. args[1] .. " won a Bonus Prize - " .. args[2])
-    print("###############")    
+    print("###############")
  end
 
 
@@ -330,7 +362,7 @@ function SmokeyPointsCommands.redeemLottoTicketBonusPrize(module, command, playe
 function SmokeyPointsCommands.redeemVIPToken(module, command, player, args)
     print("###############")
     print("[VIP TOKENS]           " .. args[1] .. " redeemed VIP Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
-        
+
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
     smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 
@@ -347,7 +379,7 @@ function SmokeyPointsCommands.redeemVIPToken(module, command, player, args)
 function SmokeyPointsCommands.redeemWandererToken(module, command, player, args)
     print("#################")
     print("[WANDERER TOKENS]      " .. args[1] .. " redeemed WANDERER Token for $" .. Utils.CurrencyFormatter(args[2]) .. " Smokey Points!")
-        
+
     if not smokeyPointsData[args[1]] then smokeyPointsData[args[1]] = 0 end
     smokeyPointsData[args[1]] = smokeyPointsData[args[1]] + args[2]
 

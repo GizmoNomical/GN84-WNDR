@@ -17,15 +17,13 @@
 
 local Utils = require "Gizmo/GN84LIB_Utils"
 
-local MoneyClipData = {Owner = nil, SteamID = nil, BankBalance = nil, CashBalance = nil, TokenBalance = nil,}
-local recheckTimer = true
-
 -- Forward Declarations
+local UpdateSmokeyBankData
 local UpdateAllMoneyClips
-local UpdateMoneyClipData
+local UpdateMoneyClipDisplayData
 local UpdateBalanceItems
-local updateWandererTokenBalance
-local updateSmokeyPointBalance
+local UpdateWandererTokenBalance
+local UpdateSmokeyPointBalance
 
 local ConsolidateAll
 local ConsolidateAllOnTransfer
@@ -39,6 +37,17 @@ local listOfTokenStacks
 
 local currentUUID = nil
 local lastUUID = nil
+
+
+
+
+
+------------------------------------------------------------------------
+--                        INITIALIZATION
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------
 
 
 ------------------------------------------------------------------------
@@ -72,6 +81,8 @@ local function RemoveBalanceItems(moneyClip)
         end
 	end
 end
+
+
 
 ------------------------------------------------------------------------
 --                    CREATE BALANCE ITEMS
@@ -142,6 +153,8 @@ local function CreateBalanceItems(moneyclip)
 end
 
 
+
+
 ------------------------------------------------------------------------
 --                     BIND MONEY CLIP TO PLAYER
 ------------------------------------------------------------------------
@@ -156,14 +169,10 @@ local function BindMoneyClipToPlayer(target, player, item)
 	local username = player:getUsername()
     if not username then return end
 
-    ---@type InventoryItem
-    item2 = item
-
-
     -- Set Default Values
 	if not modData.Owner then
-		--modData.Owner = username
-        modData.Owner = "TestUser"
+		modData.Owner = username
+        -- modData.Owner = "TestUser"
 		modData.AutoConsolidate = true
         modData.UUID = getRandomUUID()
         modData.BankBalance = 0
@@ -215,736 +224,6 @@ local function UnBindMoneyClip(target, player, item)
 end
 
 
-
-
-------------------------------------------------------------------------
---                     CONTEXT MENUS & FUNCTIONS
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                     CONSOLIDATE ALL CURRENCY
-------------------------------------------------------------------------
-
--- Daily Consolidation / Manual Consolidation
-local function ConsolidateAll(moneyclip)
-    getPlayer():Say("Consolidating All Currency")
-    ConsolidateCash(moneyclip, true)
-    ConsolidateTokens(moneyclip, true)
-    UpdateMoneyClipData(moneyclip, true)
-end
-
--- On Transfer Consolidation
-ConsolidateAllOnTransfer = function(moneyclip)    
-    ConsolidateCash(moneyclip, false)
-    ConsolidateTokens(moneyclip, false)
-    UpdateMoneyClipData(moneyclip, true)
-end
-
-
--- Pasthrough Function
-local function _ConsolidateAll(item)
-	ConsolidateAll(item)
-end
-
-
-------------------------------------------------------------------------
---                      MONEY CLIP CONTEXT MENU
-------------------------------------------------------------------------
-
-local function MoneyClipContext(playerNum, context, items)
-
-	local player = getPlayer()
-    items = ISInventoryPane.getActualItems(items)
-
-    UpdateAllMoneyClips()
-
-	for _, item in ipairs(items) do
-		if item:getType() == "MoneyClip" then
-			if not item:isInPlayerInventory() then return end
-
-			local moneyClip = item:getModData()
-            if not moneyClip then return end
-
-			if moneyClip.Owner == nil then
-				context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
-
-			elseif moneyClip.Owner == player:getUsername() then
-					context:addOptionOnTop("Consolidate All Currency", items, function() _ConsolidateAll(item) end, player, item)
-			end
-
-			-- Admin Un-Bind Option
-			if player:getAccessLevel() == "Admin" then
-				if moneyClip.Owner ~= nil then
-				    context:addOptionOnTop("Un-Bind Money Clip (Admin)", items, UnBindMoneyClip, player, item)
-				end
-			end
-		end
-    end
-end
-
-Events.OnFillInventoryObjectContextMenu.Add(MoneyClipContext)
-
-
-
-------------------------------------------------------------------------
---                      DEPOSIT CASH BALANCE
-------------------------------------------------------------------------
-
-local function DepositCashBalance(item)
-
-        local moneyClip = item
-
-        if moneyClip:getType() == "MoneyClip" then
-
-            local modData = moneyClip:getModData()
-            if modData == nil then return end
-
-            local player = getPlayer()
-
-            if modData.Owner == player:getUsername() then
-
-                local amount = modData.CashBalance or 0
-                if amount ~= 0 then
-                    sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
-                    modData.CashBalance = 0
-                    getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
-                    player:Say("Depositing $" .. Utils.CurrencyFormatter(amount) .. " into Smokey Bank")
-                end
-            else
-               player:Say("Error:  Unauthorized")
-            end
-        end
-end
-
--- Passthrough Function
-local function _DepositCashBalance(item)
-	DepositCashBalance(item)
-    UpdateAllMoneyClips()
-end
-
-
-
-------------------------------------------------------------------------
---                       BANK BALANCE CONTEXT MENU
-------------------------------------------------------------------------
-
-local function BankBalanceContext(playerNum, context, items)
-
-	local player = getPlayer()
-    items = ISInventoryPane.getActualItems(items)
-
-    UpdateAllMoneyClips()
-
-	for _, item in ipairs(items) do
-		if item:getType() == "BankBalance" then
-			if not item:isInPlayerInventory() then return end
-
-            if not item:getContainer():getContainingItem() then return end
-
-            local moneyClip = item:getContainer():getContainingItem()
-            if moneyClip:getType() == "MoneyClip" then
-                local modData = moneyClip:getModData()
-
-                if modData == nil then return end
-                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
-                if modData.CashBalance == nil then return end
-
-                if modData.CashBalance > 0 then
-                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
-                    -- option.notAvailable = false
-
-                elseif modData.CashBalance == 0 then
-                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
-                    -- option.notAvailable = true
-
-                end
-            end
-		end
-    end
-end
-
-Events.OnFillInventoryObjectContextMenu.Add(BankBalanceContext)
-
-
-
-
-------------------------------------------------------------------------
---                    CREATE MONEYSTACKX CASH STACK
-------------------------------------------------------------------------
-CreateCashStack = function(moneyClip, amount)
-    if not moneyClip then return false end
-    if not amount then return false end
-
-    local modData = moneyClip:getModData()
-    if not modData then return false end
-
-    -- Instantiate MoneyStackX Item
-    local moneyStackX = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStackX")
-    moneyClip:getItemContainer():AddItem(moneyStackX)
-
-    local moneyStackData = moneyStackX:getModData()
-    if not moneyStackData then return false end
-
-    -- Set Money Stack Amount in modData
-    moneyStackData.CashAmount = amount
-
-    -- Rename Money Stack to Reflect Cash Amount
-    moneyStackX:setName(moneyStackX:getName() .. " - $" .. Utils.CurrencyFormatter(moneyStackData.CashAmount))
-    return true
-end
-
-
-
-------------------------------------------------------------------------
---                      GRAB FULL BALANCE OF CASH
-------------------------------------------------------------------------
-
-local function GrabFullStackOfCash(item)
-        if item == nil then return end
-
-        local moneyClip = item
-
-        if moneyClip:getType() == "MoneyClip" then
-
-            local modData = moneyClip:getModData()
-            if modData == nil then return end
-            if modData.Owner == nil then return end
-
-            local player = getPlayer()
-            if player == nil then return end
-
-            if modData.Owner == player:getUsername() then
-                if CreateCashStack(moneyClip, modData.CashBalance) then
-                    modData.CashBalance = 0
-                    getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
-                else
-                    print("Error: Grabbing Full Stack of Cash Failed!")
-                end
-            else
-                getPlayer():Say("Error:  Unauthorized")
-            end
-        end
-end
-
--- TODO
-local function GrabStackOfCash(item)
-    if MoneyClipData.CashBalance == nil then return end
-
-    if MoneyClipData.CashBalance ~= nil and MoneyClipData.CashBalance > 0 then
-
-        local moneyClipContainer = item:getContainer():getContainingItem()
-
-        if moneyClipContainer:getType() == "MoneyClip" then
-
-            local modData = moneyClipContainer:getModData()
-
-            if modData == nil then return end
-
-            local player = getPlayer()
-
-            if modData.Owner == player:getUsername() then
-                print("Grabbing a Stack of Cash")
-                if CreateCashStack(moneyClipContainer, modData.CashBalance) then
-                    modData.CashBalance = 0
-                    print("Stack of Cash Successful")
-                    recheckTimer = true
-                    UpdateAllMoneyClips()
-                else
-                    print("Stack of Cash Failed")
-                end
-            else
-                getPlayer():Say("Error:  Unauthorized")
-            end
-        end
-    end
-end
-
-
-
--- Passthrough Functions
-local function _GrabFullStackOfCash(item)
-	GrabFullStackOfCash(item)
-    UpdateAllMoneyClips()
-end
-
-local function _GrabStackOfCash(item)
-	GrabStackOfCash(item)
-    UpdateAllMoneyClips()
-end
-
-local function _ConsolidateCash(item)
-    ConsolidateCash(item, true)
-    UpdateAllMoneyClips()
-end
-
-
-
-------------------------------------------------------------------------
---                      CASH BALANCE CONTEXT MENU
-------------------------------------------------------------------------
-
-local function CashBalanceContext(playerNum, context, items)
-
-	local player = getSpecificPlayer(playerNum)
-    items = ISInventoryPane.getActualItems(items)
-
-    UpdateAllMoneyClips()
-
-	for _, item in ipairs(items) do
-		if item:getType() == "CashBalance" then
-			if not item:isInPlayerInventory() then return end
-
-            if not item:getContainer():getContainingItem() then return end
-
-            local moneyClip = item:getContainer():getContainingItem()
-            if moneyClip:getType() == "MoneyClip" then
-
-                local modData = moneyClip:getModData()
-                if modData == nil then return end
-                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
-                if modData.CashBalance == nil then modData.CashBalance = 0 end
-
-                if modData.CashBalance > 0 then
-                    local variableStack = context:addOptionOnTop("Grab a Stack of Cash (Amount)", items, function () _GrabStackOfCash(moneyClip) end, player, item)
-                    variableStack.notAvailable = true
-
-                    local fullStack = context:addOptionOnTop("Grab a Stack of Cash (All)", items, function () _GrabFullStackOfCash(moneyClip) end, player, item)
-                    fullStack.notAvailable = false
-
-                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
-                    depositBalance.notAvailable = false
-
-                elseif modData.CashBalance == 0 then
-                    local option = context:addOptionOnTop("Grab a Stack of Cash", items, nil, player, item)
-                    option.notAvailable = true
-
-                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
-                    depositBalance.notAvailable = true
-                end
-
-                local inv = moneyClip:getItemContainer():getItems()
-                if not inv then return end
-                if inv:size() == 0 then return end
-
-                local hideConsolidate = true
-                for i = inv:size()-1, 0, -1 do
-                    local cashStack = inv:get(i)
-
-                    if not cashStack:isFavorite() then
-
-                        -- Standard Cash Stacks
-                        for _moneyStack, _stats in pairs(listOfMoneyStacks) do
-                            if (cashStack:getType() == _moneyStack) or (cashStack:getType() == "MoneyStackX") then
-                                hideConsolidate = false
-                            end
-                        end
-                    end
-                end
-
-                local consolidate = context:addOptionOnTop("Consolidate Loose Cash", items, function () _ConsolidateCash(moneyClip) end, player, item)
-                consolidate.notAvailable = hideConsolidate
-		    end
-        end
-    end
-end
-
-Events.OnFillInventoryObjectContextMenu.Add(CashBalanceContext)
-
-
-
-
-
-------------------------------------------------------------------------
---                       TOKEN BALANCE CONTEXT MENU
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                 CREATE WANDERERTOKENSTACKX TOKEN STACK
-------------------------------------------------------------------------
-CreateTokenStack = function(moneyClip, amount)
-    if not moneyClip then return false end
-    if not amount then return false end
-
-    local modData = moneyClip:getModData()
-    if not modData then return false end
-
-    -- Instantiate MoneyStackX Item
-    local tokenStackX = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStackX")
-    moneyClip:getItemContainer():AddItem(tokenStackX)
-
-    local tokenStackXData = tokenStackX:getModData()
-    if not tokenStackXData then return false end
-
-    -- Set Money Stack Amount in modData
-    tokenStackXData.TokenAmount = amount
-
-    -- Rename Money Stack to Reflect Cash Amount
-    tokenStackX:setName(tokenStackX:getName() .. " -  " .. Utils.CurrencyFormatter(tokenStackXData.TokenAmount))
-    return true
-end
-
-
-
-------------------------------------------------------------------------
---                      GRAB FULL STACK OF TOKENS
-------------------------------------------------------------------------
-
-local function WithdrawAllTokens(item)
-        if item == nil then return end
-
-        local moneyClip = item
-
-        if moneyClip:getType() == "MoneyClip" then
-
-            local modData = moneyClip:getModData()
-            if modData == nil then return end
-            if modData.Owner == nil then return end
-
-            local player = getPlayer()
-            if player == nil then return end
-
-            if MoneyClipData == nil then return end
-            if MoneyClipData.TokenBalance == nil then return end
-
-            if modData.Owner == player:getUsername() then
-                if CreateTokenStack(moneyClip, MoneyClipData.TokenBalance) then
-                    sendClientCommand("GN84-WNDR", "withdrawTokens", {getPlayer():getUsername(), MoneyClipData.TokenBalance})
-                    getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
-                else
-                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
-                end
-            else
-                getPlayer():Say("Error:  Unauthorized")
-            end
-        end
-end
-
-
-
--- Passthrough Functions
-local function _WithdrawAllTokens(item)
-	WithdrawAllTokens(item)
-    UpdateAllMoneyClips()
-end
-
-local function _ConsolidateTokens(item)
-    ConsolidateTokens(item, true)
-    UpdateAllMoneyClips()
-end
-
-
-local function TokenBalanceContext(playerNum, context, items)
-
-	local player = getSpecificPlayer(playerNum)
-    items = ISInventoryPane.getActualItems(items)
-
-    UpdateAllMoneyClips()
-
-	for _, item in ipairs(items) do
-		if item:getType() == "TokenBalance" then
-			if not item:isInPlayerInventory() then return end
-
-            if not item:getContainer():getContainingItem() then return end
-
-            local moneyClip = item:getContainer():getContainingItem()
-            if moneyClip:getType() == "MoneyClip" then
-
-                local modData = moneyClip:getModData()
-                if modData == nil then return end
-                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
-                if MoneyClipData == nil then return end
-                if MoneyClipData.TokenBalance == nil then return end
-
-                if MoneyClipData.TokenBalance > 0 then
-                    local variableStack = context:addOptionOnTop("Withdraw (Amount)", items, function () _GrabTokenStack(moneyClip) end, player, item)
-                    variableStack.notAvailable = true
-
-                    local fullStack = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllTokens(moneyClip) end, player, item)
-                    fullStack.notAvailable = false
-
-                elseif MoneyClipData.TokenBalance == 0 then
-                    local option = context:addOptionOnTop("Withdraw", items, nil, player, item)
-                    option.notAvailable = true
-                end
-
-                local inv = moneyClip:getItemContainer():getItems()
-                if not inv then return end
-                if inv:size() == 0 then return end
-
-                local hideConsolidate = true
-                for i = inv:size()-1, 0, -1 do
-                    local tokenStack = inv:get(i)
-
-                    if not tokenStack:isFavorite() then
-
-                        -- Standard Cash Stacks
-                        for _tokenStack, _stats in pairs(listOfTokenStacks) do
-                            if (tokenStack:getType() == _tokenStack) or (tokenStack:getType() == "WandererTokenStackX") then
-                                hideConsolidate = false
-                            end
-                        end
-                    end
-                end
-
-                local consolidate = context:addOptionOnTop("Deposit Wanderer Tokens into Smokey Bank", items, function () _ConsolidateTokens(moneyClip) end, player, item)
-                consolidate.notAvailable = hideConsolidate
-		    end
-        end
-    end
-end
-
-Events.OnFillInventoryObjectContextMenu.Add(TokenBalanceContext)
-
-
-
-
-
-
-------------------------------------------------------------------------
---              UPDATE ALL BOUND MONEY CLIP BALANCE ITEMS
-------------------------------------------------------------------------
-
-local function GetAllMoneyClips()
-    local player = getPlayer()
-        if not player then return end
-
-        local inventory = player:getInventory()
-        if not inventory then return end
-
-        local items = inventory:getItems()
-        if not items then return end
-        if items:size() == 0 then return end
-
-        local MoneyClips = {}
-
-        for i = items:size()-1, 0, -1 do
-            local item = items:get(i)
-
-            if item:getType() == "MoneyClip" then
-                table.insert(MoneyClips, item)
-            end
-        end
-
-        return MoneyClips
-end
-
-
-UpdateAllMoneyClips = function()
-
-    local MoneyClips = GetAllMoneyClips()
-    if MoneyClips == nil then return end
-
-    for k, v in pairs(MoneyClips) do
-
-        if v:getModData().Owner ~= nil then
-            CreateBalanceItems(v)
-            UpdateMoneyClipData(v, true)
-            UpdateBalanceItems(v)
-        end
-    end
-end
-
-
-
-
-
-
-
-------------------------------------------------------------------------
---              MODDATA UPDATE FUNCTIONS - TOOLTIPS
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---              UPDATE MONEYCLIP OWNER + UUID TOOLTIP
-------------------------------------------------------------------------
-
-local function updateOwnerToolTip(item)
-    local modData = item:getModData()
-    if not modData then return end
-
-    MoneyClipData.Owner = modData.Owner
-    MoneyClipData.UUID = modData.UUID
-    currentUUID = modData.UUID
-end
-
-
-
-------------------------------------------------------------------------
---              BANK - UPDATE SMOKEY POINTS TOOLTIP
-------------------------------------------------------------------------
-
-local function UpdateSmokeyPointsFromServer(module, command, arguments)
-    if module ~= "GN84-WNDR" then return end
-
-    if module == "GN84-WNDR" and command == "get" then
-        if arguments then
-            MoneyClipData.BankBalance = arguments[1]
-            local MoneyClips = GetAllMoneyClips()
-            if MoneyClips == nil then return end
-
-            for k, v in pairs(MoneyClips) do
-                UpdateBalanceItems(v)
-            end
-        end
-    end
-end
-
-updateSmokeyPointBalance = function(item, override)
-
-    if override then
-        sendClientCommand("GN84-WNDR", "get", nil)
-    end
-
-    if recheckTimer then
-        sendClientCommand("GN84-WNDR", "get", nil)
-    end
-end
-
-Events.OnServerCommand.Add(UpdateSmokeyPointsFromServer)
-
-
-
-
-
-------------------------------------------------------------------------
---              BANK - UPDATE WANDERER TOKENS TOOLTIP
-------------------------------------------------------------------------
-
-local function UpdateTokensFromServer(module, command, arguments)
-    if module ~= "GN84-WNDR" then return end
-
-    if module == "GN84-WNDR" and command == "getTokens" then
-        if arguments then
-            MoneyClipData.TokenBalance = arguments[1]
-            local MoneyClips = GetAllMoneyClips()
-            if MoneyClips == nil then return end
-
-            for k, v in pairs(MoneyClips) do
-                UpdateBalanceItems(v)
-            end
-        end
-    end
-end
-
-updateWandererTokenBalance = function(item, override)
-
-    if override then
-        sendClientCommand("GN84-WNDR", "getTokens", nil)
-    end
-
-    if recheckTimer then
-        sendClientCommand("GN84-WNDR", "getTokens", nil)
-    end
-end
-
-Events.OnServerCommand.Add(UpdateTokensFromServer)
-
-
-
-
-
-------------------------------------------------------------------------
---                      CASH BALANCE TOOLTIP
-------------------------------------------------------------------------
-
-local function updateCashBalanceToolTip(item)
-    if recheckTimer then
-        local modData = item:getModData()
-        if modData then
-            MoneyClipData.CashBalance = modData.CashBalance
-        end
-    end
-end
-
-
-
-------------------------------------------------------------------------
---               UPDATE BALANCE ITEMS NAME / AMOUNTS
-------------------------------------------------------------------------
-
-UpdateBalanceItems = function(item)
-    if not item then return end
-    local moneyClip = item
-
-    local modData = moneyClip:getModData()
-    if not modData then return end
-
-    local moneyClipContainer = moneyClip:getItemContainer()
-    local items = moneyClipContainer:getItems()
-
-
-    if not items then
-        print("Error: Invalid Container")
-        return
-    else
-
-        if items:size() == 0 then return
-
-        elseif items:size() ~= 0 then
-
-            local player = getPlayer()
-            local username = player:getUsername()
-            local isOwner = nil
-
-            if (modData.Owner) then
-                if modData.Owner ~= username then
-                    isOwner = false
-                elseif modData.Owner == username then
-                    isOwner = true
-                end                   
-            end
-
-            for i = items:size()-1, 0, -1 do
-                local infoItem = items:get(i)
-
-                local BankBalance = MoneyClipData.BankBalance
-                local CashBalance = modData.CashBalance
-                local TokenBalance = MoneyClipData.TokenBalance
-                
-
-                if infoItem:getType() == "BankBalance" then
-                    if BankBalance == nil then
-                        infoItem:setName("-----[   Bank Balance:     ... ... ...")
-                    elseif isOwner == false then
-                        infoItem:setName("-----[   Bank Balance:     ... ... ...")
-                    elseif isOwner == true then
-                        infoItem:setName("-----[   Bank Balance:     $" ..  Utils.CurrencyFormatter(BankBalance))
-                    end
-
-                elseif infoItem:getType() == "CashBalance" then
-                    if CashBalance == nil then
-                        infoItem:setName("-----[   Cash Balance:     ... ... ...")
-                    elseif isOwner == false then
-                        infoItem:setName("-----[   Cash Balance:     ... ... ...")
-                    elseif isOwner == true then
-                        infoItem:setName("-----[   Cash Balance:     $" ..  Utils.CurrencyFormatter(CashBalance))
-                    end
-
-                elseif infoItem:getType() == "TokenBalance" then
-                    if TokenBalance == nil then
-                        infoItem:setName("-----[   Token Balance:    ... ... ...")
-                    elseif isOwner == false then
-                        infoItem:setName("-----[   Token Balance:    ... ... ...")
-                    elseif isOwner == true then
-                        infoItem:setName("-----[   Token Balance:    " ..  Utils.CurrencyFormatter(TokenBalance))
-                    end
-                end
-
-            end
-        end
-    end
-end
-
-
-
-
-------------------------------------------------------------------------
---                 MANUAL / AUTO UPDATE MONEY CLIP DATA
-------------------------------------------------------------------------
-
-UpdateMoneyClipData = function(moneyClip, override)
-    updateSmokeyPointBalance(moneyClip, override)
-    updateCashBalanceToolTip(moneyClip)
-    updateWandererTokenBalance(moneyClip, override)
-    UpdateBalanceItems(moneyClip)
-end
 
 
 
@@ -1016,7 +295,8 @@ ConsolidateCash = function(item, playSound)
         cashBalance = cashBalance + runningTotal
         modData.CashBalance = cashBalance
 
-        UpdateAllMoneyClips()
+        UpdateMoneyClipDisplayData(moneyClip, true)
+
         if playSound then
             getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
         end
@@ -1080,9 +360,11 @@ ConsolidateTokens = function(item, playSound)
 
         if runningTotal > 0 then
             sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), runningTotal})
-            UpdateAllMoneyClips()
+
+            UpdateMoneyClipDisplayData(moneyClip, true)
+
             if playSound then
-                getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)                
+                getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
             end
         end
 end
@@ -1090,12 +372,836 @@ end
 
 
 ------------------------------------------------------------------------
---                         AUTO-CONSOLIDATE
+--                     CONSOLIDATE ALL CURRENCY
+------------------------------------------------------------------------
+
+
+-- Daily Consolidation / Manual Consolidation
+ConsolidateAll = function(moneyClip)
+    ConsolidateCash(moneyClip, true)
+    ConsolidateTokens(moneyClip, true)
+    UpdateMoneyClipDisplayData(moneyClip, true)
+end
+
+-- On Transfer Consolidation
+ConsolidateAllOnTransfer = function(moneyClip)
+    ConsolidateCash(moneyClip, false)
+    ConsolidateTokens(moneyClip, false)
+    UpdateMoneyClipDisplayData(moneyClip, true)
+end
+
+
+-- Pasthrough Function
+local function _ConsolidateAll(item)
+	ConsolidateAll(item)
+    getPlayer():Say("Consolidating All Currency")
+end
+
+
+
+
+
+
+------------------------------------------------------------------------
+--                     CONTEXT MENUS & FUNCTIONS
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+--                           MONEY CLIP
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                          CONTEXT MENU
+------------------------------------------------------------------------
+
+local function MoneyClipContext(playerNum, context, items)
+
+	local player = getPlayer()
+    items = ISInventoryPane.getActualItems(items)
+
+	for _, item in ipairs(items) do
+		if item:getType() == "MoneyClip" then
+			if not item:isInPlayerInventory() then return end
+
+			local moneyClip = item
+            local modData = moneyClip:getModData()
+
+            if not modData then return end
+
+
+            UpdateSmokeyBankData()
+
+			if modData.Owner == nil then
+				context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
+
+			elseif modData.Owner == player:getUsername() then
+					context:addOptionOnTop("Consolidate All Currency", items, function() _ConsolidateAll(moneyClip) end, player, item)
+			end
+
+			-- Admin Un-Bind Option
+			if player:getAccessLevel() == "Admin" then
+				if modData.Owner ~= nil then
+				    context:addOptionOnTop("Un-Bind Money Clip (Admin)", items, UnBindMoneyClip, player, item)
+				end
+			end
+		end
+    end
+end
+
+Events.OnFillInventoryObjectContextMenu.Add(MoneyClipContext)
+
+
+
+
+
+------------------------------------------------------------------------
+--                            BANK BALANCE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                            CONTEXT MENU
+------------------------------------------------------------------------
+
+local function BankBalanceContext(playerNum, context, items)
+
+	local player = getPlayer()
+    items = ISInventoryPane.getActualItems(items)
+
+	for _, item in ipairs(items) do
+		if item:getType() == "BankBalance" then
+			if not item:isInPlayerInventory() then return end
+
+            if not item:getContainer():getContainingItem() then return end
+
+            local moneyClip = item:getContainer():getContainingItem()
+            if moneyClip:getType() == "MoneyClip" then
+                local modData = moneyClip:getModData()
+
+                if modData == nil then return end
+                UpdateSmokeyPointBalance(nil, true)
+
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
+                if modData.CashBalance == nil then return end
+
+                if modData.CashBalance > 0 then
+                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
+                    -- option.notAvailable = false
+
+                elseif modData.CashBalance == 0 then
+                    -- local option = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
+                    -- option.notAvailable = true
+
+                end
+            end
+		end
+    end
+end
+
+Events.OnFillInventoryObjectContextMenu.Add(BankBalanceContext)
+
+
+
+
+
+
+------------------------------------------------------------------------
+--                            CASH BALANCE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                              DEPOSIT
+------------------------------------------------------------------------
+
+local function DepositCashBalance(item)
+
+        local moneyClip = item
+
+        if moneyClip:getType() == "MoneyClip" then
+
+            local modData = moneyClip:getModData()
+            if modData == nil then return end
+
+            local player = getPlayer()
+
+            if modData.Owner == player:getUsername() then
+
+                local amount = modData.CashBalance or 0
+                if amount ~= 0 then
+                    sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
+                    modData.CashBalance = 0
+                    getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
+                    player:Say("Depositing $" .. Utils.CurrencyFormatter(amount) .. " into Smokey Bank")
+                    UpdateMoneyClipDisplayData(moneyClip, true)
+                end
+            else
+               player:Say("Error:  Unauthorized")
+            end
+        end
+end
+
+-- Passthrough Function
+local function _DepositCashBalance(item)
+	DepositCashBalance(item)
+end
+
+
+
+------------------------------------------------------------------------
+--                    CREATE MONEYSTACKX CASH STACK
+------------------------------------------------------------------------
+
+CreateCashStack = function(moneyClip, amount)
+    if not moneyClip then return false end
+    if not amount then return false end
+
+    local modData = moneyClip:getModData()
+    if not modData then return false end
+
+    -- Instantiate MoneyStackX Item
+    local moneyStackX = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStackX")
+    moneyClip:getItemContainer():AddItem(moneyStackX)
+
+    local moneyStackData = moneyStackX:getModData()
+    if not moneyStackData then return false end
+
+    -- Set Money Stack Amount in modData
+    moneyStackData.CashAmount = amount
+
+    -- Rename Money Stack to Reflect Cash Amount
+    moneyStackX:setName(moneyStackX:getName() .. " - $" .. Utils.CurrencyFormatter(moneyStackData.CashAmount))
+    return true
+end
+
+
+
+------------------------------------------------------------------------
+--                       GRAB CASH STACK - ALL
+------------------------------------------------------------------------
+
+local function GrabStackOfCashAll(item)
+        if item == nil then return end
+
+        local moneyClip = item
+
+        if moneyClip:getType() == "MoneyClip" then
+
+            local modData = moneyClip:getModData()
+            if modData == nil then return end
+            if modData.Owner == nil then return end
+            if modData.CashBalance == nil then return end
+
+            local player = getPlayer()
+            if player == nil then return end
+
+            if modData.Owner == player:getUsername() then
+                if CreateCashStack(moneyClip, modData.CashBalance) then
+                    modData.CashBalance = 0
+                    getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+                    UpdateMoneyClipDisplayData(moneyClip, true)
+                else
+                    print("Error: Grabbing Full Stack of Cash Failed!")
+                end
+            else
+                getPlayer():Say("Error:  Unauthorized")
+            end
+        end
+end
+
+
+
+
+------------------------------------------------------------------------
+--                     GRAB CASH STACK - AMOUNT
+------------------------------------------------------------------------
+
+-- TODO
+local function GrabStackOfCashAmount(item)
+    if item == nil then return end
+
+    local moneyClip = item
+
+    if moneyClip:getType() == "MoneyClip" then
+
+        local modData = moneyClip:getModData()
+        if modData == nil then return end
+        if modData.Owner == nil then return end
+
+        local player = getPlayer()
+        if player == nil then return end
+
+        if modData.Owner == player:getUsername() then
+            if CreateCashStack(moneyClip, modData.CashBalance) then
+                modData.CashBalance = 0
+                getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+            else
+                print("Error: Grabbing Stack of Cash (Amount) Failed!")
+            end
+        else
+            getPlayer():Say("Error:  Unauthorized")
+        end
+    end
+end
+
+
+
+-- Passthrough Functions
+local function _GrabStackOfCashAll(item)
+	GrabStackOfCashAll(item)
+end
+
+local function _GrabStackOfCashAmount(item)
+	GrabStackOfCashAmount(item)
+end
+
+local function _ConsolidateCash(item)
+    ConsolidateCash(item, true)
+end
+
+
+
+------------------------------------------------------------------------
+--                           CASH BALANCE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                           CONTEXT MENU
+------------------------------------------------------------------------
+
+local function CashBalanceContext(playerNum, context, items)
+
+	local player = getSpecificPlayer(playerNum)
+    items = ISInventoryPane.getActualItems(items)
+
+
+	for _, item in ipairs(items) do
+		if item:getType() == "CashBalance" then
+			if not item:isInPlayerInventory() then return end
+
+            if not item:getContainer():getContainingItem() then return end
+
+            local moneyClip = item:getContainer():getContainingItem()
+            if moneyClip:getType() == "MoneyClip" then
+
+                local modData = moneyClip:getModData()
+                if modData == nil then return end
+
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
+                if modData.CashBalance == nil then modData.CashBalance = 0 end
+
+                if modData.CashBalance > 0 then
+                    local variableStack = context:addOptionOnTop("Grab a Stack of Cash (Amount)", items, function () _GrabStackOfCashAmount(moneyClip) end, player, item)
+                    variableStack.notAvailable = true
+
+                    local fullStack = context:addOptionOnTop("Grab a Stack of Cash (All)", items, function () _GrabStackOfCashAll(moneyClip) end, player, item)
+                    fullStack.notAvailable = false
+
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
+                    depositBalance.notAvailable = false
+
+                elseif modData.CashBalance == 0 then
+                    local option = context:addOptionOnTop("Grab a Stack of Cash", items, nil, player, item)
+                    option.notAvailable = true
+
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
+                    depositBalance.notAvailable = true
+                end
+
+                local inv = moneyClip:getItemContainer():getItems()
+                if not inv then return end
+                if inv:size() == 0 then return end
+
+                local hideConsolidate = true
+                for i = inv:size()-1, 0, -1 do
+                    local cashStack = inv:get(i)
+
+                    if not cashStack:isFavorite() then
+
+                        -- Standard Cash Stacks
+                        for _moneyStack, _stats in pairs(listOfMoneyStacks) do
+                            if (cashStack:getType() == _moneyStack) or (cashStack:getType() == "MoneyStackX") then
+                                hideConsolidate = false
+                            end
+                        end
+                    end
+                end
+
+                local consolidate = context:addOptionOnTop("Consolidate Loose Cash", items, function () _ConsolidateCash(moneyClip) end, player, item)
+                consolidate.notAvailable = hideConsolidate
+		    end
+        end
+    end
+end
+
+Events.OnFillInventoryObjectContextMenu.Add(CashBalanceContext)
+
+
+
+
+
+------------------------------------------------------------------------
+--                           TOKEN BALANCE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                 CREATE WANDERERTOKENSTACKX TOKEN STACK
+------------------------------------------------------------------------
+
+CreateTokenStack = function(moneyClip, amount)
+    if not moneyClip then return false end
+    if not amount then return false end
+
+    local modData = moneyClip:getModData()
+    if not modData then return false end
+
+    -- Instantiate MoneyStackX Item
+    local tokenStackX = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStackX")
+    moneyClip:getItemContainer():AddItem(tokenStackX)
+
+    local tokenStackXData = tokenStackX:getModData()
+    if not tokenStackXData then return false end
+
+    -- Set Money Stack Amount in modData
+    tokenStackXData.TokenAmount = amount
+
+    -- Rename Money Stack to Reflect Cash Amount
+    tokenStackX:setName(tokenStackX:getName() .. " -  " .. Utils.CurrencyFormatter(tokenStackXData.TokenAmount))
+    return true
+end
+
+
+
+------------------------------------------------------------------------
+--                      WITHDRAW TOKENS - ALL
+------------------------------------------------------------------------
+
+local function WithdrawAllTokens(item)
+        if item == nil then return end
+
+        local moneyClip = item
+
+        if moneyClip:getType() == "MoneyClip" then
+
+            local modData = moneyClip:getModData()
+            if modData == nil then return end
+
+            if modData.Owner == nil then return end
+            if modData.TokenBalance == nil then return end
+
+            local player = getPlayer()
+            if player == nil then return end
+
+            if modData.Owner == player:getUsername() then
+                if CreateTokenStack(moneyClip, modData.TokenBalance) then
+                    sendClientCommand("GN84-WNDR", "withdrawTokens", {getPlayer():getUsername(), modData.TokenBalance})
+                    getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+                    UpdateWandererTokenBalance(nil, true)
+                else
+                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
+                end
+            else
+                getPlayer():Say("Error:  Unauthorized")
+            end
+        end
+end
+
+
+
+-- Passthrough Functions
+local function _WithdrawAllTokens(item)
+	WithdrawAllTokens(item)
+end
+
+local function _ConsolidateTokens(item)
+    ConsolidateTokens(item, true)
+end
+
+
+
+
+
+------------------------------------------------------------------------
+--                          TOKEN BALANCE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                          CONTEXT MENU
+------------------------------------------------------------------------
+
+local function TokenBalanceContext(playerNum, context, items)
+
+	local player = getSpecificPlayer(playerNum)
+    items = ISInventoryPane.getActualItems(items)
+
+	for _, item in ipairs(items) do
+		if item:getType() == "TokenBalance" then
+			if not item:isInPlayerInventory() then return end
+
+            if not item:getContainer():getContainingItem() then return end
+
+            local moneyClip = item:getContainer():getContainingItem()
+            if moneyClip:getType() == "MoneyClip" then
+
+                local modData = moneyClip:getModData()
+                if modData == nil then return end
+                UpdateWandererTokenBalance(nil, true)
+
+                if modData.Owner ~= player:getUsername() then player:Say("Error:  Unauthorized") return end
+                if modData.TokenBalance == nil then return end
+
+                if modData.TokenBalance > 0 then
+                    local variableStack = context:addOptionOnTop("Withdraw (Amount)", items, function () _GrabTokenStack(moneyClip) end, player, item)
+                    variableStack.notAvailable = true
+
+                    local fullStack = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllTokens(moneyClip) end, player, item)
+                    fullStack.notAvailable = false
+
+                elseif modData.TokenBalance == 0 then
+                    local option = context:addOptionOnTop("Withdraw", items, nil, player, item)
+                    option.notAvailable = true
+                end
+
+                local inv = moneyClip:getItemContainer():getItems()
+                if not inv then return end
+                if inv:size() == 0 then return end
+
+                local hideConsolidate = true
+                for i = inv:size()-1, 0, -1 do
+                    local tokenStack = inv:get(i)
+
+                    if not tokenStack:isFavorite() then
+
+                        -- Standard Cash Stacks
+                        for _tokenStack, _stats in pairs(listOfTokenStacks) do
+                            if (tokenStack:getType() == _tokenStack) or (tokenStack:getType() == "WandererTokenStackX") then
+                                hideConsolidate = false
+                            end
+                        end
+                    end
+                end
+
+                local consolidate = context:addOptionOnTop("Deposit Wanderer Tokens into Smokey Bank", items, function () _ConsolidateTokens(moneyClip) end, player, item)
+                consolidate.notAvailable = hideConsolidate
+		    end
+        end
+    end
+end
+
+Events.OnFillInventoryObjectContextMenu.Add(TokenBalanceContext)
+
+
+
+
+
+
+------------------------------------------------------------------------
+--                     UPDATE ALL MONEY CLIP DATA
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------
+
+local function GetAllMoneyClips()
+    local player = getPlayer()
+        if not player then return end
+
+        local inventory = player:getInventory()
+        if not inventory then return end
+
+        local items = inventory:getItems()
+        if not items then return end
+        if items:size() == 0 then return end
+
+        local MoneyClips = {}
+
+        for i = items:size()-1, 0, -1 do
+            local item = items:get(i)
+
+            if item:getType() == "MoneyClip" then
+                table.insert(MoneyClips, item)
+            end
+        end
+
+        return MoneyClips
+end
+
+
+UpdateAllMoneyClips = function()
+
+    local MoneyClips = GetAllMoneyClips()
+    if MoneyClips == nil then return end
+
+    for k, v in pairs(MoneyClips) do
+        local modData = v:getModData()
+        if not modData then return end
+
+        local player = getPlayer()
+        local username = player:getUsername()
+
+        if modData.Owner ~= nil then
+            if modData.Owner == username then
+            CreateBalanceItems(v)
+            UpdateMoneyClipDisplayData(v, true)
+            end
+        end
+    end
+end
+
+
+------------------------------------------------------------------------
+--                      UPDATE BALANCE ITEMS
+------------------------------------------------------------------------
+
+UpdateBalanceItems = function(item)
+    if not item then return end
+    local moneyClip = item
+
+    local modData = moneyClip:getModData()
+    if not modData then return end
+
+    local moneyClipContainer = moneyClip:getItemContainer()
+    local items = moneyClipContainer:getItems()
+
+
+    if not items then
+        print("Error: Invalid Container")
+        return
+    else
+
+        if items:size() == 0 then return
+
+        elseif items:size() ~= 0 then
+
+            local player = getPlayer()
+            local username = player:getUsername()
+            local isOwner = nil
+
+            if (modData.Owner) then
+                if modData.Owner ~= username then
+                    isOwner = false
+                elseif modData.Owner == username then
+                    isOwner = true
+                end
+            end
+
+            local BankBalance  = nil
+            local CashBalance  = nil
+            local TokenBalance = nil
+
+            for i = items:size()-1, 0, -1 do
+                local infoItem = items:get(i)
+
+                BankBalance = modData.BankBalance
+                CashBalance = modData.CashBalance
+                TokenBalance = modData.TokenBalance
+
+                if infoItem:getType() == "BankBalance" then
+                    if BankBalance == nil then
+                        infoItem:setName("-----[   Bank Balance:     ... ... ...")
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Bank Balance:     ... ... ...")
+                    elseif isOwner == true then
+                        infoItem:setName("-----[   Bank Balance:     $" ..  Utils.CurrencyFormatter(BankBalance))
+                    end
+
+                elseif infoItem:getType() == "CashBalance" then
+                    if CashBalance == nil then
+                        infoItem:setName("-----[   Cash Balance:     ... ... ...")
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Cash Balance:     ... ... ...")
+                    elseif isOwner == true then
+                        infoItem:setName("-----[   Cash Balance:     $" ..  Utils.CurrencyFormatter(CashBalance))
+                    end
+
+                elseif infoItem:getType() == "TokenBalance" then
+                    if TokenBalance == nil then
+                        infoItem:setName("-----[   Token Balance:    ... ... ...")
+                    elseif isOwner == false then
+                        infoItem:setName("-----[   Token Balance:    ... ... ...")
+                    elseif isOwner == true then
+                        infoItem:setName("-----[   Token Balance:    " ..  Utils.CurrencyFormatter(TokenBalance))
+                    end
+                end
+            end
+        end
+    end
+end
+
+
+
+------------------------------------------------------------------------
+--                 UPDATE MONEY CLIP DISPLAY DATA
+------------------------------------------------------------------------
+
+UpdateMoneyClipDisplayData = function(moneyClip, override)
+    UpdateBalanceItems(moneyClip)
+
+    local inventoryPage = getPlayerInventory(0).inventoryPane.inventoryPage
+    if not inventoryPage then return end
+    UpdateContainerButtonTooltip(inventoryPage, "end")
+end
+
+
+
+
+
+
+
+------------------------------------------------------------------------
+--                    SMOKEY BANK DATA UPDATE
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+--                 BANK BALANCE - SMOKEY POINTS
+------------------------------------------------------------------------
+
+local function SaveBankBalance(balance)
+    local MoneyClips = GetAllMoneyClips()
+    if MoneyClips == nil then return end
+
+    for k, v in pairs(MoneyClips) do
+        local modData = v:getModData()
+        if not modData then return end
+
+        local player = getPlayer()
+        local username = player:getUsername()
+
+        if modData.Owner ~= nil then
+            if modData.Owner == username then
+                modData.BankBalance = balance
+                UpdateMoneyClipDisplayData(v, true)
+            end
+        end
+    end
+end
+
+
+local function GetBankBalance(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if module == "GN84-WNDR" and command == "get" then
+        if arguments then
+            SaveBankBalance(arguments[1])
+        end
+    end
+end
+
+
+UpdateSmokeyPointBalance = function(item, override)
+
+    if override then
+        sendClientCommand("GN84-WNDR", "get", nil)
+    end
+end
+
+Events.OnServerCommand.Add(GetBankBalance)
+
+
+
+
+------------------------------------------------------------------------
+--                  BANK BALANCE - WANDERER TOKENS
+------------------------------------------------------------------------
+
+local function SaveTokenBalance(balance)
+    local MoneyClips = GetAllMoneyClips()
+    if MoneyClips == nil then return end
+
+    for k, v in pairs(MoneyClips) do
+        local modData = v:getModData()
+        if not modData then return end
+
+        local player = getPlayer()
+        local username = player:getUsername()
+
+        if modData.Owner ~= nil then
+            if modData.Owner == username then
+                modData.TokenBalance = balance
+                UpdateMoneyClipDisplayData(v, true)
+            end
+        end
+    end
+end
+
+
+local function GetTokenBalance(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if module == "GN84-WNDR" and command == "getTokens" then
+        if arguments then
+            SaveTokenBalance(arguments[1])
+        end
+    end
+end
+
+
+UpdateWandererTokenBalance = function(item, override)
+
+    if override then
+        sendClientCommand("GN84-WNDR", "getTokens", nil)
+    end
+end
+
+Events.OnServerCommand.Add(GetTokenBalance)
+
+
+------------------------------------------------------------------------
+--                  RECEIVE / REQUEST SMOKEY BANK DATA
+------------------------------------------------------------------------
+
+UpdateSmokeyBankData = function()
+    UpdateSmokeyPointBalance(nil, true)
+    UpdateWandererTokenBalance(nil, true)
+    UpdateAllMoneyClips()
+end
+
+
+local function ReceiveSmokeyBankData(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if module == "GN84-WNDR" and command == "UpdateSmokeyBankData" then
+        UpdateSmokeyBankData()
+    end
+end
+
+Events.OnServerCommand.Add(ReceiveSmokeyBankData)
+
+
+
+
+
+
+------------------------------------------------------------------------
+--                        SYSTEM FUNCTIONS
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+--                       SERVER REQUEST TIMER
+------------------------------------------------------------------------
+
+-- local function ReCheckDataTimer()
+--     if recheckTimer == false then
+--         recheckTimer = true
+--     end
+--     --ReceiveSmokeyBankData()
+-- end
+
+-- Events.EveryOneMinute.Add(ReCheckDataTimer)
+
+
+
+------------------------------------------------------------------------
+--                 AUTO-CONSOLIDATE - ON TRANSFER
 ------------------------------------------------------------------------
 
 local oldTransferPerform = ISInventoryTransferAction.perform
 
-function ISInventoryTransferAction:perform()    
+function ISInventoryTransferAction:perform()
     local moneyClip = nil
 
     if self.destContainer and self.destContainer:getType() == "MoneyClip" then
@@ -1104,13 +1210,35 @@ function ISInventoryTransferAction:perform()
 
     oldTransferPerform(self)
 
-    if not moneyClip then return end    
+    if not moneyClip then return end
 
     -- Run once all items are transferred
-    if #self.queueList == 0 then    
+    if #self.queueList == 0 then
         ConsolidateAllOnTransfer(moneyClip)
-    end    
+    end
 end
+
+
+------------------------------------------------------------------------
+--                    AUTO-CONSOLIDATE - DAILY @12AM
+------------------------------------------------------------------------
+
+local function DailyAutoConsolidate()
+
+    local MoneyClips = GetAllMoneyClips()
+    if MoneyClips == nil then return end
+    getPlayer():Say("Consolidating All Currency")
+
+    for k, v in pairs(MoneyClips) do
+
+        if v:getModData().Owner ~= nil then
+            ConsolidateAll(v)
+        end
+    end
+end
+
+Events.EveryDays.Add(DailyAutoConsolidate)
+
 
 
 ------------------------------------------------------------------------
@@ -1161,77 +1289,106 @@ end
 
 
 
+
+
 ------------------------------------------------------------------------
---                     DAILY AUTO-CONSOLIDATE     
+--                        INVENTORY TOOLTIPS
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                     CONTAINER BUTTON TOOLTIP
 ------------------------------------------------------------------------
 
-local function DailyAutoConsolidate()
+function UpdateContainerButtonTooltip(inventoryPage, state)
+    if not inventoryPage then return end
+    if not state then return end
 
-    local MoneyClips = GetAllMoneyClips()
-    if MoneyClips == nil then return end
+    if state ~= "end" then return end
+    if not inventoryPage.onCharacter then return end
 
-    for k, v in pairs(MoneyClips) do
+    local containers = inventoryPage.backpacks
+    if not containers then return end
 
-        if v:getModData().Owner ~= nil then
-            ConsolidateAll(v)
+    for i,v in ipairs(containers) do
+        local container = v.inventory
+        if container:getType() == "MoneyClip" then
+
+            local modData = container:getContainingItem():getModData()
+            if not modData then return end
+
+            local player = getPlayer()
+            if modData.Owner ~= player:getUsername() then return end
+
+            local smokeyPointBalance = modData.BankBalance
+            local cashBalance = modData.CashBalance
+            local wandererTokenBalance = modData.TokenBalance
+
+            if type(smokeyPointBalance) == "number" then
+                smokeyPointBalance = Utils.CurrencyFormatter(smokeyPointBalance)
+            else
+                smokeyPointBalance = "... ... ..."
+            end
+
+            if type(cashBalance) == "number" then
+                cashBalance = Utils.CurrencyFormatter(cashBalance)
+            else
+                cashBalance = "... ... ..."
+            end
+
+            if type(wandererTokenBalance) == "number" then
+                wandererTokenBalance = Utils.CurrencyFormatter(wandererTokenBalance)
+            else
+                wandererTokenBalance = "... ... ..."
+            end
+
+            v.tooltip = nil
+            ISInventoryPage.renderDirty = true
+            ISInventoryPage.dirtyUI()
+
+            local balanceText = "<H2><LINE><LINE> <RGB:1.0,0.6,0.11,1>Bank Balance:  $" .. smokeyPointBalance .. "<LINE><RGB:0.17255,1.0,0.01961,1>Cash Balance:  $" .. cashBalance .. "<LINE><RGB:0.0,0.886,1.0,1>Token Balance:   " .. wandererTokenBalance
+
+            local newTooltip = v.tooltip .. balanceText
+            v.tooltip = newTooltip
         end
     end
 end
 
-Events.EveryDays.Add(DailyAutoConsolidate)
+Events.OnRefreshInventoryWindowContainers.Add(UpdateContainerButtonTooltip)
 
 
 
 
 
 ------------------------------------------------------------------------
---                       SERVER REQUEST TIMER
+--                       MONEY CLIP TOOLTIP
 ------------------------------------------------------------------------
-
-local function ReCheckDataTimer()
-    if recheckTimer == false then
-        recheckTimer = true
-    end
-    UpdateAllMoneyClips()
-end
-
-Events.EveryTenMinutes.Add(ReCheckDataTimer)
-
-
-
-
 ------------------------------------------------------------------------
---                             TOOLTIPS
+--                       
 ------------------------------------------------------------------------
 
 local oldRender = ISToolTipInv.render
+
 function ISToolTipInv:render()
 
     local itemType = self.item:getType()
     if not itemType == "MoneyClip" then return oldRender(self) end
 
     if not ISContextMenu.instance or not ISContextMenu.instance.visibleCheck then
-        if not MoneyClipData then return end
 
         -- Call the original render function first to draw the original tooltip content
         oldRender(self)
 
-        ------------------------------------------------------------------------
-        --                       MONEY CLIP TOOLTIP
-        ------------------------------------------------------------------------
 
-        -- Update Owner Constantly
-        local item = self.item
-        updateOwnerToolTip(item)
+        local moneyClip = self.item
+        local modData = moneyClip:getModData()
 
-        -- Error Handling
-        if MoneyClipData.Owner == nil then return end
-        if MoneyClipData.UUID == nil then return end
+        if not modData then return end
+        if modData.Owner == nil then return end
+        if modData.UUID == nil then return end
 
         -- Check if Money Clip UUID is Different & Update
         if lastUUID ~= currentUUID then
-            UpdateMoneyClipData(item, true)
-            currentUUID = MoneyClipData.UUID
+            UpdateMoneyClipDisplayData(moneyClip, true)
+            currentUUID = modData.UUID
             lastUUID = currentUUID
         end
 
@@ -1239,11 +1396,13 @@ function ISToolTipInv:render()
         local username = player:getUsername()
         local blankString = " "
 
+
         -- Information Display Strings
-        local moneyClipOwner        = MoneyClipData.Owner or blankString
-        local smokeyPointBalance    = MoneyClipData.BankBalance or 0
-        local cashBalance           = MoneyClipData.CashBalance or 0
-        local wandererTokenBalance  = MoneyClipData.TokenBalance or 0
+        local moneyClipOwner        = modData.Owner or blankString
+        local smokeyPointBalance    = modData.BankBalance or 0
+        local cashBalance           = modData.CashBalance or 0
+        local wandererTokenBalance  = modData.TokenBalance or 0
+
 
 
         ------------------------------------------------------------------------
@@ -1275,11 +1434,11 @@ function ISToolTipInv:render()
             self.tooltip:DrawText(fontType, "Token Balance:   " .. Utils.CurrencyFormatter(wandererTokenBalance), startX, 44, 0.0, 0.886, 1.0, 1)
 
         elseif moneyClipOwner and (moneyClipOwner ~= username) then
-            if (getAccessLevel() == "admin") then
-                self:drawRect(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, fontHeight * 1.5, 1, 0, 0, 0)
-                self:drawRectBorder(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, (fontHeight * 1.5) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
-                self.tooltip:DrawText(fontType, "Bound To:  " .. moneyClipOwner, startX, 6, 1.0, 0.6, 0.11, 1)
-            end
+            -- if (getAccessLevel() == "admin") then
+            --     self:drawRect(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, fontHeight * 1.5, 1, 0, 0, 0)
+            --     self:drawRectBorder(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, (fontHeight * 1.5) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
+            --     self.tooltip:DrawText(fontType, "Bound To:  " .. moneyClipOwner, startX, 6, 1.0, 0.6, 0.11, 1)
+            -- end
         end
     end
 end
