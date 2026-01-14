@@ -479,7 +479,7 @@ module GN84-WNDR
 		Type				=  Normal,
 		Icon				=  LottoStandard,		
 		WorldStaticModel	=  LottoTicketStandard,
-		Tooltip 			=  Scratch the Lotto Ticket for a Chance to Win!,
+		Tooltip 			=  Scratch the Lotto Ticket for a Chance to Win Big!,
 	}
 
 	item LottoTicketRare
@@ -490,7 +490,7 @@ module GN84-WNDR
 		Type				=  Normal,
 		Icon				=  LottoRare,				
 		WorldStaticModel	=  LottoTicketRare,
-		Tooltip 			=  Collect Rare Tickets for a Chance to Win Big!,
+		Tooltip 			=  Collect Rare Tickets to Claim Rare Prizes!,
 	}
 
 	item LottoTicketGolden

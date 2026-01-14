@@ -27,6 +27,9 @@ module GN84-WNDR
 /*--                CONVERT MONEY TO STACKS OF CASH                       */
 /*------------------------------------------------------------------------*/
 
+/*                           LEGACY                                       */
+
+/*
 	recipe Make 100 Stack of Cash
 	{
 		Money=100,
@@ -579,11 +582,17 @@ module GN84-WNDR
 	}	
 
 
+*/
+
+
+
+
+
 /*------------------------------------------------------------------------*/
 /*--                    CONVERT CASH TO SMOKEY POINTS                     */
 /*------------------------------------------------------------------------*/
 	
-	recipe Convert to 100 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=1,
 		
@@ -596,7 +605,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints100,	
 	}
 
-	recipe Convert to 500 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=5,
 		
@@ -609,7 +618,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500,	
 	}
 
-	recipe Convert to 500 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=1,
 		
@@ -622,7 +631,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500,	
 	}
 	
-	recipe Convert to 1000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=10,
 		
@@ -635,7 +644,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 
-	recipe Convert to 1000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=2,
 		
@@ -648,7 +657,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 	
-	recipe Convert to 1000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=1,
 		
@@ -661,7 +670,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000,	
 	}
 
-	recipe Convert to 5000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=50,
 		
@@ -674,7 +683,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000,	
 	}
 
-	recipe Convert to 5000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=5,
 		
@@ -687,7 +696,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000,	
 	}
 
-	recipe Convert to 5000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=1,
 		
@@ -700,7 +709,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000,	
 	}	
 	
-	recipe Convert to 10000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=100,
 		
@@ -713,7 +722,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
-	recipe Convert to 10000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=20,
 		
@@ -726,7 +735,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
-	recipe Convert to 10000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=10,
 		
@@ -739,7 +748,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
-	recipe Convert to 10000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=2,
 		
@@ -752,7 +761,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
-	recipe Convert to 10000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=1,
 		
@@ -765,7 +774,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000,	
 	}
 
-	recipe Convert to 50000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=50,
 		
@@ -778,7 +787,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints50000,	
 	}
 
-	recipe Convert to 50000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=10,
 		
@@ -791,7 +800,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints50000,	
 	}
 
-	recipe Convert to 50000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=5,
 		
@@ -804,7 +813,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints50000,	
 	}
 
-	recipe Convert to 50000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack50000=1,
 		
@@ -818,7 +827,7 @@ module GN84-WNDR
 	}
 
 
-	recipe Convert to 100000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=20,
 		
@@ -831,7 +840,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints100000,	
 	}
 
-	recipe Convert to 100000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=10,
 		
@@ -844,7 +853,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints100000,	
 	}
 
-	recipe Convert to 100000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=1,
 		
@@ -857,7 +866,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints100000,	
 	}
 
-	recipe Convert to 500000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=100,
 		
@@ -870,7 +879,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
-	recipe Convert to 500000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=50,
 		
@@ -883,7 +892,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
-	recipe Convert to 500000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack50000=10,
 		
@@ -896,7 +905,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
-	recipe Convert to 500000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=5,
 		
@@ -909,7 +918,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
-	recipe Convert to 500000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=1,
 		
@@ -922,7 +931,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints500000,	
 	}
 
-	recipe Convert to 1000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=1,
 		
@@ -935,7 +944,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
 
-	recipe Convert to 1000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=10,
 		
@@ -948,7 +957,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
 
-	recipe Convert to 1000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=2,
 		
@@ -961,7 +970,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
 
-	recipe Convert to 1000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=100,
 		
@@ -974,7 +983,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints1000000,	
 	}
 
-	recipe Convert to 5000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=50,
 		
@@ -987,7 +996,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000000,	
 	}
 
-	recipe Convert to 5000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=10,
 		
@@ -1000,7 +1009,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000000,	
 	}
 
-	recipe Convert to 5000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=5,
 		
@@ -1013,7 +1022,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000000,	
 	}
 
-	recipe Convert to 5000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000000=1,
 		
@@ -1026,7 +1035,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints5000000,	
 	}
 
-	recipe Convert to 10000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=100,
 		
@@ -1039,7 +1048,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000000,	
 	}
 
-	recipe Convert to 10000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=10,
 		
@@ -1052,7 +1061,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000000,	
 	}
 	
-	recipe Convert to 10000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000000=2,
 		
@@ -1065,7 +1074,7 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPoints10000000,	
 	}
 
-	recipe Convert to 10000000 Smokey Points
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000000=1,
 		
@@ -1265,7 +1274,7 @@ module GN84-WNDR
         OnCreate:ShredderRecycleClothing,
 	}
 
-	recipe Shred and Recycle Bulletproof Vest for Money
+	recipe Shred and Recycle Armor for Money
 	{
 		keep SmokeyShredderRecycler,
 
@@ -1672,7 +1681,7 @@ module GN84-WNDR
 
 	recipe Redeem Rare Tickets for Wheel Spin Fragment
 	{
-		LottoTicketRare=20,
+		LottoTicketRare=25,
 
 		InSameInventory:true,
 		RemoveResultItem:true,
@@ -1723,7 +1732,7 @@ module GN84-WNDR
 		WheelSpinFragment3,
 		WheelSpinFragment4,
 		WheelSpinFragment5,
-		WandererTokenStack50,
+		WandererTokenStack100,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1748,7 +1757,7 @@ module GN84-WNDR
 	recipe Forge Super Wheel Spin Token
 	{
 		WheelSpinTokenNew=1,
-		WandererTokenStack100,
+		WandererTokenStack250,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1773,7 +1782,7 @@ module GN84-WNDR
 	recipe Forge Mega Wheel Spin Token
 	{
 		SuperWheelSpinTokenNew=1,
-		WandererTokenStack250,
+		WandererTokenStack500,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1864,7 +1873,7 @@ module GN84-WNDR
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-WNDR.WandererTokenStack100,
+		Result:GN84-WNDR.WandererTokenStack250,
 		Time:120.0,
 	}
 
@@ -1874,7 +1883,7 @@ module GN84-WNDR
 /*------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------*/
-/*--                     REDEEMING WANDERER TOKENS                        */
+/*--                 REDEEMING / DEPOSITING WANDERER TOKENS               */
 /*------------------------------------------------------------------------*/
 	
 	/*   REDEEMING WANDERER TOKENS   */
@@ -1891,13 +1900,30 @@ module GN84-WNDR
 		OnCreate:GivePlayerSmokeyPointsWandererToken,
 	}
 
+/*   ToDo
+
+	recipe Deposit Wanderer Token into Smokey Bank
+	{
+		WandererToken,
+
+		InSameInventory:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		Result:Money,
+		RemoveResultItem:true,
+		Time:120.0,		
+		OnCreate:DepositWandererTokensIntoSmokeyBank,
+	}
+*/
 
 /*------------------------------------------------------------------------*/
-/*--                         STACKING TOKENS                              */
+/*--                    STACKING TOKENS - LEGACY                          */
 /*------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------*/
 /*--                             5 Tokens                                 */
 /*------------------------------------------------------------------------*/
+
+/*
 
 	recipe Make 5 Stack of Wanderer Tokens
 	{
@@ -1910,9 +1936,6 @@ module GN84-WNDR
 		Time:120.0,
 	}
 
-/*------------------------------------------------------------------------*/
-/*--                            10 Tokens                                 */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 10 Stack of Wanderer Tokens
 	{
@@ -1936,9 +1959,6 @@ module GN84-WNDR
 		Time:120.0,
 	}
 
-/*------------------------------------------------------------------------*/
-/*--                            25 Tokens                                 */
-/*------------------------------------------------------------------------*/
 	
 	recipe Make 25 Stack of Wanderer Tokens
 	{
@@ -1963,9 +1983,6 @@ module GN84-WNDR
 	}
 	
 
-/*------------------------------------------------------------------------*/
-/*--                            50 Tokens                                 */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 50 Stack of Wanderer Tokens
 	{
@@ -2012,9 +2029,6 @@ module GN84-WNDR
 	}
 
 
-/*------------------------------------------------------------------------*/
-/*--                            100 Tokens                                */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 100 Stack of Wanderer Tokens
 	{
@@ -2071,9 +2085,6 @@ module GN84-WNDR
 		Time:120.0,
 	}	
 
-/*------------------------------------------------------------------------*/
-/*--                            250 Tokens                                */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 250 Stack of Wanderer Tokens
 	{
@@ -2143,9 +2154,6 @@ module GN84-WNDR
 	}
 
 
-/*------------------------------------------------------------------------*/
-/*--                            500 Tokens                                */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 500 Stack of Wanderer Tokens
 	{
@@ -2226,9 +2234,6 @@ module GN84-WNDR
 	}
 
 
-/*------------------------------------------------------------------------*/
-/*--                            1000 Tokens                               */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 1000 Stack of Wanderer Tokens
 	{
@@ -2307,9 +2312,6 @@ module GN84-WNDR
 		Time:120.0,
 	}
 
-/*------------------------------------------------------------------------*/
-/*--                            5000 Tokens                               */
-/*------------------------------------------------------------------------*/
 
 	recipe Make 5000 Stack of Wanderer Tokens
 	{
@@ -2322,10 +2324,7 @@ module GN84-WNDR
 		Time:120.0,
 	}
 
-	
-/*------------------------------------------------------------------------*/
-/*--                       UNSTACKING TOKENS                              */
-/*------------------------------------------------------------------------*/
+
 
 	recipe Unstack Wanderer Tokens
 	{
@@ -2405,11 +2404,6 @@ module GN84-WNDR
 	}
 	
 
-
-
-/*------------------------------------------------------------------------*/
-/*--                    SPLITTING TOKEN STACKS                            */
-/*------------------------------------------------------------------------*/
 
 	recipe Split Stack of Wanderer Tokens
 	{
@@ -2498,6 +2492,12 @@ module GN84-WNDR
 		Result:GN84-WNDR.WandererTokenStack1000=5,
 		Time:120.0,
 	}
+
+*/
+
+
+
+
 
 
 /*------------------------------------------------------------------------*/
@@ -2729,6 +2729,7 @@ module GN84-WNDR
 /*--                     LEGACY TOKEN CONVERSIONS                         */
 /*------------------------------------------------------------------------*/
 
+/*
 	recipe Update Legacy VIP Tokens to New Format
 	{
 		VIPToken=5,
@@ -2752,3 +2753,5 @@ module GN84-WNDR
 	}
 
 }
+
+/*
