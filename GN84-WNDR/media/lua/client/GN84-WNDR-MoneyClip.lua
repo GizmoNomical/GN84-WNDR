@@ -1558,7 +1558,7 @@ function ISToolTipInv:render()
 
         local player = getPlayer()
         if not player then return end
-        
+
         local username = player:getUsername()
         local blankString = " "
 
@@ -1608,3 +1608,14 @@ function ISToolTipInv:render()
         end
     end
 end
+
+
+------------------------------------------------------------------------
+--                          
+--                          
+--                        CUSTOM UI FUNCTIONS
+--                          
+--                          
+------------------------------------------------------------------------
+
+

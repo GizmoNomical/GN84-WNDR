@@ -18,42 +18,27 @@
 require "recipecode"
 require "ISUI/ISContextMenu"
 
+
 ------------------------------------------------------------------------
 --                       SANDBOX VARIABLES
 ------------------------------------------------------------------------
 
-local pointsPerZombieKill 		= SandboxVars.GN84WNDR.PointsPerZombieKill 		or 18
+local pointsPerZombieKill 		= SandboxVars.GN84WNDR.PointsPerZombieKill 			or 18
 local bonusCashOdds				= SandboxVars.GN84WNDR.EFundOdds					or 10
 local walletCashMultiplier 		= SandboxVars.GN84WNDR.WalletCashMultiplier 		or 1.0
-local eFundCashMultiplier 		= SandboxVars.GN84WNDR.EFundCashMultiplier		or 1.0
-local wealthyCashAmount 		= SandboxVars.GN84WNDR.WealthyCash				or 50
-local averageCashAmount 		= SandboxVars.GN84WNDR.AverageCash				or 15
+local eFundCashMultiplier 		= SandboxVars.GN84WNDR.EFundCashMultiplier			or 1.0
+local wealthyCashAmount 		= SandboxVars.GN84WNDR.WealthyCash					or 50
+local averageCashAmount 		= SandboxVars.GN84WNDR.AverageCash					or 15
 local poorCashAmount 			= SandboxVars.GN84WNDR.PoorCash 					or 5
-local playerLuckBonus 			= SandboxVars.GN84WNDR.PlayerLuckBonus 			or 1.2
+local playerLuckBonus 			= SandboxVars.GN84WNDR.PlayerLuckBonus 				or 1.2
 local playerUnluckyPenalty 		= SandboxVars.GN84WNDR.PlayerUnluckyPenalty 		or 0.95
-local lotteryTicketOdds 		= SandboxVars.GN84WNDR.LotteryTicketOdds 		or 3.25
-local rareTicketCashValue 		= SandboxVars.GN84WNDR.RareTicketCashValue 		or 1
-local VIPTokenCashValue 		= SandboxVars.GN84WNDR.VIPTokenCashValue 		or 100000
-local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 	or 10000
+local lotteryTicketOdds 		= SandboxVars.GN84WNDR.LotteryTicketOdds 			or 3.25
+local rareTicketCashValue 		= SandboxVars.GN84WNDR.RareTicketCashValue 			or 1
+local VIPTokenCashValue 		= SandboxVars.GN84WNDR.VIPTokenCashValue 			or 100000
+local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 		or 10000
 
 
 
-
-------------------------------------------------------------------------
---                          TODO: NEW PLAYER - ADD MONEY CLIP
-------------------------------------------------------------------------
-
--- function OnCreatePlayer(playerIndex, player)
---     if not player:getModData().wallet then
---         local wallet = player:getInventory():AddItem("VM.Leather_Wallet")
---         wallet:getInventory():AddItem("VM.10Bill")
---         wallet:getInventory():AddItem("VM.5Bill")
---         wallet:getInventory():AddItem("VM.5Bill")
---         player:getModData().wallet = true
---     end
--- end
-
--- Events.OnCreatePlayer.Add(OnCreatePlayer)
 
 
 
@@ -130,13 +115,15 @@ function GivePlayerSmokeyPointsWandererToken()
 end
 
 
+
 ------------------------------------------------------------------------
 --                  ADD SMOKEY POINTS ON ZOMBIE KILL
 ------------------------------------------------------------------------
 
+
 function SmokeyPointsOnZombieKill(zombie)
 	local player = getPlayer()
-	if player == nil then return end
+	if not player then return end
 
 	local lastAttacker = zombie:getAttackedBy()
 
@@ -154,8 +141,8 @@ Events.OnZombieDead.Add(SmokeyPointsOnZombieKill)
 ------------------------------------------------------------------------
 
 local function checkWalletForCash(player)
-	if player == nil then return false end
-
+	if not player then return false end
+	
 	local baseOdds = 80
 	local bonusOdds = 0
 
@@ -181,6 +168,8 @@ end
 
 
 local function calculateWalletCash(player)
+	if not player then return 0 end
+
 	local cashFound = 0
 	local wealthRoll = ZombRand(100) + 1
 
@@ -210,8 +199,8 @@ end
 
 
 local function checkWalletForBonusCash(player)
-	if player == nil then return false end
-
+	if not player then return false end
+	
 	local baseOdds = SandboxVars.GN84WNDR.EFundOdds
 	local bonusOdds = 0
 
@@ -237,7 +226,7 @@ end
 
 
 local function calculateBonusWalletCash(player)
-	if player == nil then return end
+	if not player then return 0 end
 
 	local cashFound = 0
 	local bonusCashRoll = ZombRand(100) + 1
@@ -269,6 +258,7 @@ end
 
 
 function CollectMoneyFromWallet(sources, result, player, item)
+	if not player then return end
 
 	local walletCash = 0
 	local bonusCash = 0
@@ -331,6 +321,7 @@ end
 ------------------------------------------------------------------------
 --                          LOTTO TICKETS
 ------------------------------------------------------------------------
+
 
 local function PlayLottoWinnerSound()
 	getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
@@ -583,7 +574,7 @@ local bonusPrizeLow =
 
 
 local function CheckForWinner(player)
-	if player == nil then return end
+	if not player then return end
 
 -- Check for Luck
 
@@ -606,7 +597,7 @@ end
 
 
 local function CalcLottoWinnings(player)
-	if player == nil then return end
+	if not player then return end	
 
 	local lottoTicketWinnings = 0
 	local lottoTicketRoll = ZombRand(10000) + 1
@@ -678,6 +669,8 @@ end
 
 
 function ScratchLottoTicketStandard(sources, result, player, item)
+	if not player then return end
+
 	if CheckForWinner(player) then
 		CalcLottoWinnings(player)
 		PlayLottoWinnerSound()
@@ -687,7 +680,9 @@ function ScratchLottoTicketStandard(sources, result, player, item)
 	end
 end
 
+
 function TradeRareTicketForStandardTickets(sources, result, player)
+	if not player then return end
 	local t = 0
 
 	while t ~= 5 do
@@ -696,7 +691,9 @@ function TradeRareTicketForStandardTickets(sources, result, player)
 	end
 end
 
+
 function TradeRareTicketForCashStack(sources, result, player)
+	if not player then return end
 	local t = 0
 
 	while t ~= rareTicketCashValue do
@@ -704,6 +701,8 @@ function TradeRareTicketForCashStack(sources, result, player)
 		t = t+1
 	end
 end
+
+
 
 local randomAmmoList =
 {
@@ -722,6 +721,8 @@ local randomAmmoList =
 }
 
 function TradeRareTicketForRandomAmmo(sources, result, player)
+	if not player then return end
+
 	local randNum = ZombRand(1, #randomAmmoList + 1)
 
 	if ScriptManager.instance:getItem(randomAmmoList[randNum]) == nil then
@@ -739,6 +740,7 @@ end
 --                       WHEEL SPIN FRAGMENTS
 ------------------------------------------------------------------------
 
+
 local randomWheelSpinFragmentList =
 {
 	"GN84-WNDR.WheelSpinFragment1",
@@ -748,7 +750,10 @@ local randomWheelSpinFragmentList =
 	"GN84-WNDR.WheelSpinFragment5",
 }
 
+
 function GiveRandomWheelSpinFragment(sources, result, player)
+	if not player then return end
+
 	local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
 
 	if ScriptManager.instance:getItem(randomWheelSpinFragmentList[randNum]) == nil then
@@ -760,6 +765,7 @@ function GiveRandomWheelSpinFragment(sources, result, player)
 end
 
 function GiveFiveRandomWheelSpinFragments(sources, result, player)
+	if not player then return end
 
 	for i=0, 4, 1 do
 		local randNum = ZombRand(1, #randomWheelSpinFragmentList + 1)
@@ -781,6 +787,7 @@ end
 ------------------------------------------------------------------------
 
 function CutLeatherWallet(items, result, player)
+	if not player then return end
 
 	local leatherOdds = 20
 	local extraLeatherOdds = 10
@@ -824,9 +831,7 @@ end
 --                     MONEY CLIP ITEM VALIDATION
 ------------------------------------------------------------------------
 
-function GN84_AcceptItemsMoneyClip(container, item)
-
-	local moneyClipItems =
+local moneyClipItems =
 	{
 		"Base.Money",
 		"GN84-WNDR.BankBalance",
@@ -894,6 +899,8 @@ function GN84_AcceptItemsMoneyClip(container, item)
 		"TheyKnew.Zomboxivir",
 		"TheyKnew.Zomboxycycline",
 	}
+
+function GN84_AcceptItemsMoneyClip(container, item)	
 
 	for i = 1, #moneyClipItems do
     	if item:getFullType() == moneyClipItems[i] then
