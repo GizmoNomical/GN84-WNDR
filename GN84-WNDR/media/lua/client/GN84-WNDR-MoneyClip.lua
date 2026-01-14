@@ -9,28 +9,68 @@
 -- ##      | |__| | | |  / /  | | | | | | | (_) | | |\  | | (_) | | | | | | | | | | (__  | (_| | | |      ##
 -- ##      \_____ | |_| /___| |_| |_| |_|  \___/  |_| \_|  \___/  |_| |_| |_| |_|  \___|  \__,_| |_|      ##
 -- ##                                                                                                     ##
--- ##                               Copyright © GizmoNomical - 2025                                       ##
+-- ##                               Copyright © GizmoNomical - 2026                                       ##
 -- ##                                           GN84-WNDR                                                 ##
 -- ##                                       The Wanderers Core                                            ##
 -- #########################################################################################################
 -- #########################################################################################################
 
+
 local Utils = require "Gizmo/GN84LIB_Utils"
 
--- Forward Declarations
+
+
+------------------------------------------------------------------------
+--                     FORWARD FUNCTION DECLARATIONS     
+------------------------------------------------------------------------
+
+local BindMoneyClipToPlayer
+local UnBindMoneyClip
+
+local CreateBalanceItems
+local RemoveBalanceItems
+
+local ReceiveSmokeyBankData
 local UpdateSmokeyBankData
-local UpdateAllMoneyClips
-local UpdateMoneyClipDisplayData
-local UpdateBalanceItems
-local UpdateWandererTokenBalance
+
 local UpdateSmokeyPointBalance
+local GetBankBalance
+local SaveBankBalance
+
+local UpdateWandererTokenBalance
+local GetTokenBalance
+local SaveTokenBalance
+
+local GetAllMoneyClips
+local UpdateAllMoneyClips
+local UpdateBalanceItems
+local UpdateMoneyClipDisplayData
+local UpdateContainerButtonTooltip
+
+local MoneyClipContext
+local BankBalanceContext
+local CashBalanceContext
+local TokenBalanceContext
 
 local ConsolidateAll
 local ConsolidateAllOnTransfer
-local CreateCashStack
-local CreateTokenStack
 local ConsolidateCash
+local _ConsolidateCash
 local ConsolidateTokens
+local _ConsolidateTokens
+
+local CreateCashStack
+local DepositCashBalance
+local _DepositCashBalance
+local GrabStackOfCashAll
+local _GrabStackOfCashAll
+local GrabStackOfCashAmount
+local _GrabStackOfCashAmount
+
+local CreateTokenStack
+local WithdrawAllTokens
+local _WithdrawAllTokens
+
 
 local listOfMoneyStacks
 local listOfTokenStacks
@@ -41,46 +81,85 @@ local lastUUID = nil
 
 
 
-
 ------------------------------------------------------------------------
---                        INITIALIZATION
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---
-------------------------------------------------------------------------
-
-
-------------------------------------------------------------------------
---                       REMOVE BALANCE ITEMS
+--                          
+--                          
+--                        INITIALIZATION  
+--                          
+--                          
 ------------------------------------------------------------------------
 
-local function RemoveBalanceItems(moneyClip)
-    local moneyClipContainer = moneyClip:getItemContainer()
-    local items = moneyClipContainer:getItems()
+------------------------------------------------------------------------
+--                     BIND MONEY CLIP TO PLAYER
+------------------------------------------------------------------------
 
-    if not items then
-        print("Warning: No Item List")
-        return
-    else
 
-        if items:size() == 0 then
-            return
+BindMoneyClipToPlayer = function(target, player, item)
+    if not item then return end
+    local moneyClip = item
 
-        elseif items:size() ~= 0 then
-            for i = items:size()-1, 0, -1 do
-                local item = items:get(i)
+	local modData = moneyClip:getModData()
+	if not modData then return end
 
-                if item:getType() == "BankBalance" then
-                    moneyClipContainer:DoRemoveItem(item)
-                elseif item:getType() == "CashBalance" then
-                    moneyClipContainer:DoRemoveItem(item)
-                elseif item:getType() == "TokenBalance" then
-                    moneyClipContainer:DoRemoveItem(item)
-                end
-            end
-        end
+	local username = player:getUsername()
+    if not username then return end
+
+    -- Set Default Values
+	if not modData.Owner then
+		modData.Owner = username
+        -- modData.Owner = "TestUser"
+		modData.AutoConsolidate = true
+        modData.UUID = getRandomUUID()
+        modData.BankBalance = 0
+        modData.CashBalance = 0
+        modData.TokenBalance = 0
 	end
+
+	-- Change Item Name to Reflect Bound Status
+	local itemName = moneyClip:getName()
+	if itemName == "Money Clip" then
+		item:setName(username .. "'s Money Clip")
+	end
+
+    -- Favorite Item
+	moneyClip:setFavorite(true)
+
+    -- Play Notification Sound
+    getSoundManager():PlaySound("BindMoneyClip", false, 1):setVolume(1)
+    -- Announce Binding to Player
+    player:Say("Money Clip Bound to Player")
+
+    CreateBalanceItems(moneyClip)
 end
+
+
+
+------------------------------------------------------------------------
+--                     UNBIND MONEY CLIP - (ADMIN)
+------------------------------------------------------------------------
+
+
+UnBindMoneyClip = function(target, player, item)
+    if not item then return end
+    local moneyClip = item
+
+	local modData = moneyClip:getModData()
+	if not modData then return end
+
+    if (modData.CashBalance ~= nil) and (modData.CashBalance > 0) then
+        CreateCashStack(moneyClip, modData.CashBalance)
+    end
+
+    moneyClip:setFavorite(false)
+    RemoveBalanceItems(moneyClip)
+
+	modData.Owner = nil
+	modData.BankBalance = nil
+	modData.CashBalance = nil
+	modData.TokenBalance = nil
+    modData.UUID = nil
+end
+
 
 
 
@@ -88,7 +167,8 @@ end
 --                    CREATE BALANCE ITEMS
 ------------------------------------------------------------------------
 
-local function CreateBalanceItems(moneyclip)
+
+CreateBalanceItems = function(moneyclip)
 
     -- Spawn Dummy Tooltip Items if not already Spawned
 	local moneyClip = moneyclip:getItemContainer()
@@ -156,80 +236,53 @@ end
 
 
 ------------------------------------------------------------------------
---                     BIND MONEY CLIP TO PLAYER
+--                       REMOVE BALANCE ITEMS
 ------------------------------------------------------------------------
 
-local function BindMoneyClipToPlayer(target, player, item)
-    if not item then return end
-    local moneyClip = item
 
-	local modData = moneyClip:getModData()
-	if not modData then return end
+RemoveBalanceItems = function(moneyClip)
+    local moneyClipContainer = moneyClip:getItemContainer()
+    local items = moneyClipContainer:getItems()
 
-	local username = player:getUsername()
-    if not username then return end
+    if not items then
+        print("Warning: No Item List")
+        return
+    else
 
-    -- Set Default Values
-	if not modData.Owner then
-		modData.Owner = username
-        -- modData.Owner = "TestUser"
-		modData.AutoConsolidate = true
-        modData.UUID = getRandomUUID()
-        modData.BankBalance = 0
-        modData.CashBalance = 0
-        modData.TokenBalance = 0
+        if items:size() == 0 then
+            return
+
+        elseif items:size() ~= 0 then
+            for i = items:size()-1, 0, -1 do
+                local item = items:get(i)
+
+                if item:getType() == "BankBalance" then
+                    moneyClipContainer:DoRemoveItem(item)
+                elseif item:getType() == "CashBalance" then
+                    moneyClipContainer:DoRemoveItem(item)
+                elseif item:getType() == "TokenBalance" then
+                    moneyClipContainer:DoRemoveItem(item)
+                end
+            end
+        end
 	end
-
-	-- Change Item Name to Reflect Bound Status
-	local itemName = moneyClip:getName()
-	if itemName == "Money Clip" then
-		item:setName(username .. "'s Money Clip")
-	end
-
-    -- Favorite Item
-	moneyClip:setFavorite(true)
-
-    -- Play Notification Sound
-    getSoundManager():PlaySound("BindMoneyClip", false, 1):setVolume(1)
-    -- Announce Binding to Player
-    player:Say("Money Clip Bound to Player")
-
-    CreateBalanceItems(moneyClip)
-end
-
-
-------------------------------------------------------------------------
---                     UNBIND MONEY CLIP - ADMIN
-------------------------------------------------------------------------
-
-local function UnBindMoneyClip(target, player, item)
-    if not item then return end
-    local moneyClip = item
-
-	local modData = moneyClip:getModData()
-	if not modData then return end
-
-    if (modData.CashBalance ~= nil) and (modData.CashBalance > 0) then
-        CreateCashStack(moneyClip, modData.CashBalance)
-    end
-
-    moneyClip:setFavorite(false)
-    RemoveBalanceItems(moneyClip)
-
-	modData.Owner = nil
-	modData.BankBalance = nil
-	modData.CashBalance = nil
-	modData.TokenBalance = nil
-    modData.UUID = nil
 end
 
 
 
 
 
+
+
+
 ------------------------------------------------------------------------
---                      CURRENCY CONSOLIDATION
+--                          
+--                          
+--                      CURRENCY CONSOLIDATION    
+--                          
+--                          
 ------------------------------------------------------------------------
+
 ------------------------------------------------------------------------
 --                        CASH CONSOLIDATION
 ------------------------------------------------------------------------
@@ -309,6 +362,7 @@ end
 --                    WANDERER TOKEN CONSOLIDATION
 ------------------------------------------------------------------------
 
+
 listOfTokenStacks =
 {
     WandererToken                       =   {type = "GN84-WNDR.WandererToken",                      value = 1,          },
@@ -372,18 +426,21 @@ end
 
 
 ------------------------------------------------------------------------
---                     CONSOLIDATE ALL CURRENCY
+--             DAILY CONSOLIDATION / MANUAL CONSOLIDATION     
 ------------------------------------------------------------------------
 
 
--- Daily Consolidation / Manual Consolidation
 ConsolidateAll = function(moneyClip)
     ConsolidateCash(moneyClip, true)
     ConsolidateTokens(moneyClip, true)
     UpdateMoneyClipDisplayData(moneyClip, true)
 end
 
--- On Transfer Consolidation
+------------------------------------------------------------------------
+--                       ON-TRANSFER CONSOLIDATION   
+------------------------------------------------------------------------
+
+
 ConsolidateAllOnTransfer = function(moneyClip)
     ConsolidateCash(moneyClip, false)
     ConsolidateTokens(moneyClip, false)
@@ -391,7 +448,11 @@ ConsolidateAllOnTransfer = function(moneyClip)
 end
 
 
--- Pasthrough Function
+------------------------------------------------------------------------
+--                         PASSTHROUGH 
+------------------------------------------------------------------------
+
+
 local function _ConsolidateAll(item)
 	ConsolidateAll(item)
     getPlayer():Say("Consolidating All Currency")
@@ -400,24 +461,29 @@ end
 
 
 
-
-
 ------------------------------------------------------------------------
---                     CONTEXT MENUS & FUNCTIONS
+--                          
+--                          
+--                     CONTEXT MENUS & FUNCTIONS    
+--                          
+--                          
 ------------------------------------------------------------------------
-------------------------------------------------------------------------
---
-------------------------------------------------------------------------
-
 
 ------------------------------------------------------------------------
+--                          
+--                          
 --                           MONEY CLIP
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                          CONTEXT MENU
+--                          
+--                          
 ------------------------------------------------------------------------
 
-local function MoneyClipContext(playerNum, context, items)
+
+------------------------------------------------------------------------
+--                     MONEY CLIP - CONTEXT MENU
+------------------------------------------------------------------------
+
+
+MoneyClipContext = function(playerNum, context, items)
 
 	local player = getPlayer()
     items = ISInventoryPane.getActualItems(items)
@@ -456,15 +522,20 @@ Events.OnFillInventoryObjectContextMenu.Add(MoneyClipContext)
 
 
 
-
 ------------------------------------------------------------------------
+--                          
+--                          
 --                            BANK BALANCE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                            CONTEXT MENU
+--                          
+--                          
 ------------------------------------------------------------------------
 
-local function BankBalanceContext(playerNum, context, items)
+------------------------------------------------------------------------
+--                       BANK BALANCE - CONTEXT MENU
+------------------------------------------------------------------------
+
+
+BankBalanceContext = function(playerNum, context, items)
 
 	local player = getPlayer()
     items = ISInventoryPane.getActualItems(items)
@@ -503,171 +574,20 @@ Events.OnFillInventoryObjectContextMenu.Add(BankBalanceContext)
 
 
 
-
-
-
 ------------------------------------------------------------------------
+--                          
+--                          
 --                            CASH BALANCE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                              DEPOSIT
-------------------------------------------------------------------------
-
-local function DepositCashBalance(item)
-
-        local moneyClip = item
-
-        if moneyClip:getType() == "MoneyClip" then
-
-            local modData = moneyClip:getModData()
-            if modData == nil then return end
-
-            local player = getPlayer()
-
-            if modData.Owner == player:getUsername() then
-
-                local amount = modData.CashBalance or 0
-                if amount ~= 0 then
-                    sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
-                    modData.CashBalance = 0
-                    getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
-                    player:Say("Depositing $" .. Utils.CurrencyFormatter(amount) .. " into Smokey Bank")
-                    UpdateMoneyClipDisplayData(moneyClip, true)
-                end
-            else
-               player:Say("Error:  Unauthorized")
-            end
-        end
-end
-
--- Passthrough Function
-local function _DepositCashBalance(item)
-	DepositCashBalance(item)
-end
-
-
-
-------------------------------------------------------------------------
---                    CREATE MONEYSTACKX CASH STACK
+--                          
+--                          
 ------------------------------------------------------------------------
 
-CreateCashStack = function(moneyClip, amount)
-    if not moneyClip then return false end
-    if not amount then return false end
-
-    local modData = moneyClip:getModData()
-    if not modData then return false end
-
-    -- Instantiate MoneyStackX Item
-    local moneyStackX = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStackX")
-    moneyClip:getItemContainer():AddItem(moneyStackX)
-
-    local moneyStackData = moneyStackX:getModData()
-    if not moneyStackData then return false end
-
-    -- Set Money Stack Amount in modData
-    moneyStackData.CashAmount = amount
-
-    -- Rename Money Stack to Reflect Cash Amount
-    moneyStackX:setName(moneyStackX:getName() .. " - $" .. Utils.CurrencyFormatter(moneyStackData.CashAmount))
-    return true
-end
-
-
-
 ------------------------------------------------------------------------
---                       GRAB CASH STACK - ALL
+--                     CASH BALANCE - CONTEXT MENU
 ------------------------------------------------------------------------
 
-local function GrabStackOfCashAll(item)
-        if item == nil then return end
 
-        local moneyClip = item
-
-        if moneyClip:getType() == "MoneyClip" then
-
-            local modData = moneyClip:getModData()
-            if modData == nil then return end
-            if modData.Owner == nil then return end
-            if modData.CashBalance == nil then return end
-
-            local player = getPlayer()
-            if player == nil then return end
-
-            if modData.Owner == player:getUsername() then
-                if CreateCashStack(moneyClip, modData.CashBalance) then
-                    modData.CashBalance = 0
-                    getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
-                    UpdateMoneyClipDisplayData(moneyClip, true)
-                else
-                    print("Error: Grabbing Full Stack of Cash Failed!")
-                end
-            else
-                getPlayer():Say("Error:  Unauthorized")
-            end
-        end
-end
-
-
-
-
-------------------------------------------------------------------------
---                     GRAB CASH STACK - AMOUNT
-------------------------------------------------------------------------
-
--- TODO
-local function GrabStackOfCashAmount(item)
-    if item == nil then return end
-
-    local moneyClip = item
-
-    if moneyClip:getType() == "MoneyClip" then
-
-        local modData = moneyClip:getModData()
-        if modData == nil then return end
-        if modData.Owner == nil then return end
-
-        local player = getPlayer()
-        if player == nil then return end
-
-        if modData.Owner == player:getUsername() then
-            if CreateCashStack(moneyClip, modData.CashBalance) then
-                modData.CashBalance = 0
-                getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
-            else
-                print("Error: Grabbing Stack of Cash (Amount) Failed!")
-            end
-        else
-            getPlayer():Say("Error:  Unauthorized")
-        end
-    end
-end
-
-
-
--- Passthrough Functions
-local function _GrabStackOfCashAll(item)
-	GrabStackOfCashAll(item)
-end
-
-local function _GrabStackOfCashAmount(item)
-	GrabStackOfCashAmount(item)
-end
-
-local function _ConsolidateCash(item)
-    ConsolidateCash(item, true)
-end
-
-
-
-------------------------------------------------------------------------
---                           CASH BALANCE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                           CONTEXT MENU
-------------------------------------------------------------------------
-
-local function CashBalanceContext(playerNum, context, items)
+CashBalanceContext = function(playerNum, context, items)
 
 	local player = getSpecificPlayer(playerNum)
     items = ISInventoryPane.getActualItems(items)
@@ -737,15 +657,12 @@ Events.OnFillInventoryObjectContextMenu.Add(CashBalanceContext)
 
 
 
-
 ------------------------------------------------------------------------
---                           TOKEN BALANCE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                 CREATE WANDERERTOKENSTACKX TOKEN STACK
+--                       CREATE MONEYSTACKX
 ------------------------------------------------------------------------
 
-CreateTokenStack = function(moneyClip, amount)
+
+CreateCashStack = function(moneyClip, amount)
     if not moneyClip then return false end
     if not amount then return false end
 
@@ -753,28 +670,29 @@ CreateTokenStack = function(moneyClip, amount)
     if not modData then return false end
 
     -- Instantiate MoneyStackX Item
-    local tokenStackX = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStackX")
-    moneyClip:getItemContainer():AddItem(tokenStackX)
+    local moneyStackX = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStackX")
+    moneyClip:getItemContainer():AddItem(moneyStackX)
 
-    local tokenStackXData = tokenStackX:getModData()
-    if not tokenStackXData then return false end
+    local moneyStackData = moneyStackX:getModData()
+    if not moneyStackData then return false end
 
     -- Set Money Stack Amount in modData
-    tokenStackXData.TokenAmount = amount
+    moneyStackData.CashAmount = amount
 
     -- Rename Money Stack to Reflect Cash Amount
-    tokenStackX:setName(tokenStackX:getName() .. " -  " .. Utils.CurrencyFormatter(tokenStackXData.TokenAmount))
+    moneyStackX:setName(moneyStackX:getName() .. " - $" .. Utils.CurrencyFormatter(moneyStackData.CashAmount))
     return true
 end
 
 
 
+
 ------------------------------------------------------------------------
---                      WITHDRAW TOKENS - ALL
+--                              DEPOSIT
 ------------------------------------------------------------------------
 
-local function WithdrawAllTokens(item)
-        if item == nil then return end
+
+DepositCashBalance = function(item)
 
         local moneyClip = item
 
@@ -783,19 +701,58 @@ local function WithdrawAllTokens(item)
             local modData = moneyClip:getModData()
             if modData == nil then return end
 
+            local player = getPlayer()
+
+            if modData.Owner == player:getUsername() then
+
+                local amount = modData.CashBalance or 0
+                if amount ~= 0 then
+                    sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
+                    modData.CashBalance = 0
+                    getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
+                    player:Say("Depositing $" .. Utils.CurrencyFormatter(amount) .. " into Smokey Bank")
+                    UpdateMoneyClipDisplayData(moneyClip, true)
+                end
+            else
+               player:Say("Error:  Unauthorized")
+            end
+        end
+end
+
+-- Passthrough Function
+_DepositCashBalance = function(item)
+	DepositCashBalance(item)
+end
+
+
+
+------------------------------------------------------------------------
+--                       GRAB CASH STACK - ALL
+------------------------------------------------------------------------
+
+
+GrabStackOfCashAll = function(item)
+        if item == nil then return end
+
+        local moneyClip = item
+
+        if moneyClip:getType() == "MoneyClip" then
+
+            local modData = moneyClip:getModData()
+            if modData == nil then return end
             if modData.Owner == nil then return end
-            if modData.TokenBalance == nil then return end
+            if modData.CashBalance == nil then return end
 
             local player = getPlayer()
             if player == nil then return end
 
             if modData.Owner == player:getUsername() then
-                if CreateTokenStack(moneyClip, modData.TokenBalance) then
-                    sendClientCommand("GN84-WNDR", "withdrawTokens", {getPlayer():getUsername(), modData.TokenBalance})
-                    getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
-                    UpdateWandererTokenBalance(nil, true)
+                if CreateCashStack(moneyClip, modData.CashBalance) then
+                    modData.CashBalance = 0
+                    getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+                    UpdateMoneyClipDisplayData(moneyClip, true)
                 else
-                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
+                    print("Error: Grabbing Full Stack of Cash Failed!")
                 end
             else
                 getPlayer():Say("Error:  Unauthorized")
@@ -805,13 +762,54 @@ end
 
 
 
--- Passthrough Functions
-local function _WithdrawAllTokens(item)
-	WithdrawAllTokens(item)
+------------------------------------------------------------------------
+--                     GRAB CASH STACK - AMOUNT
+------------------------------------------------------------------------
+
+-- TODO
+GrabStackOfCashAmount = function(item)
+    if item == nil then return end
+
+    local moneyClip = item
+
+    if moneyClip:getType() == "MoneyClip" then
+
+        local modData = moneyClip:getModData()
+        if modData == nil then return end
+        if modData.Owner == nil then return end
+
+        local player = getPlayer()
+        if player == nil then return end
+
+        if modData.Owner == player:getUsername() then
+            if CreateCashStack(moneyClip, modData.CashBalance) then
+                modData.CashBalance = 0
+                getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+            else
+                print("Error: Grabbing Stack of Cash (Amount) Failed!")
+            end
+        else
+            getPlayer():Say("Error:  Unauthorized")
+        end
+    end
 end
 
-local function _ConsolidateTokens(item)
-    ConsolidateTokens(item, true)
+
+------------------------------------------------------------------------
+--                      PASSTHROUGH FUNCTIONS    
+------------------------------------------------------------------------
+
+
+_GrabStackOfCashAll = function(item)
+	GrabStackOfCashAll(item)
+end
+
+_GrabStackOfCashAmount = function(item)
+	GrabStackOfCashAmount(item)
+end
+
+_ConsolidateCash = function(item)
+    ConsolidateCash(item, true)
 end
 
 
@@ -819,13 +817,19 @@ end
 
 
 ------------------------------------------------------------------------
+--                          
+--                          
 --                          TOKEN BALANCE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                          CONTEXT MENU
+--                          
+--                          
 ------------------------------------------------------------------------
 
-local function TokenBalanceContext(playerNum, context, items)
+------------------------------------------------------------------------
+--                    TOKEN BALANCE - CONTEXT MENU
+------------------------------------------------------------------------
+
+
+TokenBalanceContext = function(playerNum, context, items)
 
 	local player = getSpecificPlayer(playerNum)
     items = ISInventoryPane.getActualItems(items)
@@ -889,16 +893,104 @@ Events.OnFillInventoryObjectContextMenu.Add(TokenBalanceContext)
 
 
 
+------------------------------------------------------------------------
+--                     CREATE WANDERERTOKENSTACKX
+------------------------------------------------------------------------
+
+
+CreateTokenStack = function(moneyClip, amount)
+    if not moneyClip then return false end
+    if not amount then return false end
+
+    local modData = moneyClip:getModData()
+    if not modData then return false end
+
+    -- Instantiate MoneyStackX Item
+    local tokenStackX = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStackX")
+    moneyClip:getItemContainer():AddItem(tokenStackX)
+
+    local tokenStackXData = tokenStackX:getModData()
+    if not tokenStackXData then return false end
+
+    -- Set Money Stack Amount in modData
+    tokenStackXData.TokenAmount = amount
+
+    -- Rename Money Stack to Reflect Cash Amount
+    tokenStackX:setName(tokenStackX:getName() .. " -  " .. Utils.CurrencyFormatter(tokenStackXData.TokenAmount))
+    return true
+end
+
+
+
+------------------------------------------------------------------------
+--                      WITHDRAW TOKENS - ALL
+------------------------------------------------------------------------
+
+
+WithdrawAllTokens = function(item)
+        if item == nil then return end
+
+        local moneyClip = item
+
+        if moneyClip:getType() == "MoneyClip" then
+
+            local modData = moneyClip:getModData()
+            if modData == nil then return end
+
+            if modData.Owner == nil then return end
+            if modData.TokenBalance == nil then return end
+
+            local player = getPlayer()
+            if player == nil then return end
+
+            if modData.Owner == player:getUsername() then
+                if CreateTokenStack(moneyClip, modData.TokenBalance) then
+                    sendClientCommand("GN84-WNDR", "withdrawTokens", {getPlayer():getUsername(), modData.TokenBalance})
+                    getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+                    UpdateWandererTokenBalance(nil, true)
+                else
+                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
+                end
+            else
+                getPlayer():Say("Error:  Unauthorized")
+            end
+        end
+end
 
 
 ------------------------------------------------------------------------
---                     UPDATE ALL MONEY CLIP DATA
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---
+--                          PASSTHROUGH
 ------------------------------------------------------------------------
 
-local function GetAllMoneyClips()
+
+_WithdrawAllTokens = function(item)
+	WithdrawAllTokens(item)
+end
+
+_ConsolidateTokens = function(item)
+    ConsolidateTokens(item, true)
+end
+
+
+
+
+
+------------------------------------------------------------------------
+--                          
+--                          
+--                      MONEY CLIP DATA UPDATE    
+--                          
+--                          
+------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------
+--                GET ALL MONEY CLIPS FROM INVENTORY
+------------------------------------------------------------------------
+
+
+GetAllMoneyClips = function()
     local player = getPlayer()
         if not player then return end
 
@@ -923,6 +1015,13 @@ local function GetAllMoneyClips()
 end
 
 
+
+
+------------------------------------------------------------------------
+--                     UPDATE ALL MONEY CLIPS     
+------------------------------------------------------------------------
+
+
 UpdateAllMoneyClips = function()
 
     local MoneyClips = GetAllMoneyClips()
@@ -945,9 +1044,11 @@ UpdateAllMoneyClips = function()
 end
 
 
+
 ------------------------------------------------------------------------
---                      UPDATE BALANCE ITEMS
+--                     UPDATE ALL BALANCE ITEMS
 ------------------------------------------------------------------------
+
 
 UpdateBalanceItems = function(item)
     if not item then return end
@@ -1030,6 +1131,7 @@ end
 --                 UPDATE MONEY CLIP DISPLAY DATA
 ------------------------------------------------------------------------
 
+
 UpdateMoneyClipDisplayData = function(moneyClip, override)
     UpdateBalanceItems(moneyClip)
 
@@ -1042,21 +1144,43 @@ end
 
 
 
-
-
 ------------------------------------------------------------------------
---                    SMOKEY BANK DATA UPDATE
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---
-------------------------------------------------------------------------
-
-
-------------------------------------------------------------------------
---                 BANK BALANCE - SMOKEY POINTS
+--                          
+--                          
+--                     SMOKEY BANK DATA UPDATE     
+--                          
+--                          
 ------------------------------------------------------------------------
 
-local function SaveBankBalance(balance)
+------------------------------------------------------------------------
+--                   BANK BALANCE - SMOKEY POINTS
+------------------------------------------------------------------------
+
+
+UpdateSmokeyPointBalance = function(item, override)
+
+    if override then
+        sendClientCommand("GN84-WNDR", "get", nil)
+    end
+end
+
+Events.OnServerCommand.Add(GetBankBalance)
+
+
+
+GetBankBalance = function(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if module == "GN84-WNDR" and command == "get" then
+        if arguments then
+            SaveBankBalance(arguments[1])
+        end
+    end
+end
+
+
+
+SaveBankBalance = function(balance)
     local MoneyClips = GetAllMoneyClips()
     if MoneyClips == nil then return end
 
@@ -1077,26 +1201,6 @@ local function SaveBankBalance(balance)
 end
 
 
-local function GetBankBalance(module, command, arguments)
-    if module ~= "GN84-WNDR" then return end
-
-    if module == "GN84-WNDR" and command == "get" then
-        if arguments then
-            SaveBankBalance(arguments[1])
-        end
-    end
-end
-
-
-UpdateSmokeyPointBalance = function(item, override)
-
-    if override then
-        sendClientCommand("GN84-WNDR", "get", nil)
-    end
-end
-
-Events.OnServerCommand.Add(GetBankBalance)
-
 
 
 
@@ -1104,7 +1208,31 @@ Events.OnServerCommand.Add(GetBankBalance)
 --                  BANK BALANCE - WANDERER TOKENS
 ------------------------------------------------------------------------
 
-local function SaveTokenBalance(balance)
+
+UpdateWandererTokenBalance = function(item, override)
+
+    if override then
+        sendClientCommand("GN84-WNDR", "getTokens", nil)
+    end
+end
+
+Events.OnServerCommand.Add(GetTokenBalance)
+
+
+
+GetTokenBalance = function(module, command, arguments)
+    if module ~= "GN84-WNDR" then return end
+
+    if module == "GN84-WNDR" and command == "getTokens" then
+        if arguments then
+            SaveTokenBalance(arguments[1])
+        end
+    end
+end
+
+
+
+SaveTokenBalance = function(balance)
     local MoneyClips = GetAllMoneyClips()
     if MoneyClips == nil then return end
 
@@ -1125,39 +1253,14 @@ local function SaveTokenBalance(balance)
 end
 
 
-local function GetTokenBalance(module, command, arguments)
-    if module ~= "GN84-WNDR" then return end
 
-    if module == "GN84-WNDR" and command == "getTokens" then
-        if arguments then
-            SaveTokenBalance(arguments[1])
-        end
-    end
-end
-
-
-UpdateWandererTokenBalance = function(item, override)
-
-    if override then
-        sendClientCommand("GN84-WNDR", "getTokens", nil)
-    end
-end
-
-Events.OnServerCommand.Add(GetTokenBalance)
 
 
 ------------------------------------------------------------------------
 --                  RECEIVE / REQUEST SMOKEY BANK DATA
 ------------------------------------------------------------------------
 
-UpdateSmokeyBankData = function()
-    UpdateSmokeyPointBalance(nil, true)
-    UpdateWandererTokenBalance(nil, true)
-    UpdateAllMoneyClips()
-end
-
-
-local function ReceiveSmokeyBankData(module, command, arguments)
+ReceiveSmokeyBankData = function(module, command, arguments)
     if module ~= "GN84-WNDR" then return end
 
     if module == "GN84-WNDR" and command == "UpdateSmokeyBankData" then
@@ -1169,16 +1272,22 @@ Events.OnServerCommand.Add(ReceiveSmokeyBankData)
 
 
 
+UpdateSmokeyBankData = function()
+    UpdateSmokeyPointBalance(nil, true)
+    UpdateWandererTokenBalance(nil, true)
+    UpdateAllMoneyClips()
+end
+
 
 
 
 ------------------------------------------------------------------------
---                        SYSTEM FUNCTIONS
+--                          
+--                          
+--                        SYSTEM FUNCTIONS  
+--                          
+--                          
 ------------------------------------------------------------------------
-------------------------------------------------------------------------
---
-------------------------------------------------------------------------
-
 
 ------------------------------------------------------------------------
 --                       SERVER REQUEST TIMER
@@ -1195,9 +1304,11 @@ Events.OnServerCommand.Add(ReceiveSmokeyBankData)
 
 
 
+
 ------------------------------------------------------------------------
---                 AUTO-CONSOLIDATE - ON TRANSFER
+--                  AUTO-CONSOLIDATE - ON TRANSFER
 ------------------------------------------------------------------------
+
 
 local oldTransferPerform = ISInventoryTransferAction.perform
 
@@ -1219,9 +1330,11 @@ function ISInventoryTransferAction:perform()
 end
 
 
+
 ------------------------------------------------------------------------
---                    AUTO-CONSOLIDATE - DAILY @12AM
+--                  AUTO-CONSOLIDATE - DAILY @12AM
 ------------------------------------------------------------------------
+
 
 local function DailyAutoConsolidate()
 
@@ -1244,6 +1357,7 @@ Events.EveryDays.Add(DailyAutoConsolidate)
 ------------------------------------------------------------------------
 --    PREVENT UNAUTHORIZED ACCESS OF ITEMS / MOVING OF BALANCE ITEMS
 ------------------------------------------------------------------------
+
 
 local oldTransferIsValid = ISInventoryTransferAction.isValid
 
@@ -1289,16 +1403,20 @@ end
 
 
 
-
-
 ------------------------------------------------------------------------
---                        INVENTORY TOOLTIPS
+--                          
+--                          
+--                         INVENTORY TOOLTIPS 
+--                          
+--                          
 ------------------------------------------------------------------------
+
 ------------------------------------------------------------------------
 --                     CONTAINER BUTTON TOOLTIP
 ------------------------------------------------------------------------
 
-function UpdateContainerButtonTooltip(inventoryPage, state)
+
+UpdateContainerButtonTooltip = function(inventoryPage, state)
     if not inventoryPage then return end
     if not state then return end
 
@@ -1356,13 +1474,8 @@ Events.OnRefreshInventoryWindowContainers.Add(UpdateContainerButtonTooltip)
 
 
 
-
-
 ------------------------------------------------------------------------
 --                       MONEY CLIP TOOLTIP
-------------------------------------------------------------------------
-------------------------------------------------------------------------
---                       
 ------------------------------------------------------------------------
 
 local oldRender = ISToolTipInv.render
