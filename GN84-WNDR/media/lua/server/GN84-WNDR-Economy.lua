@@ -115,6 +115,66 @@ function GivePlayerSmokeyPointsWandererToken()
 end
 
 
+------------------------------------------------------------------------
+--                  CASH / TOKEN STACK X FUNCTIONS      
+------------------------------------------------------------------------
+
+
+function OnTest_PlayerOwnsMoneyClip(item, result)	
+	if item:isFavorite() then return false end
+
+	if item:getContainer() then
+		if not item:getContainer():getContainingItem() then return true end
+
+		if item:getContainer():getContainingItem():getType() == "MoneyClip" then
+			local moneyClip = item:getContainer():getContainingItem()
+
+			print("Item Within MoneyClip")
+			local modData = moneyClip:getModData()
+			if not modData then return false end
+			
+			local player = getPlayer()
+			if not player then return false end
+
+			local username = player:getUsername()
+
+			if modData.Owner == username then
+				print("Owned by Player")
+				return true
+			elseif modData.Owner ~= username then
+				print("Error: Not Owned by Player")
+				return false
+			end
+		else
+			return true
+		end
+	else		
+		print("Item Not within Money Clip")
+		return true
+	end	
+end
+
+function GivePlayerSmokeyPointsX(sources, result, player, item)
+	local modData = item:getModData()
+	if not modData then return end
+
+	if modData.CashAmount > 0 then
+		sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), modData.CashAmount})
+		getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
+	end
+end
+
+function GivePlayerWandererTokensX(sources, result, player, item)
+	local modData = item:getModData()
+	if not modData then return end
+
+	if modData.TokenAmount > 0 then
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), modData.TokenAmount})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+	end
+end
+
+
 
 ------------------------------------------------------------------------
 --                  ADD SMOKEY POINTS ON ZOMBIE KILL

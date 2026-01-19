@@ -574,10 +574,15 @@ function SmokeyPointsUI:render()
         BankTexture = BankCard:getTexture()
     end
 
+    if CashTexture == nil then
+        local CashItem = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStack10000000")
+        CashTexture = CashItem:getTexture()        
+    end
+
     if TokenTexture == nil then
         local TokenItem = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStack100")
         TokenTexture = TokenItem:getTexture()
-    end
+    end    
 
     local titleLength = getTextManager():MeasureStringX(UIFont.Large, self.title)
 

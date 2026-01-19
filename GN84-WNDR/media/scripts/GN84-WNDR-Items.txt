@@ -91,7 +91,7 @@ module GN84-WNDR
 
     item MoneyStack100
     {
-        DisplayName          =  Stack of Cash - $100 - ,
+        DisplayName          =  Stack of Cash  -  $100 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.0001,
@@ -102,7 +102,7 @@ module GN84-WNDR
 
 	item MoneyStack500
     {
-        DisplayName          =  Stack of Cash - $500 - ,
+        DisplayName          =  Stack of Cash  -  $500 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.0005,
@@ -113,7 +113,7 @@ module GN84-WNDR
 	
 	item MoneyStack1000
     {
-        DisplayName          =  Stack of Cash - $1000 - ,
+        DisplayName          =  Stack of Cash  -  $1000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.001,
@@ -124,7 +124,7 @@ module GN84-WNDR
 
 	item MoneyStack5000
     {
-        DisplayName          =  Stack of Cash - $5000 - ,
+        DisplayName          =  Stack of Cash  -  $5000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.005,
@@ -135,7 +135,7 @@ module GN84-WNDR
 	
 	item MoneyStack10000
     {
-        DisplayName          =  Stack of Cash - $10000 - ,
+        DisplayName          =  Stack of Cash  -  $10000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.01,
@@ -146,7 +146,7 @@ module GN84-WNDR
 
 	item MoneyStack50000
     {
-        DisplayName          =  Stack of Cash - $50000 - ,
+        DisplayName          =  Stack of Cash  -  $50000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.05,
@@ -157,7 +157,7 @@ module GN84-WNDR
 
 	item MoneyStack100000
     {
-        DisplayName          =  Stack of Cash - $100000 - ,
+        DisplayName          =  Stack of Cash  -  $100000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.1,
@@ -168,7 +168,7 @@ module GN84-WNDR
 
 	item MoneyStack500000
     {
-        DisplayName          =  Stack of Cash - $500000 - ,
+        DisplayName          =  Stack of Cash  -  $500000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  0.5,
@@ -179,7 +179,7 @@ module GN84-WNDR
 
 	item MoneyStack1000000
     {
-        DisplayName          =  Stack of Cash - $1000000 - ,
+        DisplayName          =  Stack of Cash  -  $1000000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
@@ -190,7 +190,7 @@ module GN84-WNDR
 
 	item MoneyStack5000000
     {
-        DisplayName          =  Stack of Cash - $5000000 - ,
+        DisplayName          =  Stack of Cash  -  $5000000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
@@ -201,7 +201,7 @@ module GN84-WNDR
 
 	item MoneyStack10000000
     {
-        DisplayName          =  Stack of Cash - $10000000 - ,
+        DisplayName          =  Stack of Cash  -  $10000000 - ,
 		DisplayCategory		 =  Currency,
         Type                 =  Normal,
         Weight               =  1.0,
