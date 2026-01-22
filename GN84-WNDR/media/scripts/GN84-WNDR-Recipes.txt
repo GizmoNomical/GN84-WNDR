@@ -7,7 +7,7 @@ module GN84-WNDR
 
 
 /*------------------------------------------------------------------------*/
-/*--                  NEW CASH/TOKEN STACK X                              */
+/*--                     NEW CASH/TOKEN STACK X                           */
 /*------------------------------------------------------------------------*/
 
 	recipe Deposit Cash into Smokey Bank	
@@ -59,11 +59,49 @@ module GN84-WNDR
 
 
 /*------------------------------------------------------------------------*/
-/*--                    CONVERT CASH TO SMOKEY POINTS                     */
+/*--                    DEPOSIT CASH INTO SMOKEY BANK                     */
 /*------------------------------------------------------------------------*/
 	
 	
 
+	recipe Deposit Cash into Smokey Bank
+	{
+		Money=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints100,	
+	}
+
+	recipe Deposit Cash into Smokey Bank
+	{
+		Money=500,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints500,	
+	}
+
+	recipe Deposit Cash into Smokey Bank
+	{
+		Money=1000,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:ReceiptSound,
+		OnCreate:GivePlayerSmokeyPoints1000,	
+	}
 
 	recipe Deposit Cash into Smokey Bank
 	{

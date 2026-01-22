@@ -57,7 +57,7 @@ function SmokeyPointsAdminPanel:createChildren()
     self.pointsEntry = ISTextEntryBox:new("0", (self.width - btnWid) / 2, z, btnWid, FONT_HGT_SMALL + 4)
     self.pointsEntry:initialise()
     self.pointsEntry:instantiate()
-    self.pointsEntry:setMaxTextLength(9)
+    self.pointsEntry:setMaxTextLength(13)
     self.pointsEntry:setOnlyNumbers(true)
     self:addChild(self.pointsEntry)
 

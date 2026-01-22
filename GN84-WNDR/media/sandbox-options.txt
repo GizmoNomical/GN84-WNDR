@@ -9,25 +9,37 @@ option GN84WNDR.PointsName
     translation = GN84WNDR_PointsName,
 }
 
-option GN84WNDR.PointsFrequency
-{
-    type = enum,
-    numValues = 4,
-    default = 2,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_PointsFrequency,
-}
-
-option GN84WNDR.PointsPerTick
+option GN84WNDR.PointsPerTickFast
 {
     type = integer,
     min = 0,
     max = 2147483647,
-    default = 80,
+    default = 1,
 
     page = GN84WNDR,
-    translation = GN84WNDR_PointsPerTick,
+    translation = GN84WNDR_PointsPerTickFast,
+}
+
+option GN84WNDR.PointsPerTickMedium
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 40,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_PointsPerTickMedium,
+}
+
+option GN84WNDR.PointsPerTickSlow
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 255,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_PointsPerTickSlow,
 }
 
 option GN84WNDR.TokensPerTick
@@ -165,7 +177,7 @@ option GN84WNDR.WandererTokenCashValue
     type = integer,
     min = 0,
     max = 1000000,
-    default = 10000,
+    default = 1000,
 
     page = GN84WNDR,
     translation = GN84WNDR_WandererTokenCashValue,

@@ -18,6 +18,22 @@
 
 local Utils = require "Gizmo/GN84LIB_Utils"
 
+require "ISUI/ISPanel"
+
+local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
+local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
+local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
+local FONT_SCALE = FONT_HGT_SMALL / 14
+
+local buttonBorderColorDisabled = {r=1.0, g=0.0, b=0.0, a=0.5}           -- RED
+local buttonBorderColorEnabled  = {r=0.0, g=1.0, b=0.0, a=0.75}          -- GREEN
+local buttonBorderColorActive   = {r=0.341, g=0.561, b=0.875, a=1.0}     -- BLUE
+local buttonBorderColorCaution  = {r=0.874, g=0.560, b=0.341, a=1.0}     -- ORANGE
+
+-- ITEM TEXTURES
+local BankTexture
+local CashTexture
+local TokenTexture
 local GNStamp = "media/ui/GizmoNomical.png"
 
 ------------------------------------------------------------------------
@@ -48,7 +64,8 @@ local GetAllMoneyClips
 local UpdateAllMoneyClips
 local UpdateBalanceItems
 local UpdateMoneyClipDisplayData
-local UpdateContainerButtonTooltip
+local RefreshContainerButtons
+local _UpdateContainerButtonToolTips
 
 local MoneyClipContext
 local BankBalanceContext
@@ -75,6 +92,9 @@ local CreateTokenStack
 local WithdrawTokenAmountFromBank
 local WithdrawAllTokensFromBank
 local _WithdrawAllTokensFromBank
+local _WithdrawTokensFromBankUI
+local _WithdrawCashFromBankUI
+local _WithdrawCashFromBalanceUI
 
 
 local listOfMoneyStacks
@@ -85,6 +105,7 @@ local lastUUID = nil
 
 local withdrawCashFromBankUI
 local withdrawTokensFromBankUI
+local withdrawCashFromBalanceUI
 
 
 
@@ -191,7 +212,7 @@ CreateBalanceItems = function(moneyclip)
     local items = moneyClip:getItems()
 
     if not items then
-        print("Error: Invalid Container")
+        print("LINE: " .. 215 .. "] WARN: Invalid Container")
         return
     else
         -- Instantiate Balance Items
@@ -267,7 +288,7 @@ RemoveBalanceItems = function(moneyClip)
     local items = moneyClipContainer:getItems()
 
     if not items then
-        print("Warning: No Item List")
+        print("LINE: " .. 291 .. "] WARN: Invalid Container")
         return
     else
 
@@ -330,7 +351,7 @@ ConsolidateCash = function(item, playSound, override)
 
     local modData = moneyClip:getModData()
     if not modData then return end
-    
+
     if override or modData.ConsolidateCash then
         local moneyClipContainer = item:getItemContainer()
         local items = moneyClipContainer:getItems()
@@ -353,7 +374,6 @@ ConsolidateCash = function(item, playSound, override)
 
                 --Variable Cash Stacks
                 if cashStack:getType() == "MoneyStackX" then
-                    --print(item:getType())
                     local moneyStackX = cashStack:getModData()
                     local cashAmount = moneyStackX.CashAmount or 0
 
@@ -369,11 +389,14 @@ ConsolidateCash = function(item, playSound, override)
         modData.CashBalance = cashBalance
 
         UpdateMoneyClipDisplayData(moneyClip, true)
-
-        if playSound then
+        if runningTotal > 0 then
+            if playSound then
             getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+
+                getPlayer():Say("Consolidated  $" .. Utils.CurrencyFormatter(runningTotal) .. "  into your Cash Balance")
+            end
         end
-    end    
+    end
 end
 
 
@@ -440,6 +463,7 @@ ConsolidateTokens = function(item, playSound, override)
 
             if playSound then
                 getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
+                getPlayer():Say("Depositing  " .. Utils.CurrencyFormatter(runningTotal) .. "  Wanderer Tokens into Smokey Bank")
             end
         end
     end
@@ -468,8 +492,8 @@ ConsolidateAll = function(moneyClip)
 
     if modData.Owner == username then
         ConsolidateCash(moneyClip, true)
-        ConsolidateTokens(moneyClip, true)        
-    end    
+        ConsolidateTokens(moneyClip, true)
+    end
     UpdateMoneyClipDisplayData(moneyClip, true)
 end
 
@@ -498,7 +522,7 @@ ConsolidateAllDaily = function(moneyClip)
             ConsolidateTokens(moneyClip, true)
         end
         UpdateMoneyClipDisplayData(moneyClip, true)
-    end    
+    end
 end
 
 
@@ -526,7 +550,7 @@ ConsolidateAllOnTransfer = function(moneyClip)
             ConsolidateTokens(moneyClip, false)
         end
         UpdateMoneyClipDisplayData(moneyClip, true)
-    end    
+    end
 end
 
 
@@ -543,7 +567,7 @@ end
 
 
 ------------------------------------------------------------------------
---                     CONSOLIDATION TOGGLES     
+--                     CONSOLIDATION TOGGLES
 ------------------------------------------------------------------------
 
 
@@ -630,10 +654,10 @@ MoneyClipContext = function(playerNum, context, items)
 			if modData.Owner == nil then
 				local bindMoneyClip = context:addOptionOnTop("Bind Money Clip", items, BindMoneyClipToPlayer, player, item)
                 local toolTip = ISWorldObjectContextMenu.addToolTip()
-                toolTip.description = getText("Bind this Money Clip to your Player Account.\n\nPrevents Unauthorized Access\nProvides Quick Access to Smokey Bank")
+                toolTip.description = getText("Binds Money Clip to your Account.\n\nPrevents Unauthorized Access\nProvides Quick Access to Smokey Bank\nAllows for Currency Consolidation")
                 bindMoneyClip.toolTip = toolTip
 
-			elseif modData.Owner == player:getUsername() then   
+			elseif modData.Owner == player:getUsername() then
 
                 local refreshMoneyClip = context:addOptionOnTop("Refresh Money Clip", items, function() _ConsolidateAll(moneyClip) end, player, item)
                 local toolTip = ISWorldObjectContextMenu.addToolTip()
@@ -644,9 +668,22 @@ MoneyClipContext = function(playerNum, context, items)
                 -- SUBMENU
 				local option = context:insertOptionAfter("Refresh Money Clip", "Settings:", worldobjects, nil)
                 option.iconTexture = getTexture(GNStamp)
-                
+
                 local subMenu = context:getNew(context)
                 context:addSubMenu(option, subMenu)
+
+                if modData.AutoConsolidateOnTransfer then
+                    local onTransferConsolidate = subMenu:addOptionOnTop("Toggle Currency Auto-Consolidation (On-Transfer)", items, function() _ToggleOnTransferConsolidate(moneyClip) end, player, item)
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Disable On-Transfer Auto-Consolidation")
+                    onTransferConsolidate.toolTip = toolTip
+                    onTransferConsolidate.iconTexture = getTexture(GNStamp)
+                elseif not modData.AutoConsolidateOnTransfer then
+                    local onTransferConsolidate = subMenu:addOptionOnTop("Toggle Currency Auto-Consolidation (On-Transfer)", items, function() _ToggleOnTransferConsolidate(moneyClip) end, player, item)
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Enable On-Transfer Auto-Consolidation of Non-Favorited Currency within your Money Clip")
+                    onTransferConsolidate.toolTip = toolTip
+                end
 
                 if modData.AutoConsolidateDaily then
                     local dailyConsolidate = subMenu:addOptionOnTop("Toggle Currency Auto-Consolidation (Daily)", items, function() _ToggleDailyConsolidate(moneyClip) end, player, item)
@@ -661,19 +698,6 @@ MoneyClipContext = function(playerNum, context, items)
                     toolTip.description = getText("Enable Daily Auto-Consolidation of Non-Favorited Currency within your Money Clip\n\nScheduled: 12am Daily In-Game")
                     dailyConsolidate.toolTip = toolTip
                 end
-
-                if modData.AutoConsolidateOnTransfer then
-                    local onTransferConsolidate = subMenu:addOptionOnTop("Toggle Currency Auto-Consolidation (On-Transfer)", items, function() _ToggleOnTransferConsolidate(moneyClip) end, player, item)
-                    local toolTip = ISWorldObjectContextMenu.addToolTip()
-                    toolTip.description = getText("Disable On-Transfer Auto-Consolidation")
-                    onTransferConsolidate.toolTip = toolTip
-                    onTransferConsolidate.iconTexture = getTexture(GNStamp)
-                elseif not modData.AutoConsolidateOnTransfer then
-                    local onTransferConsolidate = subMenu:addOptionOnTop("Toggle Currency Auto-Consolidation (On-Transfer)", items, function() _ToggleOnTransferConsolidate(moneyClip) end, player, item)
-                    local toolTip = ISWorldObjectContextMenu.addToolTip()
-                    toolTip.description = getText("Enable On-Transfer Auto-Consolidation of Non-Favorited Currency within your Money Clip")
-                    onTransferConsolidate.toolTip = toolTip
-                end               
 
                 if modData.ConsolidateTokens then
                     local consolidateTokens = subMenu:addOptionOnTop("Toggle Wanderer Token Consolidation", items, function() _ToggleConsolidateTokens(moneyClip) end, player, item)
@@ -760,14 +784,24 @@ BankBalanceContext = function(playerNum, context, _items)
 
                 if modData.BankBalance > 0 then
 
-                    local option = context:addOptionOnTop("Withdraw (Amount)", items, function () _WithdrawCashFromBankUI(moneyClip) end, player, item)
-                    option.notAvailable = false
-                    local option = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllCashFromBank(moneyClip) end, player, item)
-                    option.notAvailable = false
+                    local withdrawAmount = context:addOptionOnTop("Withdraw (Amount)", items, function () _WithdrawCashFromBankUI(moneyClip) end, player, item)
+                    withdrawAmount.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Withdraw a Specific Amount of Cash from your Smokey Bank")
+                    withdrawAmount.toolTip = toolTip
+
+                    local withdrawAll = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllCashFromBank(moneyClip) end, player, item)
+                    withdrawAll.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Withdraw your Full Balance of Cash from your Smokey Bank")
+                    withdrawAll.toolTip = toolTip
 
                 elseif modData.BankBalance == 0 then
-                    local option = context:addOptionOnTop("Withdraw)", items, nil, player, item)
-                    option.notAvailable = true
+                    local withdraw = context:addOptionOnTop("Withdraw", items, nil, player, item)
+                    withdraw.notAvailable = true
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Insufficient Funds")
+                    withdraw.toolTip = toolTip
                 end
             end
 		end
@@ -810,7 +844,7 @@ end
 
 
 ------------------------------------------------------------------------
---                       PASSTHROUGH   
+--                       PASSTHROUGH
 ------------------------------------------------------------------------
 
 
@@ -849,7 +883,7 @@ WithdrawAllCashFromBank = function(item)
                     getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
                     UpdateSmokeyPointBalance()
                 else
-                    print("Error: Withdraw (All) Smokey Points Failed!")
+                    print("LINE: " .. 886 .. "] ERROR: 'Withdraw (All) Smokey Points' Failed!")
                 end
             end
         else
@@ -893,7 +927,7 @@ WithdrawCashAmountFromBank = function(item, amount)
                 getSoundManager():PlaySound("ReceiptSound", false, 1):setVolume(1)
                 UpdateSmokeyPointBalance()
             else
-                print("Error: Withdraw (Amount) Smokey Points Failed!")
+                print("LINE: " .. 930 .. "] ERROR: 'Withdraw (Amount) Smokey Points' Failed!")
             end
         else
             getPlayer():Say("Error:  Unauthorized")
@@ -941,21 +975,36 @@ CashBalanceContext = function(playerNum, context, _items)
                 if modData.CashBalance == nil then modData.CashBalance = 0 end
 
                 if modData.CashBalance > 0 then
-                    local variableStack = context:addOptionOnTop("Grab a Stack of Cash (Amount)", items, function () _GrabStackOfCashAmount(moneyClip) end, player, item)
-                    variableStack.notAvailable = true
+                    local variableStack = context:addOptionOnTop("Pull out a Stack of Cash (Amount)", items, function () _WithdrawCashFromBalanceUI(moneyClip) end, player, item)
+                    variableStack.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Take a Specific Amount of Cash from your Cash Balance")
+                    variableStack.toolTip = toolTip
 
-                    local fullStack = context:addOptionOnTop("Grab a Stack of Cash (All)", items, function () _GrabStackOfCashAll(moneyClip) end, player, item)
+                    local fullStack = context:addOptionOnTop("Pull out a Stack of Cash (All)", items, function () _GrabStackOfCashAll(moneyClip) end, player, item)
                     fullStack.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Take your Full Cash Balance")
+                    fullStack.toolTip = toolTip
 
-                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, function () _DepositCashBalance(moneyClip) end, player, item)
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance", items, function () _DepositCashBalance(moneyClip) end, player, item)
                     depositBalance.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Deposit your Full Cash Balance into your Smokey Bank")
+                    depositBalance.toolTip = toolTip
 
                 elseif modData.CashBalance == 0 then
-                    local option = context:addOptionOnTop("Grab a Stack of Cash", items, nil, player, item)
+                    local option = context:addOptionOnTop("Pull out a Stack of Cash", items, nil, player, item)
                     option.notAvailable = true
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Insufficient Funds")
+                    option.toolTip = toolTip
 
-                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance into Smokey Bank", items, nil, player, item)
+                    local depositBalance = context:addOptionOnTop("Deposit Cash Balance", items, nil, player, item)
                     depositBalance.notAvailable = true
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Insufficient Funds")
+                    depositBalance.toolTip = toolTip
                 end
 
                 local inv = moneyClip:getItemContainer():getItems()
@@ -977,8 +1026,16 @@ CashBalanceContext = function(playerNum, context, _items)
                     end
                 end
 
-                local consolidate = context:addOptionOnTop("Consolidate Loose Cash", items, function () _ConsolidateCash(moneyClip, true) end, player, item)
+                local consolidate = context:insertOptionAfter("Deposit Cash Balance", "Consolidate Loose Cash", items, function () _ConsolidateCash(moneyClip, true) end, player, item)
                 consolidate.notAvailable = hideConsolidate
+                local toolTip = ISWorldObjectContextMenu.addToolTip()
+                if hideConsolidate then
+                    toolTip.description = getText("No Cash Found to Consolidate")
+                else
+                    toolTip.description = getText("Consolidate all Non-Favorited Cash into your Cash Balance")
+                end
+
+                consolidate.toolTip = toolTip
 		    end
         end
     end
@@ -1058,7 +1115,7 @@ end
 
 
 ------------------------------------------------------------------------
---                        PASSTHROUGH  
+--                        PASSTHROUGH
 ------------------------------------------------------------------------
 
 
@@ -1096,7 +1153,7 @@ GrabStackOfCashAll = function(item)
                     getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
                     UpdateMoneyClipDisplayData(moneyClip, true)
                 else
-                    print("Error: Grabbing Full Stack of Cash Failed!")
+                    print("LINE: " .. 1156 .. "] ERROR: 'Grab Stack of Cash (All)' Failed!")
                 end
             else
                 player:Say("Error:  Unauthorized")
@@ -1110,35 +1167,76 @@ end
 --                     GRAB CASH STACK - AMOUNT
 ------------------------------------------------------------------------
 
--- TODO
-GrabStackOfCashAmount = function(item)
+
+GrabStackOfCashAmount = function(item, amount)
     if not item then return end
+    if not amount then return end
 
     local moneyClip = item
 
     if moneyClip:getType() == "MoneyClip" then
 
         local modData = moneyClip:getModData()
-        if modData == nil then return end
-        if modData.Owner == nil then return end
+        if not modData then return end
+        if not modData.Owner then return end
+        if not modData.CashBalance then return end
 
         local player = getPlayer()
         if not player then return end
 
         local username = player:getUsername()
 
+        if amount > modData.CashBalance then
+            player:Say("Error: Insufficient Funds")
+            return
+        end
+
         if modData.Owner == username then
-            if CreateCashStack(moneyClip, modData.CashBalance) then
-                modData.CashBalance = 0
+            if CreateCashStack(moneyClip, amount) then
+                modData.CashBalance = modData.CashBalance - amount
                 getSoundManager():PlaySound("CountingMoney", false, 1):setVolume(1)
+                UpdateMoneyClipDisplayData(moneyClip, true)
             else
-                print("Error: Grabbing Stack of Cash (Amount) Failed!")
+                print("LINE: " .. 1200 .. "] ERROR: 'Grab Stack of Cash (Amount)' Failed!")
             end
         else
-            player:Say("Error:  Unauthorized")
+            getPlayer():Say("Error:  Unauthorized")
         end
     end
 end
+
+
+------------------------------------------------------------------------
+--                 WITHDRAW FROM CASH BALANCE UI TOGGLE
+------------------------------------------------------------------------
+
+
+_WithdrawCashFromBalanceUI = function(moneyClip)
+    if not moneyClip then return end
+
+    local modData = moneyClip:getModData()
+    if not modData then return end
+    if not modData.CashBalance then return end
+
+    local player = getPlayer()
+    if not player then return end
+
+    local username = player:getUsername()
+
+    if modData.Owner == username then
+        if modData.CashBalance > 0 then
+            if withdrawCashFromBalanceUI == nil then
+                local width = 200
+                local height = 200
+
+                withdrawCashFromBalanceUI = WithdrawCashFromBalanceUI:new((getCore():getScreenWidth() / 2) - (width / 2), (getCore():getScreenHeight() / 2) - (height / 2), width, height, modData.CashBalance, moneyClip)
+                withdrawCashFromBalanceUI:initialise()
+                withdrawCashFromBalanceUI:addToUIManager()
+            end
+        end
+    end
+end
+
 
 
 ------------------------------------------------------------------------
@@ -1148,11 +1246,6 @@ end
 
 _GrabStackOfCashAll = function(item)
 	GrabStackOfCashAll(item)
-end
-
-
-_GrabStackOfCashAmount = function(item)
-	GrabStackOfCashAmount(item)
 end
 
 
@@ -1204,13 +1297,22 @@ TokenBalanceContext = function(playerNum, context, _items)
                 if modData.TokenBalance > 0 then
                     local variableStack = context:addOptionOnTop("Withdraw (Amount)", items, function () _WithdrawTokensFromBankUI(moneyClip) end, player, item)
                     variableStack.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Withdraw a specific amount of Wanderer Tokens from your Smokey Bank")
+                    variableStack.toolTip = toolTip
 
                     local fullStack = context:addOptionOnTop("Withdraw (All)", items, function () _WithdrawAllTokensFromBank(moneyClip) end, player, item)
                     fullStack.notAvailable = false
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Withdraw your Full Balance of Wanderer Tokens from your Smokey Bank")
+                    fullStack.toolTip = toolTip
 
                 elseif modData.TokenBalance == 0 then
                     local option = context:addOptionOnTop("Withdraw", items, nil, player, item)
                     option.notAvailable = true
+                    local toolTip = ISWorldObjectContextMenu.addToolTip()
+                    toolTip.description = getText("Insufficient Funds")
+                    option.toolTip = toolTip
                 end
 
                 local inv = moneyClip:getItemContainer():getItems()
@@ -1232,8 +1334,11 @@ TokenBalanceContext = function(playerNum, context, _items)
                     end
                 end
 
-                local consolidate = context:addOptionOnTop("Deposit Wanderer Tokens into Smokey Bank", items, function () _ConsolidateTokens(moneyClip, true) end, player, item)
+                local consolidate = context:addOptionOnTop("Deposit Wanderer Tokens", items, function () _ConsolidateTokens(moneyClip, true) end, player, item)
                 consolidate.notAvailable = hideConsolidate
+                local toolTip = ISWorldObjectContextMenu.addToolTip()
+                toolTip.description = getText("Deposit Wanderer Tokens into your Smokey Bank")
+                consolidate.toolTip = toolTip
 		    end
         end
     end
@@ -1334,7 +1439,7 @@ WithdrawAllTokensFromBank = function(item)
                     getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
                     UpdateWandererTokenBalance()
                 else
-                    print("Error: Withdraw (All) Wanderer Tokens Failed!")
+                    print("LINE: " .. 1442 .. "] ERROR: 'Withdraw (All) Wanderer Tokens' Failed!")
                 end
             else
                 getPlayer():Say("Error:  Unauthorized")
@@ -1377,7 +1482,7 @@ WithdrawTokenAmountFromBank = function(item, amount)
                     getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)
                     UpdateWandererTokenBalance()
                 else
-                    print("Error: Withdraw (Amount) Wanderer Tokens Failed!")
+                    print("LINE: " .. 1485 .. "] ERROR: 'Withdraw (Amount) Wanderer Tokens' Failed!")
                 end
             else
                 getPlayer():Say("Error:  Unauthorized")
@@ -1489,7 +1594,7 @@ UpdateBalanceItems = function(item)
     local items = moneyClipContainer:getItems()
 
     if not items then
-        print("Error: Invalid Container")
+        print("LINE: " .. 1597 .. "] WARN: Invalid Container")
         return
     else
 
@@ -1503,7 +1608,7 @@ UpdateBalanceItems = function(item)
             local username = player:getUsername()
             local isOwner = nil
 
-            if modData.Owner then                
+            if modData.Owner then
                 if modData.Owner == username then
                     isOwner = true
                 elseif modData.Owner ~= username then
@@ -1556,21 +1661,7 @@ end
 
 
 
-------------------------------------------------------------------------
---                 UPDATE MONEY CLIP DISPLAY DATA
-------------------------------------------------------------------------
 
-
-UpdateMoneyClipDisplayData = function(moneyClip, override)
-    if not moneyClip then return end
-
-    UpdateBalanceItems(moneyClip)
-
-    local inventoryPage = getPlayerInventory(0).inventoryPane.inventoryPage
-    if not inventoryPage then return end
-
-    UpdateContainerButtonTooltip(inventoryPage)
-end
 
 
 
@@ -1590,7 +1681,7 @@ end
 
 UpdateSmokeyPointBalance = function()
     sendClientCommand("GN84-WNDR", "get", nil)
-    --print("Sent Smokey Points Update Request")
+    --print("LINE: " .. 1684 .. "] INFO: Sent Smokey Points Update Request")
 end
 
 
@@ -1642,7 +1733,7 @@ Events.OnServerCommand.Add(GetBankBalance)
 
 UpdateWandererTokenBalance = function()
     sendClientCommand("GN84-WNDR", "getTokens", nil)
-    --print("Sent Wanderer Tokens Update Request")
+    --print("LINE: " .. 1736 .. "] INFO: Sent Wanderer Tokens Update Request")
 end
 
 
@@ -1695,10 +1786,9 @@ ReceiveSmokeyBankData = function(module, command, arguments)
 
     if module == "GN84-WNDR" and command == "UpdateSmokeyBankData" then
         if arguments and arguments[1] == getPlayer():getUsername() then
-            print("Specific Player Update: " .. arguments[1])
             UpdateSmokeyBankData()
         elseif arguments == nil then
-            print("Point/Token Tick Update")
+            --print("LINE: " .. 1791 .. "] INFO: Point / Token Tick")
             UpdateSmokeyBankData()
         end
     end
@@ -1752,6 +1842,10 @@ function ISInventoryTransferAction:perform()
 
     if self.destContainer and self.destContainer:getType() == "MoneyClip" then
         moneyClip = self.destContainer:getContainingItem()
+    end
+
+    if self.srcContainer and self.srcContainer:getType() == "MoneyClip" then
+        moneyClip = self.srcContainer:getContainingItem()
     end
 
     oldTransferPerform(self)
@@ -1836,7 +1930,7 @@ function ISInventoryTransferAction:isValid()
             elseif modData.Owner == username then
                 return true
             end
-        end        
+        end
     end
 
     -- Run Original Function After Custom Checks
@@ -1856,14 +1950,74 @@ end
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
---                     CONTAINER BUTTON TOOLTIP
+--                 UPDATE MONEY CLIP DISPLAY DATA
 ------------------------------------------------------------------------
 
 
-UpdateContainerButtonTooltip = function(inventoryPage)
-    if not inventoryPage then return end
-    if not inventoryPage.onCharacter then return end
+UpdateMoneyClipDisplayData = function(moneyClip, override)
+    if not moneyClip then return end
 
+    UpdateBalanceItems(moneyClip)
+
+    playerInventoryPane = getPlayerInventory(0).inventoryPane.inventoryPage
+    if not playerInventoryPane then print("LINE: " .. 1965 .. "] WARN: Player Inventory Not Found..  Dead Player?") return end
+    RefreshContainerButtons(playerInventoryPane)
+end
+
+
+------------------------------------------------------------------------
+--                     CONTAINER BUTTON TOOLTIPS
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+--                       UPDATE BUTTON TOOLTIPS
+------------------------------------------------------------------------
+
+
+local function UpdateContainerButtonToolTips(moneyClip, v)
+        local modData = moneyClip:getModData()
+
+        local smokeyPointBalance = modData.BankBalance
+        local cashBalance = modData.CashBalance
+        local wandererTokenBalance = modData.TokenBalance
+
+        if type(smokeyPointBalance) == "number" then
+            smokeyPointBalance = Utils.CurrencyFormatter(smokeyPointBalance)
+        else
+            smokeyPointBalance = "... ... ..."
+        end
+
+        if type(cashBalance) == "number" then
+            cashBalance = Utils.CurrencyFormatter(cashBalance)
+        else
+            cashBalance = "... ... ..."
+        end
+
+        if type(wandererTokenBalance) == "number" then
+            wandererTokenBalance = Utils.CurrencyFormatter(wandererTokenBalance)
+        else
+            wandererTokenBalance = "... ... ..."
+        end
+
+        local moneyClipName = moneyClip:getName() or ""
+
+        local currentWeight = 0
+        currentWeight = math.floor(moneyClip:getUnequippedWeight() * 10 + 0.5) / 10 or 0
+
+        local maxWeight = 0
+        maxWeight = moneyClip:getCapacity() or 0
+
+        v.tooltip = "<RGB:0.17255,1.0,0.01961,1>" .. moneyClipName .. "<LINE><RGB:1,1,1,1>" .. currentWeight .. " / " .. maxWeight .. "<H2><LINE><LINE> <RGB:1.0,0.6,0.11,1>Bank Balance:  $" .. smokeyPointBalance .. "<LINE><RGB:0.17255,1.0,0.01961,1>Cash Balance:  $" .. cashBalance .. "<LINE><RGB:0.0,0.886,1.0,1>Token Balance:   " .. wandererTokenBalance
+end
+
+
+
+------------------------------------------------------------------------
+--                     REFRESH LIST OF CONTAINERS
+------------------------------------------------------------------------
+
+
+RefreshContainerButtons = function(inventoryPage)
     local containers = inventoryPage.backpacks
     if not containers then return end
 
@@ -1880,46 +2034,34 @@ UpdateContainerButtonTooltip = function(inventoryPage)
                 if not player then return end
 
                 local username = player:getUsername()
+
                 if modData.Owner then
                     if modData.Owner == username then
-
-                        local smokeyPointBalance = modData.BankBalance
-                        local cashBalance = modData.CashBalance
-                        local wandererTokenBalance = modData.TokenBalance
-
-                        if type(smokeyPointBalance) == "number" then
-                            smokeyPointBalance = Utils.CurrencyFormatter(smokeyPointBalance)
-                        else
-                            smokeyPointBalance = "... ... ..."
-                        end
-
-                        if type(cashBalance) == "number" then
-                            cashBalance = Utils.CurrencyFormatter(cashBalance)
-                        else
-                            cashBalance = "... ... ..."
-                        end
-
-                        if type(wandererTokenBalance) == "number" then
-                            wandererTokenBalance = Utils.CurrencyFormatter(wandererTokenBalance)
-                        else
-                            wandererTokenBalance = "... ... ..."
-                        end
-
-                        local moneyClipName = moneyClip:getName() or ""
-
-                        local currentWeight = 0
-                        currentWeight = math.floor(moneyClip:getUnequippedWeight() * 10 + 0.5) / 10 or 0
-
-                        local maxWeight = 0
-                        maxWeight = moneyClip:getCapacity() or 0
-
-                        v.tooltip = "<RGB:0.17255,1.0,0.01961,1>" .. moneyClipName .. "<LINE><RGB:1,1,1,1>" .. currentWeight .. " / " .. maxWeight .. "<H2><LINE><LINE> <RGB:1.0,0.6,0.11,1>Bank Balance:  $" .. smokeyPointBalance .. "<LINE><RGB:0.17255,1.0,0.01961,1>Cash Balance:  $" .. cashBalance .. "<LINE><RGB:0.0,0.886,1.0,1>Token Balance:   " .. wandererTokenBalance
+                        UpdateContainerButtonToolTips(moneyClip, v)
                     end
-                end                
+                end
             end
         end
     end
 end
+
+
+
+------------------------------------------------------------------------
+--                          REFRESH ON CONTAINER CHANGE
+------------------------------------------------------------------------
+
+
+local function OnContainerUpdate(inventoryPage, state)
+    if state == "end" and inventoryPage.onCharacter then
+        RefreshContainerButtons(inventoryPage)
+    else
+        return
+    end
+end
+
+Events.OnRefreshInventoryWindowContainers.Add(OnContainerUpdate)
+
 
 
 
@@ -1988,22 +2130,44 @@ function ISToolTipInv:render()
         -- Tooltip Widths
         local tooltipWidth = self:getWidth()
         local longestToolTip = math.max(moneyClipOwnerTextWidth, smokeyPointBalanceTextWidth, cashBalanceTextWidth, wandererTokenBalanceTextWidth)
+        local longestToolTipAdmin = math.max(moneyClipOwnerTextWidth, cashBalanceTextWidth)
         local startX = (tooltipWidth) + 10
+
+        if BankTexture == nil then
+            local BankCard = InventoryItemFactory.CreateItem("GN84-WNDR.BankBalance")
+            BankTexture = BankCard:getTexture()
+        end
+
+        if CashTexture == nil then
+            local CashItem = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStack10000000")
+            CashTexture = CashItem:getTexture()
+        end
+
+        if TokenTexture == nil then
+            local TokenItem = InventoryItemFactory.CreateItem("GN84-WNDR.WandererTokenStack100")
+            TokenTexture = TokenItem:getTexture()
+        end
 
         -- Render Tooltip
         if moneyClipOwner and (moneyClipOwner == username) then
-            self:drawRect(tooltipWidth, 0, longestToolTip + 40, fontHeight * 3.5, 1, 0, 0, 0)
-            self:drawRectBorder(tooltipWidth, 0, longestToolTip + 40, (fontHeight * 3.5) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
-            self.tooltip:DrawText(fontType, "Bank Balance:  $" .. Utils.CurrencyFormatter(smokeyPointBalance), startX, 12, 1.0, 0.6, 0.11, 1)
-            self.tooltip:DrawText(fontType, "Cash Balance:  $" .. Utils.CurrencyFormatter(cashBalance), startX, 28, 0.17255, 1.0, 0.01961, 1)
-            self.tooltip:DrawText(fontType, "Token Balance:   " .. Utils.CurrencyFormatter(wandererTokenBalance), startX, 44, 0.0, 0.886, 1.0, 1)
+            self:drawRect(tooltipWidth, 0, longestToolTip + 50, fontHeight * 3, 1, 0, 0, 0)
+            self:drawRectBorder(tooltipWidth, 0, longestToolTip + 50, (fontHeight * 3) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
+
+            self:drawTextureScaledAspect2(BankTexture, startX, 9, FONT_HGT_SMALL, FONT_HGT_SMALL, 1, 1, 1, 1)
+            self.tooltip:DrawText(fontType, "Bank Balance:  $" .. Utils.CurrencyFormatter(smokeyPointBalance), startX + FONT_HGT_SMALL, 6, 1.0, 0.6, 0.11, 1)
+
+            self:drawTextureScaledAspect2(CashTexture, startX, 25, FONT_HGT_SMALL, FONT_HGT_SMALL, 1, 1, 1, 1)
+            self.tooltip:DrawText(fontType, "Cash Balance:  $" .. Utils.CurrencyFormatter(cashBalance), startX + FONT_HGT_SMALL, 22, 0.17255, 1.0, 0.01961, 1)
+
+            self:drawTextureScaledAspect2(TokenTexture, startX, 41, FONT_HGT_SMALL, FONT_HGT_SMALL, 1, 1, 1, 1)
+            self.tooltip:DrawText(fontType, "Token Balance:   " .. Utils.CurrencyFormatter(wandererTokenBalance), startX + FONT_HGT_SMALL, 38, 0.0, 0.886, 1.0, 1)
 
         elseif moneyClipOwner and (moneyClipOwner ~= username) then
             if (getAccessLevel() == "admin") then
-                self:drawRect(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, fontHeight * 1.5, 1, 0, 0, 0)
-                self:drawRectBorder(tooltipWidth, 0, moneyClipOwnerTextWidth + 60, (fontHeight * 1.5) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
-                self.tooltip:DrawText(fontType, "Bound To:  " .. moneyClipOwner, startX, 6, 1.0, 0.6, 0.11, 1)
-                self.tooltip:DrawText(fontType, "Cash Balance:  $" .. Utils.CurrencyFormatter(cashBalance), startX, 28, 0.17255, 1.0, 0.01961, 1)
+                self:drawRect(tooltipWidth, 0, longestToolTipAdmin + 40, fontHeight * 2.25, 1, 0, 0, 0)
+                self:drawRectBorder(tooltipWidth, 0, longestToolTipAdmin + 40, (fontHeight * 2.25) + 4, self.borderColor.a, self.borderColor.r, self.borderColor.g, self.borderColor.b)
+                self.tooltip:DrawText(fontType, "Owner:  " .. moneyClipOwner, startX, 6, 1.0, 0.6, 0.11, 1)
+                self.tooltip:DrawText(fontType, "Cash Balance:  $" .. Utils.CurrencyFormatter(cashBalance), startX, 22, 0.17255, 1.0, 0.01961, 1)
             end
         end
     end
@@ -2017,29 +2181,6 @@ end
 --
 --
 ------------------------------------------------------------------------
-
-require "ISUI/ISPanel"
-
-local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
-local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
-local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
-local FONT_SCALE = FONT_HGT_SMALL / 14
-
-local buttonBorderColorDisabled = {r=1.0, g=0.0, b=0.0, a=0.5}           -- RED
-local buttonBorderColorEnabled  = {r=0.0, g=1.0, b=0.0, a=0.75}          -- GREEN
-local buttonBorderColorActive   = {r=0.341, g=0.561, b=0.875, a=1.0}     -- BLUE
-local buttonBorderColorCaution  = {r=0.874, g=0.560, b=0.341, a=1.0}     -- ORANGE
-
--- ITEM TEXTURES
-local BankTexture
-local CashTexture
-local TokenTexture
-
--- if CashTexture == nil then
---     local CashItem = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStack10000000")
---     CashTexture = CashItem:getTexture()
--- end
-
 
 ------------------------------------------------------------------------
 --                    SMOKEY BANK WITHDRAW UI
@@ -2109,7 +2250,7 @@ function WithdrawCashFromBankUI:create()
     self._pointsEntry = ISTextEntryBox:new("0", (self.width - 80) / 2, 100, 80, FONT_HGT_SMALL + 8)
     self._pointsEntry:initialise()
     self._pointsEntry:instantiate()
-    self._pointsEntry:setMaxTextLength(9)
+    self._pointsEntry:setMaxTextLength(13)
     self._pointsEntry:setOnlyNumbers(true)
     self:addChild(self._pointsEntry)
 
@@ -2192,6 +2333,155 @@ end
 
 
 ------------------------------------------------------------------------
+--                 WITHDRAW CASH FROM BALANCE UI
+------------------------------------------------------------------------
+
+
+WithdrawCashFromBalanceUI = ISPanel:derive("WithdrawCashFromBalanceUI")
+
+function WithdrawCashFromBalanceUI:initialise()
+    ISPanel.initialise(self)
+    self:create()
+end
+
+function WithdrawCashFromBalanceUI:prerender()
+    ISPanel.prerender(self)
+    self:drawRectBorder(0, 0, self:getWidth(), self:getHeight(), 0.8, 1.0, 1.0, 1.0)
+    self:drawRectBorder(0, 0, self:getWidth(), 40, 0.8, 1.0, 1.0, 1.0)
+end
+
+function WithdrawCashFromBalanceUI:render()
+    if not self.moneyClip or not self.moneyClip:isInPlayerInventory() then
+        getPlayer():Say("Error: Invalid MoneyClip Data")
+        withdrawCashFromBalanceUI:setVisible(false)
+        withdrawCashFromBalanceUI:removeFromUIManager()
+        withdrawCashFromBalanceUI = nil
+        return
+    end
+
+    local modData = self.moneyClip:getModData()
+    if not modData then return end
+
+    if CashTexture == nil then
+        local CashItem = InventoryItemFactory.CreateItem("GN84-WNDR.MoneyStack10000000")
+        CashTexture = CashItem:getTexture()
+    end
+
+    -- VISA ICON
+    self:drawTextureScaledAspect2(CashTexture, self.width - 30, 10 * FONT_SCALE, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+    self:drawTextureScaledAspect2(CashTexture, 5, 10 * FONT_SCALE, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+
+    self:drawTextCentre("Cash On Hand", self.width / 2, 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
+    self:drawTextCentre("Balance", self.width / 2, 50, 1, 1, 1, 1, UIFont.Medium)
+    local balanceText = Utils.CurrencyFormatter(modData.CashBalance) or 0
+    self:drawTextCentre(balanceText, self.width / 2, 70, 1, 1, 1, 1, UIFont.Medium)
+
+    local cashBalance = modData.CashBalance
+    local withdrawAmount = tonumber(self._pointsEntry:getInternalText()) or 0
+
+    if withdrawAmount == 0 or self._pointsEntry:getInternalText() == "" then
+        self._withdrawButton.borderColor = buttonBorderColorDisabled
+        self._withdrawButton:setTooltip("Please enter a valid number")
+    elseif withdrawAmount > cashBalance then
+        self._withdrawButton.borderColor = buttonBorderColorDisabled
+        self._withdrawButton:setTooltip("Insufficient Funds")
+    elseif withdrawAmount > 0 and withdrawAmount <= cashBalance then
+        self._withdrawButton.borderColor = buttonBorderColorEnabled
+        self._withdrawButton:setTooltip("Take out a Stack of Cash from your Cash Balance")
+    end
+end
+
+function WithdrawCashFromBalanceUI:create()
+    local btnWidth = 50
+    local btnHeight = getTextManager():getFontHeight(UIFont.Small) + 4 * 2
+    local padBottom = 20
+
+    -- Currency Entry Box
+    self._pointsEntry = ISTextEntryBox:new("0", (self.width - 80) / 2, 100, 80, FONT_HGT_SMALL + 8)
+    self._pointsEntry:initialise()
+    self._pointsEntry:instantiate()
+    self._pointsEntry:setMaxTextLength(13)
+    self._pointsEntry:setOnlyNumbers(true)
+    self:addChild(self._pointsEntry)
+
+    -- Withdraw Button
+    local z = self._pointsEntry.y + self._pointsEntry.height + 10
+    self._withdrawButton = ISButton:new((self.width - 80) / 2, z, 80 , btnHeight, "WITHDRAW", self, WithdrawCashFromBalanceUI.onOptionMouseDown)
+    self._withdrawButton.internal = "WITHDRAW"
+    self._withdrawButton:initialise()
+    self._withdrawButton:instantiate()
+    self:addChild(self._withdrawButton)
+
+    -- Close UI Button
+    z = self._withdrawButton.y + self._withdrawButton.height + 10
+    self._closeUIButton = ISButton:new((self.width - btnWidth) / 2, z, btnWidth, btnHeight, getText("UI_btn_close"), self, WithdrawCashFromBalanceUI.onOptionMouseDown)
+    self._closeUIButton.internal = "CLOSE_UI"
+    self._closeUIButton:initialise()
+    self._closeUIButton:instantiate()
+    self:addChild(self._closeUIButton)
+end
+
+function WithdrawCashFromBalanceUI:onOptionMouseDown(button, x, y)
+
+    if button.internal == "CLOSE_UI" then
+        withdrawCashFromBalanceUI:setVisible(false)
+        withdrawCashFromBalanceUI:removeFromUIManager()
+        withdrawCashFromBalanceUI = nil
+    end
+
+    if button.internal == "WITHDRAW" then
+        if not self.moneyClip then return end
+
+        local modData = self.moneyClip:getModData()
+        if not modData then return end
+        if not modData.CashBalance then return end
+
+        local cashBalance = modData.CashBalance
+        local withdrawAmount = tonumber(self._pointsEntry:getInternalText()) or 0
+
+        local player = getPlayer()
+        if not player then return end
+
+        if withdrawAmount == 0 or self._pointsEntry:getInternalText() == "" then
+            player:Say("Error: Invalid Entry")
+        elseif withdrawAmount > cashBalance then
+            player:Say("Error: Insufficient Funds")
+        elseif withdrawAmount > 0 and withdrawAmount <= cashBalance then
+            player:Say("Taking $" .. Utils.CurrencyFormatter(withdrawAmount) .. "  from your Cash Balance")
+            GrabStackOfCashAmount(self.moneyClip, withdrawAmount)
+
+            -- Close UI After Transaction
+            withdrawCashFromBalanceUI:setVisible(false)
+            withdrawCashFromBalanceUI:removeFromUIManager()
+            withdrawCashFromBalanceUI = nil
+        end
+    end
+
+end
+
+function WithdrawCashFromBalanceUI:new(x, y, width, height, _balance, _moneyClip)
+    local o = {}
+    o = ISPanel:new(x, y + 50, width, height)
+    setmetatable(o, self)
+    self.__index = self
+    o.balance = _balance or 0
+    o.moneyClip = _moneyClip
+    o.moveWithMouse = true
+    o.variableColor= {r=0.9, g=0.55, b=0.1, a=1}
+    o.borderColor = {r=0.4, g=0.4, b=0.4, a=1}
+    o.backgroundColor = {r=0, g=0, b=0, a=0.75}
+    o.buttonBorderColor = {r=0.7, g=0.7, b=0.7, a=0.5}
+    o.zOffsetSmallFont = 25
+    WithdrawCashFromBalanceUI.instance = o
+
+    if not _moneyClip then return nil end
+
+    return o
+end
+
+
+
+------------------------------------------------------------------------
 --                    WITHDRAW TOKENS FROM BANK UI
 ------------------------------------------------------------------------
 
@@ -2259,7 +2549,7 @@ function WithdrawTokensFromBankUI:create()
     self._pointsEntry = ISTextEntryBox:new("0", (self.width - 80) / 2, 100, 80, FONT_HGT_SMALL + 8)
     self._pointsEntry:initialise()
     self._pointsEntry:instantiate()
-    self._pointsEntry:setMaxTextLength(9)
+    self._pointsEntry:setMaxTextLength(6)
     self._pointsEntry:setOnlyNumbers(true)
     self:addChild(self._pointsEntry)
 
@@ -2337,23 +2627,3 @@ function WithdrawTokensFromBankUI:new(x, y, width, height, _balance, _moneyClip)
 
     return o
 end
-
-
-
-
-
-
-
-local function debugTestKey(key)
-    if key == 73 then
-        local width = 200
-        local height = 200
-        withdrawCashFromBankUI = WithdrawCashFromBankUI:new((getCore():getScreenWidth() / 2) - (width / 2), (getCore():getScreenHeight() / 2) - (height / 2), width, height, 654321, nil)
-        if withdrawCashFromBankUI then
-            withdrawCashFromBankUI:initialise()
-            withdrawCashFromBankUI:addToUIManager()
-        end
-    end
-end
-
-Events.OnCustomUIKeyPressed.Add(debugTestKey)

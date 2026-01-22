@@ -43,11 +43,10 @@ local printf = function(message, ...) printer:printf(message, ...) end
 
 
 ------------------------------------------------------------------------
---        PLAYER POINTS PER 10 MIN TICK + SLEEP EXPLOIT REMOVAL
+--        POINTS PER TICK ( 1 MIN + 10 MIN + 1 HOUR ) + SLEEP EXPLOIT REMOVAL
 ------------------------------------------------------------------------
 
-
-local function PointsTick()
+local function PointsTickFast()
     local players = getOnlinePlayers()
     if IsoPlayer.allPlayersAsleep() then
         --print ("All Players Sleeping..")
@@ -59,14 +58,57 @@ local function PointsTick()
             --print (players:get(i), " is awake.")
             local username = players:get(i):getUsername()
             if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
-            smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTick
-            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
-            --print ("Adding Points to:", players:get(i))
+            smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTickFast
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)            
         else
             --print (players:get(i), "is sleeping...")
         end
     end
 end
+
+
+local function PointsTickMedium()
+    local players = getOnlinePlayers()
+    if IsoPlayer.allPlayersAsleep() then
+        --print ("All Players Sleeping..")
+        return
+    end
+
+    for i = 0, players:size() - 1 do
+        if not players:get(i):isAsleep() then
+            --print (players:get(i), " is awake.")
+            local username = players:get(i):getUsername()
+            if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
+            smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTickMedium
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)            
+        else
+            --print (players:get(i), "is sleeping...")
+        end
+    end
+end
+
+
+local function PointsTickSlow()
+    local players = getOnlinePlayers()
+    if IsoPlayer.allPlayersAsleep() then
+        --print ("All Players Sleeping..")
+        return
+    end
+
+    for i = 0, players:size() - 1 do
+        if not players:get(i):isAsleep() then
+            --print (players:get(i), " is awake.")
+            local username = players:get(i):getUsername()
+            if not smokeyPointsData[username] then smokeyPointsData[username] = 0 end
+            smokeyPointsData[username] = smokeyPointsData[username] + SandboxVars.GN84WNDR.PointsPerTickSlow
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)            
+        else
+            --print (players:get(i), "is sleeping...")
+        end
+    end
+end
+
+
 
 ------------------------------------------------------------------------
 --                   PLAYER PER HOUR TICK - TOKENS
@@ -85,8 +127,7 @@ local function TokensTick()
             if not smokeyTokensData[username] then smokeyTokensData[username] = 0 end
             smokeyTokensData[username] = smokeyTokensData[username] + SandboxVars.GN84WNDR.TokensPerTick
 
-            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)
-            --print ("Adding Points to:", players:get(i))
+            sendServerCommand("GN84-WNDR", "UpdateSmokeyBankData", nil)            
         else
             --print (players:get(i), "is sleeping...")
         end
@@ -150,13 +191,16 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 
     LoadListings()
 
+    -- Smokey Points Every 1 Minute
+    Events.EveryOneMinute.Add(PointsTickFast)
+    
     -- Smokey Points Every 10 Minutes
-    --Events.EveryTenMinutes.Add(PointsTick)
+    Events.EveryTenMinutes.Add(PointsTickMedium)
+    
+    -- Smokey Points Every 1 Hour
+    Events.EveryHours.Add(PointsTickSlow)    
 
-    -- TESTING
-    Events.EveryOneMinute.Add(PointsTick)
-
-    -- Wanderer Token every 1 Hour
+    -- Wanderer Tokens Every 24 Hours
     Events.EveryDays.Add(TokensTick)
 
 end)
