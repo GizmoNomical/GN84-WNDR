@@ -110,6 +110,104 @@ local withdrawCashFromBalanceUI
 
 
 
+
+------------------------------------------------------------------------
+--                          
+--                          
+--                      MONEY CLIP ITEM VALIDATION    
+--                          
+--                          
+------------------------------------------------------------------------
+
+
+local moneyClipItems =
+	{
+		"Base.Money",
+		"GN84-WNDR.BankBalance",
+		"GN84-WNDR.CashBalance",
+		"GN84-WNDR.TokenBalance",
+		"GN84-WNDR.MoneyStackX",
+		"GN84-WNDR.WandererTokenStackX",
+		"GN84-WNDR.MoneyStack100",
+		"GN84-WNDR.MoneyStack500",
+		"GN84-WNDR.MoneyStack1000",
+		"GN84-WNDR.MoneyStack5000",
+		"GN84-WNDR.MoneyStack10000",
+		"GN84-WNDR.MoneyStack50000",
+		"GN84-WNDR.MoneyStack100000",
+		"GN84-WNDR.MoneyStack500000",
+		"GN84-WNDR.MoneyStack1000000",
+		"GN84-WNDR.MoneyStack5000000",
+		"GN84-WNDR.MoneyStack10000000",
+		"GN84-WNDR.LottoTicketStandard",
+		"GN84-WNDR.LottoTicketRare",
+		"GN84-WNDR.LottoTicketGolden",
+		"GN84-WNDR.JadeSpinCasing",
+		"GN84-WNDR.CitrineSpinCasing",
+		"GN84-WNDR.DiamondSpinCasing",
+		"GN84-WNDR.ObsidianSpinCasing",
+		"GN84-WNDR.EmeraldSpinCore",
+		"GN84-WNDR.TopazSpinCore",
+		"GN84-WNDR.SapphireSpinCore",
+		"GN84-WNDR.RubySpinCore",
+		"GN84-WNDR.WheelSpinFragmentA",
+		"GN84-WNDR.WheelSpinFragmentB",
+		"GN84-WNDR.WheelSpinFragmentC",
+		"GN84-WNDR.WheelSpinFragmentD",
+		"GN84-WNDR.WheelSpinFragmentE",
+		"GN84-WNDR.WheelSpinToken",
+		"GN84-WNDR.SuperWheelSpinToken",
+		"GN84-WNDR.MegaWheelSpinToken",
+		"GN84-WNDR.UltimateWheelSpinToken",
+		"GN84-WNDR.WanderersRaffleTicket",
+		"GN84-WNDR.WanderersVIPCoupon",
+		"GN84-WNDR.VIPToken",
+		"GN84-WNDR.WandererToken",
+		"GN84-WNDR.WandererTokenStack5",
+		"GN84-WNDR.WandererTokenStack10",
+		"GN84-WNDR.WandererTokenStack25",
+		"GN84-WNDR.WandererTokenStack50",
+		"GN84-WNDR.WandererTokenStack100",
+		"GN84-WNDR.WandererTokenStack250",
+		"GN84-WNDR.WandererTokenStack500",
+		"GN84-WNDR.WandererTokenStack1000",
+		"GN84-WNDR.WandererTokenStack5000",
+		"GN84-WNDR.SafehouseExpansionPermit5",
+		"GN84-WNDR.SafehouseExpansionPermit10",
+		"GN84-WNDR.SafehouseExpansionPermit50",
+		"GN84-WNDR.SafehouseExpansionPermit100",
+		"GN84-WNDR.SafehouseExpansionPermit250",
+		"GN84-WNDR.SafehouseExpansionPermit500",
+		"GN84-WNDR.SafehouseExpansionPermit1000",
+		"GN84-WNDR.SafehouseExpansionPermit5000",
+		"GN84-WNDR.RealEstateLicenseResidential",
+		"GN84-WNDR.RealEstateLicenseCommercial",
+		"GN84-WNDR.ResidentialPermitSmall",
+		"GN84-WNDR.ResidentialPermitLarge",
+		"GN84-WNDR.ResidentialPermitMansion",
+		"GN84-WNDR.FactionPermitSmall",
+		"GN84-WNDR.FactionPermitLarge",
+		"GN84-WNDR.FactionPermitMassive",
+		"Base.VCSClaimPermit",
+		"Base.VCSExpansionPermit",
+		"Base.VCSTempPermit24",
+		"Base.VCSTempPermit48",
+		"Base.VCSTempPermit72",
+		"TheyKnew.Zomboxivir",
+		"TheyKnew.Zomboxycycline",
+	}
+
+function GN84_AcceptItemsMoneyClip(container, item)	
+
+	for i = 1, #moneyClipItems do
+    	if item:getFullType() == moneyClipItems[i] then
+			return true
+		end
+	end
+end
+
+
+
 ------------------------------------------------------------------------
 --
 --

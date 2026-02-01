@@ -1248,39 +1248,39 @@ module GN84-WNDR
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WNDR.WheelSpinTokenNew,
+		Result:GN84-WNDR.WheelSpinToken,
 		Time:120.0,
 		Tooltip: "Combine 5 Unique Wheel Spin Fragments to Forge a Wheel Spin Token!",
 	}
 
 	recipe Forge Super Wheel Spin Token
 	{
-		WheelSpinTokenNew=5,
+		WheelSpinToken=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WNDR.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinToken,
 		Time:120.0,	
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
 
 	recipe Forge Super Wheel Spin Token
 	{
-		WheelSpinTokenNew=1,
+		WheelSpinToken=1,
 		WandererTokenStack250,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
-		Result:GN84-WNDR.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinToken,
 		Time:120.0,	
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
 
 	recipe Forge Mega Wheel Spin Token
 	{
-		SuperWheelSpinTokenNew=5,
+		SuperWheelSpinToken=5,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1292,7 +1292,7 @@ module GN84-WNDR
 
 	recipe Forge Mega Wheel Spin Token
 	{
-		SuperWheelSpinTokenNew=1,
+		SuperWheelSpinToken=1,
 		WandererTokenStack500,
 
 		InSameInventory:true,
@@ -1346,18 +1346,18 @@ module GN84-WNDR
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:ShatterToken,
-		Result:GN84-WNDR.SuperWheelSpinTokenNew=5,
+		Result:GN84-WNDR.SuperWheelSpinToken=5,
 		Time:100.0,
 	}
 
 	recipe Shatter Super Wheel Spin Token into Lesser Tokens
 	{
-		SuperWheelSpinTokenNew,
+		SuperWheelSpinToken,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:ShatterToken,
-		Result:GN84-WNDR.WheelSpinTokenNew=5,
+		Result:GN84-WNDR.WheelSpinToken=5,
 		Time:100.0,
 	}
 
@@ -1368,23 +1368,23 @@ module GN84-WNDR
 
 	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
-		VIPTokenNew,
+		VIPToken,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-WNDR.SuperWheelSpinTokenNew,
+		Result:GN84-WNDR.SuperWheelSpinToken,
 		Time:120.0,
 	}
 
 	recipe Redeem VIP Token for Stack of Wanderer Tokens
 	{
-		VIPTokenNew,
+		VIPToken,
 
 		InSameInventory:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		Result:GN84-WNDR.WandererTokenStack250,
+		Result:GN84-WNDR.WandererTokenStack100,
 		Time:120.0,
 	}
 

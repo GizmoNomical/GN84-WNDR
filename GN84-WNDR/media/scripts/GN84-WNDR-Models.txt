@@ -10,7 +10,7 @@ module GN84-WNDR
 	{
 		mesh = worlditems/SmokeyShredderRecycler,
 		texture = worlditems/SmokeyShredderRecycler,
-		scale = 0.6,
+		scale = 0.7,
 	}
 
 	model SafehouseExpansionPermit10
@@ -34,10 +34,17 @@ module GN84-WNDR
 		scale = 0.6,
 	}
 
-	model AdditionalSafehousePermit
+	model RealEstateLicenseResidential
 	{
 		mesh = worlditems/GN84Permit,
-		texture = worlditems/AdditionalSafehousePermit,
+		texture = worlditems/RealEstateLicenseResidential,
+		scale = 0.6,
+	}
+
+	model RealEstateLicenseCommercial
+	{
+		mesh = worlditems/GN84Permit,
+		texture = worlditems/RealEstateLicenseCommercial,
 		scale = 0.6,
 	}
 
@@ -48,12 +55,6 @@ module GN84-WNDR
 		scale = 0.6,
 	}
 
-	model CommercialClaimPermit
-	{
-		mesh = worlditems/GN84Permit,
-		texture = worlditems/CommercialClaimPermit,
-		scale = 0.6,
-	}
 
 	model FactionBunkerClaimPermit
 	{
@@ -87,7 +88,7 @@ module GN84-WNDR
 	{
 		mesh = worlditems/LottoTicket,
 		texture = worlditems/LottoTicketStandardModel,
-		scale = 0.9,
+		scale = 0.7,
 	}
 
 	model LottoTicketRare
@@ -101,55 +102,103 @@ module GN84-WNDR
 	{
 		mesh = worlditems/LottoTicket,
 		texture = worlditems/LottoTicketGoldenModel,
-		scale = 0.9,
+		scale = 1.1,
 	}
 
 
 
-	model LottoWheelSpinFragment1
+	model WheelSpinFragmentA
 	{
 		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/WheelSpinFragment1,
+		texture = worlditems/WheelSpinFragmentA,
 		scale = 1.25,
 	}
 
-	model LottoWheelSpinFragment2
+	model WheelSpinFragmentB
 	{
 		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/WheelSpinFragment2,
+		texture = worlditems/WheelSpinFragmentB,
 		scale = 1.25,
 	}
 
-	model LottoWheelSpinFragment3
+	model WheelSpinFragmentC
 	{
 		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/WheelSpinFragment3,
+		texture = worlditems/WheelSpinFragmentC,
 		scale = 1.25,
 	}
 
-	model LottoWheelSpinFragment4
+	model WheelSpinFragmentD
 	{
 		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/WheelSpinFragment4,
+		texture = worlditems/WheelSpinFragmentD,
 		scale = 1.25,
 	}
 
-	model LottoWheelSpinFragment5
+	model WheelSpinFragmentE
 	{
 		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/WheelSpinFragment5,
+		texture = worlditems/WheelSpinFragmentE,
 		scale = 1.25,
 	}
 
 
 
-	model LottoWheelSpinTokenOld
+	model JadeSpinCasing
 	{
-		mesh = worlditems/LottoWheelSpinTokenOld,
-		texture = worlditems/LottoWheelSpinTokenModel,
-		scale = 1.25,
+		mesh = worlditems/SpinCasing,
+		texture = worlditems/JadeSpinCasing,
+		scale = 1.6,
 	}
 
+	model CitrineSpinCasing
+	{
+		mesh = worlditems/SpinCasing,
+		texture = worlditems/CitrineSpinCasing,
+		scale = 1.8,
+	}
+
+	model DiamondSpinCasing
+	{
+		mesh = worlditems/SpinCasing,
+		texture = worlditems/DiamondSpinCasing,
+		scale = 2.0,
+	}
+	
+	model ObsidianSpinCasing
+	{
+		mesh = worlditems/SpinCasing,
+		texture = worlditems/ObsidianSpinCasing,
+		scale = 2.25,
+	}
+
+	model EmeraldSpinCore
+	{
+		mesh = worlditems/SpinCore,
+		texture = worlditems/EmeraldSpinCore,
+		scale = 1.6,
+	}
+
+	model TopazSpinCore
+	{
+		mesh = worlditems/SpinCore,
+		texture = worlditems/TopazSpinCore,
+		scale = 1.8,
+	}
+
+	model SapphireSpinCore
+	{
+		mesh = worlditems/SpinCore,
+		texture = worlditems/SapphireSpinCore,
+		scale = 2.0,
+	}
+
+	model RubySpinCore
+	{
+		mesh = worlditems/SpinCore,
+		texture = worlditems/RubySpinCore,
+		scale = 2.25,
+	}
 
 
 	model Lotto-WheelSpinToken
@@ -182,18 +231,12 @@ module GN84-WNDR
 
 
 
+
 	model VIPToken
 	{
 		mesh = worlditems/VIPToken,
-		texture = worlditems/VIPTokenModel,
+		texture = worlditems/VIPToken,
 		scale = 1.2,
-	}
-
-	model EventToken
-	{
-		mesh = worlditems/EventToken,
-		texture = worlditems/EventTokenModel,
-		scale = 1.35,
 	}
 
 	model WandererToken

@@ -23,15 +23,15 @@ ItemName_GN84-WNDR.SafehouseExpansionPermit1000 = "Safehouse Expansion Permit - 
 ItemName_GN84-WNDR.SafehouseExpansionPermit5000 = "Safehouse Expansion Permit - 5,000 Tiles",
 
 ItemName_GN84-WNDR.WandererTokenStackX = "Stack of Wanderer Tokens",
-ItemName_GN84-WNDR.WandererTokenStack5 = "Wanderer Tokens - Stack of 5 -",
-ItemName_GN84-WNDR.WandererTokenStack10 = "Wanderer Tokens - Stack of 10 -",
-ItemName_GN84-WNDR.WandererTokenStack25 = "Wanderer Tokens - Stack of 25 -",
-ItemName_GN84-WNDR.WandererTokenStack50 = "Wanderer Tokens - Stack of 50 -",
-ItemName_GN84-WNDR.WandererTokenStack100 = "Wanderer Tokens - Stack of 100 -",
-ItemName_GN84-WNDR.WandererTokenStack250 = "Wanderer Tokens - Stack of 250 -",
-ItemName_GN84-WNDR.WandererTokenStack500 = "Wanderer Tokens - Stack of 500 -",
-ItemName_GN84-WNDR.WandererTokenStack1000 = "Wanderer Tokens - Stack of 1,000 -",
-ItemName_GN84-WNDR.WandererTokenStack5000 = "Wanderer Tokens - Stack of 5,000 -",
+ItemName_GN84-WNDR.WandererTokenStack5 = "Stack of Wanderer Tokens  -  5",
+ItemName_GN84-WNDR.WandererTokenStack10 = "Stack of Wanderer Tokens  -  10",
+ItemName_GN84-WNDR.WandererTokenStack25 = "Stack of Wanderer Tokens  -  25",
+ItemName_GN84-WNDR.WandererTokenStack50 = "Stack of Wanderer Tokens  -  50",
+ItemName_GN84-WNDR.WandererTokenStack100 = "Stack of Wanderer Tokens  -  100",
+ItemName_GN84-WNDR.WandererTokenStack250 = "Stack of Wanderer Tokens  -  250",
+ItemName_GN84-WNDR.WandererTokenStack500 = "Stack of Wanderer Tokens  -  500",
+ItemName_GN84-WNDR.WandererTokenStack1000 = "Stack of Wanderer Tokens  -  1000",
+ItemName_GN84-WNDR.WandererTokenStack5000 = "Stack of Wanderer Tokens  -  5000",
 
 
 

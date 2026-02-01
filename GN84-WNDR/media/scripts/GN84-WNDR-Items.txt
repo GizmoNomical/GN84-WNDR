@@ -357,26 +357,26 @@ module GN84-WNDR
 	
 	}
 
-	item AdditionalSafehousePermit
+	item RealEstateLicenseResidential
 	{
 		DisplayName			=  Real Estate License - Residential,
 		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  AdditionalSafehousePermit,
-		WorldStaticModel	=  AdditionalSafehousePermit,
+		Icon				=  RealEstateLicenseResidential,
+		WorldStaticModel	=  RealEstateLicenseResidential,
 		Tooltip				=  License to Own Multiple Properties,
 	
 	}
 
-	item CommercialClaimPermit
+	item RealEstateLicenseCommercial
 	{
 		DisplayName			=  Real Estate License - Commercial,
 		DisplayCategory		=  License,
 		Weight				=  0.1,
 		Type				=  Normal,
-		Icon				=  CommercialClaimPermit,
-		WorldStaticModel	=  CommercialClaimPermit,
+		Icon				=  RealEstateLicenseCommercial,
+		WorldStaticModel	=  RealEstateLicenseCommercial,
 		Tooltip				=  License to Own Commercial Properties,
 	
 	}
@@ -506,65 +506,158 @@ module GN84-WNDR
 
 
 /*------------------------------------------------------------------------*/
-/*--                      WHEEL SPIN TOKENS                               */
+/*--                       WHEEL SPIN ITEMS                               */
 /*------------------------------------------------------------------------*/
 
-	item WheelSpinFragment1
+	item JadeSpinCasing
 	{
-		DisplayName			=  Wheel Spin Fragment - (A),
+		DisplayName			=  Jade Spin Casing,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinFragment1,				
-		WorldStaticModel	=  LottoWheelSpinFragment1,
-		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+		Icon				=  JadeSpinCasing,				
+		WorldStaticModel	=  JadeSpinCasing,
+		Tooltip 			=  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
 	}
 
-	item WheelSpinFragment2
+	item CitrineSpinCasing
 	{
-		DisplayName			=  Wheel Spin Fragment - (B),
+		DisplayName			=  Citrine Spin Casing,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinFragment2,				
-		WorldStaticModel	=  LottoWheelSpinFragment2,
-		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+		Icon				=  CitrineSpinCasing,				
+		WorldStaticModel	=  CitrineSpinCasing,
+		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
 	}
 
-	item WheelSpinFragment3
+	item DiamondSpinCasing
 	{
-		DisplayName			=  Wheel Spin Fragment - (C),
+		DisplayName			=  Diamond Spin Casing,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinFragment3,				
-		WorldStaticModel	=  LottoWheelSpinFragment3,
-		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+		Icon				=  DiamondSpinCasing,				
+		WorldStaticModel	=  DiamondSpinCasing,
+		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
 	}
-
-	item WheelSpinFragment4
+	
+	item ObsidianSpinCasing
 	{
-		DisplayName			=  Wheel Spin Fragment - (D),
+		DisplayName			=  Obsidian Spin Casing,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinFragment4,				
-		WorldStaticModel	=  LottoWheelSpinFragment4,
-		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+		Icon				=  ObsidianSpinCasing,				
+		WorldStaticModel	=  ObsidianSpinCasing,
+		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
 	}
 
-	item WheelSpinFragment5
+
+	EmeraldSpinCore
 	{
-		DisplayName			=  Wheel Spin Fragment - (E),
+		DisplayName			=  Emerald Spin Core,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  WheelSpinFragment5,				
-		WorldStaticModel	=  LottoWheelSpinFragment5,
-		Tooltip 			=  Collect Wheel Spin Fragments to Forge a Wheel Spin Token!,
+		Icon				=  EmeraldSpinCore,				
+		WorldStaticModel	=  EmeraldSpinCore,
+		Tooltip 	        =  Used to Empower a Spin Token,
 	}
 
-	item WheelSpinTokenNew
+	TopazSpinCore
+	{
+		DisplayName			=  Topaz Spin Core,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  TopazSpinCore,				
+		WorldStaticModel	=  TopazSpinCore,
+		Tooltip 	        =  Used to Empower a Spin Token,
+	}
+
+	SapphireSpinCore
+	{
+		DisplayName			=  Sapphire Spin Core,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  SapphireSpinCore,				
+		WorldStaticModel	=  SapphireSpinCore,
+		Tooltip 	        =  Used to Empower a Spin Token,
+	}
+
+	RubySpinCore
+	{
+		DisplayName			=  Ruby Spin Core,
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  RubySpinCore,				
+		WorldStaticModel	=  RubySpinCore,
+		Tooltip 	        =  Used to Empower a Spin Token,
+	}
+
+
+
+
+
+	item WheelSpinFragmentA
+	{
+		DisplayName			=  Spin Fragment - (A),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragmentA,				
+		WorldStaticModel	=  WheelSpinFragmentA,
+		Tooltip 			=  Collect Spin Fragments to Forge a Spin Token!,
+	}
+
+	item WheelSpinFragmentB
+	{
+		DisplayName			=  Spin Fragment - (B),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragmentB,				
+		WorldStaticModel	=  WheelSpinFragmentB,
+		Tooltip 			=  Collect Spin Fragments to Forge a Spin Token!,
+	}
+
+	item WheelSpinFragmentC
+	{
+		DisplayName			=  Spin Fragment - (C),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragmentC,				
+		WorldStaticModel	=  WheelSpinFragmentC,
+		Tooltip 			=  Collect Spin Fragments to Forge a Spin Token!,
+	}
+
+	item WheelSpinFragmentD
+	{
+		DisplayName			=  Spin Fragment - (D),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragmentD,				
+		WorldStaticModel	=  WheelSpinFragmentD,
+		Tooltip 			=  Collect Spin Fragments to Forge a Spin Token!,
+	}
+
+	item WheelSpinFragmentE
+	{
+		DisplayName			=  Spin Fragment - (E),
+		DisplayCategory		=  Token,
+		Weight				=  0.0001,
+		Type				=  Normal,
+		Icon				=  WheelSpinFragmentE,				
+		WorldStaticModel	=  WheelSpinFragmentE,
+		Tooltip 			=  Collect Spin Fragments to Forge a Wheel Spin Token!,
+	}
+
+	item WheelSpinToken
 	{
 		DisplayName			=  Wheel Spin Token,
 		DisplayCategory		=  Token,
@@ -575,7 +668,7 @@ module GN84-WNDR
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Wheel and Claim your Prize!,
 	}
 
-	item SuperWheelSpinTokenNew
+	item SuperWheelSpinToken
 	{
 		DisplayName			=  Super Wheel Spin Token,
 		DisplayCategory		=  Token,
@@ -611,68 +704,18 @@ module GN84-WNDR
 
 
 /*------------------------------------------------------------------------*/
-/*--                          LEGACY TOKENS                               */
-/*------------------------------------------------------------------------*/
-
-	item WheelSpinToken
-	{
-		DisplayName			=  Wanderers Lotto - Wheel Spin Token (Legacy),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  WheelSpinTokenOld,				
-		WorldStaticModel	=  LottoWheelSpinTokenOld,
-		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain a useable fragment,
-	}	
-
-	item SuperWheelSpinToken
-	{
-		DisplayName			=  Wanderers Lotto - Super Wheel Spin Token (Legacy),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  WheelSpinTokenOld,				
-		WorldStaticModel	=  LottoWheelSpinTokenOld,
-		Tooltip 			=  This Legacy Token has lost it's magic..  Shatter it to regain useable fragments,
-	}	
-
-
-
-/*------------------------------------------------------------------------*/
 /*--                        TOKENS AND COUPONS                            */
 /*------------------------------------------------------------------------*/
 
 	item VIPToken
 	{
-		DisplayName			=  Wanderers VIP Token (Deprecated),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  VIPTokenOld,				
-		WorldStaticModel	=  VIPToken,
-		Tooltip 			=  Please contact an admin for redemption,
-	}
-
-	item VIPTokenNew
-	{
 		DisplayName			=  Wanderers VIP Token,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  VIPTokenNew,				
+		Icon				=  VIPToken,				
 		WorldStaticModel	=  VIPToken,
 		Tooltip 			=  Thank you for Supporting The Wanderers!  Contact an Admin for additional redemption options!,
-	}
-
-	item EventToken
-	{
-		DisplayName			=  Wanderers Event Token (Deprecated),
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  EventToken,				
-		WorldStaticModel	=  EventToken,
-		Tooltip 			=  Please contact an admin for redemption,
 	}
 
 	item WandererToken
@@ -689,7 +732,7 @@ module GN84-WNDR
 	
 	item WandererTokenStack5
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 5,
+		DisplayName			=  Stack of Wanderer Tokens  -  5,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -700,7 +743,7 @@ module GN84-WNDR
 
 	item WandererTokenStack10
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 10,
+		DisplayName			=  Stack of Wanderer Tokens  -  10,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -711,7 +754,7 @@ module GN84-WNDR
 
 	item WandererTokenStack25
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 25,
+		DisplayName			=  Stack of Wanderer Tokens  -  25,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -722,7 +765,7 @@ module GN84-WNDR
 
 	item WandererTokenStack50
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 50,
+		DisplayName			=  Stack of Wanderer Tokens  -  50,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -733,7 +776,7 @@ module GN84-WNDR
 
 	item WandererTokenStack100
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 100,
+		DisplayName			=  Stack of Wanderer Tokens  -  100,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -744,7 +787,7 @@ module GN84-WNDR
 
 	item WandererTokenStack250
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 250,
+		DisplayName			=  Stack of Wanderer Tokens  -  250,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -755,7 +798,7 @@ module GN84-WNDR
 	
 	item WandererTokenStack500
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 500,
+		DisplayName			=  Stack of Wanderer Tokens  -  500,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -766,7 +809,7 @@ module GN84-WNDR
 	
 	item WandererTokenStack1000
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 1000,
+		DisplayName			=  Stack of Wanderer Tokens  -  1000,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
@@ -777,7 +820,7 @@ module GN84-WNDR
 
 	item WandererTokenStack5000
 	{
-		DisplayName			=  Wanderer Tokens - Stack of 5000,
+		DisplayName			=  Stack of Wanderer Tokens  -  5000,
 		DisplayCategory		=  Token,
 		Weight				=  0.001,
 		Type				=  Normal,
