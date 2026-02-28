@@ -1190,6 +1190,7 @@ module GN84-WNDR
 /*--              RARE TICKETS FOR WHEEL SPIN FRAGMENTS                   */
 /*------------------------------------------------------------------------*/
 
+/*
 	recipe Redeem Rare Tickets for Wheel Spin Fragment
 	{
 		LottoTicketRare=25,
@@ -1203,11 +1204,13 @@ module GN84-WNDR
 		OnCreate:GiveRandomWheelSpinFragment,
 	}
 
+*/
 	
 /*------------------------------------------------------------------------*/
 /*--                      WHEEL SPIN UPGRADES                             */
 /*------------------------------------------------------------------------*/
 
+/*
 	recipe Shatter Legacy Wheel Spin Token into Fragment
 	{
 		WheelSpinToken=1,
@@ -1361,11 +1364,13 @@ module GN84-WNDR
 		Time:100.0,
 	}
 
+*/
 
 /*------------------------------------------------------------------------*/
 /*--                     VIP TOKEN REDEMPTIONS                            */
 /*------------------------------------------------------------------------*/	
 
+/*
 	recipe Redeem VIP Token for Super Wheel Spin Token
 	{
 		VIPToken,
@@ -1376,6 +1381,8 @@ module GN84-WNDR
 		Result:GN84-WNDR.SuperWheelSpinToken,
 		Time:120.0,
 	}
+
+*/
 
 	recipe Redeem VIP Token for Stack of Wanderer Tokens
 	{

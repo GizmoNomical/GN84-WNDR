@@ -195,6 +195,7 @@ local moneyClipItems =
 		"Base.VCSTempPermit72",
 		"TheyKnew.Zomboxivir",
 		"TheyKnew.Zomboxycycline",
+        "GN84-WNDR.VehicleInteriorLatchKey"
 	}
 
 function GN84_AcceptItemsMoneyClip(container, item)	

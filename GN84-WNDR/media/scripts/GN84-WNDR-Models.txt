@@ -142,7 +142,12 @@ module GN84-WNDR
 		scale = 1.25,
 	}
 
-
+	model WheelSpinBase
+	{
+		mesh = worlditems/WheelSpinBase,
+		texture = worlditems/WheelSpinBase,
+		scale = 1.6,
+	}
 
 	model JadeSpinCasing
 	{

@@ -464,6 +464,17 @@ module GN84-WNDR
 
 	}
 
+	item VehicleInteriorLatchKey
+	{
+		DisplayName			=  Vehicle Interior - Latch Key,
+		DisplayCategory		=  Wanderers,
+		Weight				=  0.1,		
+		Type				=  Key,        
+        Icon				=  CarKey,		
+		WorldStaticModel	=  CarKeys,
+		Tooltip				=  Used to Unlock a Vehicle Interior,
+	}
+
 
 
 
@@ -509,97 +520,50 @@ module GN84-WNDR
 /*--                       WHEEL SPIN ITEMS                               */
 /*------------------------------------------------------------------------*/
 
-	item JadeSpinCasing
+/*
+	item WheelSpinBaseUniversal
 	{
-		DisplayName			=  Jade Spin Casing,
+		DisplayName			=  Spin Base - Universal,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  JadeSpinCasing,				
-		WorldStaticModel	=  JadeSpinCasing,
-		Tooltip 			=  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
+		Icon				=  WheelSpinBaseUniversal,				
+		WorldStaticModel	=  WheelSpinBaseUniversal,
+		Tooltip 			=  Used to Bind Spin Fragments into Spin Tokens,
 	}
 
-	item CitrineSpinCasing
+	item WheelSpinBaseHardwood
 	{
-		DisplayName			=  Citrine Spin Casing,
+		DisplayName			=  Spin Base - Hardwood,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  CitrineSpinCasing,				
-		WorldStaticModel	=  CitrineSpinCasing,
-		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
+		Icon				=  WheelSpinBaseHardwood,				
+		WorldStaticModel	=  WheelSpinBaseHardwood,
+		Tooltip 			=  Used to Bind Spin Fragments into Spin Tokens,
 	}
 
-	item DiamondSpinCasing
+	item WheelSpinBaseBone
 	{
-		DisplayName			=  Diamond Spin Casing,
+		DisplayName			=  Spin Base - Bone,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  DiamondSpinCasing,				
-		WorldStaticModel	=  DiamondSpinCasing,
-		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
+		Icon				=  WheelSpinBaseBone,				
+		WorldStaticModel	=  WheelSpinBaseBone,
+		Tooltip 			=  Used to Bind Spin Fragments into Spin Tokens,
 	}
-	
-	item ObsidianSpinCasing
+
+	item WheelSpinAugmentJade
 	{
-		DisplayName			=  Obsidian Spin Casing,
+		DisplayName			=  Spin Augment - Jade,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
-		Icon				=  ObsidianSpinCasing,				
-		WorldStaticModel	=  ObsidianSpinCasing,
-		Tooltip 	        =  Used to Bind Spin Fragments and a Spin Core into a Finished Spin Token,
+		Icon				=  JadeAugment,				
+		WorldStaticModel	=  JadeAugment,
+		Tooltip 			=  Augments a Spin Token with a Unique Bonus!,
 	}
-
-
-	EmeraldSpinCore
-	{
-		DisplayName			=  Emerald Spin Core,
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  EmeraldSpinCore,				
-		WorldStaticModel	=  EmeraldSpinCore,
-		Tooltip 	        =  Used to Empower a Spin Token,
-	}
-
-	TopazSpinCore
-	{
-		DisplayName			=  Topaz Spin Core,
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  TopazSpinCore,				
-		WorldStaticModel	=  TopazSpinCore,
-		Tooltip 	        =  Used to Empower a Spin Token,
-	}
-
-	SapphireSpinCore
-	{
-		DisplayName			=  Sapphire Spin Core,
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  SapphireSpinCore,				
-		WorldStaticModel	=  SapphireSpinCore,
-		Tooltip 	        =  Used to Empower a Spin Token,
-	}
-
-	RubySpinCore
-	{
-		DisplayName			=  Ruby Spin Core,
-		DisplayCategory		=  Token,
-		Weight				=  0.0001,
-		Type				=  Normal,
-		Icon				=  RubySpinCore,				
-		WorldStaticModel	=  RubySpinCore,
-		Tooltip 	        =  Used to Empower a Spin Token,
-	}
-
-
-
 
 
 	item WheelSpinFragmentA
@@ -659,7 +623,7 @@ module GN84-WNDR
 
 	item WheelSpinToken
 	{
-		DisplayName			=  Wheel Spin Token,
+		DisplayName			=  Standard Spin Token,
 		DisplayCategory		=  Token,
 		Weight				=  0.0001,
 		Type				=  Normal,
@@ -701,7 +665,7 @@ module GN84-WNDR
 		Tooltip 			=  Contact an Admin on The Wanderers Discord to Spin the Ultimate Wheel and Claim your Prize!,
 	}
 
-
+*/
 
 /*------------------------------------------------------------------------*/
 /*--                        TOKENS AND COUPONS                            */

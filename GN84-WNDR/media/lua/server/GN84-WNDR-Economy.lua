@@ -395,14 +395,11 @@ end
 -- LISTS OF BONUS PRIZES
 local bonusPrizeRare =
 {
-	"Base.Katana",
-	"GN84-WNDR.SuperWheelSpinToken",
-	"GN84-WNDR.WheelSpinToken",
+	"Base.Katana",	
 	"TWeapons.LongSword",
 	"GN84-HI.CrystalBall",
 	"DynamicBackpacks.UpgradeCapacityMilitary",
 	"DynamicBackpacks.UpgradeWeightReductionMilitary",
-	"GN84-WNDR.WheelSpinToken",
 	"ToolsOfTheTrade.SpiffArmyKnife",
 	"ToolsOfTheTrade.UtensilTool",
 	"TWeapons.TacticalMachete",
