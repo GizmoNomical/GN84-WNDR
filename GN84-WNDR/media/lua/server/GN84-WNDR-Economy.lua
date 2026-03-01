@@ -43,7 +43,7 @@ local WandererTokenCashValue	= SandboxVars.GN84WNDR.WandererTokenCashValue 		or 
 
 
 ------------------------------------------------------------------------
---                          ADDING SMOKEY POINTS
+--                          DEPOSIT SMOKEY POINTS
 ------------------------------------------------------------------------
 
 function GivePlayerSmokeyPoints100()
@@ -94,9 +94,10 @@ function GivePlayerSmokeyPointsVariable(amount)
 	sendClientCommand("GN84-WNDR", "depositCash", {getPlayer():getUsername(), amount})
 end
 
-function GivePlayerWandererTokensVariable(amount)
-	sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), amount})
-end
+
+------------------------------------------------------------------------
+--                   Lotto, VIP, Old Token Redemptions       
+------------------------------------------------------------------------
 
 function GivePlayerSmokeyPointsLottoTicket(amount)
 	sendClientCommand("GN84-WNDR", "redeemLottoTicket", {getPlayer():getUsername(), amount})
@@ -113,6 +114,66 @@ end
 function GivePlayerSmokeyPointsWandererToken()
 	sendClientCommand("GN84-WNDR", "redeemWandererToken", {getPlayer():getUsername(), WandererTokenCashValue})
 end
+
+------------------------------------------------------------------------
+--                     DEPOSIT WANDERER TOKENS         
+------------------------------------------------------------------------
+
+
+function GivePlayerWandererTokensVariable(amount)
+	sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), amount})
+end
+
+function GivePlayerWandererTokens1()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 1})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens5()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 5})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens10()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 10})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens25()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 25})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens50()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 50})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens100()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 100})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens250()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 250})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens500()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 500})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens1000()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 1000})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
+function GivePlayerWandererTokens5000()	
+		sendClientCommand("GN84-WNDR", "depositTokens", {getPlayer():getUsername(), 5000})
+		getSoundManager():PlaySound("WinningTicketChime", false, 1):setVolume(1)	
+end
+
 
 
 ------------------------------------------------------------------------

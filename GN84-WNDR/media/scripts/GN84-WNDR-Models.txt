@@ -254,7 +254,7 @@ module GN84-WNDR
 	model WandererTokenStackSmall
 	{
 		mesh = worlditems/WandererToken,
-		texture = worlditems/WandererTokenYellow,
+		texture = worlditems/WandererTokenOrange,
 		scale = 1.2,
 	}
 

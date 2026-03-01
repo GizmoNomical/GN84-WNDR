@@ -1076,7 +1076,7 @@ module GN84-WNDR
 
 	recipe Redeem Rare Tickets for Generator
 	{
-		LottoTicketRare=20,
+		LottoTicketRare=25,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1087,7 +1087,7 @@ module GN84-WNDR
 
 	recipe Redeem Rare Tickets for Zomboxycycline Pills
 	{
-		LottoTicketRare=5,
+		LottoTicketRare=10,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1107,6 +1107,8 @@ module GN84-WNDR
 		Time:100.0,
 	}
 
+	/*
+
 	recipe Redeem Rare Tickets for Vehicle Claim Orb
 	{
 		LottoTicketRare=8,
@@ -1117,6 +1119,8 @@ module GN84-WNDR
 		Result:Base.AVCSClaimOrb,
 		Time:100.0,
 	}
+
+	*/
 
 	recipe Redeem Rare Tickets for Propane Tank
 	{
@@ -1164,7 +1168,7 @@ module GN84-WNDR
 
 	recipe Redeem Rare Tickets for Box of MREs
 	{
-		LottoTicketRare=15,
+		LottoTicketRare=25,
 
 		InSameInventory:true,
 		AnimNode:Craft,
@@ -1406,6 +1410,8 @@ module GN84-WNDR
 	
 	/*   REDEEMING WANDERER TOKENS   */
 
+	/*
+
 	recipe Redeem Wanderer Token for Smokey Points
 	{
 		WandererToken,
@@ -1416,6 +1422,219 @@ module GN84-WNDR
 		Result:Money,
 		Time:120.0,		
 		OnCreate:GivePlayerSmokeyPointsWandererToken,
+	}
+
+	*/
+
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens1,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens1,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=5,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens5,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=10,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens10,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=25,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens25,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=50,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens50,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererToken=100,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens100,	
+	}
+
+
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack5=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens5,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack10=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens10,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack25=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens25,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack50=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens50,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack100=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens100,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack250=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens250,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack500=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens500,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack1000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens1000,	
+	}
+
+	recipe Deposit Wanderer Tokens into Smokey Bank	
+	{
+		WandererTokenStack5000=1,
+		
+		Result:SheetPaper2,
+		Time:80.0,
+		InSameInventory:true,
+		RemoveResultItem:true,
+		AnimNode:Craft,
+		Sound:WinningTicketChime,
+		OnCreate:GivePlayerWandererTokens5000,	
 	}
 
 
