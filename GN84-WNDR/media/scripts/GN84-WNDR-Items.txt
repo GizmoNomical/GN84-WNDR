@@ -30,7 +30,7 @@ module GN84-WNDR
 	{
 		DisplayName			 = 	-----[   Bank Balance,
 		DisplayCategory		 = 	Information,
-		Weight				 = 	1.0,
+		Weight				 = 	0.1,
 		Type 				 = 	Normal,
 		Icon				 = 	BankCard,
 		WorldStaticModel	 = 	BankCard,
@@ -41,7 +41,7 @@ module GN84-WNDR
 	{
 		DisplayName			 = 	-----[   Cash Balance,
 		DisplayCategory		 = 	Information,
-		Weight				 = 	1.0,
+		Weight				 = 	2.0,
 		Type 				 = 	Normal,
 		Icon				 = 	MoneyStack10000,
 		WorldStaticModel	 = 	MoneyStack10000,
@@ -52,7 +52,7 @@ module GN84-WNDR
 	{
 		DisplayName			 =  -----[   Token Balance,
 		DisplayCategory		 =  Information,
-		Weight				 =  1.0,
+		Weight				 =  0.1,
 		Type 				 =  Normal,
 		Icon				 =  WandererTokenStackMedium,
 		WorldStaticModel	 =  WandererTokenStackMedium,
