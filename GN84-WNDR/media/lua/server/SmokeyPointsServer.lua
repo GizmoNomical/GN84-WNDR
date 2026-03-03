@@ -244,7 +244,7 @@ function SmokeyPointsCommands.buyTokens(module, command, player, args)
     if not smokeyTokensData[player:getUsername()] then smokeyTokensData[player:getUsername()] = 0 end
     smokeyTokensData[player:getUsername()] = smokeyTokensData[player:getUsername()] - math.abs(args[1])
 
-    print("[SMOKEY POINTS]        Balance:   " .. Utils.CurrencyFormatter(smokeyPointsData[player:getUsername()]) .. " Wanderer Tokens!")
+    print("[SMOKEY POINTS]        Balance:   " .. Utils.CurrencyFormatter(smokeyTokensData[player:getUsername()]) .. " Wanderer Tokens!")
     print("###############")
 end
 
