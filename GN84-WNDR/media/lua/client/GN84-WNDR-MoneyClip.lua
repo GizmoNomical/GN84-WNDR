@@ -741,7 +741,10 @@ MoneyClipContext = function(playerNum, context, items)
 
 	for _, item in ipairs(items) do
 		if item:getType() == "MoneyClip" then
-			if not item:isInPlayerInventory() then return end
+			if not item:isInPlayerInventory() then
+                -- print("FILE:  GN84-WNDR-MoneyClip.lua  |  LINE:  745  |  FUNCTION:  MoneyClipContext  |  WARN:  MoneyClip Found but not Within Main Inventory")
+                return
+            end
 
 			local moneyClip = item
             local modData = moneyClip:getModData()
@@ -1627,7 +1630,7 @@ GetAllMoneyClips = function()
     local inventory = player:getInventory()
     if not inventory then return end
 
-    local items = inventory:getItems()
+    local items = inventory:getAllTypeRecurse("MoneyClip")
     if not items then return end
     if items:size() == 0 then return end
 
@@ -1674,6 +1677,8 @@ UpdateAllMoneyClips = function()
         end
     end
 end
+
+
 
 
 
