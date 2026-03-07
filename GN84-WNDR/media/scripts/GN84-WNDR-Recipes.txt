@@ -1388,16 +1388,16 @@ module GN84-WNDR
 
 */
 
-	recipe Redeem VIP Token for Stack of Wanderer Tokens
-	{
-		VIPToken,
+	// recipe Redeem VIP Token for Stack of Wanderer Tokens
+	// {
+	// 	VIPToken,
 
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:GN84-WNDR.WandererTokenStack100,
-		Time:120.0,
-	}
+	// 	InSameInventory:true,
+	// 	AnimNode:Craft,
+	// 	Sound:WinningTicketChime,
+	// 	Result:GN84-WNDR.WandererTokenStack100,
+	// 	Time:120.0,
+	// }
 
 
 /*------------------------------------------------------------------------*/
