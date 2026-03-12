@@ -6,6 +6,26 @@ module GN84-WNDR
     }
 
 
+/*------------------------------------------------------------------------*/
+/*--                            RECYCLER                                  */
+/*------------------------------------------------------------------------*/
+
+	item SmokeyShredderRecycler
+	{
+		DisplayName			=  Smokey's All-In-One Shredder Recycler,
+		DisplayCategory		=  Wanderers,
+		Weight				=  50.0,
+		Type				=  Container,
+		Capacity 			=  40,
+		WeightReduction		=  90,		
+		OpenSound			=  RecyclerOpenTray,
+		AcceptItemFunction	=  GN84_AcceptItemsRecycler,
+		Icon				=  SmokeyShredderRecycler,
+		WorldStaticModel	=  SmokeyShredderRecycler,
+		Tooltip				=  Recycle Items for Cash!,
+
+	}
+
 
 /*------------------------------------------------------------------------*/
 /*--                        MONEY CLIP ITEMS                              */
@@ -67,7 +87,7 @@ module GN84-WNDR
 	{
 		DisplayName			 =  Stack of Cash,
 		DisplayCategory		 =  Currency,
-		Weight				 = 	1.0,
+		Weight				 = 	0.1,
 		Type 				 = 	Normal,
 		Icon				 = 	MoneyStack10000,
 		WorldStaticModel	 = 	MoneyStack10000,
@@ -78,7 +98,7 @@ module GN84-WNDR
 	{
 		DisplayName			 =  Stack of Wanderer Tokens,
 		DisplayCategory		 =  Token,
-		Weight				 = 	1.0,
+		Weight				 = 	0.1,
 		Type 				 = 	Normal,
 		Icon				 = 	WandererTokenStackMedium,				
 		WorldStaticModel	 = 	WandererTokenStackMedium,	
@@ -450,19 +470,7 @@ module GN84-WNDR
 		WorldStaticModel	=  FactionBunkerClaimPermit,
 		Tooltip				=  Required to claim a Massive Bunker,
 	
-	}
-
-	item SmokeyShredderRecycler
-	{
-		DisplayName			=  Smokey's All-In-One Shredder Recycler,
-		DisplayCategory		=  Wanderers,
-		Weight				=  50.0,
-		Type				=  Normal,
-		Icon				=  SmokeyShredderRecycler,
-		WorldStaticModel	=  SmokeyShredderRecycler,
-		Tooltip				=  Recycle Items for Cash!
-
-	}
+	}	
 
 	item VehicleInteriorLatchKey
 	{

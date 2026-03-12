@@ -190,7 +190,7 @@ function OnTest_PlayerOwnsMoneyClip(item, result)
 		if item:getContainer():getContainingItem():getType() == "MoneyClip" then
 			local moneyClip = item:getContainer():getContainingItem()
 
-			print("Item Within MoneyClip")
+			-- print("Item Within MoneyClip")
 			local modData = moneyClip:getModData()
 			if not modData then return false end
 			
@@ -200,17 +200,17 @@ function OnTest_PlayerOwnsMoneyClip(item, result)
 			local username = player:getUsername()
 
 			if modData.Owner == username then
-				print("Owned by Player")
+				-- print("Owned by Player")
 				return true
 			elseif modData.Owner ~= username then
-				print("Error: Not Owned by Player")
+				-- print("Error: Not Owned by Player")
 				return false
 			end
 		else
 			return true
 		end
 	else		
-		print("Item Not within Money Clip")
+		-- print("Item Not within Money Clip")
 		return true
 	end	
 end
@@ -389,12 +389,12 @@ function CollectMoneyFromWallet(sources, result, player, item)
 
 	if checkWalletForCash(player) then
 		walletCash = calculateWalletCash(player) * walletCashMultiplier
-		print("Wallet Cash: " .. walletCash)
+		-- print("Wallet Cash: " .. walletCash)
 	end
 
 	if checkWalletForBonusCash(player) then
 		bonusCash = calculateBonusWalletCash(player) * eFundCashMultiplier
-		print("Bonus Cash: " .. walletCash)
+		-- print("Bonus Cash: " .. walletCash)
 	end
 
 

@@ -632,9 +632,11 @@ module GN84-WNDR
 		Base.WristWatch_Right_ClassicBlack/Base.WristWatch_Left_ClassicBlack/Base.WristWatch_Right_ClassicBrown/Base.WristWatch_Left_ClassicBrown/Base.WristWatch_Right_ClassicMilitary/Base.WristWatch_Left_ClassicMilitary/Base.WristWatch_Right_DigitalBlack/Base.WristWatch_Left_DigitalBlack/Base.WristWatch_Right_DigitalRed/Base.WristWatch_Left_DigitalRed/Base.WristWatch_Right_DigitalDress/Base.WristWatch_Left_DigitalDress/Base.WristWatch_Left_ClassicGold/Base.WristWatch_Right_ClassicGold,
         
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleWatches,
 	}
 
@@ -645,9 +647,11 @@ module GN84-WNDR
 		Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT/Base.Necklace_Crucifix/AuthenticZLite.Necklace_B,
         
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelrySimple,
 	}
 
@@ -658,9 +662,11 @@ module GN84-WNDR
 		Base.Necklace_DogTag/Base.Locket/Base.Ring_Right_MiddleFinger_Gold/Base.Ring_Left_MiddleFinger_Gold/Base.Ring_Right_RingFinger_Gold/Base.Ring_Left_RingFinger_Gold/Base.Ring_Right_MiddleFinger_Silver/Base.Ring_Left_MiddleFinger_Silver/Base.Ring_Right_RingFinger_Silver/Base.Ring_Left_RingFinger_Silver/Base.Earring_LoopLrg_Gold/Base.Earring_LoopLrg_Silver/Base.Earring_LoopMed_Silver/Base.Earring_LoopMed_Gold/Base.Earring_LoopSmall_Silver_Both/Base.Earring_LoopSmall_Silver_Top/Base.Earring_LoopSmall_Gold_Both/Base.Earring_LoopSmall_Gold_Top/Base.Earring_Stud_Gold/Base.Earring_Stud_Silver/Base.NoseRing_Gold/Base.NoseRing_Silver/Base.NoseStud_Gold/Base.NoseStud_Silver/Base.Bracelet_BangleRightGold/Base.Bracelet_BangleLeftGold/Base.Bracelet_ChainRightGold/Base.Bracelet_ChainLeftGold/Base.Bracelet_BangleRightSilver/Base.Bracelet_BangleLeftSilver/Base.Bracelet_ChainRightSilver/Base.Bracelet_ChainLeftSilver/Base.NecklaceLong_Silver/Base.NecklaceLong_Gold/Base.Necklace_SilverCrucifix/Base.Necklace_Silver/Base.Necklace_Gold/Base.BellyButton_RingSilver/Base.BellyButton_DangleGold/Base.BellyButton_RingGold/Base.BellyButton_StudSilver/Base.NoseStud_Gold/Base.NoseStud_Silver/Base.NoseRing_Gold/Base.NoseRing_Silver/Base.BellyButton_DangleSilver/Base.BellyButton_StudGold,
 
         Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryPrecious,
 	}
 
@@ -671,9 +677,11 @@ module GN84-WNDR
 		Base.Ring_Right_MiddleFinger_GoldRuby/Base.Ring_Left_MiddleFinger_GoldRuby/Base.Ring_Right_RingFinger_GoldRuby/Base.Ring_Left_RingFinger_GoldRuby/Base.Earring_Stone_Sapphire/Base.Earring_Stone_Emerald/Base.Earring_Stone_Ruby/Base.Earring_Pearl/Base.Earring_Dangly_Sapphire/Base.Earring_Dangly_Emerald/Base.Earring_Dangly_Ruby/Base.Earring_Dangly_Pearl/Base.Necklace_Choker_Sapphire/Base.NecklaceLong_SilverSapphire/Base.NecklaceLong_SilverEmerald/Base.Necklace_SilverSapphire/Base.Necklace_GoldRuby/Base.Necklace_Pearl/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingSilverAmethyst/Base.BellyButton_RingSilverRuby/Base.BellyButton_DangleGoldRuby/Base.Necklace_Choker_Amber/Base.NecklaceLong_Amber,
 
         Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryGemstones,
 	}
 
@@ -684,9 +692,11 @@ module GN84-WNDR
 		Base.Earring_Dangly_Diamond/Base.Ring_Right_MiddleFinger_SilverDiamond/Base.Ring_Left_MiddleFinger_SilverDiamond/Base.Ring_Right_RingFinger_SilverDiamond/Base.Ring_Left_RingFinger_SilverDiamond/Base.Ring_Right_MiddleFinger_GoldDiamond/Base.Ring_Left_MiddleFinger_GoldDiamond/Base.Ring_Right_RingFinger_GoldDiamond/Base.Ring_Left_RingFinger_GoldDiamond/Base.Necklace_Choker_Diamond/Base.NecklaceLong_SilverDiamond/Base.NecklaceLong_GoldDiamond/Base.Necklace_SilverDiamond/Base.Necklace_GoldDiamond/Base.BellyButton_RingGoldDiamond/Base.BellyButton_DangleSilverDiamond/Base.BellyButton_RingSilverDiamond/Base.BellyButton_StudGoldDiamond/Base.BellyButton_StudSilverDiamond,
         
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
 	
@@ -703,9 +713,11 @@ module GN84-WNDR
 		Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer,
         
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleSimpleTool,
 	}
 
@@ -716,9 +728,11 @@ module GN84-WNDR
 		ToolsOfTheTrade.FellingAxe/ToolsOfTheTrade.Hatchet/AuthenticZLite.AuthenticIceAxe/ToolsOfTheTrade.IndustrialPipeWrench/ToolsOfTheTrade.IndustrialWrenchToolsOfTheTrade.PostMaul/ToolsOfTheTrade.PulaskiAxeToolsOfTheTrade.SplittingMaul/ToolsOfTheTrade.UtilityBar,/Base.Shovel/Base.Shovel2/Base.LugWrench/Base.Jack/Base.TirePump/Base.WoodAxe/Base.GardenFork/Base.GardenHoe/Base.PickAxe/Base.SnowShovel,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleLargeTool,
 	}
 
@@ -729,9 +743,11 @@ module GN84-WNDR
 		ToolsOfTheTrade.Multitool/ToolsOfTheTrade.SpiffArmyKnife/Base.Sledgehammer/Base.Sledgehammer2/Base.CarBatteryCharger,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleComplexTool,
 	}
 
@@ -742,12 +758,15 @@ module GN84-WNDR
 		Base.Belt2/Base.HolsterSimple/Base.HolsterDouble/Base.Sling/Base.Gloves_LeatherGloves/Base.Gloves_LeatherGlovesBlack/Base.Hat_Cowboy/Base.Shoes_ArmyBoots/Base.Shoes_ArmyBootsDesert/Base.TrousersMesh_Leather/Base.Trousers_LeatherBlack/Base.Jacket_Black/Base.Jacket_LeatherIronRodent/Base.Jacket_LeatherWildRacoons/Base.Jacket_LeatherBarrelDogs,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleLeather,
 	}
 
+	/*
 	recipe Shred and Recycle Empty Wallets for Money
 	{
 		keep SmokeyShredderRecycler,
@@ -755,11 +774,14 @@ module GN84-WNDR
 		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
         Time:5.0,
 		OnTest:Recipe.OnTest.IsNotFavorited,
 	}
+	*/
 
+	/*
 	recipe Shred and Recycle Leather Strips for Money
 	{
 		keep SmokeyShredderRecycler,
@@ -767,10 +789,12 @@ module GN84-WNDR
 		LeatherStrips/LeatherStripsDirty,
 
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
         Time:5.0,
 		OnTest:Recipe.OnTest.IsNotFavorited,
 	}
+	*/
 
 	recipe Shred and Recycle Clothing for Money
 	{
@@ -779,9 +803,11 @@ module GN84-WNDR
 		Base.Shirt_Lumberjack/Base.Shirt_HawaiianTINT/Base.Shirt_HawaiianRed,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:10.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleClothing,
 	}
 
@@ -792,9 +818,11 @@ module GN84-WNDR
 		Base.Vest_BulletPolice/Base.Vest_BulletArmy/Base.Vest_BulletCivilian,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:10.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleBulletVest,
 	}
 
@@ -805,9 +833,11 @@ module GN84-WNDR
 		Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles/Base.Glasses_Napier,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleGlasses,
 	}
 
@@ -818,9 +848,11 @@ module GN84-WNDR
 		Base.Book/Base.ComicBook/Base.MagazineCrossword1/Base.MagazineCrossword2/Base.MagazineCrossword3/Base.Hottiez/Base.Magazine/Base.Newspaper/Base.TVMagazine/Base.MagazineWordsearch1/Base.MagazineWordsearch2/Base.MagazineWordsearch3/Base.Notebook/Base.Journal,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecyclePaperProduct,
 	}
 
@@ -831,9 +863,11 @@ module GN84-WNDR
 		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap/Base.Camera/Base.CameraDisposable/Base.CameraExpensive/Base.Earbuds,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleLowElectronics,
 	}
 
@@ -844,9 +878,11 @@ module GN84-WNDR
 		Radio.WalkieTalkie4/Radio.WalkieTalkie5/Radio.HamRadio1/Radio.HamRadio2/Radio.HamRadioMakeShift/Radio.RadioRed,
 		
 		Result:Money,
+		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleHighElectronics,
 	}
 
