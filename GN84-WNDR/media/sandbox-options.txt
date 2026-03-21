@@ -209,6 +209,28 @@ option GN84WNDR.PlayerUnluckyPenalty
 
 }
 
+option GN84WNDR.RecyclerValueMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 100.0,
+    default = 1.0,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_RecyclerValueMultiplier,
+}
+
+option GN84WNDR.RecyclerTimeout
+{
+    type = integer,
+    min = 0,
+    max = 60,
+    default = 5,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_RecyclerTimeout,
+}
+
 option GN84WNDR.WatchesMinValue
 {
     type = integer,

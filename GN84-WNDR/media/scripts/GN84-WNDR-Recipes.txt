@@ -1143,21 +1143,6 @@ module GN84-WNDR
 		Time:100.0,
 	}
 
-	/*
-
-	recipe Redeem Rare Tickets for Vehicle Claim Orb
-	{
-		LottoTicketRare=8,
-
-		InSameInventory:true,
-		AnimNode:Craft,
-		Sound:WinningTicketChime,
-		Result:Base.AVCSClaimOrb,
-		Time:100.0,
-	}
-
-	*/
-
 	recipe Redeem Rare Tickets for Propane Tank
 	{
 		LottoTicketRare=3,

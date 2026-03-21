@@ -15,9 +15,13 @@ Sandbox_EN = {
     Sandbox_GN84WNDR_VIPTokenCashValue = "VIP Token Cash Value in Smokey Points",
     Sandbox_GN84WNDR_WandererTokenCashValue = "Wanderer Token Cash Value in Smokey Points",
 
+
     Sandbox_GN84WNDR_PlayerLuckBonus = "Player Luck Bonus Modifier",    
     Sandbox_GN84WNDR_PlayerUnluckyPenalty = "Player Unlucky Penalty Modifier",
 
+
+    Sandbox_GN84WNDR_RecyclerValueMultiplier = "Recycling: Value Multiplier",
+    Sandbox_GN84WNDR_RecyclerTimeout = "Recycling: Inactivity Timeout (Minutes)",
     Sandbox_GN84WNDR_WatchesMinValue = "Recycling: Watches - Min Value",
     Sandbox_GN84WNDR_WatchesMaxValue = "Recycling: Watches - Max Value",
     Sandbox_GN84WNDR_JewelrySimpleMinValue = "Recycling: Jewelry (Simple) - Min Value",
