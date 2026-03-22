@@ -162,4 +162,17 @@ module GN84-WNDR
         }
     }
 
+    sound RecyclerMotorRunning
+    {
+        category = Ambient,
+        loop = true,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerMotorRunning.ogg,
+            distanceMax = 50,
+            volume = 1.0,
+        }
+    }
+
 }
