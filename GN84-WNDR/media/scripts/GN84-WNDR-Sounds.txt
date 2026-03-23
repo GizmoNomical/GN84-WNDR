@@ -170,8 +170,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorStart.ogg,
-            distanceMax = 50,
-            volume = 1.1,
+            distanceMax = 30,
+            volume = 0.75,
         }
     }
 
@@ -183,8 +183,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorStop.ogg,
-            distanceMax = 50,
-            volume = 1.1,
+            distanceMax = 30,
+            volume = 0.75,
         }
     }
 
@@ -196,8 +196,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorRunning.ogg,
-            distanceMax = 50,
-            volume = 0.85,
+            distanceMax = 30,
+            volume = 0.50,
         }
     }
 
@@ -209,8 +209,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerKeyPad.ogg,
-            distanceMax = 15,
-            volume = 1.0,
+            distanceMax = 10,
+            volume = 0.7,
         }
     }
 
@@ -222,8 +222,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerCashOut.ogg,
-            distanceMax = 25,
-            volume = 1.0,
+            distanceMax = 15,
+            volume = 0.7,
         }
     }
 

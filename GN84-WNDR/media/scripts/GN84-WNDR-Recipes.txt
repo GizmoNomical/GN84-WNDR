@@ -766,7 +766,7 @@ module GN84-WNDR
         OnCreate:ShredderRecycleLeather,
 	}
 
-	/*
+	
 	recipe Shred and Recycle Empty Wallets for Money
 	{
 		keep SmokeyShredderRecycler,
@@ -776,12 +776,14 @@ module GN84-WNDR
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+        Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleEmptyWallets,
 	}
-	*/
+	
 
-	/*
+	
 	recipe Shred and Recycle Leather Strips for Money
 	{
 		keep SmokeyShredderRecycler,
@@ -792,9 +794,11 @@ module GN84-WNDR
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
         Time:5.0,
-		OnTest:Recipe.OnTest.IsNotFavorited,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleLeatherStrips,
 	}
-	*/
+	
 
 	recipe Shred and Recycle Clothing for Money
 	{

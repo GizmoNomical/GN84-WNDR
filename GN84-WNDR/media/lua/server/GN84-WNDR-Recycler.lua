@@ -67,7 +67,7 @@ local highElectronicsMaxValue = SandboxVars.GN84WNDR.HighElectronicsMaxValue 	or
 
 
 local MS_TO_MINUTES = 60000
-local BUSY_TIMEOUT = 4000
+local BUSY_TIMEOUT = 5000
 
 local CreateCash
 local AttractZombiesToRecycler
@@ -223,7 +223,7 @@ function PowerOnTimedAction:perform() -- Trigger when the action is complete
 	end
 
 
-	AttractZombiesToRecycler(self.character)
+	AttractZombiesToRecycler(self.character, 20)
 
 	modData.RecyclerEnabled = true
 	modData.RecyclerLastUsed = getTimeInMillis()
@@ -326,7 +326,7 @@ function PowerOffTimedAction:perform() -- Trigger when the action is complete
         emitter:playSound("RecyclerMotorStop", self.recycler:getSquare())
     end
 
-	AttractZombiesToRecycler(self.character)
+	AttractZombiesToRecycler(self.character, 20)
 
 	modData.RecyclerEnabled = false
 	modData.CurrentUser = nil
@@ -424,11 +424,16 @@ function ResetRecyclerTimedAction:perform() -- Trigger when the action is comple
 		return
 	end
 
-	if modData.CurrentUser ~= nil and (modData.CashBalance or 0) > 0 then
+	local amount = modData.CashBalance or 0
+	local previousUser = modData.CurrentUser
+
+	modData.CashBalance = 0
+
+	if previousUser ~= nil and amount > 0 then
 		if DEBUG_RECYCLER then
-			print("Depositing Previous Balance of " .. modData.CashBalance .. " into " .. modData.CurrentUser .. "'s Smokey Bank")
+			print("Depositing Previous Balance of " .. amount .. " into " .. previousUser .. "'s Smokey Bank")
 		end
-		sendClientCommand("GN84-WNDR", "depositCash", {modData.CurrentUser, modData.CashBalance})
+		sendClientCommand("GN84-WNDR", "depositCash", { previousUser, amount })
 	end
 
 	local emitter = getWorld():getFreeEmitter(self.recycler:getX(), self.recycler:getY(), self.recycler:getZ())
@@ -441,7 +446,7 @@ function ResetRecyclerTimedAction:perform() -- Trigger when the action is comple
         emitterReceipt:playSound("ReceiptSound", self.recycler:getSquare())
     end
 
-	AttractZombiesToRecycler(self.character)
+	AttractZombiesToRecycler(self.character, 20)
 
 	modData.RecyclerEnabled = false
 	modData.CashBalance = 0
@@ -549,16 +554,17 @@ function CashoutTimedAction:perform() -- Trigger when the action is complete
 		return
 	end
 
-	if not modData.CashBalance or modData.CashBalance <= 0 then
+	local amount = modData.CashBalance or 0
+	if amount <= 0 then
 		ISBaseTimedAction.perform(self)
 		return
 	end
 
-	if modData.CashBalance and modData.CashBalance > 0 then
-		self.character:Say("Cashing Out:  $" .. Utils.CurrencyFormatter(modData.CashBalance))
-		CreateCash(modData.CashBalance, self.recycler:getItem())
-		modData.CashBalance = 0
-	end
+	modData.CashBalance = 0
+
+	self.character:Say("Cashing Out:  $" .. Utils.CurrencyFormatter(amount))
+	CreateCash(amount, self.recycler:getItem())
+
 
 	local emitter = getWorld():getFreeEmitter(self.recycler:getX(), self.recycler:getY(), self.recycler:getZ())
     if emitter then
@@ -1080,10 +1086,16 @@ Events.OnObjectAboutToBeRemoved.Add(RecyclerCleanup)
 --                         ATTRACT ZOMBIES
 ------------------------------------------------------------------------
 
-AttractZombiesToRecycler = function(player)
-	local odds = ZombRand(0,100) + 1
+AttractZombiesToRecycler = function(player, uniqueOdds)
+	local odds = 1
+	local attractRoll = ZombRand(0, 101)
+
+	if uniqueOdds and type(uniqueOdds) == "number" then
+		odds = uniqueOdds
+	end
+
 	-- print("Odds: ", odds)
-	if odds > 99 then
+	if attractRoll <= odds then
 		-- print("Attracting Zombies to Recycler")
 		addSound(player, player:getX(), player:getY(), player:getZ(), 100, 100)
 	end
@@ -1331,11 +1343,11 @@ local function RecyclerContext(playerNum, context, worldObjects, test)
 
 			-- Check Player Proximity to Recycler
 			if not IsPlayerNearRecycler(player, object) then
-				local tooFar = context:addOptionOnTop("..Too Far Away..", nil, nil)
+				local tooFar = context:addOptionOnTop("Too Far Away", nil, nil)
 				tooFar.notAvailable = true
 
 				local toolTip = ISWorldObjectContextMenu:addToolTip()
-				toolTip.description = getText("<SIZE:medium><RGB:1,0,0,1>Move Closer<LINE><LINE><RGB:1,1,1,1>You must be within 2 tiles to use the Recycler.")
+				toolTip.description = getText("<SIZE:medium><RGB:1,0,0,1>Move Closer<LINE><LINE><RGB:1,1,1,1>You must be within 3 tiles to use the Recycler.")
 				tooFar.toolTip = toolTip
 				return
 			end
@@ -1348,6 +1360,10 @@ local function RecyclerContext(playerNum, context, worldObjects, test)
 			if IsRecyclerBusy(object) then
 				local busyOption = context:addOptionOnTop("Recycler Busy", nil, nil)
 				busyOption.notAvailable = true
+
+				local toolTip = ISWorldObjectContextMenu.addToolTip()
+				toolTip.description = getText("<SIZE:medium><RGB:1.0,0.6,0.11,1>Machine Busy - Operation in Progress<LINE><LINE><RGB:0.0,0.886,1.0,1>Please Wait")
+				busyOption.toolTip = toolTip
 				return
 			end
 
@@ -1841,26 +1857,39 @@ function ShredderRecycleWatches(sources, result, player, item)
 	local watchesValueRoll = ZombRand(watchesMinValue, watchesMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", watchesMinValue)
-	print("Max Value: ", watchesMaxValue)
-	print("Value Roll: ", watchesValueRoll)
 
 	local finalValue = math.max(1, math.floor(watchesValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
+
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", watchesMinValue)
+		print("Max Value: ", watchesMaxValue)
+		print("Value Roll: ", watchesValueRoll)
+		print("Final Value: ", finalValue)
+	end
 
 	local modData = recycler:getModData()
-	if not modData then
-		print("FILE:  GN84-WNDR-Recycler.lua  |  LINE:  563  |  FUNCTION:  ShredderRecycleWatches  |  ERROR:  modData is Invalid or Missing")
-		return
-	end
+	if not modData then return end
+
 	modData.CashBalance = modData.CashBalance + finalValue
 	modData.RecyclerLastUsed = getTimeInMillis()
 
-	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient", { RecyclerID = recycler:getID(), X = recycler:getWorldItem():getX(), Y = recycler:getWorldItem():getY(), Z = recycler:getWorldItem():getZ(), RecyclerActivated = modData.RecyclerActivated, RecyclerEnabled = modData.RecyclerEnabled, CashBalance = modData.CashBalance, CurrentUser = modData.CurrentUser, RecyclerLastUsed = modData.RecyclerLastUsed, ActionBusyUntil = modData.ActionBusyUntil })
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
 
-	--PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+	AttractZombiesToRecycler(player, 3)
+	-- Play Sound (Small Metal)
 end
 
 
@@ -1876,30 +1905,40 @@ function ShredderRecycleJewelrySimple(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelrySimpleMinValue, jewelrySimpleMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", jewelrySimpleMinValue)
-	print("Max Value: ", jewelrySimpleMaxValue)
-	print("Value Roll: ", jewelryValueRoll)
 
 	local finalValue = math.max(1, math.floor(jewelryValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", jewelrySimpleMinValue)
+		print("Max Value: ", jewelrySimpleMaxValue)
+		print("Value Roll: ", jewelryValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 3)
+	-- Play Sound (Small Metal)
+
 end
 
 
@@ -1915,30 +1954,38 @@ function ShredderRecycleJewelryPrecious(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryPreciousMinValue, jewelryPreciousMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", jewelryPreciousMinValue)
-	print("Max Value: ", jewelryPreciousMaxValue)
-	print("Value Roll: ", jewelryValueRoll)
-
 	local finalValue = math.max(1, math.floor(jewelryValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", jewelryPreciousMinValue)
+		print("Max Value: ", jewelryPreciousMaxValue)
+		print("Value Roll: ", jewelryValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 2)
+	-- Play Sound (Small Metal)
 end
 
 
@@ -1954,30 +2001,39 @@ function ShredderRecycleJewelryGemstones(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryGemsMinValue, jewelryGemsMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", jewelryGemsMinValue)
-	print("Max Value: ", jewelryGemsMaxValue)
-	print("Value Roll: ", jewelryValueRoll)
 
 	local finalValue = math.max(1, math.floor(jewelryValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", jewelryGemsMinValue)
+		print("Max Value: ", jewelryGemsMaxValue)
+		print("Value Roll: ", jewelryValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 5)
+	-- Play Sound (Small Metal)
 end
 
 
@@ -1993,30 +2049,39 @@ function ShredderRecycleJewelryDiamond(sources, result, player, item)
 	local jewelryValueRoll = ZombRand(jewelryDiamondMinValue, jewelryDiamondMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", jewelryDiamondMinValue)
-	print("Max Value: ", jewelryDiamondMaxValue)
-	print("Value Roll: ", jewelryValueRoll)
 
 	local finalValue = math.max(1, math.floor(jewelryValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", jewelryDiamondMinValue)
+		print("Max Value: ", jewelryDiamondMaxValue)
+		print("Value Roll: ", jewelryValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 10)
+	-- Play Sound (Small Metal)
 end
 
 
@@ -2039,30 +2104,39 @@ function ShredderRecycleSimpleTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(simpleToolMinValue, simpleToolMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", simpleToolMinValue)
-	print("Max Value: ", simpleToolMaxValue)
-	print("Value Roll: ", toolValueRoll)
 
 	local finalValue = math.max(1, math.floor(toolValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", simpleToolMinValue)
+		print("Max Value: ", simpleToolMaxValue)
+		print("Value Roll: ", toolValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 20)
+	-- Play Sound (Large Metal)
 end
 
 
@@ -2078,30 +2152,39 @@ function ShredderRecycleLargeTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(largeToolMinValue, largeToolMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", largeToolMinValue)
-	print("Max Value: ", largeToolMaxValue)
-	print("Value Roll: ", toolValueRoll)
 
 	local finalValue = math.max(1, math.floor(toolValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", largeToolMinValue)
+		print("Max Value: ", largeToolMaxValue)
+		print("Value Roll: ", toolValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 25)
+	-- Play Sound (Large Metal)
 end
 
 
@@ -2117,30 +2200,39 @@ function ShredderRecycleComplexTool(sources, result, player, item)
 	local toolValueRoll = ZombRand(complexToolMinValue, complexToolMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", complexToolMinValue)
-	print("Max Value: ", complexToolMaxValue)
-	print("Value Roll: ", toolValueRoll)
 
 	local finalValue = math.max(1, math.floor(toolValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", complexToolMinValue)
+		print("Max Value: ", complexToolMaxValue)
+		print("Value Roll: ", toolValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 25)
+	-- Play Sound (Large Metal)
 end
 
 
@@ -2163,30 +2255,39 @@ function ShredderRecycleLeather(sources, result, player, item)
 	local leatherValueRoll = ZombRand(leatherMinValue, leatherMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", leatherMinValue)
-	print("Max Value: ", leatherMaxValue)
-	print("Value Roll: ", leatherValueRoll)
 
 	local finalValue = math.max(1, math.floor(leatherValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", leatherMinValue)
+		print("Max Value: ", leatherMaxValue)
+		print("Value Roll: ", leatherValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 5)
+	-- Play Sound (Leather)
 end
 
 
@@ -2202,30 +2303,39 @@ function ShredderRecycleClothing(sources, result, player, item)
 	local clothingValueRoll = ZombRand(clothingMinValue, clothingMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", clothingMinValue)
-	print("Max Value: ", clothingMaxValue)
-	print("Value Roll: ", clothingValueRoll)
 
 	local finalValue = math.max(1, math.floor(clothingValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", clothingMinValue)
+		print("Max Value: ", clothingMaxValue)
+		print("Value Roll: ", clothingValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 2)
+	-- Play Sound (Light Fabric)
 end
 
 
@@ -2241,30 +2351,39 @@ function ShredderRecycleBulletVest(sources, result, player, item)
 	local vestValueRoll = ZombRand(bulletVestMinValue, bulletVestMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", bulletVestMinValue)
-	print("Max Value: ", bulletVestMaxValue)
-	print("Value Roll: ", vestValueRoll)
 
 	local finalValue = math.max(1, math.floor(vestValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", bulletVestMinValue)
+		print("Max Value: ", bulletVestMaxValue)
+		print("Value Roll: ", vestValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 10)
+	-- Play Sound (Thick Fabric)
 end
 
 
@@ -2280,30 +2399,39 @@ function ShredderRecycleGlasses(sources, result, player, item)
 	local glassesValueRoll = ZombRand(glassesMinValue, glassesMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", glassesMinValue)
-	print("Max Value: ", glassesMaxValue)
-	print("Value Roll: ", glassesValueRoll)
 
 	local finalValue = math.max(1, math.floor(glassesValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", glassesMinValue)
+		print("Max Value: ", glassesMaxValue)
+		print("Value Roll: ", glassesValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 3)
+	-- Play Sound (Glasses)
 end
 
 
@@ -2323,30 +2451,39 @@ function ShredderRecyclePaperProduct(sources, result, player, item)
 	local paperValueRoll = ZombRand(paperProductMinValue, paperProductMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", paperProductMinValue)
-	print("Max Value: ", paperProductMaxValue)
-	print("Value Roll: ", paperValueRoll)
 
 	local finalValue = math.max(1, math.floor(paperValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", paperProductMinValue)
+		print("Max Value: ", paperProductMaxValue)
+		print("Value Roll: ", paperValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 1)
+	-- Play Sound (Paper)
 end
 
 
@@ -2369,30 +2506,39 @@ function ShredderRecycleLowElectronics(sources, result, player, item)
 	local electronicsValueRoll = ZombRand(lowElectronicsMinValue, lowElectronicsMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", lowElectronicsMinValue)
-	print("Max Value: ", lowElectronicsMaxValue)
-	print("Value Roll: ", electronicsValueRoll)
 
 	local finalValue = math.max(1, math.floor(electronicsValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", lowElectronicsMinValue)
+		print("Max Value: ", lowElectronicsMaxValue)
+		print("Value Roll: ", electronicsValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 5)
+	-- Play Sound (Electronics)
 end
 
 
@@ -2408,28 +2554,134 @@ function ShredderRecycleHighElectronics(sources, result, player, item)
 	local electronicsValueRoll = ZombRand(highElectronicsMinValue, highElectronicsMaxValue) + 1
 
 	local multiplier = GetConditionScalar(sources)
-	print("Item Condition: ", multiplier)
-	print("Min Value: ", highElectronicsMinValue)
-	print("Max Value: ", highElectronicsMaxValue)
-	print("Value Roll: ", electronicsValueRoll)
 
 	local finalValue = math.max(1, math.floor(electronicsValueRoll * multiplier * recyclerValueMultiplier))
-	print("Final Value: ", finalValue)
 
-
-	if finalValue >= 10 then
-		CreateCash(finalValue, recycler)
-	else
-		local t = 0
-		while t ~= finalValue do
-			if recycler then
-				recycler:getInventory():AddItem("Money")
-			else
-				player:getInventory():AddItem("Money")
-			end
-			t = t+1
-		end
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Min Value: ", highElectronicsMinValue)
+		print("Max Value: ", highElectronicsMaxValue)
+		print("Value Roll: ", electronicsValueRoll)
+		print("Final Value: ", finalValue)
 	end
-	PlayCashoutSound(player)
-	AttractZombiesToRecycler(player)
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 5)
+	-- Play Sound (Electronics)
+end
+
+
+
+
+------------------------------------------------------------------------
+--
+--                          JUNK / MISC
+--
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--                          EMPTY WALLETS
+------------------------------------------------------------------------
+
+function ShredderRecycleEmptyWallets(sources, result, player, item)
+	if not sources then return end
+
+	local recycler = getRecyclerObject(sources) or nil
+
+	local walletValue = 1
+
+	local multiplier = GetConditionScalar(sources)
+
+	local finalValue = math.max(1, math.floor(walletValue * multiplier * recyclerValueMultiplier))
+
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Final Value: ", finalValue)
+	end
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 2)
+	-- Play Sound (Leather)
+end
+
+
+------------------------------------------------------------------------
+--                          LEATHER STRIPS
+------------------------------------------------------------------------
+
+function ShredderRecycleLeatherStrips(sources, result, player, item)
+	if not sources then return end
+
+	local recycler = getRecyclerObject(sources) or nil
+
+	local leatherValue = 1
+
+	local multiplier = GetConditionScalar(sources)
+
+	local finalValue = math.max(1, math.floor(leatherValue * multiplier * recyclerValueMultiplier))
+
+	if DEBUG_RECYCLER then
+		print("Item Condition: ", multiplier)
+		print("Final Value: ", finalValue)
+	end
+
+	local modData = recycler:getModData()
+	if not modData then return end
+
+	modData.CashBalance = modData.CashBalance + finalValue
+	modData.RecyclerLastUsed = getTimeInMillis()
+
+	sendClientCommand("GN84-WNDR", "ReceiveRecyclerModDataFromClient",
+	{
+		RecyclerID = recycler:getID(),
+		X = recycler:getWorldItem():getX(),
+		Y = recycler:getWorldItem():getY(),
+		Z = recycler:getWorldItem():getZ(),
+		RecyclerActivated = modData.RecyclerActivated,
+		RecyclerEnabled = modData.RecyclerEnabled,
+		CashBalance = modData.CashBalance,
+		CurrentUser = modData.CurrentUser,
+		RecyclerLastUsed = modData.RecyclerLastUsed,
+		ActionBusyUntil = modData.ActionBusyUntil
+	})
+
+	AttractZombiesToRecycler(player, 1)
+	-- Play Sound (Leather)
 end
