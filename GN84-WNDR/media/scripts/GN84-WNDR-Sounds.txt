@@ -162,6 +162,32 @@ module GN84-WNDR
         }
     }
 
+    sound RecyclerMotorStart
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerMotorStart.ogg,
+            distanceMax = 50,
+            volume = 1.1,
+        }
+    }
+
+    sound RecyclerMotorStop
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerMotorStop.ogg,
+            distanceMax = 50,
+            volume = 1.1,
+        }
+    }
+
     sound RecyclerMotorRunning
     {
         category = Ambient,
@@ -171,6 +197,32 @@ module GN84-WNDR
         {
             file = media/sound/RecyclerMotorRunning.ogg,
             distanceMax = 50,
+            volume = 0.85,
+        }
+    }
+
+    sound RecyclerKeyPad
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerKeyPad.ogg,
+            distanceMax = 15,
+            volume = 1.0,
+        }
+    }
+
+    sound RecyclerCashOut
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCashOut.ogg,
+            distanceMax = 25,
             volume = 1.0,
         }
     }

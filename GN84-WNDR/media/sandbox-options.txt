@@ -209,6 +209,15 @@ option GN84WNDR.PlayerUnluckyPenalty
 
 }
 
+option GN84WNDR.RecyclerDebug
+{
+    type = boolean,    
+    default = false,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_RecyclerDebug,
+}
+
 option GN84WNDR.RecyclerValueMultiplier
 {
     type = double,

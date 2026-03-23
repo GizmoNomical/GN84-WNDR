@@ -20,6 +20,7 @@ Sandbox_EN = {
     Sandbox_GN84WNDR_PlayerUnluckyPenalty = "Player Unlucky Penalty Modifier",
 
 
+    Sandbox_GN84WNDR_RecyclerDebug = "Recycling: Enable Debugging",
     Sandbox_GN84WNDR_RecyclerValueMultiplier = "Recycling: Value Multiplier",
     Sandbox_GN84WNDR_RecyclerTimeout = "Recycling: Inactivity Timeout (Minutes)",
     Sandbox_GN84WNDR_WatchesMinValue = "Recycling: Watches - Min Value",
