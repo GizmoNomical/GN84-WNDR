@@ -23,35 +23,48 @@ Sandbox_EN = {
     Sandbox_GN84WNDR_RecyclerDebug = "Recycling: Enable Debugging",
     Sandbox_GN84WNDR_RecyclerValueMultiplier = "Recycling: Value Multiplier",
     Sandbox_GN84WNDR_RecyclerTimeout = "Recycling: Inactivity Timeout (Minutes)",
-    Sandbox_GN84WNDR_WatchesMinValue = "Recycling: Watches - Min Value",
-    Sandbox_GN84WNDR_WatchesMaxValue = "Recycling: Watches - Max Value",
+
+    Sandbox_GN84WNDR_WatchesGlassesMinValue = "Recycling: Watches & Glasses - Min Value",
+    Sandbox_GN84WNDR_WatchesGlassesMaxValue = "Recycling: Watches & Glasses - Max Value",
+
     Sandbox_GN84WNDR_JewelrySimpleMinValue = "Recycling: Jewelry (Simple) - Min Value",
     Sandbox_GN84WNDR_JewelrySimpleMaxValue = "Recycling: Jewelry (Simple) - Max Value",
+
     Sandbox_GN84WNDR_JewelryPreciousMinValue = "Recycling: Jewelry (Precious) - Min Value",
     Sandbox_GN84WNDR_JewelryPreciousMaxValue = "Recycling: Jewelry (Precious) - Max Value",
+
     Sandbox_GN84WNDR_JewelryGemsMinValue = "Recycling: Jewelry (Gemstones) - Min Value",
     Sandbox_GN84WNDR_JewelryGemsMaxValue = "Recycling: Jewelry (Gemstones) - Max Value",
+
     Sandbox_GN84WNDR_JewelryDiamondMinValue = "Recycling: Jewelry (Diamond) - Min Value",
     Sandbox_GN84WNDR_JewelryDiamondMaxValue = "Recycling: Jewelry (Diamond) - Max Value",
 
     Sandbox_GN84WNDR_SimpleToolMinValue = "Recycling: Simple Tools - Min Value",
     Sandbox_GN84WNDR_SimpleToolMaxValue = "Recycling: Simple Tools - Max Value",
-    Sandbox_GN84WNDR_LargeToolMinValue = "Recycling: Large Tools - Min Value",
-    Sandbox_GN84WNDR_LargeToolMaxValue = "Recycling: Large Tools - Max Value",
+
     Sandbox_GN84WNDR_ComplexToolMinValue = "Recycling: Complex Tools - Min Value",
     Sandbox_GN84WNDR_ComplexToolMaxValue = "Recycling: Complex Tools - Max Value",
+    
+    Sandbox_GN84WNDR_MeleeOneHandMinValue = "Recycling: Melee Weapon (One-Hand) - Min Value",
+    Sandbox_GN84WNDR_MeleeOneHandMaxValue = "Recycling: Melee Weapon (One-Hand) - Max Value",
 
-    Sandbox_GN84WNDR_LeatherMinValue = "Recycling: Leather Items - Min Value",
-    Sandbox_GN84WNDR_LeatherMaxValue = "Recycling: Leather Items - Max Value",    
+    Sandbox_GN84WNDR_MeleeTwoHandMinValue = "Recycling: Melee Weapon (Two-Hand) - Min Value",
+    Sandbox_GN84WNDR_MeleeTwoHandMaxValue = "Recycling: Melee Weapon (Two-Hand) - Max Value",
+    
+    Sandbox_GN84WNDR_LeatherItemMinValue = "Recycling: Leather Items - Min Value",
+    Sandbox_GN84WNDR_LeatherItemMaxValue = "Recycling: Leather Items - Max Value",    
 
-    Sandbox_GN84WNDR_ClothingMinValue = "Recycling: Clothing Items - Min Value",
-    Sandbox_GN84WNDR_ClothingMaxValue = "Recycling: Clothing Items - Max Value",
+    Sandbox_GN84WNDR_ClothItemMinValue = "Recycling: Cloth Items - Min Value",
+    Sandbox_GN84WNDR_ClothItemMaxValue = "Recycling: Cloth Items - Max Value",
 
-    Sandbox_GN84WNDR_BulletVestMinValue = "Recycling: Bulletproof Vests - Min Value",
-    Sandbox_GN84WNDR_BulletVestMaxValue = "Recycling: Bulletproof Vests - Max Value",
+    Sandbox_GN84WNDR_ArmorMinValue = "Recycling: Armor Items - Min Value",
+    Sandbox_GN84WNDR_ArmorMaxValue = "Recycling: Armor Items - Max Value",
 
-    Sandbox_GN84WNDR_GlassesMinValue = "Recycling: Glasses - Min Value",
-    Sandbox_GN84WNDR_GlassesMaxValue = "Recycling: Glasses - Max Value",
+    Sandbox_GN84WNDR_BagsMinValue = "Recycling: Bags and Backpacks - Min Value",
+    Sandbox_GN84WNDR_BagsMaxValue = "Recycling: Bags and Backpacks - Max Value",
+
+    Sandbox_GN84WNDR_GlassItemMinValue = "Recycling: Glass Items - Min Value",
+    Sandbox_GN84WNDR_GlassItemMaxValue = "Recycling: Glass Items - Max Value",
 
     Sandbox_GN84WNDR_PaperProductMinValue = "Recycling: Paper Products - Min Value",
     Sandbox_GN84WNDR_PaperProductMaxValue = "Recycling: Paper Products - Max Value",

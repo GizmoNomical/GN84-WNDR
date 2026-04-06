@@ -10,10 +10,10 @@ module GN84-WNDR
 /*--                     NEW CASH/TOKEN STACK X                           */
 /*------------------------------------------------------------------------*/
 
-	recipe Deposit Cash into Smokey Bank	
+	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStackX=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
@@ -21,13 +21,13 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:ReceiptSound,
 		OnTest:OnTest_PlayerOwnsMoneyClip,
-		OnCreate:GivePlayerSmokeyPointsX,	
+		OnCreate:GivePlayerSmokeyPointsX,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStackX=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
@@ -35,7 +35,7 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
 		OnTest:OnTest_PlayerOwnsMoneyClip,
-		OnCreate:GivePlayerWandererTokensX,	
+		OnCreate:GivePlayerWandererTokensX,
 	}
 
 
@@ -43,566 +43,566 @@ module GN84-WNDR
 /*------------------------------------------------------------------------*/
 /*--                    SEARCH WALLETS FOR MONEY                          */
 /*------------------------------------------------------------------------*/
-		
+
 	recipe Search Wallet for Money
 	{
 		Wallet/Wallet2/Wallet3/Wallet4,
-		
+
 		InSameInventory:true,
 		Result:Base.Money,
-		Time:40,			
+		Time:40,
 		AnimNode:Craft,
 		Sound:SearchWallet,
 		OnCreate:CollectMoneyFromWallet,
 	}
-	
+
 
 
 /*------------------------------------------------------------------------*/
 /*--                    DEPOSIT CASH INTO SMOKEY BANK                     */
 /*------------------------------------------------------------------------*/
-	
-	
+
+
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		Money=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints100,	
+		OnCreate:GivePlayerSmokeyPoints100,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		Money=500,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500,	
+		OnCreate:GivePlayerSmokeyPoints500,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		Money=1000,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000,	
+		OnCreate:GivePlayerSmokeyPoints1000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints100,	
+		OnCreate:GivePlayerSmokeyPoints100,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500,	
+		OnCreate:GivePlayerSmokeyPoints500,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500,	
+		OnCreate:GivePlayerSmokeyPoints500,
 	}
-	
+
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000,	
+		OnCreate:GivePlayerSmokeyPoints1000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=2,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000,	
+		OnCreate:GivePlayerSmokeyPoints1000,
 	}
-	
+
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000,	
+		OnCreate:GivePlayerSmokeyPoints1000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=50,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000,	
+		OnCreate:GivePlayerSmokeyPoints5000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000,	
+		OnCreate:GivePlayerSmokeyPoints5000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000,	
-	}	
-	
+		OnCreate:GivePlayerSmokeyPoints5000,
+	}
+
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000,	
+		OnCreate:GivePlayerSmokeyPoints10000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500=20,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000,	
+		OnCreate:GivePlayerSmokeyPoints10000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000,	
+		OnCreate:GivePlayerSmokeyPoints10000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=2,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000,	
+		OnCreate:GivePlayerSmokeyPoints10000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000,	
+		OnCreate:GivePlayerSmokeyPoints10000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000=50,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints50000,	
+		OnCreate:GivePlayerSmokeyPoints50000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints50000,	
+		OnCreate:GivePlayerSmokeyPoints50000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints50000,	
+		OnCreate:GivePlayerSmokeyPoints50000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack50000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints50000,	
+		OnCreate:GivePlayerSmokeyPoints50000,
 	}
 
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=20,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints100000,	
+		OnCreate:GivePlayerSmokeyPoints100000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints100000,	
+		OnCreate:GivePlayerSmokeyPoints100000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints100000,	
+		OnCreate:GivePlayerSmokeyPoints100000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500000,	
+		OnCreate:GivePlayerSmokeyPoints500000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=50,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500000,	
+		OnCreate:GivePlayerSmokeyPoints500000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack50000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500000,	
+		OnCreate:GivePlayerSmokeyPoints500000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500000,	
+		OnCreate:GivePlayerSmokeyPoints500000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints500000,	
+		OnCreate:GivePlayerSmokeyPoints500000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000000,	
+		OnCreate:GivePlayerSmokeyPoints1000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000000,	
+		OnCreate:GivePlayerSmokeyPoints1000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=2,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000000,	
+		OnCreate:GivePlayerSmokeyPoints1000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints1000000,	
+		OnCreate:GivePlayerSmokeyPoints1000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=50,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000000,	
+		OnCreate:GivePlayerSmokeyPoints5000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack500000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000000,	
+		OnCreate:GivePlayerSmokeyPoints5000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000000,	
+		OnCreate:GivePlayerSmokeyPoints5000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints5000000,	
+		OnCreate:GivePlayerSmokeyPoints5000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack100000=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000000,	
+		OnCreate:GivePlayerSmokeyPoints10000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack1000000=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000000,	
+		OnCreate:GivePlayerSmokeyPoints10000000,
 	}
-	
+
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack5000000=2,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000000,	
+		OnCreate:GivePlayerSmokeyPoints10000000,
 	}
 
 	recipe Deposit Cash into Smokey Bank
 	{
 		MoneyStack10000000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:ReceiptSound,
-		OnCreate:GivePlayerSmokeyPoints10000000,	
+		OnCreate:GivePlayerSmokeyPoints10000000,
 	}
 
 
 /*------------------------------------------------------------------------*/
 /*--                 CUT LEATHER STRIPS FROM WALLET                       */
 /*------------------------------------------------------------------------*/
-	
+
 	recipe Cut Leather Wallet
    	{
    		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
@@ -625,270 +625,316 @@ module GN84-WNDR
 /*--                            JEWELRY                                   */
 /*------------------------------------------------------------------------*/
 
-	recipe Shred and Recycle Watch for Money
+	recipe Shred and Recycle Watches and Glasses
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.WristWatch_Right_ClassicBlack/Base.WristWatch_Left_ClassicBlack/Base.WristWatch_Right_ClassicBrown/Base.WristWatch_Left_ClassicBrown/Base.WristWatch_Right_ClassicMilitary/Base.WristWatch_Left_ClassicMilitary/Base.WristWatch_Right_DigitalBlack/Base.WristWatch_Left_DigitalBlack/Base.WristWatch_Right_DigitalRed/Base.WristWatch_Left_DigitalRed/Base.WristWatch_Right_DigitalDress/Base.WristWatch_Left_DigitalDress/Base.WristWatch_Left_ClassicGold/Base.WristWatch_Right_ClassicGold,
-        
+		Base.WristWatch_Right_ClassicBlack/Base.WristWatch_Left_ClassicBlack/Base.WristWatch_Right_ClassicBrown/Base.WristWatch_Left_ClassicBrown/Base.WristWatch_Right_ClassicMilitary/Base.WristWatch_Left_ClassicMilitary/Base.WristWatch_Right_DigitalBlack/Base.WristWatch_Left_DigitalBlack/Base.WristWatch_Right_DigitalRed/Base.WristWatch_Left_DigitalRed/Base.WristWatch_Right_DigitalDress/Base.WristWatch_Left_DigitalDress/Base.WristWatch_Left_ClassicGold/Base.WristWatch_Right_ClassicGold/Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles/Base.Glasses_Napier/BZMClothing.WristWatch_Right_DigitalKitten/BZMClothing.WristWatch_Left_DigitalKitten,
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:45.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleWatches,
+        OnCreate:ShredderRecycleWatchesGlasses,
 	}
 
-	recipe Shred and Recycle Jewelry for Money
+	recipe Shred and Recycle Jewelry (Simple)
 	{
 		keep SmokeyShredderRecycler,
 
 		Base.Necklace_YingYang/Base.Necklace_Choker/Base.Bracelet_RightFriendshipTINT/Base.Bracelet_LeftFriendshipTINT/Base.Necklace_Crucifix/AuthenticZLite.Necklace_B,
-        
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:45.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelrySimple,
 	}
 
-	recipe Shred and Recycle Jewelry for Money
+	recipe Shred and Recycle Jewelry (Precious)
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Necklace_DogTag/Base.Locket/Base.Ring_Right_MiddleFinger_Gold/Base.Ring_Left_MiddleFinger_Gold/Base.Ring_Right_RingFinger_Gold/Base.Ring_Left_RingFinger_Gold/Base.Ring_Right_MiddleFinger_Silver/Base.Ring_Left_MiddleFinger_Silver/Base.Ring_Right_RingFinger_Silver/Base.Ring_Left_RingFinger_Silver/Base.Earring_LoopLrg_Gold/Base.Earring_LoopLrg_Silver/Base.Earring_LoopMed_Silver/Base.Earring_LoopMed_Gold/Base.Earring_LoopSmall_Silver_Both/Base.Earring_LoopSmall_Silver_Top/Base.Earring_LoopSmall_Gold_Both/Base.Earring_LoopSmall_Gold_Top/Base.Earring_Stud_Gold/Base.Earring_Stud_Silver/Base.NoseRing_Gold/Base.NoseRing_Silver/Base.NoseStud_Gold/Base.NoseStud_Silver/Base.Bracelet_BangleRightGold/Base.Bracelet_BangleLeftGold/Base.Bracelet_ChainRightGold/Base.Bracelet_ChainLeftGold/Base.Bracelet_BangleRightSilver/Base.Bracelet_BangleLeftSilver/Base.Bracelet_ChainRightSilver/Base.Bracelet_ChainLeftSilver/Base.NecklaceLong_Silver/Base.NecklaceLong_Gold/Base.Necklace_SilverCrucifix/Base.Necklace_Silver/Base.Necklace_Gold/Base.BellyButton_RingSilver/Base.BellyButton_DangleGold/Base.BellyButton_RingGold/Base.BellyButton_StudSilver/Base.NoseStud_Gold/Base.NoseStud_Silver/Base.NoseRing_Gold/Base.NoseRing_Silver/Base.BellyButton_DangleSilver/Base.BellyButton_StudGold,
+		Base.Necklace_DogTag/Base.Locket/Base.Ring_Right_MiddleFinger_Gold/Base.Ring_Left_MiddleFinger_Gold/Base.Ring_Right_RingFinger_Gold/Base.Ring_Left_RingFinger_Gold/Base.Ring_Right_MiddleFinger_Silver/Base.Ring_Left_MiddleFinger_Silver/Base.Ring_Right_RingFinger_Silver/Base.Ring_Left_RingFinger_Silver/Base.Earring_LoopLrg_Gold/Base.Earring_LoopLrg_Silver/Base.Earring_LoopMed_Silver/Base.Earring_LoopMed_Gold/Base.Earring_LoopSmall_Silver_Both/Base.Earring_LoopSmall_Silver_Top/Base.Earring_LoopSmall_Gold_Both/Base.Earring_LoopSmall_Gold_Top/Base.Earring_Stud_Gold/Base.Earring_Stud_Silver/Base.NoseRing_Gold/Base.NoseRing_Silver/Base.NoseStud_Gold/Base.NoseStud_Silver/Base.Bracelet_BangleRightGold/Base.Bracelet_BangleLeftGold/Base.Bracelet_ChainRightGold/Base.Bracelet_ChainLeftGold/Base.Bracelet_BangleRightSilver/Base.Bracelet_BangleLeftSilver/Base.Bracelet_ChainRightSilver/Base.Bracelet_ChainLeftSilver/Base.NecklaceLong_Silver/Base.NecklaceLong_Gold/Base.Necklace_SilverCrucifix/Base.Necklace_Silver/Base.Necklace_Gold/Base.BellyButton_RingSilver/Base.BellyButton_DangleGold/Base.BellyButton_RingGold/Base.BellyButton_StudSilver/Base.BellyButton_DangleSilver/Base.BellyButton_StudGold/AuthenticZLite.Necklace_GoldCrucifix,
 
         Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:45.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryPrecious,
 	}
 
-	recipe Shred and Recycle Jewelry for Money
+	recipe Shred and Recycle Jewelry (Gemstone)
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Ring_Right_MiddleFinger_GoldRuby/Base.Ring_Left_MiddleFinger_GoldRuby/Base.Ring_Right_RingFinger_GoldRuby/Base.Ring_Left_RingFinger_GoldRuby/Base.Earring_Stone_Sapphire/Base.Earring_Stone_Emerald/Base.Earring_Stone_Ruby/Base.Earring_Pearl/Base.Earring_Dangly_Sapphire/Base.Earring_Dangly_Emerald/Base.Earring_Dangly_Ruby/Base.Earring_Dangly_Pearl/Base.Necklace_Choker_Sapphire/Base.NecklaceLong_SilverSapphire/Base.NecklaceLong_SilverEmerald/Base.Necklace_SilverSapphire/Base.Necklace_GoldRuby/Base.Necklace_Pearl/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingSilverAmethyst/Base.BellyButton_RingSilverRuby/Base.BellyButton_DangleGoldRuby/Base.Necklace_Choker_Amber/Base.NecklaceLong_Amber,
+		Base.Ring_Right_MiddleFinger_GoldRuby/Base.Ring_Left_MiddleFinger_GoldRuby/Base.Ring_Right_RingFinger_GoldRuby/Base.Ring_Left_RingFinger_GoldRuby/Base.Earring_Stone_Sapphire/Base.Earring_Stone_Emerald/Base.Earring_Stone_Ruby/Base.Earring_Pearl/Base.Earring_Dangly_Sapphire/Base.Earring_Dangly_Emerald/Base.Earring_Dangly_Ruby/Base.Earring_Dangly_Pearl/Base.Necklace_Choker_Sapphire/Base.NecklaceLong_SilverSapphire/Base.NecklaceLong_SilverEmerald/Base.Necklace_SilverSapphire/Base.Necklace_GoldRuby/Base.Necklace_Pearl/Base.BellyButton_RingGoldRuby/Base.BellyButton_RingSilverAmethyst/Base.BellyButton_RingSilverRuby/Base.BellyButton_DangleGoldRuby/Base.Necklace_Choker_Amber/Base.NecklaceLong_Amber,
 
         Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:45.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryGemstones,
 	}
 
-	recipe Shred and Recycle Jewelry for Money
+	recipe Shred and Recycle Jewelry (Diamond)
 	{
 		keep SmokeyShredderRecycler,
 
 		Base.Earring_Dangly_Diamond/Base.Ring_Right_MiddleFinger_SilverDiamond/Base.Ring_Left_MiddleFinger_SilverDiamond/Base.Ring_Right_RingFinger_SilverDiamond/Base.Ring_Left_RingFinger_SilverDiamond/Base.Ring_Right_MiddleFinger_GoldDiamond/Base.Ring_Left_MiddleFinger_GoldDiamond/Base.Ring_Right_RingFinger_GoldDiamond/Base.Ring_Left_RingFinger_GoldDiamond/Base.Necklace_Choker_Diamond/Base.NecklaceLong_SilverDiamond/Base.NecklaceLong_GoldDiamond/Base.Necklace_SilverDiamond/Base.Necklace_GoldDiamond/Base.BellyButton_RingGoldDiamond/Base.BellyButton_DangleSilverDiamond/Base.BellyButton_RingSilverDiamond/Base.BellyButton_StudGoldDiamond/Base.BellyButton_StudSilverDiamond,
-        
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:45.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleJewelryDiamond,
 	}
-	
+
 
 
 /*------------------------------------------------------------------------*/
 /*--                          OTHER ITEMS                                 */
 /*------------------------------------------------------------------------*/
 
-	recipe Shred and Recycle Tool for Money
+	recipe Shred and Recycle Tool (Simple)
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer,
-        
+		Base.SheetMetal/Base.SmallSheetMetal/Base.TinOpener/Base.GardenSaw/Base.HandFork/Base.Hammer/Base.ClubHammer/Base.PipeWrench/Base.Saw/Base.Scissors/Base.Screwdriver/Base.HammerStone/farming.HandShovel/Base.Wrench/ToolsOfTheTrade.BrickHammer/ToolsOfTheTrade.StubbyHammer/ToolsOfTheTrade.Backsaw/Base.BallPeenHammer/ToolsOfTheTrade.BushMachete/SapphCooking.CarvingForkSapph/Base.PKCheeseExpanded_CheeseGrater/filcher.SFChisel/farming.GardeningSprayEmpty/farming.WateredCan/TW.File/filcher.MasonsTrowel/TW.MetalCutter/TW.Pliers/Base.UmbrellaBlack/Base.UmbrellaBlue/Base.UmbrellaWhite/Base.UmbrellaRed/ToolsOfTheTrade.Multitool/ToolsOfTheTrade.SpiffArmyKnife/Base.Bellows/ToolsOfTheTrade.SpiritLevel/Base.GardenHoe/Base.LeafRake/Base.FishingRod/Base.FishingRodTwineLine/camping.SteelAndFlint/Base.GardenFork/Base.Scalpel/SapphCooking.Ladle_Wood/SapphCooking.MeatTenderizer_Wood/SapphCooking.WoodSpork/Base.WoodenMallet/SapphCooking.WoodenSpoon/ToolsOfTheTrade.ArmyScissors/ToolsOfTheTrade.BandageScissors/ToolsOfTheTrade.CutthroatRazor/Lifestyle.Mop2/Base.LeadPipe/Base.MetalBar/Base.MetalPipe/Base.ScrapMetal/Base.WeldingRods/SapphCooking.BakingMolds/Base.CanSealer/ToolsOfTheTrade.CastIronSkillet/SapphCooking.CocktailMixer/SapphCooking.DoughnutCutter/SapphCooking.MetalWhisk/SapphCooking.PizzaCutter/SapphCooking.MetalSpork/SapphCooking.Laddle/SKL.Strainer/ToolsOfTheTrade.UtensilTool/SapphCooking.WokPan/SapphCooking.ButterChurn/Base.BakingPan/Base.BakingTray/filcher.SFCupcakeTray/Base.Pot/Base.Kettle/AAApoc.AAAFrenchFrySlicer/Base.Pan/Base.GridlePan/AAApoc.AAAHotDogBunPan/Base.MuffinTray/Base.RoastingPan/Base.RollingPin/Base.Saucepan/AAApoc.AAAWaffleIron/AAApoc.AAAEggBeater,
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:105.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleSimpleTool,
 	}
 
-	recipe Shred and Recycle Tool for Money
+	recipe Shred and Recycle Tool (Complex)
 	{
 		keep SmokeyShredderRecycler,
 
-		ToolsOfTheTrade.FellingAxe/ToolsOfTheTrade.Hatchet/AuthenticZLite.AuthenticIceAxe/ToolsOfTheTrade.IndustrialPipeWrench/ToolsOfTheTrade.IndustrialWrenchToolsOfTheTrade.PostMaul/ToolsOfTheTrade.PulaskiAxeToolsOfTheTrade.SplittingMaul/ToolsOfTheTrade.UtilityBar,/Base.Shovel/Base.Shovel2/Base.LugWrench/Base.Jack/Base.TirePump/Base.WoodAxe/Base.GardenFork/Base.GardenHoe/Base.PickAxe/Base.SnowShovel,
-		
+		ToolsOfTheTrade.FellingAxe/ToolsOfTheTrade.IndustrialPipeWrench/ToolsOfTheTrade.IndustrialWrench/ToolsOfTheTrade.PostMaul/ToolsOfTheTrade.PulaskiAxe/ToolsOfTheTrade.SplittingMaul/ToolsOfTheTrade.UtilityBar/Base.Shovel/Base.Shovel2/Base.LugWrench/Base.Jack/Base.TirePump/Base.PickAxe/Base.SnowShovel/ToolsOfTheTrade.Adze/ToolsOfTheTrade.ArmyMattock/Perts.OverlookFireAxe/ToolsOfTheTrade.BeardedAxe/ToolsOfTheTrade.BrushHook/ToolsOfTheTrade.CrashAxe/Base.Crowbar/MonmouthWeapons.Crowbarski/ToolsOfTheTrade.DefilerAxe/ToolsOfTheTrade.DefilerSledgehammer/ToolsOfTheTrade.DespoilerAxe/ToolsOfTheTrade.DespoilerSledgehammer/ToolsOfTheTrade.EntryTool/filcher.SFGrainGrinder/ToolsOfTheTrade.HalliganBar/filcher.HandTruckBlue/filcher.HandTruckRed/ToolsOfTheTrade.IndustrialBreachingHammer/Base.MowerBladeSharp/Base.MowerBladeBlunt1/MonmouthWeapons.PickAxePink/ToolsOfTheTrade.PoliceBreachingHammer/ToolsOfTheTrade.RailwaySpikeHammer/ToolsOfTheTrade.RebarHammer/MonmouthWeapons.Hammer_Reinforced/MonmouthWeapons.AxeBZMCrafted/ToolsOfTheTrade.RyobaSaw/MonmouthWeapons.CrowbarScorpion/Base.Sledgehammer2/Base.Sledgehammer/TWeapons.TacticalAxe/TWeapons.TacticalTomahawk/ToolsOfTheTrade.Tomahawk/Base.WeldingMask/ScrapSmith.scrapsmith_anvil/ScrapSmith.Anvil/SSWorkshop.Anvil/Sprout.Cask/Base.CarBatteryCharger/AAApoc.AAAMeatGrinder/Base.ReplacementFirearmParts/Base.CordlessDrill/Base.NailGun,
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleLargeTool,
-	}
-
-	recipe Shred and Recycle Tool for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		ToolsOfTheTrade.Multitool/ToolsOfTheTrade.SpiffArmyKnife/Base.Sledgehammer/Base.Sledgehammer2/Base.CarBatteryCharger,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:130.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleComplexTool,
 	}
 
-	recipe Shred and Recycle Leather for Money
+	recipe Shred and Recycle Melee Weapon (One-Hand)
 	{
 		keep SmokeyShredderRecycler,
 
-		Base.Belt2/Base.HolsterSimple/Base.HolsterDouble/Base.Sling/Base.Gloves_LeatherGloves/Base.Gloves_LeatherGlovesBlack/Base.Hat_Cowboy/Base.Shoes_ArmyBoots/Base.Shoes_ArmyBootsDesert/Base.TrousersMesh_Leather/Base.Trousers_LeatherBlack/Base.Jacket_Black/Base.Jacket_LeatherIronRodent/Base.Jacket_LeatherWildRacoons/Base.Jacket_LeatherBarrelDogs,
-		
+		Base.BadmintonRacket/Base.Bayonnet/AuthenticZLite.AuthenticIceAxe/AuthenticZLite.Authentic_BouquetFlowers/Base.BreadKnife/Base.ButterKnife/SapphCooking.ChefKnife1/SapphCooking.ChefKnife3/SapphCooking.ChefKnife2/Base.DumbBell/Base.HuntingKnife/Base.IcePick/Base.KitchenKnife/Base.LetterOpener/Base.Machete/Base.MeatCleaver/SapphCooking.MeatTenderizer/GWP.MoraKnife/Base.Nightstick/Base.Plunger/Base.TennisRacket/Base.Trumpet/GWP.VikingAxe/Base.Violin/ToolsOfTheTrade.Hatchet/ToolsOfTheTrade.Kukri/Base.Flute/Lifestyle.Harmonica/MWPWeapons.gemtord42crashaxe/MWPWeapons.gerberpackhatchet/MWPWeapons.doomsdaysurvivalaxe/MWPWeapons.crtkfreyraxe/TWeapons.MilitaryKnife/TWeapons.TacticalMachete/MWPWeapons.winklersurvivalhatchet,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:120.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleMeleeWeaponOneHand,
+	}
+
+	recipe Shred and Recycle Melee Weapon (Two-Hand)
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.GuitarAcoustic/AuthenticZLite.AuthenticWalkingCaneGrandFather/Base.Axe/AuthenticZLite.MandoSpear/Base.GuitarElectricBassBlack/Base.GuitarElectricBlack/Base.GuitarElectricBassBlue/Base.GuitarElectricBlue/Base.CanoePadelX2/Base.CanoePadel/Base.Chainsaw/Base.Banjo/Base.BarBell/AuthenticZLite.AuthenticCricketBat/AuthenticZLite.AuthenticCrutch/Base.EntrenchingTool_Blade/Base.EntrenchingToolBlack_Folded/Base.EntrenchingToolBlack_Blade/Base.EntrenchingTool_Folded/Base.EntrenchingToolBlack_Blunt/Base.EntrenchingTool_Blunt/GWP.KatanaGoldRed/Base.Golfclub/Base.HockeyStick/Base.IceHockeyStick/Base.Katana/Base.Keytar/AuthenticZLite.AuthenticWalkingCaneMetal/SapphCooking.PizzaPeel/Base.Poolcue/Base.GuitarElectricBassRed/Base.GuitarElectricRed/Base.Saxophone/Base.BaseballBatNails/Base.PickAxeHandleSpiked/AuthenticZLite.AuthenticTagillaSledgehammer/GWP.Wakizashi/AuthenticZLite.AuthenticWalkingCane/Base.WoodAxe/ToolsOfTheTrade.AluminumBaseballBat/TWeapons.CHockeyStickWire/TWeapons.CHockeyStick/ToolsOfTheTrade.CoreHammer,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:150.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleMeleeWeaponTwoHand,
+	}
+	
+	recipe Shred and Recycle Cloth Items
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Tshirt_DefaultTEXTURE/Base.Tshirt_White/Base.Tshirt_PoloStripedTINT/Base.Tshirt_PoloTINT/Base.Shirt_FormalWhite/Base.Shirt_FormalWhite_ShortSleeve/Base.Shirt_FormalTINT/Base.Shirt_FormalTINT_ShortSleeve/Base.Shirt_Denim/Base.Shirt_Lumberjack/Base.Shirt_HawaiianRed/Base.Shirt_HawaiianBlue/Base.Shirt_HawaiianGreen/Base.Shirt_CamoGreen/Base.Shirt_CamoDesert/Base.Shirt_CamoUrban/Base.Trousers_DefaultTEXTURE/Base.Trousers_Denim/Base.Trousers_JeanBaggy/Base.Trousers_WhiteTEXTURE/Base.Trousers_Black/Base.TrousersMesh_DenimLight/Base.Shorts_LongDenim/Base.Shorts_ShortDenim/Base.Shorts_LongSport/Base.Shorts_ShortSport/Base.Skirt_Knees/Base.Skirt_Long/Base.Skirt_Short/Base.Dress_Knees/Base.Dress_Long/Base.Dress_Short/Base.Jacket_WhiteTINT/Base.Jacket_Padded/Base.Jacket_Denim/Base.Jacket_CamoGreen/Base.Jacket_CamoDesert/Base.Jacket_CamoUrban/Base.HoodieDOWN_WhiteTINT/Base.HoodieDOWN_Black/Base.HoodieUP_WhiteTINT/Base.HoodieUP_Black/Base.Vest_DefaultTEXTURE/Base.Vest_HighViz/Base.Vest_Foreman/Base.Gloves_FingerlessGloves/Base.Shoes_Random/Base.Shoes_Black/Base.Shoes_Brown/Base.Shoes_RedTrainers/Base.Shoes_TrainerTINT/Base.Shoes_BlueTrainers/Base.Shoes_GreenTrainers/Base.Shoes_White/Base.Shirt_HawaiianTINT/AuthenticZLite.Authentic_PomPomRed/AuthenticZLite.Authentic_PomPomBlack/AuthenticZLite.Authentic_PomPomWhite/AuthenticZLite.Authentic_PomPomBlue/Base.Spiffo/Base.SpiffoBig/Base.BorisBadger/Base.JacquesBeaver/Base.FreddyFox/Base.PancakeHedgehog/Base.MoleyMole/Base.FluffyfootBunny/Base.FurbertSquirrel/DynamicBackpacks.UpgradeCapacityCloth/DynamicBackpacks.UpgradeWeightReductionCloth/DynamicBackpacks.UpgradeCapacityJean/DynamicBackpacks.UpgradeWeightReductionJean,
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
         Time:100.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleCloth,
+	}
+
+	recipe Shred and Recycle Leather Items
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Ashe_Boots/Base.Ashe_Cloak/Base.Ashe_Cloak_ON/Base.Ashe_Jacket/Base.Ashe_Jacket_ON/AuthenticZLite.Jacket_Hunter/Base.Boots_Bennett/Base.Leather_Jacket_Bennett/Base.Leather_Pants_Bennett/MonmouthClothing.Jacket_Dead_Apes/Base.Gunsmith_Jacket/Base.Gunsmith_Jacket_ON/Base.Leather_Jacket_Harry/Base.Leather_Vest_Harry/Base.Boots_Heather/AuthenticZLite.Gloves_LeatherGauntlets/AuthenticZLite.Fat01_JacketLeather/AuthenticZLite.Fat02_JacketLong/AuthenticZLite.Fat03_JacketLong/Base.JacketLong_Random/AuthenticZLite.Fat02_JacketLeather/AuthenticZLite.Fat01_JacketLong/Base.Glove_Leather/Base.Glove_Mustang/AuthenticZLite.Gloves_SamaraiArmor_Gauntlets/Base.Shirts_Sebastian/MonmouthClothing.Trousers_KK_Leather/AuthenticZLite.Gloves_LeatherWalker/AuthenticZLite.Gloves_LeatherGlovesWhite/Base.Belt2/Base.HolsterSimple/Base.HolsterDouble/Base.Sling/Base.Gloves_LeatherGloves/Base.Gloves_LeatherGlovesBlack/Base.Hat_Cowboy/Base.Shoes_ArmyBoots/Base.Shoes_ArmyBootsDesert/Base.TrousersMesh_Leather/Base.Trousers_LeatherBlack/Base.Jacket_Black/Base.Jacket_LeatherIronRodent/Base.Jacket_LeatherWildRacoons/Base.Jacket_LeatherBarrelDogs/DynamicBackpacks.UpgradeCapacityLeather/DynamicBackpacks.UpgradeWeightReductionLeather/Base.Gloves_LeatherGlovesBrown/Base.Hat_Sam_NV_OFF/Base.GM17_Gasmask/Base.GP4U_Gasmask/Base.GP5M_Gasmask/BZMClothing.Hat_GasMask/Base.K1_Gasmask/Base.K1_Half/Base.K1_Hood/Base.Hat_M45_GasMask/Base.Hat_MCU_GasMask/Base.MM1_Gasmask/Base.Hat_MSA_Gas_Mask/Base.Hat_MSA_Gas_Mask_AMP/Base.Metro_Gasmask/Base.Metro_Gasmask_Set/Base.PMG_Gasmask/Base.PMK1_Gasmask/Base.PMK1_Half/Base.PMK2_Gasmask/Base.PMK2_Half/Base.SHMS_Gasmask/Base.SHMS_Gasmask_Set/Base.Hat_SwatGasMask,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:110.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleLeather,
 	}
 
+	recipe Shred and Recycle Heavy Armor
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Vest_BulletPolice/Base.Vest_BulletArmy/Base.Vest_BulletCivilian/Base.RiotShieldPolice/Base.RiotShieldSwat/Base.Armor_6B13/AuthenticZLite.Vest_BulletBlack/Base.SET_Armor/Base.SET_Armor_FULL/Base.EXO_Suit/Base.Armor_Defender/Base.Armor_Defender_Set/Base.Hunter_Armor/AuthenticZLite.Vest_BulletKilla/Base.Armor_Dozer/Base.JUGG_Armor/AuthenticZLite.Vest_BulletRPD/Base.RiotArmorSuit/AuthenticZLite.Vest_SamuraiBreastPlate/Base.Sheriff_Vest/Base.Sheriff_Vest_Full/Base.StormTrooperArmor/Base.Vest_BulletSwat/AuthenticZLite.Vest_BulletTV110_BulletVest/Base.USCM_Armor/Base.Chain_Coat/Base.Chain_Pants/Base.Chain_Pants_Rolled/ScrapSmithArmor.scrapsmith_chainmailHauberk/Base.Chain_Mask,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:150.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleArmor,
+	}
+
+	recipe Shred and Recycle Bags and Backpacks
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Bag_Sniper_Pack/Base.Bushcraft_Bag/Base.DamiaoBackPack/Base.ELA_Bag/Base.Ham_Radio/AuthenticZLite.Bag_B4BEvangelo/AuthenticZLite.Bag_B4BHoffman/AuthenticZLite.Bag_B4BHolly/Base.Hunter_Backpack/Base.Bag_SurvivorBag/Base.Bag_Tactical_Alice/Base.Bag_ALICEpack_Army/AuthenticZLite.Bag_Packsport_Plain/AuthenticZLite.Bag_Packsport_Rim/Base.Bag_ALICEpack_Pink/Base.Bag_SSO/Base.Bag_Savotta/AuthenticZLite.Bag_SpiffoBackpackAZ/Base.Bag_Bush/Base.Bag_Hunting/AuthenticZLite.Bag_B4BWalker/Base.Bag_ZIP/Base.Bag_BigHikingBag/Base.Bag_BowlingBallBag/Base.Casual_Bag/Base.Bag_DoctorBag/Base.Bag_ShotgunDblBag/LuxuryDuffelBagCollection.Bag_SpiderManDuffelBagDC/LuxuryDuffelBagCollection.Bag_DitoDuffelBagDC/Base.Bag_WeaponBag/LuxuryDuffelBagCollection.Bag_RedCrossDuffelBagDC/Base.Bag_ShotgunSawnoffBag/Base.Bag_InmateEscapedBag/Base.Bag_WorkerBag/Base.Bag_Military/LuxuryDuffelBagCollection.Bag_SnakeDuffelBagDC/LuxuryDuffelBagCollection.Bag_AdidasDuffelBagDC/Base.Bag_MoneyBag/LuxuryDuffelBagCollection.Bag_MilitarRedDuffelBagDC/LuxuryDuffelBagCollection.Bag_CocaColaDuffelBagDC/LuxuryDuffelBagCollection.Bag_BellaDuffelBagDC/LuxuryDuffelBagCollection.Bag_PepsiDuffelBagDC/Base.Bag_DuffelBagTINT/Base.Bag_FoodCanned/LuxuryDuffelBagCollection.Bag_ChicagoBullsDuffelBagDC/LuxuryDuffelBagCollection.Bag_EseJotaDuffelBagDC/LuxuryDuffelBagCollection.Bag_ResidentEvilDuffelBagDC/Base.Bag_ShotgunBag/Base.Bag_FoodSnacks/LuxuryDuffelBagCollection.Bag_DuffelBagGreenMilitar/LuxuryDuffelBagCollection.Bag_NightLivingDeadDuffelBagDC/Base.Bag_ShotgunDblSawnoffBag/LuxuryDuffelBagCollection.Bag_MtvDuffelBagDC/Base.Bag_ToolBag/LuxuryDuffelBagCollection.Bag_FishingDuffelBagDC/AuthenticZLite.Bag_DuffelBag_Festive/Base.Bag_GolfBag/AuthenticZLite.Handbag2/Base.Handbag/BZMClothing.Handbag_Secondary/Base.Bag_NormalHikingBag/Base.Sheriff_Bag/AuthenticZLite.Bag_RoadsideDuffel/AuthenticZLite.Bag_Schoolbag_Spiffo2/Base.Bag_Schoolbag/Base.Bag_BigSwatBag/Base.Tote/BZMClothing.Tote_Secondary/Base.Bag_MedicalBag/Base.Trauma_Bag/Base.Postal_Worker_Satchel/BZMClothing.Bag_ALICEpack_Black/BZMClothing.Bag_ALICEpack_Black_Tier_1/BZMClothing.Bag_ALICEpack_Black_Tier_2/BZMClothing.Bag_ALICEpack_Black_Tier_3/AuthenticZLite.Bag_SchoolBagCEDABlack/AuthenticZLite.Bag_SchoolBagCEDABlue/Base.Bag_Cat_Pack/Base.C420_PAPR/AuthenticZLite.Bag_ALICEpack_Festive/BZMClothing.Bag_ALICEpack_GaPDC_Tier_3/BZMClothing.Bag_ALICEpack_GaPDC/BZMClothing.Bag_ALICEpack_GaPDC_Tier_2/BZMClothing.Bag_ALICEpack_GaPDC_Tier_1/Base.Bag_Hazard_Cross/Base.OMNI_Pouch_Loose/Base.OMNI_Pouch/AuthenticZLite.Bag_SchoolBagNBH/BZMClothing.Bag_ALICEpack_Olive_Tier_3/BZMClothing.Bag_ALICEpack_Olive_Tier_2/BZMClothing.Bag_ALICEpack_Olive/BZMClothing.Bag_ALICEpack_Olive_Tier_1/BZMClothing.Bag_ALICEpack_PinkSkyBlue_Tier_3/BZMClothing.Bag_ALICEpack_PinkSkyBlue_Tier_1/BZMClothing.Bag_ALICEpack_PinkSkyBlue_Tier_2/BZMClothing.Bag_ALICEpack_PinkSkyBlue/AuthenticZLite.Bag_SchoolBagCEDARed/Base.Bag_Robbie_Pack/BZMClothing.Bag_ALICEpack_Sand/BZMClothing.Bag_ALICEpack_Sand_Tier_1/BZMClothing.Bag_ALICEpack_Sand_Tier_3/BZMClothing.Bag_ALICEpack_Sand_Tier_2/BZMClothing.Bag_ALICEpack_Spike_Tier_2/BZMClothing.Bag_ALICEpack_Spike_Tier_3/BZMClothing.Bag_ALICEpack_Spike/BZMClothing.Bag_ALICEpack_Spike_Tier_1/AuthenticZLite.Bag_ALICEpack_UrbanCamo/BZMClothing.Bag_ALICEpack_WaGDC_Tier_1/BZMClothing.Bag_ALICEpack_WaGDC/BZMClothing.Bag_ALICEpack_WaGDC_Tier_3/BZMClothing.Bag_ALICEpack_WaGDC_Tier_2/Base.Bag_Schoolbag2/Base.Bag_DuffelBag/Base.Bag_Satchel/Base.Bag_ALICEpack/Base.Bag_ALICEpack_Desert/Base.Bag_ALICEpack_Green/Base.Bag_FannyPackFront/Base.Bag_FannyPackBack/TheyKnew.MysteriousSatchel/Base.Toolbox/BZMClothing.FirstAidKit_Secondary/AuthenticZLite.Bag_L4DeadMedkit/AuthenticZLite.Bag_UtilityBeltDesert/Base.Bag_Radio_Pack/Base.Belt_Pack_AR/Base.Belt_Pack_AR_Loose/Base.C420_PAPR_Loose/Base.C420_PAPR/Base.Bag_SKS_Vest_Loose/Base.Bag_SKS_Vest/Base.Bag_AK_Vest_Loose/Base.Bag_AK_Vest/Base.Rig_ELA_Loose/Base.Rig_ELA/Base.Bag_X_Vest_Loose/Base.Bag_X_Vest/Base.OMNI_Pouch_Loose/Base.OMNI_Pouch/Base.Bag_Duty_Belt_Back/Base.Bag_Duty_Belt_Front/Base.Belt_Pack_Duty_Loose/Base.Belt_Pack_Duty/Base.Rig_Smersh_Loose/Base.Rig_Smersh/Base.Rig_Smersh_A_Loose/Base.Rig_Smersh_A/Base.Rig_Smersh_B_Loose/Base.Rig_Smersh_B/Base.Rig_Smersh_C_Loose/Base.Rig_Smersh_C/Base.Shotgun_Rig_Loose/Base.Shotgun_Rig/Base.Trench_Ammo_Pack_Loose/Base.Trench_Ammo_Pack/Base.Trench_Grenade_Pack_Loose/Base.Trench_Grenade_Pack/AuthenticZLite.Bag_MilitaryWebbing_AZ/AuthenticZLite.Bag_MilitaryWebbingTightened_AZ/Base.Belt_Pack_Pouch/Base.Belt_Pack_Pouch_Loose,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:125.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleBags,
+	}
+
+	recipe Shred and Recycle Glass Items
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.LightBulbBlue/Base.LightBulbCyan/Base.LightBulbGreen/Base.LightBulbMagenta/Base.LightBulbOrange/Base.LightBulbPink/Base.LightBulbPurple/Base.LightBulbRed/Base.LightBulb/Base.LightBulbYellow/SapphCooking.CocktailGlass/SapphCooking.Empty_FrenchPress/SapphCooking.LowballGlass/filcher.EmptyGlass/Base.EmptyJar/filcher.JarAndLid/SapphCooking.CocktailGlassWhiskey/Base.GlassWine,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:35.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleGlassItems,
+	}
+
 	
-	recipe Shred and Recycle Empty Wallets for Money
+
+	recipe Shred and Recycle Electronics (Basic)
 	{
 		keep SmokeyShredderRecycler,
 
-		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleEmptyWallets,
-	}
-	
-
-	
-	recipe Shred and Recycle Leather Strips for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		LeatherStrips/LeatherStripsDirty,
+		Radio.HamRadioMakeShift/Radio.RadioRed/Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap/Base.Camera/Base.CameraDisposable/Base.CameraExpensive/Base.Earbuds/Radio.CDplayer/Base.AlarmClock2/Base.CordlessPhone/Base.Headphones/Base.Remote/Tsarcraft.TCWalkman/Base.VideoGame/Base.Amplifier/Radio.RadioReceiver/Radio.RadioTransmitter/Base.Receiver/Base.ElectronicsScrap/Base.Timer/Base.VHS/Base.VHS_Home/Base.VHS_Retail,
 
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:5.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleLeatherStrips,
-	}
-	
-
-	recipe Shred and Recycle Clothing for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		Base.Shirt_Lumberjack/Base.Shirt_HawaiianTINT/Base.Shirt_HawaiianRed,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleClothing,
-	}
-
-	recipe Shred and Recycle Armor for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		Base.Vest_BulletPolice/Base.Vest_BulletArmy/Base.Vest_BulletCivilian,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleBulletVest,
-	}
-
-	recipe Shred and Recycle Glasses for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		Base.Glasses_Aviators/Base.Glasses_Normal/Base.Glasses_Reading/Base.Glasses/Base.Glasses_SafetyGoggles/Base.Glasses_Shooting/Base.Glasses_SkiGoggles/Base.Glasses_Sun/Base.Glasses_SwimmingGoggles/Base.Glasses_Napier,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecycleGlasses,
-	}
-
-	recipe Shred and Recycle Paper Products for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		Base.Book/Base.ComicBook/Base.MagazineCrossword1/Base.MagazineCrossword2/Base.MagazineCrossword3/Base.Hottiez/Base.Magazine/Base.Newspaper/Base.TVMagazine/Base.MagazineWordsearch1/Base.MagazineWordsearch2/Base.MagazineWordsearch3/Base.Notebook/Base.Journal,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
-		OnTest: GN84_IsRecycleable,
-		OnCanPerform: GN84_IsRecyclerUsed,
-        OnCreate:ShredderRecyclePaperProduct,
-	}
-
-	recipe Shred and Recycle Electronics for Money
-	{
-		keep SmokeyShredderRecycler,
-
-		Radio.WalkieTalkie1/Radio.WalkieTalkie2/Radio.WalkieTalkie3/Radio.WalkieTalkieMakeShift/Radio.RadioBlack/Radio.RadioMakeShift/Base.NoiseTrap/Base.Camera/Base.CameraDisposable/Base.CameraExpensive/Base.Earbuds,
-		
-		Result:Money,
-		RemoveResultItem: true,
-		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:105.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleLowElectronics,
 	}
 
-	recipe Shred and Recycle Electronics for Money
+	recipe Shred and Recycle Electronics (High End)
 	{
 		keep SmokeyShredderRecycler,
 
-		Radio.WalkieTalkie4/Radio.WalkieTalkie5/Radio.HamRadio1/Radio.HamRadio2/Radio.HamRadioMakeShift/Radio.RadioRed,
-		
+		Radio.WalkieTalkie4/Radio.WalkieTalkie5/Radio.HamRadio1/Radio.HamRadio2/TrueMusicJukebox.StarterKit/Base.Speaker/Radio.TvAntique/Radio.TvWideScreen/Radio.TvBlack/Tsarcraft.TCBoombox/Tsarcraft.TCVinylplayer/Base.MotionSensor/SapphCooking.CoffeeGrinder/SapphCooking.Blender/Base.Hat_PVS15_ON/Base.Hat_PVS15_OFF/Base.Hat_PVS15_Harness_ON/Base.Hat_PVS15_Harness_OFF/Base.NV_PVS5/Base.NV_PVS5_OFF/Base.NV_PVS21/Base.NV_PVS21_OFF/Base.NV_PVS7/Base.NV_PVS7_OFF/Base.Hat_NV18_ON/Base.Hat_NV18_OFF/Base.Hat_NV18_Harness_ON/Base.Hat_NV18_Harness_OFF/Base.NV_GPNVG_18/Base.NV_GPNVG_18_OFF/Base.NV_PNV_57/Base.NV_PNV_57_OFF/Base.Hat_Sam_NV/Base.Hat_Sam_NV_OFF,
+
 		Result:Money,
 		RemoveResultItem: true,
 		CanBeDoneFromFloor:true,
-        Time:100.0,
+        Time:125.0,
 		OnTest: GN84_IsRecycleable,
 		OnCanPerform: GN84_IsRecyclerUsed,
         OnCreate:ShredderRecycleHighElectronics,
 	}
+
+
+
+	recipe Shred and Recycle Paper Products
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Book/Base.Magazine/Base.Newspaper/Base.Journal/Base.Notebook/Base.BookCarpentry1/Base.BookCarpentry2/Base.BookCarpentry3/Base.BookCarpentry4/Base.BookCarpentry5/Base.BookCooking1/Base.BookCooking2/Base.BookCooking3/Base.BookCooking4/Base.BookCooking5/Base.BookFarming1/Base.BookFarming2/Base.BookFarming3/Base.BookFarming4/Base.BookFarming5/Base.BookFishing1/Base.BookFishing2/Base.BookFishing3/Base.BookFishing4/Base.BookFishing5/Base.BookTrapping1/Base.BookTrapping2/Base.BookTrapping3/Base.BookTrapping4/Base.BookTrapping5/Base.BookForaging1/Base.BookForaging2/Base.BookForaging3/Base.BookForaging4/Base.BookForaging5/Base.BookFirstAid1/Base.BookFirstAid2/Base.BookFirstAid3/Base.BookFirstAid4/Base.BookFirstAid5/Base.BookElectrician1/Base.BookElectrician2/Base.BookElectrician3/Base.BookElectrician4/Base.BookElectrician5/Base.BookMetalwork1/Base.BookMetalwork2/Base.BookMetalwork3/Base.BookMetalwork4/Base.BookMetalwork5/Base.BookMechanics1/Base.BookMechanics2/Base.BookMechanics3/Base.BookMechanics4/Base.BookMechanics5/Base.BookTailoring1/Base.BookTailoring2/Base.BookTailoring3/Base.BookTailoring4/Base.BookTailoring5/Base.MetalworkMag1/Base.MetalworkMag2/Base.MetalworkMag3/Base.MetalworkMag4/Base.MetalworkMag5/Base.MetalworkMag6/filcher.SFMetalworkMag5/filcher.SFMetalworkMag6/Base.ElectronicsMag1/Base.ElectronicsMag2/Base.ElectronicsMag3/Base.ElectronicsMag4/Base.ElectronicsMag5/Base.MechanicMag1/Base.MechanicMag2/Base.MechanicMag3/Base.CookingMag1/Base.CookingMag2/Base.HuntingMag1/Base.HuntingMag2/Base.HuntingMag3/Base.ComicBook/Base.MagazineCrossword1/Base.MagazineCrossword2/Base.MagazineCrossword3/Base.HottieZ/Base.TVMagazine/Base.MagazineWordsearch1/Base.MagazineWordsearch2/Base.MagazineWordsearch3/Base.SmithingMag1/Base.SmithingMag2/Base.SmithingMag3/Base.SmithingMag4,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:60.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecyclePaperProduct,
+	}
+
+	recipe Shred and Recycle Empty Wallets
+	{
+		keep SmokeyShredderRecycler,
+
+		EmptyWallet1/EmptyWallet2/EmptyWallet3/EmptyWallet4,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:40.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleEmptyWallets,
+	}
+
+	recipe Shred and Recycle Fabric Strips
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.RippedSheets/Base.RippedSheetsDirty/Base.DenimStrips/Base.DenimStripsDirty/Base.LeatherStrips/Base.LeatherStripsDirty,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:25.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleFabricStrips,
+	}
+
+	recipe Shred and Recycle Junk
+	{
+		keep SmokeyShredderRecycler,
+
+		Base.Aluminum/Base.CanEmpty/Base.Pop/Base.Pop2/Base.Pop3/Base.PopBottle/Base.WaterBottleEmpty/Base.WineEmpty/Base.BeerEmpty/Base.WhiskeyEmpty/Base.BleachEmpty/Base.CrispsEmpty/Base.Crisps2Empty/Base.Crisps3Empty/Base.Crisps4Empty/Base.ChocolateEmpty/Base.CandyPackage/Base.Cigarettes/Base.Doll/Base.TeddyBear/Base.Cube/Base.RubberDuck/Base.Yoyo/Base.CardDeck/Base.Dice/Base.ChessBlack/Base.ChessWhite/Base.CheckersBlack/Base.CheckersWhite/Base.Dominoes/Base.TennisBall/Base.Baseball/Base.Football/Base.Basketball/Base.GolfBall/Base.HockeyPuck/Base.Mirror/Base.Comb/Base.MakeupEyeshadow/Base.MakeupFoundation/Base.MakeupLipstick/Base.Toothbrush/Base.Razor/Base.Sponge/Base.Paintbrush/Base.BoxOfJars/Base.BoxOfJarsLids/Sprout.AppleBagSeed/Sprout.AvocadoBagSeed/Sprout.BananaBagSeed/Sprout.BellPepperBagSeed/Sprout.BerryBlackBagSeed/Sprout.BerryBlueBagSeed/Sprout.BlackGeraniumBagSeed/Sprout.BlackSageBagSeed/Sprout.BlueDelphiniumBagSeed/farming.BroccoliBagSeed/farming.CabbageBagSeed/Greenfire.CannabisBagSeed/farming.CarrotBagSeed/filcher.CauliflowerBagSeed/Sprout.CherryBagSeed/Sprout.CoffeeBagSeed/Sprout.ComfreyBagSeed/Sprout.CommonMallowBagSeed/Sprout.CornBagSeed/Sprout.CottonBagSeed/Sprout.EggplantBagSeed/Sprout.GarlicBagSeed/Sprout.GingerBagSeed/Sprout.HopsBagSeed/Sprout.IndicaBagSeed/filcher.SFLemonGrassBagSeed/filcher.LettuceBagSeed/Sprout.MagentaPentaBagSeed/Sprout.OrangeDahliaBagSeed/Sprout.PearBagSeed/Sprout.PepperPlantBagSeed/Sprout.PinkCarnationBagSeed/Sprout.PlantainBagSeed/farming.PotatoBagSeed/farming.RedRadishBagSeed/Sprout.RedRoseBagSeed/Sprout.RiceBagSeed/Sprout.RubberBagSeed/Sprout.SativaBagSeed/farming.StrewberrieBagSeed/filcher.TeaBagSeed/Greenfire.TobaccoBagSeed/farming.TomatoBagSeed/Sprout.WhiteLarkspurBagSeed/Sprout.YellowDaisyBagSeed/filcher.GreenPen/Base.Pen/Base.BluePen/Base.RedPen,
+
+		Result:Money,
+		RemoveResultItem: true,
+		CanBeDoneFromFloor:true,
+        Time:50.0,
+		OnTest: GN84_IsRecycleable,
+		OnCanPerform: GN84_IsRecyclerUsed,
+        OnCreate:ShredderRecycleJunk,
+	}
+
 
 
 
@@ -941,7 +987,7 @@ module GN84-WNDR
 /*------------------------------------------------------------------------*/
 /*--                         REDEEM - AMMO BOXES                          */
 /*------------------------------------------------------------------------*/
-	
+
 	recipe Redeem Rare Tickets for Random Box of Ammo
 	{
 		LottoTicketRare=10,
@@ -1234,7 +1280,7 @@ module GN84-WNDR
 	}
 
 */
-	
+
 /*------------------------------------------------------------------------*/
 /*--                      WHEEL SPIN UPGRADES                             */
 /*------------------------------------------------------------------------*/
@@ -1293,7 +1339,7 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
 		Result:GN84-WNDR.SuperWheelSpinToken,
-		Time:120.0,	
+		Time:120.0,
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
 
@@ -1306,7 +1352,7 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
 		Result:GN84-WNDR.SuperWheelSpinToken,
-		Time:120.0,	
+		Time:120.0,
 		Tooltip: "Combine 5 Wheel Spin Tokens to Forge a Super Wheel Spin Token!",
 	}
 
@@ -1318,7 +1364,7 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
 		Result:GN84-WNDR.MegaWheelSpinToken,
-		Time:120.0,	
+		Time:120.0,
 		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
 	}
 
@@ -1331,7 +1377,7 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WheelSpinForge,
 		Result:GN84-WNDR.MegaWheelSpinToken,
-		Time:120.0,	
+		Time:120.0,
 		Tooltip: "Combine 5 Super Wheel Spin Tokens to Forge a Mega Wheel Spin Token!",
 	}
 
@@ -1397,7 +1443,7 @@ module GN84-WNDR
 
 /*------------------------------------------------------------------------*/
 /*--                     VIP TOKEN REDEMPTIONS                            */
-/*------------------------------------------------------------------------*/	
+/*------------------------------------------------------------------------*/
 
 /*
 	recipe Redeem VIP Token for Super Wheel Spin Token
@@ -1432,7 +1478,7 @@ module GN84-WNDR
 /*------------------------------------------------------------------------*/
 /*--                 REDEEMING / DEPOSITING WANDERER TOKENS               */
 /*------------------------------------------------------------------------*/
-	
+
 	/*   REDEEMING WANDERER TOKENS   */
 
 	/*
@@ -1445,221 +1491,221 @@ module GN84-WNDR
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
 		Result:Money,
-		Time:120.0,		
+		Time:120.0,
 		OnCreate:GivePlayerSmokeyPointsWandererToken,
 	}
 
 	*/
 
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens1,	
+		OnCreate:GivePlayerWandererTokens1,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens1,	
+		OnCreate:GivePlayerWandererTokens1,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=5,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens5,	
+		OnCreate:GivePlayerWandererTokens5,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=10,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens10,	
+		OnCreate:GivePlayerWandererTokens10,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=25,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens25,	
+		OnCreate:GivePlayerWandererTokens25,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=50,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens50,	
+		OnCreate:GivePlayerWandererTokens50,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererToken=100,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens100,	
+		OnCreate:GivePlayerWandererTokens100,
 	}
 
 
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack5=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens5,	
+		OnCreate:GivePlayerWandererTokens5,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack10=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens10,	
+		OnCreate:GivePlayerWandererTokens10,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack25=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens25,	
+		OnCreate:GivePlayerWandererTokens25,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack50=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens50,	
+		OnCreate:GivePlayerWandererTokens50,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack100=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens100,	
+		OnCreate:GivePlayerWandererTokens100,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack250=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens250,	
+		OnCreate:GivePlayerWandererTokens250,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack500=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens500,	
+		OnCreate:GivePlayerWandererTokens500,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack1000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens1000,	
+		OnCreate:GivePlayerWandererTokens1000,
 	}
 
-	recipe Deposit Wanderer Tokens into Smokey Bank	
+	recipe Deposit Wanderer Tokens into Smokey Bank
 	{
 		WandererTokenStack5000=1,
-		
+
 		Result:SheetPaper2,
 		Time:80.0,
 		InSameInventory:true,
 		RemoveResultItem:true,
 		AnimNode:Craft,
 		Sound:WinningTicketChime,
-		OnCreate:GivePlayerWandererTokens5000,	
+		OnCreate:GivePlayerWandererTokens5000,
 	}
 
 
@@ -1747,7 +1793,7 @@ module GN84-WNDR
 		Sound:CountingMoney,
 		Result:GN84-WNDR.SafehouseExpansionPermit250,
 		Time:120.0,
-	}	
+	}
 
 	recipe Consolidate Safehouse Expansion Permits - 500 Tiles
 	{

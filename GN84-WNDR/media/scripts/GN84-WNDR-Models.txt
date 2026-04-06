@@ -10,7 +10,7 @@ module GN84-WNDR
 	{
 		mesh = worlditems/SmokeyShredderRecycler,
 		texture = worlditems/SmokeyShredderRecycler,
-		scale = 0.7,
+		scale = 1.25,
 	}
 
 	model SafehouseExpansionPermit10

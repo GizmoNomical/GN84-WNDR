@@ -240,34 +240,34 @@ option GN84WNDR.RecyclerTimeout
     translation = GN84WNDR_RecyclerTimeout,
 }
 
-option GN84WNDR.WatchesMinValue
+option GN84WNDR.WatchesGlassesMinValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 3,
+    max = 10000,
+    default = 20,
 
     page = GN84WNDR,
-    translation = GN84WNDR_WatchesMinValue,
+    translation = GN84WNDR_WatchesGlassesMinValue,
 }
 
-option GN84WNDR.WatchesMaxValue
+option GN84WNDR.WatchesGlassesMaxValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 10,
+    max = 10000,
+    default = 60,
 
     page = GN84WNDR,
-    translation = GN84WNDR_WatchesMaxValue,
+    translation = GN84WNDR_WatchesGlassesMaxValue,
 }
 
 option GN84WNDR.JewelrySimpleMinValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 1,
+    max = 10000,
+    default = 10,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelrySimpleMinValue,
@@ -277,8 +277,8 @@ option GN84WNDR.JewelrySimpleMaxValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 5,
+    max = 10000,
+    default = 40,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelrySimpleMaxValue,
@@ -289,8 +289,8 @@ option GN84WNDR.JewelryPreciousMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 10,
+    max = 10000,
+    default = 40,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelryPreciousMinValue,
@@ -300,8 +300,8 @@ option GN84WNDR.JewelryPreciousMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 50,
+    max = 10000,
+    default = 80,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelryPreciousMaxValue,
@@ -311,8 +311,8 @@ option GN84WNDR.JewelryGemsMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 25,
+    max = 10000,
+    default = 50,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelryGemsMinValue,
@@ -322,7 +322,7 @@ option GN84WNDR.JewelryGemsMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
+    max = 10000,
     default = 100,
 
     page = GN84WNDR,
@@ -333,8 +333,8 @@ option GN84WNDR.JewelryDiamondMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 100,
+    max = 10000,
+    default = 50,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelryDiamondMinValue,
@@ -344,8 +344,8 @@ option GN84WNDR.JewelryDiamondMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 200,
+    max = 10000,
+    default = 150,
 
     page = GN84WNDR,
     translation = GN84WNDR_JewelryDiamondMaxValue,
@@ -355,8 +355,8 @@ option GN84WNDR.SimpleToolMinValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 1,
+    max = 10000,
+    default = 75,
 
     page = GN84WNDR,
     translation = GN84WNDR_SimpleToolMinValue,
@@ -366,41 +366,19 @@ option GN84WNDR.SimpleToolMaxValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 10,
+    max = 10000,
+    default = 200,
 
     page = GN84WNDR,
     translation = GN84WNDR_SimpleToolMaxValue,
-}
-
-option GN84WNDR.LargeToolMinValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 10,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_LargeToolMinValue,
-}
-
-option GN84WNDR.LargeToolMaxValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 40,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_LargeToolMaxValue,
 }
 
 option GN84WNDR.ComplexToolMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 40,
+    max = 10000,
+    default = 200,
 
     page = GN84WNDR,
     translation = GN84WNDR_ComplexToolMinValue,
@@ -410,129 +388,151 @@ option GN84WNDR.ComplexToolMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 100,
+    max = 10000,
+    default = 400,
 
     page = GN84WNDR,
     translation = GN84WNDR_ComplexToolMaxValue,
 }
 
-option GN84WNDR.LeatherMinValue
+option GN84WNDR.MeleeOneHandMinValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 20,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_LeatherMinValue,
-}
-
-option GN84WNDR.LeatherMaxValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 50,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_LeatherMaxValue,
-}
-
-option GN84WNDR.GlassesMinValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 5,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_GlassesMinValue,
-}
-
-option GN84WNDR.GlassesMaxValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 20,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_GlassesMaxValue,
-}
-
-option GN84WNDR.BulletVestMinValue
-{
-    type = integer,
-    min = 0,
-    max = 1000,
+    max = 10000,
     default = 100,
 
     page = GN84WNDR,
-    translation = GN84WNDR_BulletVestMinValue,
+    translation = GN84WNDR_MeleeOneHandMinValue,
 }
 
-option GN84WNDR.BulletVestMaxValue
+option GN84WNDR.MeleeOneHandMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
+    max = 10000,
+    default = 300,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_MeleeOneHandMaxValue,
+}
+
+option GN84WNDR.MeleeTwoHandMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 200,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_MeleeTwoHandMinValue,
+}
+
+option GN84WNDR.MeleeTwoHandMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 650,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_MeleeTwoHandMaxValue,
+}
+
+option GN84WNDR.ClothItemMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 50,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_ClothItemMinValue,
+}
+
+option GN84WNDR.ClothItemMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 100,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_ClothItemMaxValue,
+}
+
+option GN84WNDR.LeatherItemMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 85,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_LeatherItemMinValue,
+}
+
+option GN84WNDR.LeatherItemMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 150,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_LeatherItemMaxValue,
+}
+
+option GN84WNDR.ArmorMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
     default = 250,
 
     page = GN84WNDR,
-    translation = GN84WNDR_BulletVestMaxValue,
+    translation = GN84WNDR_ArmorMinValue,
 }
 
-option GN84WNDR.ClothingMinValue
+option GN84WNDR.ArmorMaxValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 5,
+    max = 10000,
+    default = 700,
 
     page = GN84WNDR,
-    translation = GN84WNDR_ClothingMinValue,
+    translation = GN84WNDR_ArmorMaxValue,
 }
 
-option GN84WNDR.ClothingMaxValue
+option GN84WNDR.BagsMinValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 25,
+    max = 10000,
+    default = 150,
 
     page = GN84WNDR,
-    translation = GN84WNDR_ClothingMaxValue,
+    translation = GN84WNDR_BagsMinValue,
 }
 
-option GN84WNDR.PaperProductMinValue
+option GN84WNDR.BagsMaxValue
 {
     type = integer,
     min = 0,
-    max = 100,
-    default = 5,
+    max = 10000,
+    default = 450,
 
     page = GN84WNDR,
-    translation = GN84WNDR_PaperProductMinValue,
-}
-
-option GN84WNDR.PaperProductMaxValue
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 10,
-
-    page = GN84WNDR,
-    translation = GN84WNDR_PaperProductMaxValue,
+    translation = GN84WNDR_BagsMaxValue,
 }
 
 option GN84WNDR.LowElectronicsMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 15,
+    max = 10000,
+    default = 75,
 
     page = GN84WNDR,
     translation = GN84WNDR_LowElectronicsMinValue,
@@ -542,8 +542,8 @@ option GN84WNDR.LowElectronicsMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 35,
+    max = 10000,
+    default = 275,
 
     page = GN84WNDR,
     translation = GN84WNDR_LowElectronicsMaxValue,
@@ -553,8 +553,8 @@ option GN84WNDR.HighElectronicsMinValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 50,
+    max = 10000,
+    default = 275,
 
     page = GN84WNDR,
     translation = GN84WNDR_HighElectronicsMinValue,
@@ -564,12 +564,124 @@ option GN84WNDR.HighElectronicsMaxValue
 {
     type = integer,
     min = 0,
-    max = 1000,
-    default = 100,
+    max = 10000,
+    default = 750,
 
     page = GN84WNDR,
     translation = GN84WNDR_HighElectronicsMaxValue,
 }
+
+option GN84WNDR.GlassItemMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 15,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_GlassItemMinValue,
+}
+
+option GN84WNDR.GlassItemMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 40,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_GlassItemMaxValue,
+}
+
+option GN84WNDR.PaperProductMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 35,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_PaperProductMinValue,
+}
+
+option GN84WNDR.PaperProductMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 65,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_PaperProductMaxValue,
+}
+
+option GN84WNDR.FabricStripsMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 10,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_FabricStripsMinValue,
+}
+
+option GN84WNDR.FabricStripsMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 20,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_FabricStripsMaxValue,
+}
+
+option GN84WNDR.EmptyWalletMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 25,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_EmptyWalletMinValue,
+}
+
+option GN84WNDR.EmptyWalletMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 35,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_EmptyWalletMaxValue,
+}
+
+option GN84WNDR.JunkItemMinValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 10,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_JunkItemMinValue,
+}
+
+option GN84WNDR.JunkItemMaxValue
+{
+    type = integer,
+    min = 0,
+    max = 10000,
+    default = 35,
+
+    page = GN84WNDR,
+    translation = GN84WNDR_JunkItemMaxValue,
+}
+
+
 
 option GN84WNDR.ResidentialPermitSmall
 {

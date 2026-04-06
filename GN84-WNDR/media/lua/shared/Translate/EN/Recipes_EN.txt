@@ -7,4 +7,5 @@ Recipes_EN =
 	Recipe_Consolidate_Safehouse_Expansion_Permits_-_500_Tiles = "Consolidate Safehouse Expansion Permits - 500 Tiles",
 	Recipe_Consolidate_Safehouse_Expansion_Permits_-_1000_Tiles = "Consolidate Safehouse Expansion Permits - 1,000 Tiles",
 	Recipe_Consolidate_Safehouse_Expansion_Permits_-_5000_Tiles = "Consolidate Safehouse Expansion Permits - 5,000 Tiles",
+	
 }

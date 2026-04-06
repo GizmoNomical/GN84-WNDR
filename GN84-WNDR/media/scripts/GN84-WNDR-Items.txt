@@ -15,15 +15,10 @@ module GN84-WNDR
 		DisplayName			=  Smokey's All-In-One Shredder Recycler,
 		DisplayCategory		=  Wanderers,
 		Weight				=  50.0,
-		Type				=  Container,
-		Capacity 			=  40,
-		WeightReduction		=  90,		
-		OpenSound			=  RecyclerOpenTray,
-		AcceptItemFunction	=  GN84_AcceptItemsRecycler,
+		Type				=  Normal,
 		Icon				=  SmokeyShredderRecycler,
 		WorldStaticModel	=  SmokeyShredderRecycler,
 		Tooltip				=  Recycle Items for Cash!,
-
 	}
 
 

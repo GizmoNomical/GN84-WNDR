@@ -16,7 +16,7 @@ module GN84-WNDR
                 file = media/sound/SearchWallet.ogg,
                 distanceMax = 10,
                 volume = 1.0,
-                
+
             }
     }
 
@@ -30,20 +30,20 @@ module GN84-WNDR
                 file = media/sound/ScissorsCutLeather.ogg,
                 distanceMax = 10,
                 volume = 0.25,
-                
+
             }
     }
 
     sound MoneyClipShuffle
     {
         category = Item,
-        loop = false,        
+        loop = false,
         clip
             {
                 file = media/sound/MoneyClipShuffle.ogg,
                 distanceMax = 10,
-                volume = 1.0,
-                
+                volume = 1.05,
+
             }
     }
 
@@ -81,19 +81,19 @@ module GN84-WNDR
         {
             file = media/sound/ReceiptSound.ogg,
             distanceMax = 10,
-            volume = 0.7,
+            volume = 0.75,
         }
     }
 
     sound BindMoneyClip
     {
         category = Item,
-        loop = false,        
+        loop = false,
         clip
             {
                 file = media/sound/BindMoneyClip.ogg,
                 distanceMax = 10,
-                volume = 1.0,                
+                volume = 1.0,
             }
     }
 
@@ -162,6 +162,10 @@ module GN84-WNDR
         }
     }
 
+/*------------------------------------------------------------------------*/
+/*--                             RECYCLER                                 */
+/*------------------------------------------------------------------------*/
+
     sound RecyclerMotorStart
     {
         category = Ambient,
@@ -170,8 +174,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorStart.ogg,
-            distanceMax = 30,
-            volume = 0.75,
+            distanceMax = 25,
+            volume = 0.45,
         }
     }
 
@@ -183,8 +187,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorStop.ogg,
-            distanceMax = 30,
-            volume = 0.75,
+            distanceMax = 25,
+            volume = 0.45,
         }
     }
 
@@ -196,8 +200,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerMotorRunning.ogg,
-            distanceMax = 30,
-            volume = 0.50,
+            distanceMax = 25,
+            volume = 0.38,
         }
     }
 
@@ -209,8 +213,8 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerKeyPad.ogg,
-            distanceMax = 10,
-            volume = 0.7,
+            distanceMax = 25,
+            volume = 0.8,
         }
     }
 
@@ -222,9 +226,1827 @@ module GN84-WNDR
         clip
         {
             file = media/sound/RecyclerCashOut.ogg,
-            distanceMax = 15,
-            volume = 0.7,
+            distanceMax = 25,
+            volume = 0.85,
         }
     }
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - JEWELRY                             */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry1.ogg,
+            distanceMax = 25,
+            volume = 0.45,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry2.ogg,
+            distanceMax = 25,
+            volume = 0.45,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry3.ogg,
+            distanceMax = 25,
+            volume = 0.40,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry4.ogg,
+            distanceMax = 25,
+            volume = 0.40,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry5.ogg,
+            distanceMax = 25,
+            volume = 0.60,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry6.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry7.ogg,
+            distanceMax = 25,
+            volume = 0.50,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry8.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry9.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry10.ogg,
+            distanceMax = 25,
+            volume = 0.40,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry11.ogg,
+            distanceMax = 25,
+            volume = 0.35,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry12.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry13.ogg,
+            distanceMax = 25,
+            volume = 0.50,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry14.ogg,
+            distanceMax = 25,
+            volume = 0.65,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry15.ogg,
+            distanceMax = 25,
+            volume = 0.65,
+        }
+    }
+
+    sound RecyclerJewelry
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJewelry16.ogg,
+            distanceMax = 25,
+            volume = 0.35,
+        }
+    }
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - SMALL METAL                         */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal1.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal2.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal3.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal4.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal5.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal6.ogg,
+            distanceMax = 25,
+            volume = 0.16,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal7.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal8.ogg,
+            distanceMax = 25,
+            volume = 0.18,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal9.ogg,
+            distanceMax = 25,
+            volume = 0.17,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal10.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerSmallMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerSmallMetal11.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - LARGE METAL                         */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal1.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal2.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal3.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal4.ogg,
+            distanceMax = 25,
+            volume = 0.13,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal5.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal6.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal7.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal8.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal9.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal10.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal11.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal12.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal13.ogg,
+            distanceMax = 25,
+            volume = 0.11,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal14.ogg,
+            distanceMax = 25,
+            volume = 0.14,
+        }
+    }
+
+    sound RecyclerLargeMetal
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLargeMetal15.ogg,
+            distanceMax = 25,
+            volume = 0.12,
+        }
+    }
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - LEATHER                             */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather1.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather2.ogg,
+            distanceMax = 25,
+            volume = 0.40,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather3.ogg,
+            distanceMax = 25,
+            volume = 0.35,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather4.ogg,
+            distanceMax = 25,
+            volume = 0.35,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather5.ogg,
+            distanceMax = 25,
+            volume = 0.55,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather6.ogg,
+            distanceMax = 25,
+            volume = 0.55,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather7.ogg,
+            distanceMax = 25,
+            volume = 0.65,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather8.ogg,
+            distanceMax = 25,
+            volume = 0.35,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather9.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerLeather
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeather10.ogg,
+            distanceMax = 25,
+            volume = 0.55,
+        }
+    }
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - CLOTH                               */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth1.ogg,
+            distanceMax = 25,
+            volume = 0.50,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth2.ogg,
+            distanceMax = 25,
+            volume = 0.50,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth3.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth4.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth5.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth6.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth7.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth8.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth9.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth10.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth11.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth12.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth13.ogg,
+            distanceMax = 25,
+            volume = 0.65,
+        }
+    }
+
+    sound RecyclerCloth
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerCloth14.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+    
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - ARMOR                               */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerArmor
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerArmor1.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerArmor
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerArmor2.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerArmor
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerArmor3.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerArmor
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerArmor4.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerArmor
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerArmor5.ogg,
+            distanceMax = 25,
+            volume = 0.28,
+        }
+    }
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - GLASS ITEMS                         */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass1.ogg,
+            distanceMax = 25,
+            volume = 0.95,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass2.ogg,
+            distanceMax = 25,
+            volume = 0.95,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass3.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass4.ogg,
+            distanceMax = 25,
+            volume = 0.85,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass5.ogg,
+            distanceMax = 25,
+            volume = 0.50,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass6.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass7.ogg,
+            distanceMax = 25,
+            volume = 1.0,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass8.ogg,
+            distanceMax = 25,
+            volume = 1.0,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass9.ogg,
+            distanceMax = 25,
+            volume = 1.0,
+        }
+    }
+    
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass10.ogg,
+            distanceMax = 25,
+            volume = 0.85,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass11.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass12.ogg,
+            distanceMax = 25,
+            volume = 0.95,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass13.ogg,
+            distanceMax = 25,
+            volume = 1.0,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass14.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass15.ogg,
+            distanceMax = 25,
+            volume = 0.70,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass16.ogg,
+            distanceMax = 25,
+            volume = 0.70,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass17.ogg,
+            distanceMax = 25,
+            volume = 0.65,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass18.ogg,
+            distanceMax = 25,
+            volume = 0.85,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass19.ogg,
+            distanceMax = 25,
+            volume = 0.55,
+        }
+    }
+
+    sound RecyclerGlass
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerGlass20.ogg,
+            distanceMax = 25,
+            volume = 0.75,
+        }
+    }
+
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - PAPER PRODUCTS                      */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper1.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper2.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper3.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper4.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper5.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper6.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper7.ogg,
+            distanceMax = 25,
+            volume = 0.30,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper8.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerPaper
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerPaper9.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - ELECTRONICS                         */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics1.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics2.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics3.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics4.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics5.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics6.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics7.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics8.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics9.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics10.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics11.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics12.ogg,
+            distanceMax = 25,
+            volume = 0.15,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics13.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerElectronics
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerElectronics14.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+
+/*------------------------------------------------------------------------*/
+/*--                      RECYCLING - LEATHER STRIPS                      */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerLeatherStrips
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeatherStrips1.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerLeatherStrips
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerLeatherStrips2.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+/*------------------------------------------------------------------------*/
+/*--                        RECYCLING - JUNK                              */
+/*------------------------------------------------------------------------*/
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk1.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk2.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk3.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk4.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk5.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk6.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk7.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk8.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk9.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk10.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk11.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk12.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk13.ogg,
+            distanceMax = 25,
+            volume = 0.20,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk14.ogg,
+            distanceMax = 25,,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk15.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk16.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk17.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk18.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+    sound RecyclerJunk
+    {
+        category = Ambient,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/RecyclerJunk19.ogg,
+            distanceMax = 25,
+            volume = 0.25,
+        }
+    }
+
+
 
 }
