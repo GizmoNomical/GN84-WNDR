@@ -23,6 +23,12 @@ GN84-WNDR serves as the core gameplay and backend platform for a live multiplaye
 - Real-time synchronization of world state across connected clients
 - Performance-focused event-driven design to minimize server overhead
 
+## Problems Solved
+
+- Prevented multiplayer desynchronization through server-authoritative state handling.
+- Eliminated concurrent access issues on shared world entities using lock-state and timeout controls.
+- Reduced server overhead through event-driven systems that avoid constant polling.
+
 ## Live Environment
 
 This platform has been actively maintained and expanded through live multiplayer operation, supporting persistent progression, economy systems, and server-wide gameplay features.
