@@ -39,19 +39,19 @@ This platform has been actively maintained and expanded through live multiplayer
 
 Actively maintained and expanded.
 
-### Dual Currency Economy & Shop
+## Dual Currency Economy & Shop
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-09-51" src="https://github.com/user-attachments/assets/d3e7bfd9-f265-4177-8bbb-46c382aa012e" />
-### Money Clip - Currency Tracking
+## Money Clip - Currency Tracking
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-10-01" src="https://github.com/user-attachments/assets/f12349b7-0cc6-46e0-9b0e-74c320be5f53" />
-### Money Clip - Adjustable Settings & Currency Consolidation
+## Money Clip - Adjustable Settings & Currency Consolidation
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-10-11" src="https://github.com/user-attachments/assets/df5a17a0-aa67-4277-86ad-4c33be1a490e" />
-### Admin Currency Creation Tools
+## Admin Currency Creation Tools
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-09-27" src="https://github.com/user-attachments/assets/a15cc958-f94e-4eda-b1ac-b70782ba52d1" />
-### Recycler System
+## Recycler System
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-08-43" src="https://github.com/user-attachments/assets/761323d2-4099-4fc7-87cd-d82f4b113bde" />
-### In-Game Lotto System - Scratch-It Tickets
+## In-Game Lotto System - Scratch-It Tickets
 <img width="2560" height="1361" alt="screenshot_28-05-2026_22-14-18" src="https://github.com/user-attachments/assets/3a2130bb-2c98-4308-9d95-591e513b4ee2" />
-### Server-Side Tracking of Economy and Lottery Systems
+## Server-Side Tracking of Economy and Lottery Systems
 <img width="1859" height="1004" alt="Screenshot 2026-05-28 221851" src="https://github.com/user-attachments/assets/b21e6089-896b-4e40-a120-6ac5a6545739" />
 
 
